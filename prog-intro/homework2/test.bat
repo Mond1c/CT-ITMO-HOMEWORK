@@ -1,1 +1,1 @@
-javac -cp . *.java && java -ea -jar SumTest.jar Base
+javac -cp . SumOctal.java && java -ea -jar SumTest.jar Octal

@@ -13,7 +13,9 @@ public class Sum {
                     stringBuilder.append(arg.charAt(i));
                 }
             }
-            if (!stringBuilder.isEmpty()) sum += Integer.parseInt(stringBuilder.toString());
+            if (!stringBuilder.isEmpty()) {
+                sum += Integer.parseInt(stringBuilder.toString());
+            }
         }
         System.out.println(sum);
     }
