@@ -5,6 +5,7 @@ import base.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,7 +14,8 @@ import java.util.stream.IntStream;
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public final class ReverseTester {
-    public interface Op extends Function<int[][], long[][]> {};
+    @FunctionalInterface
+    public interface Op extends Function<int[][], long[][]> {}
 
     private static final int[] DIVISORS = {100, 10, 1};
 
@@ -43,6 +45,7 @@ public final class ReverseTester {
     }
 
     public static Consumer<TestCounter> variant(final int maxSize, final Named<Op> transform) {
+        Objects.requireNonNull(transform);
         return variant(maxSize, () -> new ReverseTester("Reverse" + transform.getName(), transform.getValue()));
     }
 
@@ -61,7 +64,7 @@ public final class ReverseTester {
     }
 
     private void run(final TestCounter counter, final int maxSize) {
-        new Checker(counter, maxSize, Runner.std(name)).test();
+        new Checker(counter, maxSize, Runner.packages("", "reverse").std(name)).test();
     }
 
     @Override
