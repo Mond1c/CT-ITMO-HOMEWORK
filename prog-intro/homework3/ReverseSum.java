@@ -6,22 +6,22 @@ import java.util.ArrayList;
 public class ReverseSum {
     public static void main(String[] args) {
         Scanner consoleScanner = new Scanner(System.in);
-        int[][] matrix = new int[1][];
-        int[] row_sizes = new int[1];
+        int[][] matrix = new int[2][];
+        int[] row_sizes = new int[2];
         int i = 0;
         while (consoleScanner.hasNextLine()) {
             Scanner stringScanner = new Scanner(consoleScanner.nextLine());
-            int[] row = new int[1];
+            int[] row = new int[2];
             int j = 0;
             while (stringScanner.hasNextInt()) {
                 if (j == row.length) {
-                    row = Arrays.copyOf(row, row.length * 2);
+                    row = Arrays.copyOf(row, row.length + (row.length >> 1));
                 }
                 row[j++] = stringScanner.nextInt();
             }
             if (i == matrix.length) {
-                matrix = Arrays.copyOf(matrix, matrix.length * 2);
-                row_sizes = Arrays.copyOf(row_sizes, row_sizes.length * 2);
+                matrix = Arrays.copyOf(matrix, matrix.length + (matrix.length >> 1));
+                row_sizes = Arrays.copyOf(row_sizes, row_sizes.length + (row_sizes.length >> 1));
             }
             matrix[i] = row;
             row_sizes[i++] = j;
