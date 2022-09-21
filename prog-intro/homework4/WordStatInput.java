@@ -7,18 +7,18 @@ public class WordStatInput {
         List<String> words = new ArrayList<>();
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < line.length(); i++) {
-        	char character = line.charAt(i);
-        	boolean isPartOfWord = Character.isLetter(character) || character == '-' || character == '\'' ||
+            char character = line.charAt(i);
+            boolean isPartOfWord = Character.isLetter(character) || character == '-' || character == '\'' ||
                 Character.getType(character) == Character.DASH_PUNCTUATION;
-        	if (isPartOfWord) { 
+            if (isPartOfWord) { 
                 word.append(Character.toLowerCase(character));
-        	}
-        	if (!isPartOfWord || i == line.length() - 1) {
-        		if (!word.isEmpty()) {
-        			words.add(word.toString());
-        		}
-        		word = new StringBuilder();
-        	}
+            }
+            if (!isPartOfWord || i == line.length() - 1) {
+                if (!word.isEmpty()) {
+                    words.add(word.toString());
+                }
+                word = new StringBuilder();
+            }
         }
         return words;
     }
