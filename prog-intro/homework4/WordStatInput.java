@@ -13,10 +13,8 @@ public class WordStatInput {
             if (isPartOfWord) { 
                 word.append(Character.toLowerCase(character));
             }
-            if (!isPartOfWord || i == line.length() - 1) {
-                if (!word.isEmpty()) {
-                    words.add(word.toString());
-                }
+            if ((!isPartOfWord || i == line.length() - 1) && !word.isEmpty()) {
+                words.add(word.toString());
                 word = new StringBuilder();
             }
         }
@@ -32,7 +30,6 @@ public class WordStatInput {
                 List<String> words = getWords(line);
                 for (String word : words) {
                     if (!word.isEmpty()) {
-                        word = word.toLowerCase();
                         dict.put(word, dict.getOrDefault(word, 0) + 1);
                     }
                 }
