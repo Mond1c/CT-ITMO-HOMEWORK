@@ -1,1 +1,1 @@
-javac -cp . *.java && java -ea -jar ReverseTest.jar Sum && del *.class
+javac -cp . *.java && java -ea -jar ReverseTest.jar Sum

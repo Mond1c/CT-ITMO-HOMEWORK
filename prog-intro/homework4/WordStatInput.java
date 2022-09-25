@@ -4,7 +4,7 @@ import java.util.*;
 
 public class WordStatInput {
     private static List<String> getWords(String line) {
-        List<String> words = new ArrayList<>();
+        List<String> words = new LinkedList<>();
         StringBuilder word = new StringBuilder();
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
@@ -22,8 +22,10 @@ public class WordStatInput {
     }
 
     public static void main(String[] args) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0]), StandardCharsets.UTF_8));
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args[1]), StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0]),
+                    StandardCharsets.UTF_8));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args[1]),
+                    StandardCharsets.UTF_8))) {
             Map<String, Integer> dict = new LinkedHashMap<>();
             String line = reader.readLine();
             while (line != null) {
