@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+	
+
+\title{Домашняя работа №1}
+\author{Михаил Корнилович}
+\date{Сентябрь 2022}
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\newpage
+\pagenumbering{arabic}
+\section{Задача №1}
+
+\begin{equation*}
+    \begin{cases}
+        f_1(n) \leq c_1g_1(n) \\
+        f_2(n) \leq c_2g_2(n) \\
+    \end{cases}
+    \Rightarrow
+    f_1(n) + f_2(n) \leq c_1g_1(n) + c_2g_2(n)
+    \Rightarrow
+    f_1(n) + f_2(n) \leq \mathcal{O}(g_1(n) + g_2(n))
+\end{equation*}
+
+\section{Задача №2}
+
+Имеем по определению:
+
+$f(n) \leq c_1f(n)$ и $g(n) \leq c_2g(n)$
+
+\noindent Также:
+
+$min(f(n), g(n)) \leq max(f(n), g(n)) \leq max(f(n), g(n))$
+
+\noindent Распишем это неравенство, используя определение:
+
+$min(c_1f(n), c_2g(n)) \leq max(f(n), g(n)) \leq max(c_1f(n), c_2g(n))$
+
+\noindent Полчуается  $\exists c_1,c_2: max(f(n), g(n))$ ограничена сверху и снизу $\Rightarrow$
+
+$\Rightarrow max(f(n), g(n)) = \Theta(f(n) + g(n))$
+
+\section{Задача №3}
+\noindent Чтобы это равенство оказалось верным, нужно доказать, что:
+
+$\sum_{i=1}^{n+5} 2^i \leq c\cdot2^n$
+ 
+\noindent Воспользуемся математической индукцией.
+
+\noindent База индукции:
+
+Пусть $n_0 = 0$, а $c = 62$, тогда $62 \leq 62$ - верно
+
+\noindent Индукционный переход:
+
+Пусть для n неравенство $\sum_{i=1}^{n+5} 2^i \leq c\cdot2^n$ верно.
+
+Проверим его для n + 1:
+\begin{equation*}
+    \sum_{i=1}^{n+6} 2^i \leq c\cdot2^{(n+1)}
+    \Leftrightarrow
+    \sum_{i=1}^{n+5} 2^i + 2^{n+6} \leq 2c\cdot2^n
+    \Leftrightarrow
+    \sum_{i=1}^{n+5} 2^i + 2^{n+6} \leq c\cdot2^n + c\cdot2^n
+\end{equation*}
+\noindentТ.к. $\sum_{i=1}^{n+5} 2^i \leq c\cdot2^n$ верно, нам надо проверить только то, что $2^{n+6} \leq c\cdot2^n$
+
+\begin{equation*}
+    2^{n+6} \leq c\cdot2^n 
+    \Leftrightarrow
+    2^6\cdot2^n \leq c\cdot2^n
+    \Leftrightarrow
+    2^6 \leq c
+\end{equation*}
+
+\noindent Последнее неравенство верно, т.к. c - любое число, следовательно
+
+$\sum_{i=1}^{n+5} 2^i = \mathcal{O}(2^n)$
+\section{Задача №4}
+
+Чтобы равенство оказалочь верным нужно доказать, что:
+
+$c\cdot n^3 \leq \frac{n^3}{6} - 7\cdot n^2$
+
+\noindent Воспользуемся математической индукцией.
+
+\noindent База индукции:
+
+Пусть $n = 1$ и $c = \frac{-41}{6}$, тогда:
+
+$\frac{-41}{6} \leq \frac{-41}{6}$
+
+\noindentИндукционный переход:
+
+Пусть для n неравенсто $c\cdot n^3 \leq \frac{n^3}{6} - 7\cdot n^2$ верно. Распишем его:
+
+\begin{equation}
+    c\cdot n^3 \leq \frac{n^3}{6} - 7\cdot n^2
+    \Rightarrow
+    6c\cdot n \leq n - 42 
+    \Rightarrow
+    n(6c-1) \leq -42
+\end{equation}
+
+Проверим его для n + 1:
+
+\begin{equation*}
+    c\cdot (n+1)^3 \leq \frac{(n+1)^3}{6} - 7\cdot (n+1)^2
+    \Rightarrow
+    6c\cdot (n+1)^3 \leq (n+1)^3 - 7\cdot (n+1)^2
+    \Rightarrow
+    (n+1)^3(6c - 1) \leq -7\cdot(n+1)^2
+    \Rightarrow
+\end{equation*}
+
+\begin{equation}
+    \Rightarrow
+    (n+1)(6c-1) \leq -7
+\end{equation}
+
+Из (1) следует то, что $(6c - 1) < 0$. Зная это, (2) неравенсто становиться верным.
+
+Следовательно, 
+\begin{equation*}
+    \frac{n^3}{6} - 7\cdot n^2 = \Omega(n^3)
+\end{equation*}
+
+\section{Задача №5}
+    Ответ: 
+    \begin{align*}
+        1,n^{\frac{1}{logn}}, (\frac{3}{2})^2, loglogn, \sqrt{logn}, log^2n, (\sqrt{2})^{logn}, n, 2^{logn}, nlogn, log(n!),\\
+        n^2, 4^{logn}, n^3, log(n)!, (logn)^{logn}, n^{loglogn}, n\cdot 2^n ,e^n, 2^{2^n}, 2^{2^{n + 1}},  n!, (n+1)!
+    \end{align*}
+\end{document}
