@@ -1,17 +1,28 @@
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.Arrays;
 
 public class BufScanner implements AutoCloseable {
     private final Reader reader;
-    private static final int BUFFER_SIZE = 50;
+    private static final int BUFFER_SIZE = 8192;
     private char[] buffer = new char[BUFFER_SIZE];
     private int position;
     private int length;
-    private boolean skipLF = false;
+    private boolean isPrevWasLF;
 
     public BufScanner(Reader reader) {
         this.reader = reader;
+    }
+
+    public BufScanner(InputStream stream) {
+        this.reader = new InputStreamReader(stream);
+    }
+
+    public BufScanner(String source) {
+        this.reader = new StringReader(source);
     }
 
     public void close() throws IOException {
@@ -68,7 +79,7 @@ public class BufScanner implements AutoCloseable {
         }
         return false;
     }*/
-
+/*
     public boolean hasNext(boolean isNumber) throws IOException {
         if (!isBufferUpdated()) {
             return false;
@@ -87,18 +98,26 @@ public class BufScanner implements AutoCloseable {
      
         return true;
     }
+    */
 
     public String nextLine() throws IOException {
         if (!isBufferUpdated()) {
             return null;
         }
-        if (Character.getType(buffer[position]) == Character.CONTROL && skipLF) {
-            skipLF = false;
-            position++;
+        /*if (Character.getType(buffer[position]) == Character.CONTROL && position + 1 < length 
+            && Character.getType(buffer[position + 1]) == Character.CONTROL) {
+            position += 2;
             return "";
-        }
+        }*/
         if (Character.getType(buffer[position]) == Character.CONTROL) {
-            skipLF = true;
+            if (isPrevWasLF) {
+                isPrevWasLF = false;
+                position++;
+                return "";
+            } else {
+                isPrevWasLF = true;
+                position++;
+            }
         }
         StringBuilder builder = new StringBuilder();
         while (position < length || isBufferUpdated()) {
@@ -106,9 +125,10 @@ public class BufScanner implements AutoCloseable {
            // System.err.println((int)character);
             position++;
             if (Character.getType(character) != Character.CONTROL) {
-                skipLF = false;
                 builder.append(character);
-            } else if (skipLF) {
+                isPrevWasLF = false;
+            } else if (isPrevWasLF) {
+                isPrevWasLF = false;
                 return "";
             } else if (!builder.isEmpty()) {
                 break;

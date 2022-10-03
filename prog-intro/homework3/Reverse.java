@@ -5,10 +5,11 @@ public class Reverse {
     public static void main(String[] args) { // O(n * m) n - amount of lines, m - average length of each line
         Scanner consoleScanner = new Scanner(System.in);
         Stack<Stack<Integer>> lines = new Stack<>();
+        int i = 1;
         while (consoleScanner.hasNextLine()) {
             String line = consoleScanner.nextLine();
             Scanner stringScanner = new Scanner(line);
-            System.err.println(line);
+            System.err.println(i++ + " " + line);
             Stack<Integer> values = new Stack<>();
             while (stringScanner.hasNextInt()) {
                 values.push(stringScanner.nextInt());

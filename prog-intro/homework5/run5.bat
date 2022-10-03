@@ -1,0 +1,1 @@
+javac -cp . *.java && java -ea -jar FastReverseTest.jar Base && del *.class
