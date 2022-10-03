@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.9.25)  25 SEP 2022 18:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.9.25)  25 SEP 2022 18:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -379,13 +379,7 @@ tex.def
 File: l3backend-pdftex.def 2022-07-01 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count273
 \l__pdf_internal_box=\box53
-) (hw1.aux
-LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 5
-.
-
-(C:\Users\pocht\AppData\Local\Programs\MiKTeX\tex/latex/cyrillic\t2acmr.fd
-File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
-))
+) (hw1.aux)
 \openout1 = `hw1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -403,6 +397,12 @@ LaTeX Font Info:    ... okay on input line 14.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
 LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 14.
+LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 1
+4.
+
+(C:\Users\pocht\AppData\Local\Programs\MiKTeX\tex/latex/cyrillic\t2acmr.fd
+File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
+)
 LaTeX Font Info:    ... okay on input line 14.
 LaTeX Info: Redefining \th on input line 14.
 
@@ -458,25 +458,25 @@ mm/m/it/10 g[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n\OT1/cmr/m/n/10 ))
  []
 
 [1]
-Overfull \hbox (89.84608pt too wide) detected at line 121
+Overfull \hbox (99.84612pt too wide) detected at line 121
 \OML/cmm/m/it/10 c \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT
 1/cmr/m/n/10 + 1)[] \OMS/cmsy/m/n/10 ^^T [] ^^@ \OT1/cmr/m/n/10 7 \OMS/cmsy/m/n
 /10 ^^A \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 + 1)[] \OMS/cmsy/m/
 n/10 ) \OT1/cmr/m/n/10 6\OML/cmm/m/it/10 c \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/10
  (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 + 1)[] \OMS/cmsy/m/n/10 ^^T \OT1/cmr/m/n/1
 0 (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 + 1)[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/
-10 7 \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 +
- 1)[] \OMS/cmsy/m/n/10 ) \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 + 
-1)[](6\OML/cmm/m/it/10 c \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1) \OMS/cmsy/m/n/
-10 ^^T ^^@\OT1/cmr/m/n/10 7 \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/10 (\OML/cmm/m/it
-/10 n \OT1/cmr/m/n/10 + 1)[] \OMS/cmsy/m/n/10 )
+10 42 \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 
++ 1)[] \OMS/cmsy/m/n/10 ) \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 +
+ 1)[](6\OML/cmm/m/it/10 c \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1) \OMS/cmsy/m/n
+/10 ^^T ^^@\OT1/cmr/m/n/10 42 \OMS/cmsy/m/n/10 ^^A \OT1/cmr/m/n/10 (\OML/cmm/m/
+it/10 n \OT1/cmr/m/n/10 + 1)[] \OMS/cmsy/m/n/10 )
  []
 
 [2] (hw1.aux) ) 
 Here is how much of TeX's memory you used:
  4219 strings out of 478338
  63125 string characters out of 2836700
- 376355 words of memory out of 3000000
+ 376364 words of memory out of 3000000
  22614 multiletter control sequences out of 15000+600000
  479631 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -496,7 +496,7 @@ ers/pocht/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb
 mr7.pfb><C:/Users/pocht/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb><C:/Users/pocht/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmsy7.pfb>
-Output written on hw1.pdf (3 pages, 128390 bytes).
+Output written on hw1.pdf (3 pages, 128388 bytes).
 PDF statistics:
  164 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

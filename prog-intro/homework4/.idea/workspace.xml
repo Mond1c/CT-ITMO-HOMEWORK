@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94d8ec7e-0d2a-4565-ac73-7fd0f55b9412" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework4.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ADS/homework1/hw1.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../ADS/homework1/hw1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ADS/homework1/hw1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../ADS/homework1/hw1.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ADS/homework1/hw1.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../../ADS/homework1/hw1.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ADS/homework1/hw1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../ADS/homework1/hw1.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +59,7 @@
       <updated>1663687643877</updated>
       <workItem from="1663687645299" duration="3856000" />
       <workItem from="1663699169843" duration="258000" />
+      <workItem from="1664122484608" duration="33000" />
     </task>
     <servers />
   </component>

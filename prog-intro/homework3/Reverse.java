@@ -6,7 +6,9 @@ public class Reverse {
         Scanner consoleScanner = new Scanner(System.in);
         Stack<Stack<Integer>> lines = new Stack<>();
         while (consoleScanner.hasNextLine()) {
-            Scanner stringScanner = new Scanner(consoleScanner.nextLine());
+            String line = consoleScanner.nextLine();
+            Scanner stringScanner = new Scanner(line);
+            System.err.println(line);
             Stack<Integer> values = new Stack<>();
             while (stringScanner.hasNextInt()) {
                 values.push(stringScanner.nextInt());
