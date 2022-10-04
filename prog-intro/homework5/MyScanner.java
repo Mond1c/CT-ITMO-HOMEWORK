@@ -3,13 +3,26 @@ import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+import javax.swing.text.Position;
+
 public class MyScanner implements AutoCloseable {
     private final Reader reader;
     private static final int BUFFER_SIZE = 1024;
     private CharBuffer buffer;
+    private boolean isPrevWasLF;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
+        this.buffer = CharBuffer.allocate(BUFFER_SIZE);
+    }
+
+    public MyScanner(InputStream stream) {
+        this.reader = new InputStreamReader(stream);
+        this.buffer = CharBuffer.allocate(BUFFER_SIZE);
+    }
+
+    public MyScanner(String source) {
+        this.reader = new StringReader(source);
         this.buffer = CharBuffer.allocate(BUFFER_SIZE);
     }
 
@@ -22,11 +35,7 @@ public class MyScanner implements AutoCloseable {
         if (!buffer.hasRemaining()) {
             buffer.clear();
             reader.read(buffer);
-            //System.err.println("Debug: " + buffer.position());
             buffer.flip();
-            //System.err.println("Debug: " + buffer.length());
-           // System.err.println(buffer.position() + " " + buffer.length() + " " + Arrays.toString(buffer.array()));
-            //System.err.println(buffer.hasRemaining());
             return buffer.hasRemaining();
         }
         return true;
@@ -38,7 +47,7 @@ public class MyScanner implements AutoCloseable {
             || type == Character.PARAGRAPH_SEPARATOR || type == Character.CONTROL;
     }
 
-    public boolean hasNextLine() throws IOException {
+   /* public boolean hasNextLine() throws IOException {
         if (!isBufferUpdated()) {
             return false;
         }
@@ -75,17 +84,31 @@ public class MyScanner implements AutoCloseable {
         }
      
         return true;
-    }
+    }*/
 
     public String nextLine() throws IOException {
         if (!isBufferUpdated()) {
-            throw new IOException("The resource has ended.");
+            return null;
+        }
+        if (Character.getType(buffer.charAt(0)) == Character.CONTROL) {
+            if (isPrevWasLF) {
+                isPrevWasLF = false;
+                buffer.get();
+                return "";
+            } else {
+                isPrevWasLF = true;
+                buffer.get();
+            }
         }
         StringBuilder builder = new StringBuilder();
         while (buffer.hasRemaining() || isBufferUpdated()) {
             char character = buffer.get();
             if (Character.getType(character) != Character.CONTROL) {
                 builder.append(character);
+                isPrevWasLF = false;
+            } else if (isPrevWasLF) {
+                isPrevWasLF = false;
+                return "";
             } else if (!builder.isEmpty()) {
                 break;
             }
@@ -101,12 +124,15 @@ public class MyScanner implements AutoCloseable {
             }
         }*/
         //System.err.println(builder);
+        if (builder.isEmpty()) {
+            return null;
+        }
         return builder.toString();
     }
 
     public String next(boolean isNumber) throws IOException {
         if (!isBufferUpdated()) {
-            throw new IOException("The resource has ended.");
+            return null;
         }
         StringBuilder builder = new StringBuilder();
 
@@ -138,6 +164,9 @@ public class MyScanner implements AutoCloseable {
                 break;
             }
         }*/
+        if (builder.isEmpty()) {
+            return null;
+        }
         return builder.toString();
     }
 }

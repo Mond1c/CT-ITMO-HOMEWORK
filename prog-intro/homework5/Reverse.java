@@ -6,27 +6,27 @@ import java.util.Stack;
 
 public class Reverse {
 
-    public static void main(String[] args) throws IOException { // O(n * m) n - amount of lines, m - average length of each line
-        BufScanner consoleScanner = new BufScanner(System.in);
+    public static void main(String[] args)  { 
         Stack<Stack<Integer>> lines = new Stack<>();
-        String line = consoleScanner.nextLine();
-        while (line != null) {
-            //Scanner stringScanner = new Scanner(line);
-            BufScanner stringScanner = new BufScanner(line);
-            Stack<Integer> values = new Stack<>();
-            String number = stringScanner.next(true);
-            while (number != null) {
-                values.push(Integer.parseInt(number));
-                number = stringScanner.next(true);
+        try (BufScanner consoleScanner = new BufScanner(System.in)) {
+            String line = consoleScanner.nextLine();
+            while (line != null) {
+                try (MyScanner stringScanner = new MyScanner(line)) {
+                    Stack<Integer> values = new Stack<>();
+                    String number = stringScanner.next(true);
+                    while (number != null) {
+                        values.push(Integer.parseInt(number));
+                        number = stringScanner.next(true);
+                    }
+                    lines.push(values);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                line = consoleScanner.nextLine();
             }
-            /*while (stringScanner.hasNextInt()) {
-                values.push(stringScanner.nextInt());
-            }*/
-            lines.push(values);
-            stringScanner.close();
-            line = consoleScanner.nextLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        consoleScanner.close();
         while (!lines.empty()) {
             Stack<Integer> l = lines.pop();
             while (!l.empty()) {

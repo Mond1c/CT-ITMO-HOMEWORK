@@ -1,34 +1,44 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.Arrays;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ReverseSum {
     public static void main(String[] args) {
-        Scanner consoleScanner = new Scanner(System.in);
         int[][] matrix = new int[2][];
         int[] row_sizes = new int[2];
-        int i = 0;
-        while (consoleScanner.hasNextLine()) {
-            Scanner stringScanner = new Scanner(consoleScanner.nextLine());
-            int[] row = new int[2];
-            int j = 0;
-            while (stringScanner.hasNextInt()) {
-                if (j == row.length) {
-                    row = Arrays.copyOf(row, row.length + (row.length >> 1));
+        try (BufScanner consoleScanner = new BufScanner(System.in)) {
+            int i = 0;
+            String line = consoleScanner.nextLine();
+            while (line != null) {
+                try (BufScanner stringScanner = new BufScanner(line)) {
+                    int[] row = new int[2];
+                    int j = 0;
+                    String number = stringScanner.next(true);
+                    while (number != null) {
+                        if (j == row.length) {
+                            row = Arrays.copyOf(row, row.length + (row.length >> 1));
+                        }
+                        row[j++] = Integer.parseInt(number);
+                        number = stringScanner.next(true);
+                    }
+                    if (i == matrix.length) {
+                        matrix = Arrays.copyOf(matrix, matrix.length + (matrix.length >> 1));
+                        row_sizes = Arrays.copyOf(row_sizes, row_sizes.length + (row_sizes.length >> 1));
+                    }
+                    matrix[i] = row;
+                    row_sizes[i++] = j;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                row[j++] = stringScanner.nextInt();
+                line = consoleScanner.nextLine();
             }
-            if (i == matrix.length) {
-                matrix = Arrays.copyOf(matrix, matrix.length + (matrix.length >> 1));
-                row_sizes = Arrays.copyOf(row_sizes, row_sizes.length + (row_sizes.length >> 1));
-            }
-            matrix[i] = row;
-            row_sizes[i++] = j;
-            stringScanner.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        consoleScanner.close();
-        for (i = 0; i < matrix.length; i++) {
+
+        for (int i = 0; i < matrix.length; i++) {
             if (matrix[i] == null) break;
             for (int j = 0; j < row_sizes[i]; j++) {
                 int sum = 0;

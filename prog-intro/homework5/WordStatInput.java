@@ -22,12 +22,12 @@ public class WordStatInput {
     }
 
     public static void main(String[] args) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0]),
+        try (BufScanner reader = new BufScanner(new InputStreamReader(new FileInputStream(args[0]),
                     StandardCharsets.UTF_8));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args[1]),
                     StandardCharsets.UTF_8))) {
             Map<String, Integer> dict = new LinkedHashMap<>();
-            String line = reader.readLine();
+            String line = reader.nextLine();
             while (line != null) {
                 List<String> words = getWords(line);
                 for (String word : words) {
@@ -35,7 +35,7 @@ public class WordStatInput {
                         dict.put(word, dict.getOrDefault(word, 0) + 1);
                     }
                 }
-                line = reader.readLine();
+                line = reader.nextLine();
             }
             for (Map.Entry<String, Integer> item : dict.entrySet()) {
                 writer.write(item.getKey() + " " + item.getValue());
