@@ -1,42 +1,67 @@
-import java.io.*;
-import java.nio.CharBuffer;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.Arrays;
-
-import javax.swing.text.Position;
 
 public class MyScanner implements AutoCloseable {
     private final Reader reader;
     private static final int BUFFER_SIZE = 1024;
-    private CharBuffer buffer;
+    private char[] buffer = new char[BUFFER_SIZE];
+    private int position;
+    private int length;
+    private boolean isForNumbers;
     private boolean isPrevWasLF;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
-        this.buffer = CharBuffer.allocate(BUFFER_SIZE);
+    }
+
+    public MyScanner(Reader reader, boolean isForNumbers) {
+        this.reader = reader;
+        this.isForNumbers = isForNumbers;
     }
 
     public MyScanner(InputStream stream) {
         this.reader = new InputStreamReader(stream);
-        this.buffer = CharBuffer.allocate(BUFFER_SIZE);
+    }
+
+    public MyScanner(InputStream stream, boolean isForNumbers) {
+        this.reader = new InputStreamReader(stream);
+        this.isForNumbers = isForNumbers;
     }
 
     public MyScanner(String source) {
         this.reader = new StringReader(source);
-        this.buffer = CharBuffer.allocate(BUFFER_SIZE);
+    }
+
+    public MyScanner(String source, boolean isForNumbers) {
+        this.reader = new StringReader(source);
+        this.isForNumbers = isForNumbers;
     }
 
     public void close() throws IOException {
         reader.close();
     }
 
+    // For debug
+    private void printBuffer() {
+        for (int i = 0; i < length; i++) {
+            if (Character.getType(buffer[i]) == Character.CONTROL) {
+                System.err.print("n ");
+            } else {
+                System.err.print(buffer[i] + " ");
+            }
+        }
+        System.err.println();
+    }
+
     private boolean isBufferUpdated() throws IOException {
-        //System.err.println(Arrays.toString(buffer.array()));
-        if (!buffer.hasRemaining()) {
-            buffer.clear();
-            reader.read(buffer);
-            buffer.flip();
-            return buffer.hasRemaining();
+        if (position >= length) {
+            length = reader.read(buffer);
+            position = 0;
+            return length > 0;
         }
         return true;
     }
@@ -47,62 +72,36 @@ public class MyScanner implements AutoCloseable {
             || type == Character.PARAGRAPH_SEPARATOR || type == Character.CONTROL;
     }
 
-   /* public boolean hasNextLine() throws IOException {
-        if (!isBufferUpdated()) {
-            return false;
-        }
-       // int n = buffer.limit() - buffer.position();
-     //   System.err.println(n);
-       // System.err.println(Arrays.toString(buffer.array()));
-       // System.err.println(buffer.position() + " " + buffer.remaining());
-        for (int position = 0; position < buffer.remaining(); position++) {
-            if (Character.getType(buffer.charAt(position)) == Character.CONTROL) {
-                if (position + 1 < buffer.remaining()
-                && Character.getType(buffer.charAt(position + 1)) == Character.CONTROL) {
-                    buffer.put(buffer.position() + position + 1, ' ');
-                }
-                return true;
-            }
+    private boolean isFits(char character) {
+        if (isForNumbers) {
+            if (Character.isDigit(character) || character == '-'
+                || Character.toLowerCase(character) == 'o') {
+                    return true;
+                } 
+        } else if (!isSeparator(character)) {
+            return true;
         }
         return false;
     }
-
-    public boolean hasNext(boolean isNumber) throws IOException {
-        if (!isBufferUpdated()) {
-            return false;
-        }
-
-        if (isNumber) {
-            for (int position = 0; position < buffer.remaining(); position++) {
-                if (Character.isDigit(buffer.charAt(position))) {
-                    return true;
-                } else if (position == buffer.remaining() - 1 && !isBufferUpdated()) {
-                    return false;
-                }
-            }
-            return false;
-        }
-     
-        return true;
-    }*/
 
     public String nextLine() throws IOException {
         if (!isBufferUpdated()) {
             return null;
         }
-        if (Character.getType(buffer.charAt(0)) == Character.CONTROL) {
+        if (Character.getType(buffer[position]) == Character.CONTROL) {
             if (isPrevWasLF) {
                 isPrevWasLF = false;
-                buffer.get();
+                position++;
                 return "";
             } else {
                 isPrevWasLF = true;
-                buffer.get();
+                position++;
             }
         }
         StringBuilder builder = new StringBuilder();
-        while (buffer.hasRemaining() || isBufferUpdated()) {
-            char character = buffer.get();
+        while (position < length || isBufferUpdated()) {
+            char character = buffer[position];
+            position++;
             if (Character.getType(character) != Character.CONTROL) {
                 builder.append(character);
                 isPrevWasLF = false;
@@ -114,56 +113,27 @@ public class MyScanner implements AutoCloseable {
             }
         }
         
-        /*int count = 0;
-        while ((buffer.hasRemaining() || isBufferUpdated()) && count < 2) {
-            if (Character.getType(buffer.charAt(0)) == Character.CONTROL) {
-                buffer.get();
-                count++;
-            } else {
-                break;
-            }
-        }*/
-        //System.err.println(builder);
         if (builder.isEmpty()) {
             return null;
         }
         return builder.toString();
     }
 
-    public String next(boolean isNumber) throws IOException {
+    public String next() throws IOException {
         if (!isBufferUpdated()) {
             return null;
         }
         StringBuilder builder = new StringBuilder();
-
-        if (isNumber) {
-            while (buffer.hasRemaining() || isBufferUpdated()) {
-                char character = buffer.get();
-                if (Character.isDigit(character) || (builder.isEmpty() && character == '-')) {
-                    builder.append(character);
-                } else if (!builder.isEmpty()) {
-                    break;
-                }
-            }
-        } else {
-            while (buffer.hasRemaining() || isBufferUpdated()) {
-                char character = buffer.get();
-                if (!isSeparator(character)) {
-                    builder.append(character);
-                } else if (!builder.isEmpty()) {
-                    break;
-                }
-            }
-        }
-        /*int count = 0;
-        while ((buffer.hasRemaining() || isBufferUpdated())) {
-            if (Character.getType(buffer.charAt(0)) == Character.CONTROL && count < 2) {
-                buffer.get();
-                count++;
-            } else {
+        while (position < length || isBufferUpdated()) {
+            char character = buffer[position];
+            position++;
+            if (isFits(character)) {
+                builder.append(character);
+            } else if (!builder.isEmpty()) {
                 break;
             }
-        }*/
+        }
+        
         if (builder.isEmpty()) {
             return null;
         }

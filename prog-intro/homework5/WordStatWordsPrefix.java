@@ -22,7 +22,7 @@ public class WordStatWordsPrefix {
     }
 
     public static void main(String[] args) {
-        try (BufScanner reader = new BufScanner(new InputStreamReader(new FileInputStream(args[0]),
+        try (MyScanner reader = new MyScanner(new InputStreamReader(new FileInputStream(args[0]),
                     StandardCharsets.UTF_8));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args[1]),
                     StandardCharsets.UTF_8))) {

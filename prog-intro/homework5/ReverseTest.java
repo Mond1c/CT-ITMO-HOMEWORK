@@ -1,5 +1,6 @@
 package reverse;
 
+import base.ExtendedRandom;
 import base.Named;
 import base.Selector;
 import base.TestCounter;
@@ -8,10 +9,10 @@ import reverse.ReverseTester.Op;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.IntToLongFunction;
 import java.util.function.LongBinaryOperator;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -103,6 +104,12 @@ public final class ReverseTest {
                 .toArray(long[][]::new);
     });
 
+    private static final Named<BiFunction<ExtendedRandom, Integer, String>> OCT_DEC = Named.of("OctDec", (r, i) ->
+            r.nextBoolean()
+            ? Integer.toString(i)
+            : Integer.toOctalString(i) + (r.nextBoolean() ? "o" : "O"));
+    private static final Named<BiFunction<ExtendedRandom, Integer, String>> DEC = Named.of("", (r, i) -> Integer.toString(i));
+
     public static final Selector SELECTOR = selector(ReverseTest.class, MAX_SIZE);
 
     private ReverseTest() {
@@ -116,6 +123,7 @@ public final class ReverseTest {
                 .variant("Avg", ReverseTester.variant(maxSize, AVG))
                 .variant("Even", ReverseTester.variant(maxSize, EVEN))
                 .variant("Transpose", ReverseTester.variant(maxSize, TRANSPOSE))
+                .variant("OctDec",      ReverseTester.variant(maxSize, "", OCT_DEC, DEC))
 
                 ;
     }

@@ -8,20 +8,20 @@ public class ReverseSum {
     public static void main(String[] args) {
         int[][] matrix = new int[2][];
         int[] row_sizes = new int[2];
-        try (BufScanner consoleScanner = new BufScanner(System.in)) {
+        try (MyScanner consoleScanner = new MyScanner(System.in)) {
             int i = 0;
             String line = consoleScanner.nextLine();
             while (line != null) {
-                try (BufScanner stringScanner = new BufScanner(line)) {
+                try (MyScanner stringScanner = new MyScanner(line, true)) {
                     int[] row = new int[2];
                     int j = 0;
-                    String number = stringScanner.next(true);
+                    String number = stringScanner.next();
                     while (number != null) {
                         if (j == row.length) {
                             row = Arrays.copyOf(row, row.length + (row.length >> 1));
                         }
                         row[j++] = Integer.parseInt(number);
-                        number = stringScanner.next(true);
+                        number = stringScanner.next();
                     }
                     if (i == matrix.length) {
                         matrix = Arrays.copyOf(matrix, matrix.length + (matrix.length >> 1));
