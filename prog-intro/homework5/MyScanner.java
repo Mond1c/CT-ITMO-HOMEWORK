@@ -6,8 +6,8 @@ import java.io.StringReader;
 import java.util.Arrays;
 
 public class MyScanner implements AutoCloseable {
-    private final Reader reader;
     private static final int BUFFER_SIZE = 1024;
+    private final Reader reader;
     private char[] buffer = new char[BUFFER_SIZE];
     private int position;
     private int length;
@@ -88,16 +88,6 @@ public class MyScanner implements AutoCloseable {
         if (!isBufferUpdated()) {
             return null;
         }
-        if (Character.getType(buffer[position]) == Character.CONTROL) {
-            if (isPrevWasLF) {
-                isPrevWasLF = false;
-                position++;
-                return "";
-            } else {
-                isPrevWasLF = true;
-                position++;
-            }
-        }
         StringBuilder builder = new StringBuilder();
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
@@ -105,10 +95,14 @@ public class MyScanner implements AutoCloseable {
             if (Character.getType(character) != Character.CONTROL) {
                 builder.append(character);
                 isPrevWasLF = false;
-            } else if (isPrevWasLF) {
-                isPrevWasLF = false;
-                return "";
-            } else if (!builder.isEmpty()) {
+            } else if (builder.isEmpty()) {
+                if (isPrevWasLF) {
+                    isPrevWasLF = false;
+                    return "";
+                } else {
+                    isPrevWasLF = true;
+                }
+            } else {
                 break;
             }
         }

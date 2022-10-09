@@ -25,12 +25,12 @@ public class ReverseOctDec {
                     }
                     lines.add(values);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println(e.getMessage());
                 }
                 line = consoleScanner.nextLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
         for (int i = lines.size() - 1; i >= 0; i--) {
             for (int j = lines.get(i).size() - 1; j >= 0; j--) {
