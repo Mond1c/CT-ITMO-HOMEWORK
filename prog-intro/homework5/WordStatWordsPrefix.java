@@ -27,16 +27,14 @@ public class WordStatWordsPrefix {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args[1]),
                     StandardCharsets.UTF_8))) {
             Map<String, Integer> dict = new TreeMap<>();
-            String line = reader.nextLine();
-            while (line != null) {
-                List<String> words = getWords(line);
+            while (reader.hasNextLine()) {
+                List<String> words = getWords(reader.nextLine());
                 for (String word : words) {
                     if (!word.isEmpty()) {
                         String prefix = word.substring(0, Math.min(3, word.length()));
                         dict.put(prefix, dict.getOrDefault(prefix, 0) + 1);
                     }
                 }
-                line = reader.nextLine();
             }
             for (Map.Entry<String, Integer> item : dict.entrySet()) {
                 writer.write(item.getKey() + " " + item.getValue());

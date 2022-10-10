@@ -11,34 +11,20 @@ public class MyScanner implements AutoCloseable {
     private char[] buffer = new char[BUFFER_SIZE];
     private int position;
     private int length;
-    private boolean isForNumbers;
+    private String curToken;
+    private String curLine;
     private boolean isPrevWasLF;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
     }
 
-    public MyScanner(Reader reader, boolean isForNumbers) {
-        this.reader = reader;
-        this.isForNumbers = isForNumbers;
-    }
-
     public MyScanner(InputStream stream) {
         this.reader = new InputStreamReader(stream);
     }
 
-    public MyScanner(InputStream stream, boolean isForNumbers) {
-        this.reader = new InputStreamReader(stream);
-        this.isForNumbers = isForNumbers;
-    }
-
     public MyScanner(String source) {
         this.reader = new StringReader(source);
-    }
-
-    public MyScanner(String source, boolean isForNumbers) {
-        this.reader = new StringReader(source);
-        this.isForNumbers = isForNumbers;
     }
 
     public void close() throws IOException {
@@ -72,19 +58,38 @@ public class MyScanner implements AutoCloseable {
             || type == Character.PARAGRAPH_SEPARATOR || type == Character.CONTROL;
     }
 
-    private boolean isFits(char character) {
-        if (isForNumbers) {
-            if (Character.isDigit(character) || character == '-'
-                || Character.toLowerCase(character) == 'o') {
-                    return true;
-                } 
-        } else if (!isSeparator(character)) {
-            return true;
+    public boolean hasNextInt() throws IOException {
+        curToken = nextToken();
+        if (curToken == null) {
+            return false;
+        }
+        for (int i = 0; i < curToken.length(); i++) {
+            if (Character.isDigit(curToken.charAt(i))) {
+                return true;
+            }
         }
         return false;
     }
 
-    public String nextLine() throws IOException {
+    public boolean hasNext() throws IOException {
+        curToken = nextToken();
+        if (curToken == null) {
+            return false;
+        }
+        for (int i = 0; i < curToken.length(); i++) {
+            if (!isSeparator(curToken.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasNextLine() throws IOException {
+        curLine = nextLineToken();
+        return curLine != null;
+    }
+
+    private String nextLineToken() throws IOException {
         if (!isBufferUpdated()) {
             return null;
         }
@@ -113,7 +118,11 @@ public class MyScanner implements AutoCloseable {
         return builder.toString();
     }
 
-    public String next() throws IOException {
+    public String nextLine() {
+        return curLine;
+    }
+
+    private String nextToken() throws IOException {
         if (!isBufferUpdated()) {
             return null;
         }
@@ -121,7 +130,7 @@ public class MyScanner implements AutoCloseable {
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
             position++;
-            if (isFits(character)) {
+            if (!isSeparator(character)) {
                 builder.append(character);
             } else if (!builder.isEmpty()) {
                 break;
@@ -132,5 +141,16 @@ public class MyScanner implements AutoCloseable {
             return null;
         }
         return builder.toString();
+    }
+
+    public int nextInt() throws NumberFormatException {
+        if (Character.toLowerCase(curToken.charAt(curToken.length() - 1)) == 'o') {
+            return Integer.parseUnsignedInt(curToken.substring(0, curToken.length() - 1), 8);
+        }
+        return Integer.parseInt(curToken);
+    }
+
+    public String next() {
+        return curToken;
     }
 }

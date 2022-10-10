@@ -12,7 +12,7 @@ public class ReverseSum {
             int i = 0;
             String line = consoleScanner.nextLine();
             while (line != null) {
-                try (MyScanner stringScanner = new MyScanner(line, true)) {
+                try (MyScanner stringScanner = new MyScanner(line)) {
                     int[] row = new int[2];
                     int j = 0;
                     String number = stringScanner.next();

@@ -1,1 +1,1 @@
-javac -cp . *.java && java -ea -jar FastReverseTest.jar OctDec && del *.class
+javac -encoding "UTF-8" -cp . *.java && java -Dfile.encoding="UTF-8" -ea -jar FastReverseTest.jar OctDec && del *.class

@@ -10,24 +10,17 @@ public class ReverseOctDec {
     public static void main(String[] args)  { 
         List<List<Integer>> lines = new ArrayList<>();
         try (MyScanner consoleScanner = new MyScanner(System.in)) {
-            String line = consoleScanner.nextLine();
-            while (line != null) {
-                try (MyScanner stringScanner = new MyScanner(line, true)) {
+            while (consoleScanner.hasNextLine()) {
+                String line = consoleScanner.nextLine();
+                try (MyScanner stringScanner = new MyScanner(line)) {
                     List<Integer> values = new ArrayList<>();
-                    String number = stringScanner.next();
-                    while (number != null) {
-                        if (Character.toLowerCase(number.charAt(number.length() - 1)) == 'o') {
-                            values.add(Integer.parseUnsignedInt(number.substring(0, number.length() - 1), 8));
-                        } else {
-                            values.add(Integer.parseInt(number));
-                        }
-                        number = stringScanner.next();
+                    while (stringScanner.hasNextInt()) {
+                        values.add(stringScanner.nextInt());
                     }
                     lines.add(values);
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
                 }
-                line = consoleScanner.nextLine();
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());

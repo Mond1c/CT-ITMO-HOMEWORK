@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94d8ec7e-0d2a-4565-ac73-7fd0f55b9412" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BufScanner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FastReverseTest.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FastReverseTest.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyScanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Reverse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Reverse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReverseOctDec.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReverseOctDec.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ReverseSum.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReverseSum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReverseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReverseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WordStatInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordStatInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WordStatWordsPrefix.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordStatWordsPrefix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/package-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/Selector$Composite.class" beforeDir="false" afterPath="$PROJECT_DIR$/base/Selector$Composite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/Selector.class" beforeDir="false" afterPath="$PROJECT_DIR$/base/Selector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework3.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run5.bat" beforeDir="false" afterPath="$PROJECT_DIR$/run5.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,17 +28,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pocht/Desktop/Homework/prog-intro/homework4&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/pocht/Desktop/Homework/prog-intro/homework5",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="WordStatInput" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="WordStatInput" />
@@ -67,6 +65,7 @@
       <workItem from="1663699169843" duration="258000" />
       <workItem from="1664122484608" duration="33000" />
       <workItem from="1665238421177" duration="14000" />
+      <workItem from="1665422897039" duration="697000" />
     </task>
     <servers />
   </component>

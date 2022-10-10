@@ -27,15 +27,13 @@ public class WordStatInput {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args[1]),
                     StandardCharsets.UTF_8))) {
             Map<String, Integer> dict = new LinkedHashMap<>();
-            String line = reader.nextLine();
-            while (line != null) {
-                List<String> words = getWords(line);
+            while (reader.hasNextLine()) {
+                List<String> words = getWords(reader.nextLine());
                 for (String word : words) {
                     if (!word.isEmpty()) {
                         dict.put(word, dict.getOrDefault(word, 0) + 1);
                     }
                 }
-                line = reader.nextLine();
             }
             for (Map.Entry<String, Integer> item : dict.entrySet()) {
                 writer.write(item.getKey() + " " + item.getValue());

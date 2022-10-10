@@ -10,20 +10,17 @@ public class Reverse {
     public static void main(String[] args)  { 
         List<List<Integer>> lines = new ArrayList<>();
         try (MyScanner consoleScanner = new MyScanner(System.in)) {
-            String line = consoleScanner.nextLine();
-            while (line != null) {
-                try (MyScanner stringScanner = new MyScanner(line, true)) {
+            while (consoleScanner.hasNextLine()) {
+                String line = consoleScanner.nextLine();
+                try (MyScanner stringScanner = new MyScanner(line)) {
                     List<Integer> values = new ArrayList<>();
-                    String number = stringScanner.next();
-                    while (number != null) {
-                        values.add(Integer.parseInt(number));
-                        number = stringScanner.next();
+                    while (stringScanner.hasNextInt()) {
+                        values.add(stringScanner.nextInt());
                     }
                     lines.add(values);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                line = consoleScanner.nextLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,17 +31,5 @@ public class Reverse {
             }
             System.out.println();
         }
-        /*
-        while (!lines.empty()) {
-            Stack<Integer> l = lines.pop();
-            while (!l.empty()) {
-                System.out.print(l.pop());
-                if (!l.empty()) {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-        */
     }
 }
