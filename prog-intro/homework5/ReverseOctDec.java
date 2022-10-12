@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -8,22 +9,23 @@ import java.util.ArrayList;;
 public class ReverseOctDec {
 
     public static void main(String[] args)  { 
-        List<List<Integer>> lines = new ArrayList<>();
+        // :NOTE: memory
+        List<IntList> lines = new ArrayList<>();
         try (MyScanner consoleScanner = new MyScanner(System.in)) {
             while (consoleScanner.hasNextLine()) {
                 String line = consoleScanner.nextLine();
                 try (MyScanner stringScanner = new MyScanner(line)) {
-                    List<Integer> values = new ArrayList<>();
+                    IntList values = new IntList();
                     while (stringScanner.hasNextInt()) {
                         values.add(stringScanner.nextInt());
                     }
                     lines.add(values);
                 } catch (IOException e) {
-                    System.err.println(e.getMessage());
+                    System.err.println("Problem with I/O operations. (Maybe file doesn't exist");
                 }
             }
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Problem with I/O operations. (Maybe file doesn't exist)");
         }
         for (int i = lines.size() - 1; i >= 0; i--) {
             for (int j = lines.get(i).size() - 1; j >= 0; j--) {
