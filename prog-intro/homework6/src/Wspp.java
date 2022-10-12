@@ -8,7 +8,7 @@ public class Wspp {
         int start = 0, end = 0;
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
-            boolean isPartOfWord = Character.isLetter(character) || character == '-' || character == '\'' ||
+            boolean isPartOfWord = Character.isLetter(character) || character == '\'' ||
                     Character.getType(character) == Character.DASH_PUNCTUATION;
             if (isPartOfWord) {
                 end++;
@@ -24,15 +24,14 @@ public class Wspp {
     }
 
     public static void main(String[] args) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0]),
+        try (MyScanner reader = new MyScanner(new InputStreamReader(new FileInputStream(args[0]),
                 StandardCharsets.UTF_8));
              BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args[1]),
                      StandardCharsets.UTF_8))) {
             Map<String, IntList> dict = new LinkedHashMap<>();
-            String line = reader.readLine();
             int index = 1;
-            while (line != null) {
-                List<String> words = getWords(line);
+            while (reader.hasNextLine()) {
+                List<String> words = getWords(reader.nextLine());
                 for (String word : words) {
                     word = word.toLowerCase();
                     if (!dict.containsKey(word)) {
@@ -40,7 +39,6 @@ public class Wspp {
                     }
                     dict.get(word).add(index++);
                 }
-                line = reader.readLine();
             }
             for (Map.Entry<String, IntList> item : dict.entrySet()) {
                 writer.write(item.getKey() + " " + item.getValue().size());

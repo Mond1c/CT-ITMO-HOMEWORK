@@ -25,7 +25,7 @@ public class IntList {
         return size;
     }
 
-    public int get(int index) {
+    public int get(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index is out of range");
         }
