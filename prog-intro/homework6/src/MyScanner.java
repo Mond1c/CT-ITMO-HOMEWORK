@@ -97,7 +97,7 @@ public class MyScanner implements AutoCloseable {
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
             position++;
-            if (Character.getType(character) != Character.CONTROL) {
+            if (character != '\n' && character != '\r') {
                 builder.append(character);
                 isPrevWasLF = false;
             } else if (builder.isEmpty()) {

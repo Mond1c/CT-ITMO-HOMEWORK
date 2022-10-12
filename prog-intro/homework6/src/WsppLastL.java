@@ -26,7 +26,7 @@ public class WsppLastL {
     }
 
     public static void main(String[] args) {
-        try (Scanner reader = new Scanner(new FileReader(args[0],
+        try (MyScanner reader = new MyScanner(new FileReader(args[0],
                 StandardCharsets.UTF_8));
              BufferedWriter writer = new BufferedWriter(new FileWriter(args[1],
                      StandardCharsets.UTF_8))) {
