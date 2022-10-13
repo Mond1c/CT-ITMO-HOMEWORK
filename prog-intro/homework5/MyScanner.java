@@ -13,22 +13,34 @@ public class MyScanner implements AutoCloseable {
     private int length;
     private String curToken;
     private String curLine;
-    private boolean isPrevWasLF;
+    private boolean isLF;
+    private boolean isCRLF;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
+        getPlatformLineSeparator();
     }
 
     public MyScanner(InputStream stream) {
         this.reader = new InputStreamReader(stream);
+        getPlatformLineSeparator();
     }
 
     public MyScanner(String source) {
         this.reader = new StringReader(source);
+        getPlatformLineSeparator();
     }
 
     public void close() throws IOException {
         reader.close();
+    }
+
+    private void getPlatformLineSeparator() {
+        if (System.lineSeparator().length() == 2) {
+            isCRLF = true;
+        } else {
+            isLF = true;
+        }
     }
 
     // For debug
@@ -93,21 +105,24 @@ public class MyScanner implements AutoCloseable {
         if (!isBufferUpdated()) {
             return null;
         }
+        //printBuffer();
         StringBuilder builder = new StringBuilder();
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
             position++;
-            if (character != '\n' && character != '\r') {
+            if (isLF && character != '\n' || isCRLF && character != '\n' && character != '\r') {
                 builder.append(character);
-                isPrevWasLF = false;
+              //  isPrevWasLF = false;
             } else if (builder.isEmpty()) {
+                return "";
+                /*
                 if (isPrevWasLF) {
                     isPrevWasLF = false;
                     return "";
-                } else {
-                    isPrevWasLF = true;
                 }
+                isPrevWasLF = true; */
             } else {
+                //isPrevWasLF = true;
                 break;
             }
         }
@@ -137,9 +152,6 @@ public class MyScanner implements AutoCloseable {
             }
         }
         
-        if (builder.isEmpty()) {
-            return null;
-        }
         return builder.toString();
     }
 
