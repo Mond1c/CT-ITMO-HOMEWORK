@@ -15,6 +15,7 @@ public class MyScanner implements AutoCloseable {
     private String curLine;
     private boolean isLF;
     private boolean isCRLF;
+    private boolean isPrevWasLF;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
@@ -112,17 +113,20 @@ public class MyScanner implements AutoCloseable {
             position++;
             if (isLF && character != '\n' || isCRLF && character != '\n' && character != '\r') {
                 builder.append(character);
-              //  isPrevWasLF = false;
-            } else if (builder.isEmpty()) {
-                return "";
-                /*
-                if (isPrevWasLF) {
+                if (isCRLF) {
                     isPrevWasLF = false;
-                    return "";
                 }
-                isPrevWasLF = true; */
+            } else if (builder.isEmpty()) {
+                if (isLF) {
+                    return "";
+                } else if (isCRLF) {
+                    if (isPrevWasLF) {
+                        isPrevWasLF = false;
+                        return "";
+                    }
+                    isPrevWasLF = true;
+                }
             } else {
-                //isPrevWasLF = true;
                 break;
             }
         }
