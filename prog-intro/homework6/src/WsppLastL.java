@@ -2,6 +2,16 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+class Pair <T, G> {
+    public T first;
+    public G second;
+
+    public Pair(T first, G second) {
+        this.first = first;
+        this.second = second;
+    }
+}
+
 public class WsppLastL {
 
 
@@ -30,32 +40,31 @@ public class WsppLastL {
                 StandardCharsets.UTF_8));
              BufferedWriter writer = new BufferedWriter(new FileWriter(args[1],
                      StandardCharsets.UTF_8))) {
-            Map<String, Pair> dict = new LinkedHashMap<>();
+            Map<String, Pair<Integer, IntList>> dict = new LinkedHashMap<>();
             int index = 1;
             while (reader.hasNextLine()) {
                 List<String> words = getWords(reader.nextLine());
-                Map<String, IntList> lastIndexes = new LinkedHashMap<>();
+                Map<String, Pair<Integer, Integer>> lastIndexes = new LinkedHashMap<>();
                 for (String word : words) {
                     word = word.toLowerCase();
-                    if (!lastIndexes.containsKey(word)) {
-                        lastIndexes.put(word, new IntList());
-                    }
-                    lastIndexes.get(word).add(index++);
+                    Pair<Integer, Integer> pair = lastIndexes.getOrDefault(word, new Pair<>(0, 0));
+                    pair.first++;
+                    pair.second = index++;
+                    lastIndexes.put(word, pair);
                 }
-                for (Map.Entry<String, IntList> item : lastIndexes.entrySet()) {
+                for (Map.Entry<String, Pair<Integer, Integer>> item : lastIndexes.entrySet()) {
                     String key = item.getKey();
                     if (!dict.containsKey(key)) {
-                        dict.put(key, new Pair(0, new IntList()));
+                        dict.put(key, new Pair<>(0, new IntList()));
                     }
-                    IntList value = lastIndexes.get(key);
-                    dict.get(key).getList().add(value.get(value.size() - 1));
-                    dict.get(key).addSize(value.size());
+                    dict.get(key).second.add(item.getValue().second);
+                    dict.get(key).first += item.getValue().first;
                 }
                 index = 1;
             }
-            for (Map.Entry<String, Pair> item : dict.entrySet()) {
-                writer.write(item.getKey() + " " + item.getValue().getSize());
-                IntList list = item.getValue().getList();
+            for (Map.Entry<String, Pair<Integer, IntList>> item : dict.entrySet()) {
+                writer.write(item.getKey() + " " + item.getValue().first);
+                IntList list = item.getValue().second;
                 for (int i = 0 ; i < list.size(); i++) {
                     writer.write(" " + list.get(i));
                 }
@@ -68,24 +77,3 @@ public class WsppLastL {
     }
 }
 
-class Pair {
-    private int size;
-    private IntList list;
-
-    public Pair(int size, IntList list) {
-        this.size = size;
-        this.list = list;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void addSize(int size) {
-        this.size += size;
-    }
-
-    public IntList getList() {
-        return list;
-    }
-}
