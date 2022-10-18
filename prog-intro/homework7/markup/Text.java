@@ -1,7 +1,9 @@
-public class Text implements TextElement {
+package markup;
+public class Text extends MarkdownElement {
     private String content;
 
     public Text(String content) {
+        super(null);
         this.content = content;
     }
 

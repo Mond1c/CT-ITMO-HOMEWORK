@@ -1,14 +1,15 @@
+package markup;
 import java.util.List;
 
-public class Strikeout extends TextProperty implements TextElement {
-    public Strikeout(List<TextElement> elements) {
+public class Strikeout extends MarkdownElement {
+    public Strikeout(List<MarkdownElement> elements) {
         super(elements);
     }
 
     @Override
     public void toMarkdown(StringBuilder builder) {
         builder.append("~");
-        getMarkdownFromElements(builder);
+        super.toMarkdown(builder);
         builder.append("~");
     }
 }

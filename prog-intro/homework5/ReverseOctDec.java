@@ -21,11 +21,13 @@ public class ReverseOctDec {
                     }
                     lines.add(values);
                 } catch (IOException e) {
-                    System.err.println("Problem with I/O operations. (Maybe file doesn't exist");
+                    System.err.println("Problem with I/O operations.");
                 }
             }
+        } catch (FileNotFoundException e) {
+            System.err.println("File doesn't exist.");
         } catch (IOException e) {
-            System.err.println("Problem with I/O operations. (Maybe file doesn't exist)");
+            System.err.println("Problem with I/O operations.");
         }
         for (int i = lines.size() - 1; i >= 0; i--) {
             for (int j = lines.get(i).size() - 1; j >= 0; j--) {

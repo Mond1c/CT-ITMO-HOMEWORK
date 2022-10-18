@@ -2,11 +2,32 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+// So many memory (But it is more useful)
 class Pair <T, G> {
     public T first;
     public G second;
 
     public Pair(T first, G second) {
+        this.first = first;
+        this.second = second;
+    }
+}
+
+class PairOfIntegers {
+    public int first;
+    public int second;
+
+    public PairOfIntegers(int first, int second) {
+        this.first = first;
+        this.second = second;
+    }
+}
+
+class PairOfIntegerAndIntList {
+    public int first;
+    public IntList second;
+
+    public PairOfIntegerAndIntList(int first, IntList second) {
         this.first = first;
         this.second = second;
     }
@@ -40,35 +61,34 @@ public class WsppLastL {
                 StandardCharsets.UTF_8));
              BufferedWriter writer = new BufferedWriter(new FileWriter(args[1],
                      StandardCharsets.UTF_8))) {
-            Map<String, Pair<Integer, IntList>> dict = new LinkedHashMap<>();
+            Map<String, PairOfIntegerAndIntList> dict = new LinkedHashMap<>();
             int index = 1;
             while (reader.hasNextLine()) {
                 List<String> words = getWords(reader.nextLine());
-                Map<String, Pair<Integer, Integer>> lastIndexes = new LinkedHashMap<>();
+                Map<String, PairOfIntegers> lastIndexes = new LinkedHashMap<>();
                 for (String word : words) {
                     word = word.toLowerCase();
-                    Pair<Integer, Integer> pair = lastIndexes.getOrDefault(word, new Pair<>(0, 0));
+                    PairOfIntegers pair = lastIndexes.getOrDefault(word, new PairOfIntegers(0, 0));
                     pair.first++;
                     pair.second = index++;
                     lastIndexes.put(word, pair);
                 }
-                for (Map.Entry<String, Pair<Integer, Integer>> item : lastIndexes.entrySet()) {
+                for (Map.Entry<String, PairOfIntegers> item : lastIndexes.entrySet()) {
                     String key = item.getKey();
                     if (!dict.containsKey(key)) {
-                        dict.put(key, new Pair<>(0, new IntList()));
+                        dict.put(key, new PairOfIntegerAndIntList(0, new IntList()));
                     }
                     dict.get(key).second.add(item.getValue().second);
                     dict.get(key).first += item.getValue().first;
                 }
                 index = 1;
             }
-            for (Map.Entry<String, Pair<Integer, IntList>> item : dict.entrySet()) {
+            for (Map.Entry<String, PairOfIntegerAndIntList> item : dict.entrySet()) {
                 writer.write(item.getKey() + " " + item.getValue().first);
                 IntList list = item.getValue().second;
                 for (int i = 0 ; i < list.size(); i++) {
                     writer.write(" " + list.get(i));
                 }
-
                 writer.newLine();
             }
         } catch (IOException e) {

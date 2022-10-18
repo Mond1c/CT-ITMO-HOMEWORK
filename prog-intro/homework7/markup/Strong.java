@@ -1,14 +1,15 @@
+package markup;
 import java.util.List;
 
-public class Strong extends TextProperty implements TextElement {
-    public Strong(List<TextElement> elements) {
+public class Strong extends MarkdownElement {
+    public Strong(List<MarkdownElement> elements) {
         super(elements);
     }
 
     @Override
     public void toMarkdown(StringBuilder builder) {
         builder.append("__");
-        getMarkdownFromElements(builder);
+        super.toMarkdown(builder);
         builder.append("__");
     }
 }
