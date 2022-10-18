@@ -9,13 +9,16 @@ public class MyScanner implements AutoCloseable {
     private static final int BUFFER_SIZE = 1024;
     private final Reader reader;
     private char[] buffer = new char[BUFFER_SIZE];
+    private StringBuilder builder = new StringBuilder();
     private int position;
     private int length;
     private String curToken;
     private String curLine;
     private boolean isLF;
     private boolean isCRLF;
+    private boolean isCR;
     private boolean isPrevWasLF;
+    private boolean isTokenWasRead;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
@@ -40,7 +43,11 @@ public class MyScanner implements AutoCloseable {
         if (System.lineSeparator().length() == 2) {
             isCRLF = true;
         } else {
-            isLF = true;
+            if (System.lineSeparator() == "\n") {
+                isLF = true;
+            } else {
+                isCR = true;
+            }
         }
     }
 
@@ -107,24 +114,25 @@ public class MyScanner implements AutoCloseable {
             return null;
         }
         //printBuffer();
-        StringBuilder builder = new StringBuilder();
+        builder.setLength(0);
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
             position++;
-            if (isLF && character != '\n' || isCRLF && character != '\n' && character != '\r') {
+            // :NOTE: Другие случаи
+            if (isLF && character != '\n' || isCRLF && character != '\n' && character != '\r' || isCR && character != '\r') {
                 builder.append(character);
                 if (isCRLF) {
                     isPrevWasLF = false;
                 }
             } else if (builder.isEmpty()) {
-                if (isLF) {
-                    return "";
-                } else if (isCRLF) {
+                if (isCRLF) {
                     if (isPrevWasLF) {
                         isPrevWasLF = false;
                         return "";
                     }
                     isPrevWasLF = true;
+                } else {
+                    return "";
                 }
             } else {
                 break;
@@ -145,25 +153,31 @@ public class MyScanner implements AutoCloseable {
         if (!isBufferUpdated()) {
             return null;
         }
-        StringBuilder builder = new StringBuilder();
+        // :NOTE: new?
+        builder.setLength(0);
         while (position < length || isBufferUpdated()) {
-            char character = buffer[position];
-            position++;
+            char character = buffer[position++];
             if (!isSeparator(character)) {
                 builder.append(character);
             } else if (!builder.isEmpty()) {
                 break;
             }
         }
-        
+        isTokenWasRead = true;
         return builder.toString();
     }
 
-    public int nextInt() throws NumberFormatException {
+    // :NOTE: double call?
+    public int nextInt() throws IOException {
+        if (!isTokenWasRead && !hasNextInt()) {
+            throw new IOException("Can't read from resource.");
+        }
+        isTokenWasRead = false;
         if (Character.toLowerCase(curToken.charAt(curToken.length() - 1)) == 'o') {
             return Integer.parseUnsignedInt(curToken.substring(0, curToken.length() - 1), 8);
+        } else {
+            return Integer.parseInt(curToken);
         }
-        return Integer.parseInt(curToken);
     }
 
     public String next() {

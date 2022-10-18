@@ -12,4 +12,11 @@ public class Strong extends MarkdownElement {
         super.toMarkdown(builder);
         builder.append("__");
     }
+
+    @Override
+    public void toHtml(StringBuilder builder) {
+        builder.append("<strong>");
+        super.toHtml(builder);
+        builder.append("</strong>");
+    }
 }

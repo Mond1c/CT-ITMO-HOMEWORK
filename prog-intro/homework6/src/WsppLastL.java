@@ -2,17 +2,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-// So many memory (But it is more useful)
-class Pair <T, G> {
-    public T first;
-    public G second;
-
-    public Pair(T first, G second) {
-        this.first = first;
-        this.second = second;
-    }
-}
-
 class PairOfIntegers {
     public int first;
     public int second;
@@ -75,11 +64,10 @@ public class WsppLastL {
                 }
                 for (Map.Entry<String, PairOfIntegers> item : lastIndexes.entrySet()) {
                     String key = item.getKey();
-                    if (!dict.containsKey(key)) {
-                        dict.put(key, new PairOfIntegerAndIntList(0, new IntList()));
-                    }
-                    dict.get(key).second.add(item.getValue().second);
-                    dict.get(key).first += item.getValue().first;
+                    PairOfIntegerAndIntList pair = dict.getOrDefault(key, new PairOfIntegerAndIntList(0, new IntList()));
+                    pair.second.add(item.getValue().second);
+                    pair.first += item.getValue().first;
+                    dict.put(key, pair);
                 }
                 index = 1;
             }

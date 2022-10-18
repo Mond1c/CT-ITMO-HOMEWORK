@@ -12,4 +12,11 @@ public class Emphasis extends MarkdownElement {
         super.toMarkdown(builder);
         builder.append("*");
     }
+
+    @Override
+    public void toHtml(StringBuilder builder) {
+        builder.append("<em>");
+        super.toHtml(builder);
+        builder.append("</em>");
+    }
 }

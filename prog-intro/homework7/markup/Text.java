@@ -11,4 +11,9 @@ public class Text extends MarkdownElement {
     public void toMarkdown(StringBuilder builder) {
         builder.append(content);
     }
+
+    @Override
+    public void toHtml(StringBuilder builder) {
+        builder.append(content);
+    }
 }

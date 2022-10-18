@@ -13,22 +13,35 @@ public class MyScanner implements AutoCloseable {
     private int length;
     private String curToken;
     private String curLine;
+    private boolean isLF;
+    private boolean isCRLF;
     private boolean isPrevWasLF;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
+        getPlatformLineSeparator();
     }
 
     public MyScanner(InputStream stream) {
         this.reader = new InputStreamReader(stream);
+        getPlatformLineSeparator();
     }
 
     public MyScanner(String source) {
         this.reader = new StringReader(source);
+        getPlatformLineSeparator();
     }
 
     public void close() throws IOException {
         reader.close();
+    }
+
+    private void getPlatformLineSeparator() {
+        if (System.lineSeparator().length() == 2) {
+            isCRLF = true;
+        } else {
+            isLF = true;
+        }
     }
 
     // For debug
@@ -93,18 +106,25 @@ public class MyScanner implements AutoCloseable {
         if (!isBufferUpdated()) {
             return null;
         }
+        //printBuffer();
         StringBuilder builder = new StringBuilder();
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
             position++;
-            if (character != '\n' && character != '\r') {
+            // :NOTE: Другие случаи
+            if (isLF && character != '\n' || isCRLF && character != '\n' && character != '\r') {
                 builder.append(character);
-                isPrevWasLF = false;
-            } else if (builder.isEmpty()) {
-                if (isPrevWasLF) {
+                if (isCRLF) {
                     isPrevWasLF = false;
+                }
+            } else if (builder.isEmpty()) {
+                if (isLF) {
                     return "";
-                } else {
+                } else if (isCRLF) {
+                    if (isPrevWasLF) {
+                        isPrevWasLF = false;
+                        return "";
+                    }
                     isPrevWasLF = true;
                 }
             } else {
@@ -126,10 +146,10 @@ public class MyScanner implements AutoCloseable {
         if (!isBufferUpdated()) {
             return null;
         }
+        // :NOTE: new?
         StringBuilder builder = new StringBuilder();
         while (position < length || isBufferUpdated()) {
-            char character = buffer[position];
-            position++;
+            char character = buffer[position++];
             if (!isSeparator(character)) {
                 builder.append(character);
             } else if (!builder.isEmpty()) {
@@ -137,17 +157,17 @@ public class MyScanner implements AutoCloseable {
             }
         }
         
-        if (builder.isEmpty()) {
-            return null;
-        }
         return builder.toString();
     }
 
+    // :NOTE: double call?
     public int nextInt() throws NumberFormatException {
+        // :NOTE: NPE
         if (Character.toLowerCase(curToken.charAt(curToken.length() - 1)) == 'o') {
             return Integer.parseUnsignedInt(curToken.substring(0, curToken.length() - 1), 8);
+        } else {
+            return Integer.parseInt(curToken);
         }
-        return Integer.parseInt(curToken);
     }
 
     public String next() {

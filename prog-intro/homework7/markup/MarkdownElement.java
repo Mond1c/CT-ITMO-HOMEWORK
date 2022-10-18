@@ -13,4 +13,13 @@ public abstract class MarkdownElement {
             element.toMarkdown(builder);
         }
     }
+
+    public void toHtml(StringBuilder builder) {
+        if (elements == null) {
+            return;
+        }
+        for (MarkdownElement element : elements) {
+            element.toHtml(builder);
+        }
+    }
 }

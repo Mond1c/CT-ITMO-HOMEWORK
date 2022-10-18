@@ -12,4 +12,11 @@ public class Strikeout extends MarkdownElement {
         super.toMarkdown(builder);
         builder.append("~");
     }
+
+    @Override
+    public void toHtml(StringBuilder builder) {
+        builder.append("<s>");
+        super.toHtml(builder);
+        builder.append("</s>");
+    }
 }
