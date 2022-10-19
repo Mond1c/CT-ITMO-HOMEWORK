@@ -62,6 +62,7 @@
     </comp>
     <comp lib="0" loc="(100,460)" name="Pin">
       <a name="appearance" val="classic"/>
+      <a name="label" val="D"/>
     </comp>
     <comp lib="0" loc="(2360,150)" name="Pin">
       <a name="appearance" val="classic"/>
@@ -143,7 +144,6 @@
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
     </comp>
-    <comp lib="0" loc="(240,540)" name="POR"/>
     <comp lib="1" loc="(160,270)" name="XOR Gate">
       <a name="inputs" val="3"/>
     </comp>
@@ -170,7 +170,7 @@
     <wire from="(100,190)" to="(100,250)"/>
     <wire from="(100,380)" to="(180,380)"/>
     <wire from="(100,460)" to="(120,460)"/>
-    <wire from="(120,460)" to="(120,490)"/>
+    <wire from="(120,460)" to="(120,500)"/>
     <wire from="(1200,290)" to="(1220,290)"/>
     <wire from="(1200,420)" to="(1220,420)"/>
     <wire from="(1220,240)" to="(1220,290)"/>
@@ -198,8 +198,6 @@
     <wire from="(1490,380)" to="(1750,380)"/>
     <wire from="(1490,440)" to="(1500,440)"/>
     <wire from="(160,270)" to="(200,270)"/>
-    <wire from="(170,490)" to="(170,500)"/>
-    <wire from="(170,490)" to="(240,490)"/>
     <wire from="(1720,290)" to="(1740,290)"/>
     <wire from="(1720,420)" to="(1740,420)"/>
     <wire from="(1740,260)" to="(1740,290)"/>
@@ -252,7 +250,6 @@
     <wire from="(2350,450)" to="(2350,500)"/>
     <wire from="(2350,450)" to="(2360,450)"/>
     <wire from="(2360,350)" to="(2360,360)"/>
-    <wire from="(240,490)" to="(240,540)"/>
     <wire from="(420,290)" to="(430,290)"/>
     <wire from="(420,420)" to="(440,420)"/>
     <wire from="(430,150)" to="(2360,150)"/>
@@ -269,7 +266,7 @@
     <wire from="(450,440)" to="(460,440)"/>
     <wire from="(50,270)" to="(100,270)"/>
     <wire from="(50,270)" to="(50,500)"/>
-    <wire from="(50,500)" to="(170,500)"/>
+    <wire from="(50,500)" to="(120,500)"/>
     <wire from="(680,290)" to="(700,290)"/>
     <wire from="(680,420)" to="(700,420)"/>
     <wire from="(70,230)" to="(430,230)"/>
