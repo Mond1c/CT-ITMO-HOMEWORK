@@ -55,7 +55,7 @@
     <a name="appearance" val="logisim_evolution"/>
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
+    <a name="simulationFrequency" val="8.0"/>
     <comp lib="0" loc="(1380,180)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
@@ -86,11 +86,6 @@
     </comp>
     <comp lib="1" loc="(1020,330)" name="OR Gate"/>
     <comp lib="1" loc="(1020,390)" name="OR Gate"/>
-    <comp lib="1" loc="(1120,370)" name="NOT Gate"/>
-    <comp lib="1" loc="(1200,390)" name="NOR Gate"/>
-    <comp lib="1" loc="(310,460)" name="AND Gate">
-      <a name="inputs" val="3"/>
-    </comp>
     <comp lib="1" loc="(860,600)" name="AND Gate"/>
     <comp lib="1" loc="(90,430)" name="NOT Gate"/>
     <comp loc="(1250,270)" name="T_Trigger_2"/>
@@ -106,25 +101,12 @@
     <wire from="(1030,300)" to="(1030,390)"/>
     <wire from="(1050,500)" to="(1050,630)"/>
     <wire from="(1050,500)" to="(1330,500)"/>
-    <wire from="(1070,340)" to="(1070,370)"/>
-    <wire from="(1070,340)" to="(1250,340)"/>
-    <wire from="(1070,370)" to="(1090,370)"/>
-    <wire from="(1120,370)" to="(1140,370)"/>
-    <wire from="(1140,410)" to="(1140,460)"/>
-    <wire from="(1190,390)" to="(1200,390)"/>
-    <wire from="(1200,390)" to="(1330,390)"/>
+    <wire from="(1230,340)" to="(1230,390)"/>
+    <wire from="(1230,340)" to="(1250,340)"/>
+    <wire from="(1230,390)" to="(1330,390)"/>
     <wire from="(1250,270)" to="(1250,340)"/>
     <wire from="(1250,270)" to="(1380,270)"/>
-    <wire from="(1270,170)" to="(1270,680)"/>
-    <wire from="(1270,170)" to="(1380,170)"/>
-    <wire from="(130,440)" to="(130,680)"/>
-    <wire from="(130,440)" to="(260,440)"/>
-    <wire from="(130,680)" to="(1270,680)"/>
-    <wire from="(1300,240)" to="(1300,710)"/>
-    <wire from="(1300,240)" to="(1350,240)"/>
     <wire from="(1330,390)" to="(1330,500)"/>
-    <wire from="(1350,240)" to="(1350,640)"/>
-    <wire from="(1350,240)" to="(1380,240)"/>
     <wire from="(1380,170)" to="(1380,180)"/>
     <wire from="(140,240)" to="(140,260)"/>
     <wire from="(140,260)" to="(160,260)"/>
@@ -132,18 +114,11 @@
     <wire from="(150,290)" to="(160,290)"/>
     <wire from="(150,410)" to="(150,430)"/>
     <wire from="(150,410)" to="(440,410)"/>
-    <wire from="(150,460)" to="(150,710)"/>
-    <wire from="(150,460)" to="(260,460)"/>
-    <wire from="(150,710)" to="(1300,710)"/>
     <wire from="(160,260)" to="(160,270)"/>
-    <wire from="(220,480)" to="(220,640)"/>
-    <wire from="(220,480)" to="(260,480)"/>
-    <wire from="(220,640)" to="(1350,640)"/>
     <wire from="(30,360)" to="(70,360)"/>
-    <wire from="(310,460)" to="(1140,460)"/>
     <wire from="(380,270)" to="(380,290)"/>
     <wire from="(380,290)" to="(420,290)"/>
-    <wire from="(420,170)" to="(1270,170)"/>
+    <wire from="(420,170)" to="(1380,170)"/>
     <wire from="(420,170)" to="(420,270)"/>
     <wire from="(420,270)" to="(420,290)"/>
     <wire from="(420,270)" to="(450,270)"/>
@@ -181,7 +156,7 @@
     <wire from="(960,310)" to="(970,310)"/>
     <wire from="(960,410)" to="(960,600)"/>
     <wire from="(960,410)" to="(970,410)"/>
-    <wire from="(980,240)" to="(1300,240)"/>
+    <wire from="(980,240)" to="(1380,240)"/>
     <wire from="(980,240)" to="(980,270)"/>
   </circuit>
   <circuit name="RS_Trigger">
