@@ -88,10 +88,10 @@
     <comp lib="1" loc="(1020,390)" name="OR Gate"/>
     <comp lib="1" loc="(860,600)" name="AND Gate"/>
     <comp lib="1" loc="(90,430)" name="NOT Gate"/>
-    <comp loc="(1250,270)" name="T_Trigger_2"/>
-    <comp loc="(380,270)" name="T_Trigger_2"/>
-    <comp loc="(670,270)" name="T_Trigger_2"/>
-    <comp loc="(960,270)" name="T_Trigger_2"/>
+    <comp loc="(1250,270)" name="T_Trigger"/>
+    <comp loc="(380,270)" name="T_Trigger"/>
+    <comp loc="(670,270)" name="T_Trigger"/>
+    <comp loc="(960,270)" name="T_Trigger"/>
     <wire from="(1010,270)" to="(1010,300)"/>
     <wire from="(1010,270)" to="(1030,270)"/>
     <wire from="(1010,300)" to="(1030,300)"/>
@@ -159,149 +159,6 @@
     <wire from="(980,240)" to="(1380,240)"/>
     <wire from="(980,240)" to="(980,270)"/>
   </circuit>
-  <circuit name="RS_Trigger">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="RS_Trigger"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(190,300)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="R"/>
-    </comp>
-    <comp lib="0" loc="(190,340)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="C"/>
-    </comp>
-    <comp lib="0" loc="(190,380)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="S"/>
-    </comp>
-    <comp lib="0" loc="(370,460)" name="POR"/>
-    <comp lib="0" loc="(480,270)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Q"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(500,370)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="NQ"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="1" loc="(290,300)" name="AND Gate"/>
-    <comp lib="1" loc="(290,370)" name="AND Gate"/>
-    <comp lib="1" loc="(400,300)" name="NOR Gate"/>
-    <comp lib="1" loc="(400,370)" name="NOR Gate"/>
-    <comp lib="1" loc="(460,370)" name="OR Gate"/>
-    <wire from="(190,280)" to="(190,300)"/>
-    <wire from="(190,280)" to="(240,280)"/>
-    <wire from="(190,340)" to="(230,340)"/>
-    <wire from="(190,380)" to="(220,380)"/>
-    <wire from="(220,380)" to="(220,390)"/>
-    <wire from="(220,390)" to="(240,390)"/>
-    <wire from="(230,320)" to="(230,340)"/>
-    <wire from="(230,320)" to="(240,320)"/>
-    <wire from="(230,340)" to="(230,350)"/>
-    <wire from="(230,350)" to="(240,350)"/>
-    <wire from="(290,300)" to="(320,300)"/>
-    <wire from="(290,370)" to="(330,370)"/>
-    <wire from="(310,330)" to="(310,350)"/>
-    <wire from="(310,330)" to="(440,330)"/>
-    <wire from="(310,350)" to="(340,350)"/>
-    <wire from="(320,280)" to="(320,300)"/>
-    <wire from="(320,280)" to="(340,280)"/>
-    <wire from="(320,320)" to="(320,340)"/>
-    <wire from="(320,320)" to="(340,320)"/>
-    <wire from="(320,340)" to="(470,340)"/>
-    <wire from="(330,370)" to="(330,390)"/>
-    <wire from="(330,390)" to="(340,390)"/>
-    <wire from="(370,460)" to="(410,460)"/>
-    <wire from="(400,300)" to="(440,300)"/>
-    <wire from="(400,350)" to="(400,370)"/>
-    <wire from="(400,350)" to="(410,350)"/>
-    <wire from="(410,390)" to="(410,460)"/>
-    <wire from="(440,300)" to="(440,330)"/>
-    <wire from="(440,300)" to="(470,300)"/>
-    <wire from="(460,370)" to="(470,370)"/>
-    <wire from="(470,270)" to="(470,300)"/>
-    <wire from="(470,270)" to="(480,270)"/>
-    <wire from="(470,340)" to="(470,370)"/>
-    <wire from="(470,370)" to="(500,370)"/>
-  </circuit>
-  <circuit name="JK_Trigger">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="JK_Trigger"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(750,280)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Q"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(750,320)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="NQ"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(90,250)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="K"/>
-    </comp>
-    <comp lib="0" loc="(90,330)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="C"/>
-    </comp>
-    <comp lib="0" loc="(90,420)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="J"/>
-    </comp>
-    <comp lib="1" loc="(170,440)" name="AND Gate"/>
-    <comp lib="1" loc="(180,250)" name="AND Gate"/>
-    <comp lib="1" loc="(400,400)" name="NOT Gate"/>
-    <comp loc="(410,280)" name="RS_Trigger"/>
-    <comp loc="(680,280)" name="RS_Trigger"/>
-    <wire from="(100,250)" to="(100,270)"/>
-    <wire from="(100,270)" to="(130,270)"/>
-    <wire from="(100,300)" to="(100,330)"/>
-    <wire from="(100,300)" to="(150,300)"/>
-    <wire from="(120,460)" to="(120,490)"/>
-    <wire from="(120,490)" to="(700,490)"/>
-    <wire from="(130,180)" to="(130,230)"/>
-    <wire from="(130,180)" to="(690,180)"/>
-    <wire from="(150,300)" to="(150,400)"/>
-    <wire from="(150,300)" to="(190,300)"/>
-    <wire from="(150,400)" to="(370,400)"/>
-    <wire from="(170,440)" to="(190,440)"/>
-    <wire from="(180,250)" to="(190,250)"/>
-    <wire from="(190,250)" to="(190,280)"/>
-    <wire from="(190,320)" to="(190,440)"/>
-    <wire from="(400,400)" to="(440,400)"/>
-    <wire from="(410,280)" to="(430,280)"/>
-    <wire from="(410,300)" to="(410,320)"/>
-    <wire from="(410,320)" to="(430,320)"/>
-    <wire from="(430,240)" to="(430,280)"/>
-    <wire from="(430,240)" to="(710,240)"/>
-    <wire from="(430,280)" to="(460,280)"/>
-    <wire from="(430,320)" to="(430,370)"/>
-    <wire from="(430,320)" to="(460,320)"/>
-    <wire from="(430,370)" to="(710,370)"/>
-    <wire from="(440,300)" to="(440,400)"/>
-    <wire from="(440,300)" to="(460,300)"/>
-    <wire from="(680,280)" to="(700,280)"/>
-    <wire from="(680,300)" to="(690,300)"/>
-    <wire from="(690,180)" to="(690,300)"/>
-    <wire from="(700,280)" to="(700,490)"/>
-    <wire from="(710,240)" to="(710,280)"/>
-    <wire from="(710,280)" to="(750,280)"/>
-    <wire from="(710,320)" to="(710,370)"/>
-    <wire from="(710,320)" to="(750,320)"/>
-    <wire from="(90,250)" to="(100,250)"/>
-    <wire from="(90,330)" to="(100,330)"/>
-    <wire from="(90,420)" to="(120,420)"/>
-  </circuit>
   <circuit name="D_Trigger">
     <a name="appearance" val="logisim_evolution"/>
     <a name="circuit" val="D_Trigger"/>
@@ -366,69 +223,9 @@
     <wire from="(440,290)" to="(440,330)"/>
     <wire from="(440,330)" to="(460,330)"/>
   </circuit>
-  <circuit name="T_Trigger_Sync">
+  <circuit name="T_Trigger">
     <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="T_Trigger_Sync"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(140,440)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="T"/>
-    </comp>
-    <comp lib="0" loc="(140,600)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="C"/>
-    </comp>
-    <comp lib="0" loc="(930,420)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Q"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(930,440)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="NQ"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="1" loc="(210,400)" name="AND Gate"/>
-    <comp lib="1" loc="(210,480)" name="AND Gate"/>
-    <comp lib="1" loc="(440,600)" name="NOT Gate"/>
-    <comp loc="(520,420)" name="RS_Trigger"/>
-    <comp loc="(830,420)" name="RS_Trigger"/>
-    <wire from="(140,440)" to="(160,440)"/>
-    <wire from="(140,600)" to="(270,600)"/>
-    <wire from="(150,350)" to="(150,380)"/>
-    <wire from="(150,350)" to="(880,350)"/>
-    <wire from="(150,380)" to="(160,380)"/>
-    <wire from="(150,500)" to="(150,630)"/>
-    <wire from="(150,500)" to="(160,500)"/>
-    <wire from="(150,630)" to="(900,630)"/>
-    <wire from="(160,420)" to="(160,440)"/>
-    <wire from="(160,440)" to="(160,460)"/>
-    <wire from="(210,400)" to="(300,400)"/>
-    <wire from="(210,480)" to="(300,480)"/>
-    <wire from="(270,440)" to="(270,600)"/>
-    <wire from="(270,440)" to="(300,440)"/>
-    <wire from="(270,600)" to="(410,600)"/>
-    <wire from="(300,400)" to="(300,420)"/>
-    <wire from="(300,460)" to="(300,480)"/>
-    <wire from="(440,600)" to="(580,600)"/>
-    <wire from="(520,420)" to="(610,420)"/>
-    <wire from="(520,440)" to="(520,460)"/>
-    <wire from="(520,460)" to="(610,460)"/>
-    <wire from="(580,440)" to="(580,600)"/>
-    <wire from="(580,440)" to="(610,440)"/>
-    <wire from="(830,420)" to="(900,420)"/>
-    <wire from="(830,440)" to="(880,440)"/>
-    <wire from="(880,350)" to="(880,440)"/>
-    <wire from="(880,440)" to="(930,440)"/>
-    <wire from="(900,420)" to="(900,630)"/>
-    <wire from="(900,420)" to="(930,420)"/>
-  </circuit>
-  <circuit name="T_Trigger_2">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="T_Trigger_2"/>
+    <a name="circuit" val="T_Trigger"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
     <comp lib="0" loc="(40,290)" name="Pin">
