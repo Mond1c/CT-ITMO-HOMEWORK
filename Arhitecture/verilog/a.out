@@ -8,36 +8,53 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x55ada514bb90 .scope package, "$unit" "$unit" 2 1;
+S_0x55c88beac040 .scope package, "$unit" "$unit" 2 1;
  .timescale 0 0;
-S_0x55ada514bd20 .scope module, "not_switch_test" "not_switch_test" 3 1;
+S_0x55c88beac1d0 .scope module, "nand2_test" "nand2_test" 3 15;
  .timescale 0 0;
-v0x55ada515c530_0 .var "a", 0 0;
-RS_0x7fd06fe790a8 .resolv tri, L_0x55ada515c810, L_0x55ada515c970;
-v0x55ada515c600_0 .net8 "b", 0 0, RS_0x7fd06fe790a8;  2 drivers, strength-aware
-S_0x55ada5112cf0 .scope module, "not1" "not_switch" 3 4, 4 1 0, S_0x55ada514bd20;
+v0x55c88bebedb0_0 .var "in1", 0 0;
+v0x55c88bebee50_0 .var "in2", 0 0;
+RS_0x7f8a5b05b0d8 .resolv tri, L_0x55c88bebf160, L_0x55c88bebf2c0, L_0x55c88bebf3b0;
+v0x55c88bebef20_0 .net8 "out", 0 0, RS_0x7f8a5b05b0d8;  3 drivers, strength-aware
+S_0x55c88be71cf0 .scope module, "nand2var" "nand2" 3 19, 4 13 0, S_0x55c88beac1d0;
  .timescale 0 0;
     .port_info 0 /OUTPUT 1 "out";
-    .port_info 1 /INPUT 1 "in";
-L_0x55ada515c770 .functor BUFT 1, C8<771>, C4<0>, C4<0>, C4<0>;
-L_0x55ada515c810 .functor PMOS 1, L_0x55ada515c770, v0x55ada515c530_0, C4<0>, C4<0>;
-L_0x55ada515c6d0 .functor BUFT 1, C8<770>, C4<0>, C4<0>, C4<0>;
-L_0x55ada515c970 .functor NMOS 1, L_0x55ada515c6d0, v0x55ada515c530_0, C4<0>, C4<0>;
-v0x55ada514beb0_0 .net8 "GRD", 0 0, L_0x55ada515c6d0;  1 drivers, strength-aware
-v0x55ada515c2b0_0 .net8 "PWR", 0 0, L_0x55ada515c770;  1 drivers, strength-aware
-v0x55ada515c370_0 .net "in", 0 0, v0x55ada515c530_0;  1 drivers
-v0x55ada515c410_0 .net8 "out", 0 0, RS_0x7fd06fe790a8;  alias, 2 drivers, strength-aware
-    .scope S_0x55ada514bd20;
+    .port_info 1 /INPUT 1 "in1";
+    .port_info 2 /INPUT 1 "in2";
+L_0x55c88bebf0c0 .functor BUFT 1, C8<771>, C4<0>, C4<0>, C4<0>;
+L_0x55c88bebf160 .functor PMOS 1, L_0x55c88bebf0c0, v0x55c88bebedb0_0, C4<0>, C4<0>;
+L_0x55c88bebf2c0 .functor PMOS 1, L_0x55c88bebf0c0, v0x55c88bebee50_0, C4<0>, C4<0>;
+L_0x55c88bebf3b0 .functor NMOS 1, L_0x55c88bebf420, v0x55c88bebedb0_0, C4<0>, C4<0>;
+L_0x55c88bebf020 .functor BUFT 1, C8<770>, C4<0>, C4<0>, C4<0>;
+L_0x55c88bebf420 .functor NMOS 1, L_0x55c88bebf020, v0x55c88bebee50_0, C4<0>, C4<0>;
+v0x55c88be71ed0_0 .net8 "GRD", 0 0, L_0x55c88bebf020;  1 drivers, strength-aware
+v0x55c88bebe940_0 .net8 "PWR", 0 0, L_0x55c88bebf0c0;  1 drivers, strength-aware
+v0x55c88bebea00_0 .net "in1", 0 0, v0x55c88bebedb0_0;  1 drivers
+v0x55c88bebeaa0_0 .net "in2", 0 0, v0x55c88bebee50_0;  1 drivers
+v0x55c88bebeb60_0 .net8 "out", 0 0, RS_0x7f8a5b05b0d8;  alias, 3 drivers, strength-aware
+v0x55c88bebec70_0 .net8 "w", 0 0, L_0x55c88bebf420;  1 drivers, strength-aware
+    .scope S_0x55c88beac1d0;
 T_0 ;
-    %vpi_call/w 3 8 "$monitor", "%0t %b", $time, v0x55ada515c600_0 {0 0 0};
+    %vpi_call/w 3 22 "$monitor", "%0t: in1: %b, in2: %b, out = %b", $time, v0x55c88bebedb0_0, v0x55c88bebee50_0, v0x55c88bebef20_0 {0 0 0};
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x55ada515c530_0, 0, 1;
+    %store/vec4 v0x55c88bebedb0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55c88bebee50_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55c88bebedb0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55c88bebee50_0, 0, 1;
     %delay 1, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x55ada515c530_0, 0, 1;
-    %delay 1, 0;
+    %store/vec4 v0x55c88bebedb0_0, 0, 1;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x55ada515c530_0, 0, 1;
+    %store/vec4 v0x55c88bebee50_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55c88bebedb0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55c88bebee50_0, 0, 1;
     %end;
     .thread T_0;
 # The file index is used to find the file name in the following table.

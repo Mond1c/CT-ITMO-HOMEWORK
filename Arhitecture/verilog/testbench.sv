@@ -1,4 +1,4 @@
-module not_switch_test;
+/*module not_switch_test;
     reg a;
     wire b;
     not_switch not1(b, a);
@@ -11,21 +11,21 @@ module not_switch_test;
         #1 a = 0;
     end
 endmodule
-
+*/
 module nand2_test;
     reg in1, in2;
     wire out;
 
     nand2 nand2var(out, in1, in2);
 
-    inital begin
-        $monitor("%0t: in1: %b, in2: %b, out = %b", $time, in1, in2. out);
+    initial begin
+        $monitor("%0t: in1: %b, in2: %b, out = %b", $time, in1, in2, out);
         in1 = 0; in2 = 0;
         #1 in1 = 0; in2 = 1;
         #1 in1 = 1; in2 = 0;
         #1 in1 = 1; in2 = 1;
     end
-
+endmodule
 /*
 module not_switch_test;
     wire a, b;
