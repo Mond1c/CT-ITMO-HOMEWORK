@@ -10,10 +10,13 @@
 endmodule 
 */
 
-module nand2(output wire out, intput wire in1, in2);
+module nand2(output out, input in1, in2);
     wire w;
     supply1 PWR;
     supply0 GRD;
 
-    pmos(in, PWR, out);
+    pmos p1(out, PWR, in1);
+    pmos p2(out, PWR, in2);
+    nmos n1(out, w, in1);
+    nmos n2(w, GRD, in2);
 endmodule
