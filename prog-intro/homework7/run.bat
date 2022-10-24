@@ -1,1 +1,0 @@
-javac -cp . base/*.java java
