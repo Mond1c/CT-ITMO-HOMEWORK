@@ -3,24 +3,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class WordStatWordsPrefix {
-    private static List<String> getWords(String line) {
-        List<String> words = new LinkedList<>();
-        StringBuilder word = new StringBuilder();
-        for (int i = 0; i < line.length(); i++) {
-            char character = line.charAt(i);
-            boolean isPartOfWord = Character.isLetter(character) || character == '-' || character == '\'' ||
-                Character.getType(character) == Character.DASH_PUNCTUATION;
-            if (isPartOfWord) { 
-                word.append(Character.toLowerCase(character));
-            }
-            if ((!isPartOfWord || i == line.length() - 1) && !word.isEmpty()) {
-                words.add(word.toString());
-                word = new StringBuilder();
-            }
-        }
-        return words;
-    }
-
     public static void main(String[] args) {
         try (MyScanner reader = new MyScanner(new InputStreamReader(new FileInputStream(args[0]),
                     StandardCharsets.UTF_8));
@@ -28,7 +10,11 @@ public class WordStatWordsPrefix {
                     StandardCharsets.UTF_8))) {
             Map<String, Integer> dict = new TreeMap<>();
             while (reader.hasNextLine()) {
-                List<String> words = getWords(reader.nextLine());
+                List<String> words = new ArrayList<>();
+                MyScanner stringScanner = new MyScanner(reader.nextLine(), true);
+                while (stringScanner.hasNextWord()) {
+                    words.add(stringScanner.nextWord().toLowerCase());
+                }
                 for (String word : words) {
                     if (!word.isEmpty()) {
                         String prefix = word.substring(0, Math.min(3, word.length()));

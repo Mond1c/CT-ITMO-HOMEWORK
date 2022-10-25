@@ -21,6 +21,7 @@ public class MyScanner implements AutoCloseable {
     private boolean isPrevWasLF;
     private boolean isTokenWasRead;
     private boolean isLineWasRead;
+    private boolean isWord;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
@@ -34,6 +35,24 @@ public class MyScanner implements AutoCloseable {
 
     public MyScanner(String source) {
         this.reader = new StringReader(source);
+        getPlatformLineSeparator();
+    }
+
+    public MyScanner(Reader reader, boolean isWord) {
+        this.reader = reader;
+        this.isWord = isWord;
+        getPlatformLineSeparator();
+    }
+
+    public MyScanner(InputStream stream, boolean isWord) {
+        this.isWord = isWord;
+        this.reader = new InputStreamReader(stream);
+        getPlatformLineSeparator();
+    }
+
+    public MyScanner(String source, boolean isWord) {
+        this.reader = new StringReader(source);
+        this.isWord = isWord;
         getPlatformLineSeparator();
     }
 
@@ -80,6 +99,11 @@ public class MyScanner implements AutoCloseable {
             || type == Character.PARAGRAPH_SEPARATOR || type == Character.CONTROL;
     }
 
+    private boolean isPartOfWord(char character) {
+        return Character.isLetter(character) || character == '\'' ||
+                Character.getType(character) == Character.DASH_PUNCTUATION;
+    }
+
     public boolean hasNextInt() throws IOException {
         curToken = nextToken();
         if (curToken == null) {
@@ -106,6 +130,11 @@ public class MyScanner implements AutoCloseable {
         return false;
     }
 
+    public boolean hasNextWord() throws IOException {
+        curToken = nextToken();
+        return isTokenWasRead;
+    }
+
     public boolean hasNextLine() throws IOException {
         curLine = nextLineToken();
         return curLine != null;
@@ -115,7 +144,6 @@ public class MyScanner implements AutoCloseable {
         if (!isBufferUpdated()) {
             return null;
         }
-        //printBuffer();
         builder.setLength(0);
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
@@ -169,11 +197,14 @@ public class MyScanner implements AutoCloseable {
         builder.setLength(0);
         while (position < length || isBufferUpdated()) {
             char character = buffer[position++];
-            if (!isSeparator(character)) {
+            if (isWord && isPartOfWord(character) || !isWord && !isSeparator(character)) {
                 builder.append(character);
             } else if (!builder.isEmpty()) {
                 break;
             }
+        }
+        if (builder.isEmpty()) {
+            return null;
         }
         isTokenWasRead = true;
         return builder.toString();
@@ -195,6 +226,14 @@ public class MyScanner implements AutoCloseable {
     public String next() throws IOException {
         if (!isTokenWasRead && !hasNext()) {
             throw new NoSuchElementException("No value found");
+        }
+        isTokenWasRead = false;
+        return curToken;
+    }
+
+    public String nextWord() throws IOException {
+        if (!isTokenWasRead && !hasNextWord()) {
+            throw new NoSuchElementException("No word found");
         }
         isTokenWasRead = false;
         return curToken;

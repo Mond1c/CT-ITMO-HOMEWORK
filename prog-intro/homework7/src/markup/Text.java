@@ -6,7 +6,7 @@ public class Text extends ParagraphElement {
     private String content;
 
     public Text(String content) {
-        super(null);
+        super(null, "", "");
         this.content = content;
     }
 

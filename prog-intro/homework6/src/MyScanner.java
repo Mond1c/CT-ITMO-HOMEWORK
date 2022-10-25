@@ -4,18 +4,24 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class MyScanner implements AutoCloseable {
     private static final int BUFFER_SIZE = 1024;
     private final Reader reader;
     private char[] buffer = new char[BUFFER_SIZE];
+    private StringBuilder builder = new StringBuilder();
     private int position;
     private int length;
     private String curToken;
     private String curLine;
     private boolean isLF;
     private boolean isCRLF;
+    private boolean isCR;
     private boolean isPrevWasLF;
+    private boolean isTokenWasRead;
+    private boolean isLineWasRead;
+    private boolean isWord;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
@@ -32,6 +38,24 @@ public class MyScanner implements AutoCloseable {
         getPlatformLineSeparator();
     }
 
+    public MyScanner(Reader reader, boolean isWord) {
+        this.reader = reader;
+        this.isWord = isWord;
+        getPlatformLineSeparator();
+    }
+
+    public MyScanner(InputStream stream, boolean isWord) {
+        this.isWord = isWord;
+        this.reader = new InputStreamReader(stream);
+        getPlatformLineSeparator();
+    }
+
+    public MyScanner(String source, boolean isWord) {
+        this.reader = new StringReader(source);
+        this.isWord = isWord;
+        getPlatformLineSeparator();
+    }
+
     public void close() throws IOException {
         reader.close();
     }
@@ -40,7 +64,11 @@ public class MyScanner implements AutoCloseable {
         if (System.lineSeparator().length() == 2) {
             isCRLF = true;
         } else {
-            isLF = true;
+            if (System.lineSeparator() == "\n") {
+                isLF = true;
+            } else {
+                isCR = true;
+            }
         }
     }
 
@@ -71,6 +99,11 @@ public class MyScanner implements AutoCloseable {
             || type == Character.PARAGRAPH_SEPARATOR || type == Character.CONTROL;
     }
 
+    private boolean isPartOfWord(char character) {
+        return Character.isLetter(character) || character == '\'' ||
+                Character.getType(character) == Character.DASH_PUNCTUATION;
+    }
+
     public boolean hasNextInt() throws IOException {
         curToken = nextToken();
         if (curToken == null) {
@@ -97,6 +130,11 @@ public class MyScanner implements AutoCloseable {
         return false;
     }
 
+    public boolean hasNextWord() throws IOException {
+        curToken = nextToken();
+        return isTokenWasRead;
+    }
+
     public boolean hasNextLine() throws IOException {
         curLine = nextLineToken();
         return curLine != null;
@@ -106,26 +144,27 @@ public class MyScanner implements AutoCloseable {
         if (!isBufferUpdated()) {
             return null;
         }
-        //printBuffer();
-        StringBuilder builder = new StringBuilder();
+        builder.setLength(0);
         while (position < length || isBufferUpdated()) {
             char character = buffer[position];
             position++;
             // :NOTE: Другие случаи
-            if (isLF && character != '\n' || isCRLF && character != '\n' && character != '\r') {
+            if (isLF && character != '\n' || isCRLF && character != '\n' && character != '\r' || isCR && character != '\r') {
                 builder.append(character);
                 if (isCRLF) {
                     isPrevWasLF = false;
                 }
             } else if (builder.isEmpty()) {
-                if (isLF) {
-                    return "";
-                } else if (isCRLF) {
+                if (isCRLF) {
                     if (isPrevWasLF) {
                         isPrevWasLF = false;
+                        isLineWasRead = true;
                         return "";
                     }
                     isPrevWasLF = true;
+                } else {
+                    isLineWasRead = true;
+                    return "";
                 }
             } else {
                 break;
@@ -135,10 +174,18 @@ public class MyScanner implements AutoCloseable {
         if (builder.isEmpty()) {
             return null;
         }
+        isLineWasRead = true;
         return builder.toString();
     }
 
-    public String nextLine() {
+    public String nextLine() throws IOException {
+        if (!isLineWasRead) {
+            nextLineToken();
+            if (!isLineWasRead) {
+                throw new NoSuchElementException("No line found");
+            }
+        }
+        isLineWasRead = false;
         return curLine;
     }
 
@@ -147,22 +194,28 @@ public class MyScanner implements AutoCloseable {
             return null;
         }
         // :NOTE: new?
-        StringBuilder builder = new StringBuilder();
+        builder.setLength(0);
         while (position < length || isBufferUpdated()) {
             char character = buffer[position++];
-            if (!isSeparator(character)) {
+            if (isWord && isPartOfWord(character) || !isWord && !isSeparator(character)) {
                 builder.append(character);
             } else if (!builder.isEmpty()) {
                 break;
             }
         }
-        
+        if (builder.isEmpty()) {
+            return null;
+        }
+        isTokenWasRead = true;
         return builder.toString();
     }
 
     // :NOTE: double call?
-    public int nextInt() throws NumberFormatException {
-        // :NOTE: NPE
+    public int nextInt() throws IOException {
+        if (!isTokenWasRead && !hasNextInt()) {
+            throw new NoSuchElementException("No integer found");
+        }
+        isTokenWasRead = false;
         if (Character.toLowerCase(curToken.charAt(curToken.length() - 1)) == 'o') {
             return Integer.parseUnsignedInt(curToken.substring(0, curToken.length() - 1), 8);
         } else {
@@ -170,7 +223,19 @@ public class MyScanner implements AutoCloseable {
         }
     }
 
-    public String next() {
+    public String next() throws IOException {
+        if (!isTokenWasRead && !hasNext()) {
+            throw new NoSuchElementException("No value found");
+        }
+        isTokenWasRead = false;
+        return curToken;
+    }
+
+    public String nextWord() throws IOException {
+        if (!isTokenWasRead && !hasNextWord()) {
+            throw new NoSuchElementException("No word found");
+        }
+        isTokenWasRead = false;
         return curToken;
     }
 }
