@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class MyScanner implements AutoCloseable {
     private static final int BUFFER_SIZE = 1024;
@@ -19,6 +20,7 @@ public class MyScanner implements AutoCloseable {
     private boolean isCR;
     private boolean isPrevWasLF;
     private boolean isTokenWasRead;
+    private boolean isLineWasRead;
 
     public MyScanner(Reader reader) {
         this.reader = reader;
@@ -128,10 +130,12 @@ public class MyScanner implements AutoCloseable {
                 if (isCRLF) {
                     if (isPrevWasLF) {
                         isPrevWasLF = false;
+                        isLineWasRead = true;
                         return "";
                     }
                     isPrevWasLF = true;
                 } else {
+                    isLineWasRead = true;
                     return "";
                 }
             } else {
@@ -142,10 +146,18 @@ public class MyScanner implements AutoCloseable {
         if (builder.isEmpty()) {
             return null;
         }
+        isLineWasRead = true;
         return builder.toString();
     }
 
-    public String nextLine() {
+    public String nextLine() throws IOException {
+        if (!isLineWasRead) {
+            nextLineToken();
+            if (!isLineWasRead) {
+                throw new NoSuchElementException("No line found");
+            }
+        }
+        isLineWasRead = false;
         return curLine;
     }
 
@@ -170,7 +182,7 @@ public class MyScanner implements AutoCloseable {
     // :NOTE: double call?
     public int nextInt() throws IOException {
         if (!isTokenWasRead && !hasNextInt()) {
-            throw new IOException("Can't read from resource.");
+            throw new NoSuchElementException("No integer found");
         }
         isTokenWasRead = false;
         if (Character.toLowerCase(curToken.charAt(curToken.length() - 1)) == 'o') {
@@ -180,7 +192,11 @@ public class MyScanner implements AutoCloseable {
         }
     }
 
-    public String next() {
+    public String next() throws IOException {
+        if (!isTokenWasRead && !hasNext()) {
+            throw new NoSuchElementException("No value found");
+        }
+        isTokenWasRead = false;
         return curToken;
     }
 }
