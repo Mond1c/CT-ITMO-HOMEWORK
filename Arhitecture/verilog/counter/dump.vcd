@@ -1,0 +1,88 @@
+$date
+	Sat Oct 29 13:46:42 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module counterm_tb $end
+$var wire 5 ! out [4:0] $end
+$var reg 1 " clk $end
+$var reg 1 # enable $end
+$var reg 1 $ reset $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+1$
+1#
+0"
+bx !
+$end
+#1
+1"
+0$
+#2
+0"
+#3
+b0 !
+1"
+1$
+#4
+0"
+#5
+b1 !
+1"
+0$
+#6
+0"
+#7
+b10 !
+1"
+#8
+0"
+#9
+b11 !
+1"
+#10
+0"
+#11
+b100 !
+1"
+#12
+0"
+#13
+b101 !
+1"
+#14
+0"
+#15
+b110 !
+1"
+#16
+0"
+#17
+b111 !
+1"
+#18
+0"
+#19
+b1000 !
+1"
+#20
+0"
+#21
+b1001 !
+1"
+#22
+0"
+#23
+b1010 !
+1"
+#24
+0"
+#25
+b1011 !
+1"

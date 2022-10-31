@@ -1,0 +1,53 @@
+$date
+	Sat Oct 29 13:05:25 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module arst_tb $end
+$var wire 1 ! q $end
+$var wire 1 " nq $end
+$var reg 1 # r $end
+$var reg 1 $ s $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0$
+0#
+x"
+x!
+$end
+#1
+0"
+1!
+1$
+#2
+x"
+x!
+1#
+#3
+1"
+0!
+0$
+#4
+0"
+1!
+1$
+0#
+#5
+x"
+x!
+1#
+#6
+0$
+0#
+#7
+1"
+0!
+1#
+#8
+0#

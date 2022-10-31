@@ -64,7 +64,7 @@ public class MyScanner implements AutoCloseable {
         if (System.lineSeparator().length() == 2) {
             isCRLF = true;
         } else {
-            if (System.lineSeparator() == "\n") {
+            if (System.lineSeparator().equals("\n")) {
                 isLF = true;
             } else {
                 isCR = true;

@@ -23,28 +23,6 @@ class PairOfIntegerAndIntList {
 }
 
 public class WsppLastL {
-
-
-    private static List<String> getWords(String line) {
-        List<String> words = new ArrayList<>();
-        int start = 0, end = 0;
-        for (int i = 0; i < line.length(); i++) {
-            char character = line.charAt(i);
-            boolean isPartOfWord = Character.isLetter(character) || character == '\'' ||
-                    Character.getType(character) == Character.DASH_PUNCTUATION;
-            if (isPartOfWord) {
-                end++;
-            }
-            if (!isPartOfWord || i == line.length() - 1) {
-                if (start != end) {
-                    words.add(line.substring(start, end));
-                }
-                start = ++end;
-            }
-        }
-        return words;
-    }
-
     public static void main(String[] args) {
         try (MyScanner reader = new MyScanner(new FileReader(args[0],
                 StandardCharsets.UTF_8));
@@ -53,10 +31,10 @@ public class WsppLastL {
             Map<String, PairOfIntegerAndIntList> dict = new LinkedHashMap<>();
             int index = 1;
             while (reader.hasNextLine()) {
-                List<String> words = getWords(reader.nextLine());
+                MyScanner stringScanner = new MyScanner(reader.nextLine(), true);
                 Map<String, PairOfIntegers> lastIndexes = new LinkedHashMap<>();
-                for (String word : words) {
-                    word = word.toLowerCase();
+                while (stringScanner.hasNextWord()) {
+                    String word = stringScanner.nextWord().toLowerCase();
                     PairOfIntegers pair = lastIndexes.getOrDefault(word, new PairOfIntegers(0, 0));
                     pair.first++;
                     pair.second = index++;

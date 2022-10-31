@@ -13,13 +13,13 @@
 endmodule
 */
 module nand2_test;
-    reg in1, in2;
+    reg[1:0] in;
     wire out;
 
-    nand2 nand2var(out, in1, in2);
+    nand2 nand2var(out, in[1], in[0]);
 
     initial begin
-        $monitor("%0t: in1: %b, in2: %b, out = %b", $time, in1, in2, out);
+        $monitor("%0t: in1: %b, in2: %b, out = %b", $time, in[1], in[0], out);
         in1 = 0; in2 = 0;
         #1 in1 = 0; in2 = 1;
         #1 in1 = 1; in2 = 0;
