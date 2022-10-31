@@ -2,4 +2,5 @@
 #### Subjects:
 - prog-intro
 - Algorithms and data structures
-
+- Computer arhitecture
+- Linear algebra
