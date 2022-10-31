@@ -35,13 +35,12 @@ public class K {
                 }
             }
         }
-
+        printMatrix(matrix);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (matrix[i][j] != '.') {
                     int col = j + 1;
-                    while (col < n && matrix[i][col] == '.') {
-                        System.out.println(col);
+                    while (col < m && matrix[i][col] == '.') {
                         matrix[i][col] = matrix[i][col++ - 1];
                     }
                     col = j - 1;
