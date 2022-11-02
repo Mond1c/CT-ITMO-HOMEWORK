@@ -14,23 +14,33 @@ public class H {
         }
         int[] f = new int[sum_a];
         int[] b = new int[n];
+        b[0] = 0;
         for (int i = 0; i < n; i++) {
-            b[i] = a[i] - b[0];
             if (i - 1 >= 0) {
-                b[i] += b[i - 1];
+                b[i] += b[i - 1] + a[i - 1];
             }
-            for (int j = 0; j < a[i]; i++) {
+            for (int j = 0; j < a[i]; j++) {
                 f[b[i] + j] = i;
             }
         }
         final int q = scanner.nextInt();
+        int[] dp = new int[sum_a + 1];
         for (int i = 0; i < q; i++) {
             int t = scanner.nextInt();
             if (t < A) {
                 System.out.println("Impossible");
                 continue;
             }
-
+            int j = 1;
+            int k = 0;
+            if (dp[t] == 0) {
+                while (t + k < f.length) {
+                    k = b[f[t + k]];
+                    j++;
+                }
+                dp[t] = j;
+            }
+            System.out.println(dp[t]);
         }
     }
 }

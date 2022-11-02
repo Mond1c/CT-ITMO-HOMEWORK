@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Lab.dir/3B.cpp.o -o Lab 

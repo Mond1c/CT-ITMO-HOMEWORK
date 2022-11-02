@@ -1,0 +1,3 @@
+/home/mond1c/Documents/Homework/ADS/Lab/CMakeFiles/Lab.dir
+/home/mond1c/Documents/Homework/ADS/Lab/CMakeFiles/edit_cache.dir
+/home/mond1c/Documents/Homework/ADS/Lab/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,4 @@
-C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\222.4345.21\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/ninja/win/ninja.exe -G Ninja -S "C:\Users\pocht\OneDrive\Рабочий стол\Homework\ADS\Lab" -B "C:\Users\pocht\OneDrive\Рабочий стол\Homework\ADS\Lab\cmake-build-debug"
+/var/lib/snapd/snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/mond1c/Documents/Homework/ADS/Lab -B /home/mond1c/Documents/Homework/ADS/Lab/cmake-build-debug
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/pocht/OneDrive/Рабочий стол/Homework/ADS/Lab/cmake-build-debug
+-- Build files have been written to: /home/mond1c/Documents/Homework/ADS/Lab/cmake-build-debug
