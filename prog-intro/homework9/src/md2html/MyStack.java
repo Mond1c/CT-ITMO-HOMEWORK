@@ -1,34 +1,50 @@
 package md2html;
 
-import java.util.ArrayList;
-import java.util.List;
+import markdown.MarkdownElement;
+
+import java.util.Arrays;
 
 public class MyStack {
-    private List<MarkdownElement> list;
+    private MarkdownElement[] data;
+    private int size;
 
     public MyStack() {
-        list = new ArrayList<>();
+        this.data = new MarkdownElement[2];
+    }
+
+    private void expandMemory() {
+        data = Arrays.copyOf(data, data.length * 2);
     }
 
     public void add(MarkdownElement element) {
-        list.add(element);
+        if (size == data.length) {
+            expandMemory();
+        }
+        data[size++] = element;
     }
 
     public MarkdownElement top() {
-        return list.get(list.size() - 1);
+        if (size == 0) {
+            throw new ArrayIndexOutOfBoundsException("Stack is empty!");
+        }
+        return data[size - 1];
     }
 
     public MarkdownElement pop() {
-        MarkdownElement topElement = top();
-        list.remove(list.size() - 1);
-        return topElement;
+        MarkdownElement element = top();
+        data[--size] = null;
+        return element;
     }
 
-    public int size() {
-        return list.size();
+    public MarkdownElement[] getArray() {
+        return data;
     }
 
     public boolean isEmpty() {
-        return list.isEmpty();
+        return size == 0;
+    }
+
+    public int size() {
+        return size;
     }
 }
