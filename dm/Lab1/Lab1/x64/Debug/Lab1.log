@@ -1,0 +1,4 @@
+﻿  B.cpp
+C:\Users\pocht\Desktop\Homework\dm\Lab1\Lab1\B.cpp(59,79): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\pocht\Desktop\Homework\dm\Lab1\Lab1\B.cpp(113): warning C4715: mainB: значение возвращается не при всех путях выполнения
+  Lab1.vcxproj -> C:\Users\pocht\Desktop\Homework\dm\Lab1\x64\Debug\Lab1.exe

@@ -5,3 +5,4 @@
  *
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
+package md2html;

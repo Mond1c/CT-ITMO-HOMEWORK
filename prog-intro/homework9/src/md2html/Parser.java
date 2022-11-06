@@ -1,159 +1,193 @@
 package md2html;
 
-
 import markdown.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Parser {
-    private final static char HEADER_START_CHARACTER = '#';
-    private final static char HIGHLIGHTING_CHARACTER_1 = '_';
-    private final static char HIGHLIGHTING_CHARACTER_2 = '*';
-    private final static char STRIKEOUT_CHARACTER = '-';
-    private final static char CODE_CHARACTER = '`';
+    private static final char HEADER_CHARACTER = '#';
+    private static final char BLACK_SLASH = '\\';
+    private static final char HIGHLIGHTING_CHARACTER_1 = '_';
+    private static final char HIGHLIGHTING_CHARACTER_2 = '*';
+    private static final char STRIKEOUT_CHARACTER = '-';
+    private static final char CODE_CHARACTER = '`';
 
     private final BufferedReader reader;
     private final BufferedWriter writer;
 
-    private MyStack stack;
-    private final Map<Character, String> specialSymbols = Map.of('>', "&gt;", '<', "&lt;", '&', "&amp;");
-
-    private boolean isPrevLineWasEmpty = true;
-
+    private final List<MarkdownElement> blocks;
+    private final StringBuilder builder;
+    private final Map<Character, String> specialSymbols = Map.of('<', "&lt;", '>', "&gt;", '&', "&amp;");
+    private int highlightingCharacter1Count;
+    private int highlightingCharacter2Count;
+    private int position;
+    private final MyStack stack;
 
     public Parser(BufferedReader reader, BufferedWriter writer) {
         this.reader = reader;
         this.writer = writer;
+        this.blocks = new ArrayList<>();
+        this.builder = new StringBuilder();
         this.stack = new MyStack();
-    }
-
-    private void updateStack() {
-        List<MarkdownElement> elements = new ArrayList<>();
-        while (!stack.isEmpty() && (stack.top().getToken() != Token.HEADER && stack.top().getToken() != Token.PARAGRAPH)) {
-            elements.add(stack.pop());
-        }
-        for (MarkdownElement element : elements) {
-            stack.top().add(element);
-        }
     }
 
     public void parse() throws IOException {
         while (reader.ready()) {
-            parseLine(reader.readLine());
-        }
-        updateStack();
-        MarkdownElement[] data = stack.getArray();
-        int size = stack.size();
-        final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < size; i++) {
             builder.setLength(0);
-            if (data[i] != null) {
-                ;
-                data[i].toHtml(builder);
-                System.out.println(builder.toString());
-                writer.write(builder.toString());
-                writer.newLine();
+            String line = reader.readLine();
+            if (line.isEmpty()) {
+                continue;
             }
+            final MarkdownElement element;
+            int count = 0;
+            while (line.charAt(count) == HEADER_CHARACTER) count++;
+            if (count > 0 && Character.isWhitespace(line.charAt(count))) {
+                element = new Header(Character.forDigit(count, 10));
+            } else {
+                element = new Paragraph();
+            }
+            builder.append(line);
+            while (reader.ready()) {
+                line = reader.readLine();
+                if (line.isEmpty()) {
+                    break;
+                }
+                builder.append(System.lineSeparator());
+                builder.append(line);
+            }
+            parseBlock(element);
         }
-        reader.close();
+        for (MarkdownElement block : blocks) {
+            builder.setLength(0);
+            block.toHtml(builder);
+            writer.write(builder.toString());
+            writer.newLine();
+        }
         writer.close();
-        stack = new MyStack();
+        reader.close();
     }
 
-    private void parseLine(String line) {
-        if (line.isEmpty()) {
-            isPrevLineWasEmpty = true;
-            return;
+    private void extractText() {
+        if (stack.top().getToken() == Token.TEXT) {
+            MarkdownElement element = stack.pop();
+            stack.top().add(element);
         }
-        int pos = 0;
-        if (isPrevLineWasEmpty) {
-            while (line.charAt(pos) == HEADER_START_CHARACTER) pos++;
-            updateStack();
-            if (pos > 0 && Character.isWhitespace(line.charAt(pos))) {
-                stack.add(new Header((char) ('0' + pos++)));
+    }
+
+    private void parseHighlighting() {
+        extractText();
+        if (position + 1 < builder.length() && builder.charAt(position + 1) == builder.charAt(position)) {
+            if (!stack.isEmpty() && stack.top().getToken() == Token.STRONG) {
+                MarkdownElement element = stack.pop();
+                stack.top().add(element);
             } else {
-                pos = 0;
-                stack.add(new Paragraph());
-            }
-            isPrevLineWasEmpty = false;
-        }
-        if (!stack.isEmpty() && stack.top().getToken() == Token.TEXT) {
-            stack.top().addString("\n");
-        }
-        while (pos < line.length()) {
-            if (isHighlightingCharacter(line.charAt(pos))) {
-                if (stack.top().getToken() == Token.TEXT) {
-                    MarkdownElement element = stack.pop();
-                    stack.top().add(element);
-                }
-                if (pos + 1 < line.length() && isHighlightingCharacter(line.charAt(pos + 1))) {
-                    if (!stack.isEmpty() && stack.top().getToken() == Token.STRONG) {
-                        MarkdownElement element = stack.pop();
-                        stack.top().add(element);
-                    } else {
-                        stack.add(new Strong());
-                    }
-                    pos += 2;
-                    continue;
-                }
-                if (!stack.isEmpty() && stack.top().getToken() == Token.EMPHASIS) {
-                    MarkdownElement element = stack.pop();
-                    stack.top().add(element);
+                stack.add(new Strong());
+                if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1) {
+                    highlightingCharacter1Count -= 2;
                 } else {
+                    highlightingCharacter2Count -= 2;
+                }
+            }
+            position += 2;
+        } else {
+            if (!stack.isEmpty() && stack.top().getToken() == Token.EMPHASIS) {
+                MarkdownElement element = stack.pop();
+                stack.top().add(element);
+            } else {
+                if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 && highlightingCharacter1Count - 2 >= 0) {
                     stack.add(new Emphasis());
-                }
-                pos++;
-            } else if (pos + 1 < line.length() && isStrikeout(line.charAt(pos), line.charAt(pos + 1))) {
-                if (stack.top().getToken() == Token.TEXT) {
-                    MarkdownElement element = stack.pop();
-                    stack.top().add(element);
-                }
-                if (!stack.isEmpty() && stack.top().getToken() == Token.STRIKEOUT) {
-                    MarkdownElement element = stack.pop();
-                    stack.top().add(element);
+                    highlightingCharacter1Count -= 2;
+                } else if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_2 && highlightingCharacter2Count - 2 >= 0) {
+                    stack.add(new Emphasis());
+                    highlightingCharacter2Count -= 2;
                 } else {
-                    stack.add(new Strikeout());
+                    if (!stack.isEmpty() && stack.top().getToken() == Token.TEXT) {
+                        stack.top().addString(String.valueOf(builder.charAt(position)));
+                    } else {
+                        stack.add(new Text());
+                        stack.top().addString(String.valueOf(builder.charAt(position)));
+                    }
                 }
-                pos += 2;
-            } else if (isCode(line.charAt(pos))) {
-                if (stack.top().getToken() == Token.TEXT) {
-                    MarkdownElement element = stack.pop();
-                    stack.top().add(element);
-                }
-                if (!stack.isEmpty() && stack.top().getToken() == Token.CODE) {
-                    MarkdownElement element = stack.pop();
-                    stack.top().add(element);
-                } else {
-                    stack.add(new Code());
-                }
-                pos++;
-            } else {
-                if (stack.isEmpty() || stack.top().getToken() != Token.TEXT) {
-                    stack.add(new Text());
-                }
+            }
+            position++;
+        }
+    }
 
-                stack.top().addString(specialSymbols.getOrDefault(line.charAt(pos), String.valueOf(line.charAt(pos++))));
+    private void parseStrikeout() {
+        extractText();
+        if (!stack.isEmpty() && stack.top().getToken() == Token.STRIKEOUT) {
+            MarkdownElement element = stack.pop();
+            stack.top().add(element);
+        } else {
+            stack.add(new Strikeout());
+        }
+        position += 2;
+    }
+
+    private void parseCode() {
+        extractText();
+        if (!stack.isEmpty() && stack.top().getToken() == Token.CODE) {
+            MarkdownElement element = stack.pop();
+            stack.top().add(element);
+        } else {
+            stack.add(new Code());
+        }
+        position++;
+    }
+
+    private void parseText() {
+        String character = specialSymbols.getOrDefault(builder.charAt(position), String.valueOf(builder.charAt(position)));
+        if (builder.charAt(position) == BLACK_SLASH) {
+            character = String.valueOf(builder.charAt(position + 1));
+            position++;
+        }
+        if (stack.isEmpty() || stack.top().getToken() != Token.TEXT) {
+            stack.add(new Text());
+        }
+        stack.top().addString(character);
+        position++;
+    }
+
+    private void parseBlock(final MarkdownElement block) {
+        position = 0;
+        while (block.getToken() == Token.HEADER && builder.charAt(position) == HEADER_CHARACTER) position++;
+        if (position != 0) {
+            position++;
+        }
+        stack.clear();
+        stack.add(block);
+        highlightingCharacter1Count = highlightingCharacter2Count = 0;
+        for (int i = 0; i < builder.length(); i++) {
+            if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_1 && (i - 1 < 0 || builder.charAt(i - 1) != BLACK_SLASH)) {
+                highlightingCharacter1Count++;
+            } else if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_2 && (i - 1 < 0 || builder.charAt(i - 1) != BLACK_SLASH)) {
+                highlightingCharacter2Count++;
             }
         }
-
-    }
-
-    private boolean isHighlightingCharacter(char character) {
-        return character == HIGHLIGHTING_CHARACTER_1 || character == HIGHLIGHTING_CHARACTER_2;
-    }
-
-    private boolean isStrikeout(char first, char second) {
-        return first == STRIKEOUT_CHARACTER && second == STRIKEOUT_CHARACTER;
-    }
-
-    private boolean isCode(char character) {
-        return character == CODE_CHARACTER;
+        while (position < builder.length()) {
+            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 || builder.charAt(position) == HIGHLIGHTING_CHARACTER_2) {
+                parseHighlighting();
+            } else if (position + 1 < builder.length() && builder.charAt(position) == STRIKEOUT_CHARACTER &&
+                    builder.charAt(position + 1) == STRIKEOUT_CHARACTER) {
+                parseStrikeout();
+            } else if (builder.charAt(position) == CODE_CHARACTER) {
+                parseCode();
+            } else {
+                parseText();
+            }
+        }
+        List<MarkdownElement> elements = new ArrayList<>();
+        while (stack.size() > 1) {
+            elements.add(stack.pop());
+        }
+        for (int i = elements.size() - 1; i >= 0; i--) {
+            block.add(elements.get(i));
+        }
+        blocks.add(block);
     }
 }
-

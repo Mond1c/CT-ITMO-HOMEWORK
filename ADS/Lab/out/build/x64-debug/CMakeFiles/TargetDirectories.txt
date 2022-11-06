@@ -1,0 +1,3 @@
+C:/Users/pocht/Desktop/Homework/ADS/Lab/out/build/x64-debug/CMakeFiles/Lab.dir
+C:/Users/pocht/Desktop/Homework/ADS/Lab/out/build/x64-debug/CMakeFiles/edit_cache.dir
+C:/Users/pocht/Desktop/Homework/ADS/Lab/out/build/x64-debug/CMakeFiles/rebuild_cache.dir

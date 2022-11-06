@@ -36,6 +36,12 @@ public class MyStack {
         return element;
     }
 
+    public void clear() {
+        while (!isEmpty()) {
+            pop();
+        }
+    }
+
     public MarkdownElement[] getArray() {
         return data;
     }
