@@ -7,5 +7,6 @@ public enum Token {
     TEXT,
     HEADER,
     PARAGRAPH,
-    CODE
+    CODE,
+    IMAGE
 }

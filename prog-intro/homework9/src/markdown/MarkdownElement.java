@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class MarkdownElement {
     private final List<MarkdownElement> elements;
-    private final String htmlTag;
+    protected final String htmlTag;
     private final Token token;
 
     public MarkdownElement(String htmlTag, Token token) {
