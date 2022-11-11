@@ -17,7 +17,7 @@ std::string get_polynom(const std::string& function) {
 	return polynom;
 }
 
-int main() {
+int mainE() {
 	int n;
 	std::cin >> n;
 	n = pow(2, n);
@@ -30,4 +30,5 @@ int main() {
 	for (int i = 0; i < n; ++i) {
 		std::cout << arguments[i] << " " << polynom[i] << std::endl;
 	}
+	return 0;
 }
