@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.11.13)  13 NOV 2022 17:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.11.13)  13 NOV 2022 23:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -786,126 +786,150 @@ cmr/m/n/10 ограниччено сверху и снизу, то оно называется огрниченным.
  []
 
 
-Overfull \hbox (30.63156pt too wide) in paragraph at lines 171--171
+Overfull \hbox (30.63156pt too wide) in paragraph at lines 167--167
 []\T2A/cmr/bx/n/12 Инъекции, сюръекции, биекции, обратные отображения. Эквивале
 нтные
  []
 
 
-Overfull \hbox (40.63997pt too wide) in paragraph at lines 171--171
+Overfull \hbox (40.63997pt too wide) in paragraph at lines 167--167
 \T2A/cmr/bx/n/12 множества, свойства эквивалентности множеств. Примеры эквивале
 нтных
  []
 
 [3]
-Overfull \hbox (4.7022pt too wide) in paragraph at lines 209--209
+Overfull \hbox (4.7022pt too wide) in paragraph at lines 205--205
 []\T2A/cmr/bx/n/12 Счетные множества, не более чем счетные множества (определен
 ия
  []
 
 
-Overfull \hbox (20.35175pt too wide) in paragraph at lines 233--233
+Overfull \hbox (20.35175pt too wide) in paragraph at lines 229--229
 []\T2A/cmr/bx/n/12 Аксиома Кантора. Несчетность отрезка и некоторых других множ
 еств
  []
 
 
-Overfull \hbox (5.81259pt too wide) in paragraph at lines 235--236
+Overfull \hbox (5.81259pt too wide) in paragraph at lines 231--232
 \T2A/cmr/bx/n/10 Аксиома Кантора. \T2A/cmr/m/n/10 Любая последовательность влож
 енных друг в друга отрезков, длины которых
  []
 
 
-Overfull \hbox (8.46361pt too wide) in paragraph at lines 237--238
+Overfull \hbox (8.46361pt too wide) in paragraph at lines 233--234
 \T2A/cmr/bx/n/10 Теорема. \T2A/cmr/m/n/10 Любые два конечных интервала (соответ
 ственно отрезка) числовой прямой равномощны.
  []
 
 [4]
-Overfull \hbox (52.17526pt too wide) in paragraph at lines 243--243
+Overfull \hbox (52.17526pt too wide) in paragraph at lines 239--239
 []\T2A/cmr/bx/n/12 Единственность предела последовательности и ограниченность с
 ходящейся
  []
 
 
-Overfull \hbox (23.6143pt too wide) in paragraph at lines 260--260
+Overfull \hbox (23.6143pt too wide) in paragraph at lines 256--256
 []\T2A/cmr/bx/n/12 Бесконечно малые последовательности, элементарные свойства к
 ласса
  []
 
 
-Overfull \hbox (13.07726pt too wide) in paragraph at lines 260--260
+Overfull \hbox (13.07726pt too wide) in paragraph at lines 256--256
 \T2A/cmr/bx/n/12 бесконечно-малых последовательностей, в т.ч. лемма о произведе
 нии
  []
 
 
-Overfull \hbox (16.73192pt too wide) in paragraph at lines 265--266
+Overfull \hbox (16.73192pt too wide) in paragraph at lines 261--262
 []\T2A/cmr/m/n/10 Сумма двух бесконечно малых последовательностей есть бесконеч
 но малая последовательность. 
  []
 
 
-Overfull \hbox (26.86833pt too wide) in paragraph at lines 266--267
+Overfull \hbox (26.86833pt too wide) in paragraph at lines 262--263
 []\T2A/cmr/m/n/10 Разность двух бесконечно малых последовательностей есть беско
 нечно малая последовательность. 
  []
 
 
-Overfull \hbox (3.95726pt too wide) in paragraph at lines 268--269
+Overfull \hbox (3.95726pt too wide) in paragraph at lines 264--265
 []\T2A/cmr/m/n/10 Произведение ограниченной последовательности на бесконечно ма
 лую есть бесконечно малая
  []
 
 
-Overfull \hbox (20.67365pt too wide) in paragraph at lines 270--271
+Overfull \hbox (20.67365pt too wide) in paragraph at lines 266--267
 []\T2A/cmr/m/n/10 Если $\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 x[]\OMS/cmsy/m/n/10 
 g$ \T2A/cmr/m/n/10 - бесконечно большая последовательность, то начиная с некото
 рого номера определена
  []
 
 
-Overfull \hbox (8.47508pt too wide) in paragraph at lines 271--272
+Overfull \hbox (8.47508pt too wide) in paragraph at lines 267--268
 []\T2A/cmr/m/n/10 Если $\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 y[]\OMS/cmsy/m/n/10 
 g$ \T2A/cmr/m/n/10 - бесконечно малая последовательность, то начиная с некоторо
 го номера определена
  []
 
 
-Overfull \hbox (94.3108pt too wide) in paragraph at lines 276--276
+Overfull \hbox (94.3108pt too wide) in paragraph at lines 272--272
 []\T2A/cmr/bx/n/12 Теорема об арифметических действиях над сходящимимся последо
 вательностями. 
  []
 
-[5] [6] (./coloc1.aux)
+[5] [6]
+Overfull \hbox (20.06444pt too wide) in paragraph at lines 326--327
+[]\T2A/cmr/m/n/10 Любая возрастающая (убывающая) и ограниченная сверху (снизу) 
+последовательность сходится. 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 330.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 330.
+
+
+Overfull \hbox (3.1247pt too wide) in paragraph at lines 344--346
+\T2A/cmr/bx/n/10 Лемма. \T2A/cmr/m/n/10 Пусть $\OMS/cmsy/m/n/10 f\OML/cmm/m/it/
+10 x[]\OMS/cmsy/m/n/10 g[]$ \T2A/cmr/m/n/10 - числовая последовательность $\OML
+/cmm/m/it/10 x[] \OMS/cmsy/m/n/10 ! \OML/cmm/m/it/10 x \OMS/cmsy/m/n/10 2 []$\T
+2A/cmr/m/n/10 . Тогда $\OML/cmm/m/it/10 forall$ \T2A/cmr/m/n/10 последовательно
+сти
+ []
+
+[7] (./coloc1.aux)
 Package rerunfilecheck Info: File `coloc1.out' has not changed.
-(rerunfilecheck)             Checksum: EA4EA1C7AF74D432D1A6D3A7B4DBD99C;13388.
+(rerunfilecheck)             Checksum: AEBE9052168323BCEE5E851BE5AFCD5A;15660.
  ) 
 Here is how much of TeX's memory you used:
- 12127 strings out of 480806
- 168664 string characters out of 5905150
- 508298 words of memory out of 6000000
- 29242 multiletter control sequences out of 15000+600000
+ 12146 strings out of 480806
+ 168886 string characters out of 5905150
+ 506807 words of memory out of 6000000
+ 29247 multiletter control sequences out of 15000+600000
  416244 words of font info for 61 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,8n,63p,1968b,426s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}</us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/
-sfbx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx120
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on coloc1.pdf (6 pages, 178175 bytes).
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx10
+00.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on coloc1.pdf (7 pages, 191168 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
- 86 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 286 PDF objects out of 1000 (max. 8388607)
+ 260 compressed objects within 3 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 

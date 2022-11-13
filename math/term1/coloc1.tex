@@ -156,16 +156,12 @@
 
 \noindent {\bf Определение.} Пусть $X \subset \mathbb{R}$. Если $X$ ограниччено сверху и снизу, то оно называется огрниченным.
 
-\noindent {\bf Определение.} Верхняя грань множества называется $\sup\limits_{x \in X}x$ (supremum)
+\noindent {\bf Теорема. } $\forall$ конечного множества $X \subset \mathbb{R}\ \exists \max(X), \min(X)$
 
-\noindent {\bf Определение.} Нижняя грань множества называется $\inf\limits_{x \in X}x$ (infinum)
-
-\noindent {\bf Теорема. } Всякое ограниченное сверху непустое числовое множество имеет верхнюю грань, а всякое ограниченное снизу непустое числовое множество имеет нижнюю грань.
-
-\noindent{\bf Замечания}
+\noindent {\bf Следствия.}
 \begin{enumerate}
-	\item Если множество неограничено сверху, то $\sup X = +\infty$
-	\item Если множество неограничено снизу, то $\inf X = -\infty$
+	\item $X$ ограничена сверху $\Rightarrow \exists\ max(X)$
+	\item $X$ ограничена снизу $\Rightarrow \exists\ min(X)$
 \end{enumerate}
 
 \subsection{Инъекции, сюръекции, биекции, обратные отображения. Эквивалентные множества, свойства эквивалентности множеств. Примеры эквивалентных множеств.}
@@ -302,6 +298,55 @@
 	\displaystyle\bigcap\limits_{n = 1}^{\infty}[x_n, y_n] = c, c \in \mathbb{R}
 \end{equation*}
 
+\subsection{Теорема о существовании супремума и инфимума. Элементарные свойства супремума и инфимума}
 
+\noindent {\bf Определение.} Верхняя грань множества называется $\sup\limits_{x \in X}x$ (supremum)
 
+\noindent {\bf Определение.} Нижняя грань множества называется $\inf\limits_{x \in X}x$ (infinum)
+
+\noindent {\bf Теорема. } Всякое ограниченное сверху непустое числовое множество имеет верхнюю грань, а всякое ограниченное снизу непустое числовое множество имеет нижнюю грань.
+
+\noindent{\bf Замечания}
+\begin{enumerate}
+	\item Если множество неограничено сверху, то $\sup X = +\infty$
+	\item Если множество неограничено снизу, то $\inf X = -\infty$
+\end{enumerate}
+
+\noindent{\bf Свойства.}
+\begin{enumerate}
+	\item $\sup(A + B) = \sup A + \sup B$
+	\item $\sup(tA) = t\sup A\ \forall t > 0$
+	\item $\sup(-A) = -\inf(A)$
+\end{enumerate}
+
+\subsection{Теорема о пределе монотонной последовательности.}
+\noindent {\bf Теорема (Вейерштрасса).}
+\begin{enumerate}
+	\item Любая возрастающая (убывающая) последовательность в $\mathbb{R}$ имеет предел в $\overline{\mathbb{R}}$, и он равен её супремуму (инфимуму).
+	\item Любая возрастающая (убывающая) и ограниченная сверху (снизу) последовательность сходится.
+	\item Любая ограниченная монотонная последовательность сходится.
+\end{enumerate}
+
+\subsection{\bf Определение числа $e$, соответствующий замечательный предел}
+\noindent {\bf Определение.} 
+\begin{equation*}
+	\lim\limits_{n \to \infty}(1 + \frac{1}{n})^n = \lim\limits_{n \to \infty}(1 + \frac{1}{n})^{n + 1} = e
+\end{equation*}
+
+\subsection{Формула Герона.}
+\noindent{\bf Формула.} Пусть $a > 0, x_0 > 0$
+\begin{equation*}
+	x_{n+1} = \frac{1}{2}(x_n + \frac{a}{x_n}), n \in \mathbb{Z}_+
+\end{equation*}
+Тогда $x_n \to \sqrt{a}$
+
+\subsection{Две леммы о пределе подпоследовательности}
+\noindent{\bf Лемма.} Пусть $\{x_n\}_n$ - числовая последовательность $x_n \to x \in \overline{\mathbb{R}}$.
+Тогда $forall$ последовательности $\{x_{n_k}\}_k\ \exists \lim\limits_{n \to  \infty}x_{n_k} = x$
+
+\noindent{\bf Лемма.} Пусть $\{n_k\}_k, \{m_j\}_j$ - строго возрастающая последовательность в $\mathbb{N}$
+Тогда, если $\{n_k\}_k \cup \{m_j\}_j = \mathbb{N}$,
+\begin{equation*}
+	\{x_n\} \text{ - числовая последовательность }\quad x_{n_k} \to x \quad x_{mj} \to x \text{, то } x_n \to x
+\end{equation*}
 \end{document}
