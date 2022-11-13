@@ -1,0 +1,232 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{arcs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{stackrel}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{empty}
+\normalsize
+
+\section{Билеты}
+\subsection{Законы де Моргана}
+Пусть $\{X_{\alpha}\}_{\alpha \in A}$ - семейство множеств, $Y$ - ммножесттво. Тогда
+\begin{equation}
+	Y \setminus \displaystyle\bigcup\limits_{\alpha \in A}X_{\alpha} = \displaystyle \bigcap\limits_{\alpha \in A}(Y \setminus X_{\alpha})
+\end{equation}
+\begin{equation}
+	Y \setminus \displaystyle \bigcap\limits_{\alpha \in A}X_{\alpha} = \displaystyle \bigcup\limits_{\alpha \in A}(Y \setminus X_{\alpha})
+\end{equation}
+\begin{equation}
+	Y \cap \displaystyle\bigcup\limits_{\alpha \in A}X_{\alpha} = \displaystyle\bigcup\limits_{\alpha \in A}(Y \cap X_{\alpha})
+\end{equation}
+\begin{equation}
+	Y \cup \displaystyle\bigcap\limits_{\alpha \in A}X_{\alpha} = \displaystyle\bigcap\limits_{\alpha \in A}(Y \cup X_{\alpha})
+\end{equation}
+
+\subsection{Аксиомы порядка и их элемеенетарные следствия. Два способа расширения вещественной прямой.}
+Между элементами $\mathbb{R}$ определено отношение $\leq$ со следующими свойствами:
+\begin{enumerate}
+	\item $\forall x, y: x \leq y \vee y \leq x$
+	\item $x \leq y \wedge y \leq z \Rightarrow x \leq z$
+	\item $x \leq y \wedge y \leq x \Rightarrow x = y$
+	\item $x \leq y \Rightarrow x + z \leq y + z \forall z$
+	\item $0 \leq x \wedge 0 \leq y \Rightarrow 0 \leq xy$
+\end{enumerate}
+
+\noindent$\mathbb{R}$ можно расширять с помощью $+\infty$ и $-\infty$.  
+
+\subsection{Модуль числа}
+{\bfОпределение.} Пусть $x \in \mathbb{R}$. Число
+\begin{equation*}
+	|x| = \begin{cases}
+		x, & x \geq 0, \\
+		-x, & x < 0
+	\end{cases}
+\end{equation*}
+называется {\bf модулем} или {\bf абсолютной величиной} числа $x$. 
+
+\noindent Свойства модуля:
+\begin{enumerate}
+	\item $|-x| = x$
+	\item $\pm x \leq |x|$
+	\item $|xy| = |x||y|$
+	\item $\displaystyle|\frac{x}{y}| = \displaystyle\frac{|x|}{|y|}, y \neq 0$
+	\item $\displaystyle||x| - |y|| \leq |x \pm y| \leq |x| + |y|$
+	\item $|x| < a \Leftrightarrow -a < x < a,\ a > 0$
+\end{enumerate}
+
+\subsection{Комплексные числа}
+
+{\bf Определение.} Комплексное число - это упорядоченая пара вещественных чисел $(x, y)$, так что множество $\mathbb{C} = \mathbb{R}^2$.
+
+Определим некоторые свойства для комплексных чисел. Пусть $z_1 = (x_1, y_1),\ z_2 = (x_2, y_2)$, тогда:
+\begin{enumerate}
+	\item $z_1 + z_2 = (x_1 + x_2, y_1 + y_2)$
+	\item $0 = (0, 0)$
+	\item $-z = (-x, -y)$
+	\item $z_1 \cdot z_2 = (x_1x_2 - y_1y_2, x_1y_2 + x_2y_1)$
+	\item $1 = (1, 0)$
+	\item $\mathbb{R} = (x, 0), \mathbb{R} \subset \mathbb{C}$
+	\item $i = (0, 1)$ - мнимая еденица
+	\item $(0, y)$ - мнимые числа
+	\item $z = (x, y) = x(1, 0) + y(0, 1) = x + iy$
+	\item $\displaystyle\frac{1}{z} = \displaystyle\frac{x}{x^2 + y^2} + i\displaystyle\frac{-y}{x^2 + y^2}$
+	\item $x = Rez, y = Imz$
+\end{enumerate}
+
+\noindent $\overline{z} = x - iy$ - сопряжённое к $z$. Тогда
+\begin{equation*}
+	Rez = \frac{z + \overline{z}}{2}, \qquad Imz = \frac{z - \overline{z}}{2i}
+\end{equation*}
+\begin{equation*}
+	\overline{\overline{z}} = z, \qquad \overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_2}
+\end{equation*}
+Определим {\bf модуль} комплексного числа:
+\begin{equation*}
+	|z| = \sqrt{x^2 + y^2}
+\end{equation*}
+Он обладает следующимии свойствами:
+\begin{enumerate}
+	\item $|z_1z_2| = |z_1||z_2|$
+	\item $\displaystyle\Big|\displaystyle\frac{z_1}{z_2}\Big| = \displaystyle\frac{|z_1|}{|z_2|}$
+	\item $\big| |z_1| - |z_2| \big| \leq | z_1 \pm z_2| \leq |z_1| + |z_2|$
+	\item $z\overline{z} = |z|^2$
+\end{enumerate}
+
+
+\noindent {\bf Определение.} Тригонометрическая форма комплекесного числа определяется так - $z = r(\cos\phi + i\sin\phi),\quad r = |z|,\ \phi=\arg z$.
+
+
+\noindent {\bf Формула Муавра.}
+\begin{equation*}
+	z^n = r^n(\cos n\phi + i\sin n\phi)
+\end{equation*}
+
+
+\noindent {\bf Определение.} Показзательной формой комлексного число наззывается $z = r \cdot e^{i\phi}, \quad e^{i\phi} = \cos\phi = i\sin\phi$
+
+\noindent {\bf Определение.} Расширенная комплексная плоскость - $\hat{\mathbb{C}} = \mathbb{C} \cup \{\infty\}$
+
+
+\subsection{Принцип математической индукции. Индуктивные множества. Неравенство Бернулли.}
+
+\noindent {\bf Определение.} Пусть $\{\mathbb{P}\}$ - последовательность утверждений. Если
+\begin{enumerate}
+	\item $\mathbb{P}_1$ верно (база индукции)
+	\item $\forall a \in \mathbb{N} \mathbb{P}_n \Rightarrow \mathbb{P}_{n + 1}$ (индукционный переход, $\mathbb{P}_n$ - индукционное предположение)
+\end{enumerate}
+Тогда $\mathbb{P}_n$ верно $\forall n \in \mathbb{N}$.
+
+
+\noindent {\bf Определение.} Множество $M \in \mathbb{R} $ называется {\bf индуктивным}, если $1 \in M$ и $\forall x \in M \ x + 1 \in M$.
+
+
+\noindent {\bf Теорема (Неравенство Бернулли). }
+\begin{equation*}
+	(1 + x)^n \geq 1 + nx \forall n \geq 1 \in \mathbb{N}
+\end{equation*} 
+
+\subsection{Бином Ньютона.}
+{\bf Теорема.} Если $n \in \mathbb{Z}_+,\ x,y \in \mathbb{R} \ \text{или} \ \mathbb{C}, \text{то}$ 
+\begin{equation*}
+	(x + y)^n = \displaystyle\sum\limits_{k = 0}^{n}C_n^kx^ky^{n-k}
+\end{equation*}
+
+\subsection{Аксиома Архимеда. Плотность множества рациональных чисел в $\mathbb{R}$.}
+{\bf Аксиома.} $\forall x,y > 0 \in \mathbb{R},\ \exists n \in \mathbb{N} : nx > y$
+
+\noindent{\bf Плотность. } $\forall a<b \in \mathbb{R} \ \exists c: a<c<b$
+
+\subsection{Ограниченные, односторонне ограниченные множества. Теорема о максимуме и минимуме конечного множества и следствия из нее.}
+{\bf Определение.} Пусть $X \subset \mathbb{R}$. Если $\exists b \in \mathbb{R}\ \ \forall x \in X:\ x \leq b$, множество $X$ называется огрнаичнным сверху. 
+
+\noindent {\bf Определение.} Пусть $X \subset \mathbb{R}$. Если $\exists b \in \mathbb{R}\ \ \forall x \in X:\ x \geq b$, множество $X$ называется огрнаичнным снизу. 
+
+\noindent {\bf Определение.} Пусть $X \subset \mathbb{R}$. Если $X$ ограниччено сверху и снизу, то оно называется огрниченным.
+
+\noindent {\bf Определение.} Верхняя грань множества называется $\sup\limits_{x \in X}x$ (supremum)
+
+\noindent {\bf Определение.} Нижняя грань множества называется $\inf\limits_{x \in X}x$ (infinum)
+
+\noindent {\bf Теорема. } Всякое ограниченное сверху непустое числовое множество имеет верхнюю грань, а всякое ограниченное снизу непустое числовое множество имеет нижнюю грань.
+
+\noindent{\bf Замечания}
+\begin{enumerate}
+	\item Если множество неограничено сверху, то $\sup X = +\infty$
+	\item Если множество неограничено снизу, то $\inf X = -\infty$
+\end{enumerate}
+
+\subsection{Инъекции, сюръекции, биекции, обратные отображения. Эквивалентные множества, свойства эквивалентности множеств. Примеры эквивалентных множеств.}
+\noindent {\bf Определение.} $f: A \to B$ называется инъекцией, если верно $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$
+
+\noindent {\bf Определение.} $f: A \to B$ называется сюръекцией, если верно $\forall y \in B\  \exists x \in A : f(x) = y$
+
+\noindent {\bf Определение.} $f: A \to B$ называетсяс биекцией, еслли оно инъективно и сюръективно, то есть
+\begin{equation*}
+	\begin{cases}
+		f(x_1) = f(x_2) \Rightarrow x_1 = x_2 \ \forall x_1,x_2 \in A\\
+		\forall y \in B \ \exists x \in A : f(x) = y
+	\end{cases}
+\end{equation*} 
+
+
+\noindent {\bf Определение.} $g: B \to A$ называется обратным к $f: A \to B$, если
+\begin{equation*}
+	\begin{cases}
+		g \circ f = Id_A \\
+		f \circ G = Id_B
+	\end{cases}
+\end{equation*}
+
+\noindent {\bf Определение.} Два множеста $A$ и $B$ эквивалентны, если можно построить между их элементами отображение $f: A \to B$ такое, что оно будет биективным.
+
+\noindent Пусть $\sim$ - отношение эквивалентности. Тогда его {\bf свойства} выглядят так:
+\begin{enumerate}
+	\item $A \sim S$ (рефлексивность).
+	\item $A \sim B \Rightarrow B \sim A$ (симметричность).
+	\item $A \sim B \wedge B \sim C \Rightarrow A \sim C$ (транзитивность).
+\end{enumerate}
+
+\noindent {\bf Примеры.}
+\begin{enumerate}
+	\item $\mathbb{N} \sim \mathbb{Z}$
+	\item $[a, b] \sim [a + h,b + h] \ \forall a, b, h \in \mathbb{R}$
+	\item $(0, 1) \sim (1, +\infty)$, так как $[x \in (0, 1)] \leftrightarrow [ y = \displaystyle\frac{1}{x} \in (1, +\infty)]$
+\end{enumerate}
+
+\subsection{Счетные множества, не более чем счетные множества (определения и примеры). Образ счетного множества.}
+\noindent {\bf Определение.} множество $X$ называется счёным, если $\exists f: N \to X$, которое является биекцией.
+
+\noindent {\bf Примеры.} $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{A}$
+
+\noindent {\bf Определение.} Непустое множество являющееся конечным или счётным называется не более, чем счётным. 
+
+\noindent {\bf Теорема.} При любом отображении образ счётного множества конечен или счётен.
+
+\subsection{Две теоремы о счетных подмножествах.}
+
+\noindent {\bf Теорема.} Любое подмножество счетного множества не более чем счетно.
+
+\noindent {\bf Теорема.} Любое бесконечное множество содержит счетное подмножество.
+
+
+\subsection{Утверждения о произведении счетных множеств и о не более чем счетном объединении не более чем счетных множеств. Счетность множества рациональных чисел}
+
+\noindent {\bf Теорема.} Не более чем счётное (конечное или счётное) объединение не более чем счётных множеств является не более чем счётным множеством.
+
+\noindent {\bf Теорема.} Декартово произведение двух счётных множеств $A \times B$ cчётно.
+\noindent {\bf Теорема.} Множество всех рациональных чисел счетно.
+ 
+\end{document}
