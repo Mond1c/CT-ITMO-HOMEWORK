@@ -227,6 +227,81 @@
 \noindent {\bf Теорема.} Не более чем счётное (конечное или счётное) объединение не более чем счётных множеств является не более чем счётным множеством.
 
 \noindent {\bf Теорема.} Декартово произведение двух счётных множеств $A \times B$ cчётно.
-\noindent {\bf Теорема.} Множество всех рациональных чисел счетно.
- 
+
+\noindent {\bf Теорема.} Множество всех действительных чисел несчетно. 
+
+\subsection{Аксиома Кантора. Несчетность отрезка и некоторых других множеств вещественных чисел.}
+
+\noindent {\bf Аксиома Кантора.} Любая последовательность вложенных друг в друга отрезков, длины которых стремятся к нулю, имеет одну общую точку.
+
+\noindent {\bf Теорема.}  Любые два конечных интервала (соответственно отрезка) числовой прямой равномощны. Если заданы два интервала $(a,b)$ и $(c,d)$, то отображение.
+\begin{equation*}
+		x = \frac{(d - c)t = bc - ad}{b - a}, a < t < b
+\end{equation*}
+является биекцией интервалов $(a,b)$ и $(c,d)$ (соответственно отрезков $[a,b]$ и $[c,d]$).
+
+\subsection{Единственность предела последовательности и ограниченность сходящейся последовательности.}
+\noindent {\bf Теорема.} Последовательность точек расширенной числовой прямой $\overline{\mathbb{R}}$ может иметь на этой прямой только один предел.
+
+\noindent {\bf Теорема.} Если числовая последовательность имеет конечный предел, то она ограничена.
+
+\subsection{Утверждение о предельном переходе в неравенствах и следствия из нее. Теорема о сжатой последовательности.}
+\noindent {\bf Утверждение.} $x_n = a \in \overline{\mathbb{R}} \Leftrightarrow \lim\limits_{n \to \infty}x_n = a\  \forall n \in \mathbb{N}$
+
+\noindent {\bf Теорема (о двух милиционерах).}
+\begin{equation*}
+	\begin{cases}
+		x_n \leq y_n \leq z_n,\ \forall n \in \mathbb{N} \\
+		\lim\limits_{n \to \infty}x_n = \lim\limits_{n \to \infty}z_n = a \in \overline{\mathbb{R}}
+	\end{cases}
+	\Leftrightarrow \lim\limits_{n \to \infty}y_n = a,\ \forall x_n, y_n, z_n = \overline{\mathbb{R}}
+\end{equation*}
+
+\subsection{Бесконечно малые последовательности, элементарные свойства класса бесконечно-малых последовательностей, в т.ч. лемма о произведении б.м. на ограниченную. Бесконечно большие последовательности. Связь между б.б. и б.м. последовательностями.}
+\noindent {\bf Определение.} $\lim\limits_{n \to \infty}a_n = 0$ - бесконечно малая последовательность.
+
+\noindent {\bf Свойства.}
+\begin{enumerate}
+	\item Сумма двух бесконечно малых последовательностей есть бесконечно малая последовательность.
+	\item Разность двух бесконечно малых последовательностей есть бесконечно малая последовательность.
+	\item Бесконечно малая последовательность ограничена.
+	\item Произведение ограниченной последовательности на бесконечно малую есть бесконечно малая последовательность.
+	\item Если все элементы бесконечно малой последовательности, начиная с некоторого номера, равны одному и тому же числу, то это число - ноль.
+	\item Если $\{x_{n}\}$ - бесконечно большая последовательность, то начиная с некоторого номера определена последовательность $\{\frac{1}{x_{n}}\}$ , причём она является бесконечно малой.
+	\item Если $\{y_{n}\}$ - бесконечно малая последовательность, то начиная с некоторого номера определена последовательность $\{\frac{1}{y_{n}}\}$ , причём она является бесконечно большой.
+\end{enumerate}
+
+\noindent {\bf Определение.} Бесконечно большая — числовая последовательность, стремящаяся к (предел которой равен) бесконечности определённого знака.
+
+\subsection{Теорема об арифметических действиях над сходящимимся последовательностями.}
+
+\noindent{Теорема.} Пусть $\lim\limits_{n \to \infty}x_n = a$ и $\lim\limits_{n \to \infty}y_n = b$, то:
+\begin{enumerate}
+	\item $\lim\limits_{n \to \infty}(x_n + y_n) = a + b$
+	\item $\lim\limits_{n \to \infty}(x_ny_n) = ab$
+	\item $\lim\limits_{n \to \infty}\frac{x_n}{y_n} = \frac{a}{b},\ b \neq 0$
+\end{enumerate}
+
+\subsection{Теорема об арифметических действиях над бесконечно большими последовательностями.}
+\noindent {\bf Теорема.}
+\begin{enumerate}
+	\item $x_n \to +\infty$, $y_n$ ограничена снизу $\Rightarrow x_n + y_n \to +\infty$
+	\item $x_n \to -\infty$, $y_n$ ограничена сверху $\Rightarrow x_n + y_n \to -\infty$
+	\item $x_n \to \infty$, $y_n$ ограничена $\Rightarrow x_n + y_n \to \infty$
+	\item $x_n \to +\infty, \exists\delta > 0:\ \forall n y_n > \delta \Rightarrow x_ny_n \to +\infty$
+	\item $x_n \to -\infty, \exists\delta > 0:\ \forall n y_n > \delta \Rightarrow x_ny_n \to -\infty$
+	\item $x_n \to \infty, \exists\delta > 0:\ \forall n y_n > \delta \Rightarrow x_ny_n \to \infty$
+	\item $x_n \to x \in \mathbb{R} y_n \to \infty \Rightarrow \frac{x_n}{y_n} \to 0$
+	\item $x_n \to x \in \hat{\mathbb{R}}\setminus\{0\}, y_n \to 0 \Rightarrow \frac{x_n}{y_n} \to \infty$
+	\item $x_n \to \infty, y_n \to y \in \mathbb{R} \Rightarrow  \frac{x_n}{y_n} \to \infty$
+\end{enumerate}
+
+\subsection{Теорема о стягивающихся отрезках}
+\noindent {\bf Теорема.} Если $[x_1, y_1], [x_2, y_2], \cdots, [x_n, y_n]$ - последовательность стягивающихся отрезков, то $\exists!$ точка, принадлежащия этим отрезков.
+\begin{equation*}
+	\displaystyle\bigcap\limits_{n = 1}^{\infty}[x_n, y_n] = c, c \in \mathbb{R}
+\end{equation*}
+
+
+
 \end{document}
