@@ -3,29 +3,28 @@ package md2html;
 import markdown.*;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Parser {
     private static final char HEADER_CHARACTER = '#';
-    private static final char BLACK_SLASH = '\\';
+    private static final char BACK_SLASH = '\\';
     private static final char HIGHLIGHTING_CHARACTER_1 = '_';
     private static final char HIGHLIGHTING_CHARACTER_2 = '*';
     private static final char STRIKEOUT_CHARACTER = '-';
     private static final char CODE_CHARACTER = '`';
     private static final String IMAGE_START = "![";
+    private static final char IMAGE_ALT_END = ']';
+    private static final char IMAGE_SRC_END = ')';
 
     private final BufferedReader reader;
     private final BufferedWriter writer;
 
     private final List<MarkdownElement> blocks;
     private final StringBuilder builder;
-    private final Map<Character, String> specialSymbols = Map.of('<', "&lt;", '>', "&gt;", '&', "&amp;");
+    private final Map<Character, String> specialSymbols =
+            Map.of('<', "&lt;", '>', "&gt;", '&', "&amp;");
     private int highlightingCharacter1Count;
     private int highlightingCharacter2Count;
     private int position;
@@ -62,7 +61,8 @@ public class Parser {
                 }
                 builder.append(System.lineSeparator());
                 builder.append(line);
-            };
+            }
+            ;
             parseBlock(element);
         }
         for (MarkdownElement block : blocks) {
@@ -71,8 +71,6 @@ public class Parser {
             writer.write(builder.toString());
             writer.newLine();
         }
-        writer.close();
-        reader.close();
     }
 
     private void extractText() {
@@ -86,14 +84,34 @@ public class Parser {
         }
     }
 
+    private boolean extractToken(Token token) {
+        if (!stack.isEmpty() && stack.top().getToken() == token) {
+            MarkdownElement element = stack.pop();
+            stack.top().add(element);
+            return true;
+        }
+        return false;
+    }
+
+    private void parseToken(Token token, MarkdownElement newElement) {
+        if (!extractToken(token)) {
+            stack.add(newElement);
+        }
+    }
+
+    private void updateText(String value) {
+        if (stack.isEmpty() || stack.top().getToken() != Token.TEXT) {
+            stack.add(new Text());
+        }
+        stack.top().addString(value);
+    }
+
     private void parseHighlighting() {
         extractText();
-        if (position + 1 < builder.length() && builder.charAt(position + 1) == builder.charAt(position)) {
-            if (!stack.isEmpty() && stack.top().getToken() == Token.STRONG) {
-                MarkdownElement element = stack.pop();
-                stack.top().add(element);
-            } else {
-                stack.add(new Strong());
+        if (position + 1 < builder.length() &&
+                builder.charAt(position + 1) == builder.charAt(position)) {
+            parseToken(Token.STRONG, new Strong());
+            if (stack.isEmpty() || stack.top().getToken() != Token.STRONG) {
                 if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1) {
                     highlightingCharacter1Count -= 4;
                 } else {
@@ -102,61 +120,46 @@ public class Parser {
             }
             position += 2;
         } else {
-            if (!stack.isEmpty() && stack.top().getToken() == Token.EMPHASIS) {
-                MarkdownElement element = stack.pop();
-                stack.top().add(element);
+            if (extractToken(Token.EMPHASIS)) {
+                position++;
+                return;
+            }
+            stack.add(new Emphasis());
+            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 &&
+                    highlightingCharacter1Count - 2 >= 0) {
+                highlightingCharacter1Count -= 2;
+            } else if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_2 &&
+                    highlightingCharacter2Count - 2 >= 0) {
+                highlightingCharacter2Count -= 2;
             } else {
-                if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 && highlightingCharacter1Count - 2 >= 0) {
-                    stack.add(new Emphasis());
-                    highlightingCharacter1Count -= 2;
-                } else if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_2 && highlightingCharacter2Count - 2 >= 0) {
-                    stack.add(new Emphasis());
-                    highlightingCharacter2Count -= 2;
-                } else {
-                    if (!stack.isEmpty() && stack.top().getToken() == Token.TEXT) {
-                        stack.top().addString(String.valueOf(builder.charAt(position)));
-                    } else {
-                        stack.add(new Text());
-                        stack.top().addString(String.valueOf(builder.charAt(position)));
-                    }
-                }
+                stack.pop();
+                updateText(String.valueOf(builder.charAt(position)));
             }
             position++;
         }
     }
 
+
     private void parseStrikeout() {
         extractText();
-        if (!stack.isEmpty() && stack.top().getToken() == Token.STRIKEOUT) {
-            MarkdownElement element = stack.pop();
-            stack.top().add(element);
-        } else {
-            stack.add(new Strikeout());
-        }
+        parseToken(Token.STRIKEOUT, new Strikeout());
         position += 2;
     }
 
     private void parseCode() {
         extractText();
-        if (!stack.isEmpty() && stack.top().getToken() == Token.CODE) {
-            MarkdownElement element = stack.pop();
-            stack.top().add(element);
-        } else {
-            stack.add(new Code());
-        }
+        parseToken(Token.CODE, new Code());
         position++;
     }
 
     private void parseText() {
-        String character = specialSymbols.getOrDefault(builder.charAt(position), String.valueOf(builder.charAt(position)));
-        if (builder.charAt(position) == BLACK_SLASH) {
+        String character = specialSymbols.getOrDefault(builder.charAt(position),
+                String.valueOf(builder.charAt(position)));
+        if (builder.charAt(position) == BACK_SLASH) {
             character = String.valueOf(builder.charAt(position + 1));
             position++;
         }
-        if (stack.isEmpty() || stack.top().getToken() != Token.TEXT) {
-            stack.add(new Text());
-        }
-        stack.top().addString(character);
+        updateText(character);
         position++;
     }
 
@@ -165,11 +168,11 @@ public class Parser {
         position += 2;
         final StringBuilder src = new StringBuilder();
         final StringBuilder alt = new StringBuilder();
-        while (builder.charAt(position) != ']') {
+        while (builder.charAt(position) != IMAGE_ALT_END) {
             alt.append(builder.charAt(position++));
         }
         position += 2;
-        while (builder.charAt(position) != ')') {
+        while (builder.charAt(position) != IMAGE_SRC_END) {
             src.append(builder.charAt(position++));
         }
         position++;
@@ -186,17 +189,13 @@ public class Parser {
         stack.add(block);
         highlightingCharacter1Count = highlightingCharacter2Count = 0;
         for (int i = 0; i < builder.length(); i++) {
-            if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_1 && (i - 1 < 0 || builder.charAt(i - 1) != BLACK_SLASH)) {
+            if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_1 && (i - 1 < 0 || builder.charAt(i - 1) != BACK_SLASH)) {
                 highlightingCharacter1Count++;
-            } else if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_2 && (i - 1 < 0 || builder.charAt(i - 1) != BLACK_SLASH)) {
+            } else if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_2 && (i - 1 < 0 || builder.charAt(i - 1) != BACK_SLASH)) {
                 highlightingCharacter2Count++;
             }
         }
         while (position < builder.length()) {
-            boolean l = false;
-            if (stack.top().getToken() == Token.IMAGE) {
-                l = true;
-            }
             if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 || builder.charAt(position) == HIGHLIGHTING_CHARACTER_2) {
                 parseHighlighting();
             } else if (position + 1 < builder.length() && builder.charAt(position) == STRIKEOUT_CHARACTER &&
