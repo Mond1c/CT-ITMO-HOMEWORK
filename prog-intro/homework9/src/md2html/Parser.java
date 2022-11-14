@@ -21,25 +21,21 @@ public class Parser {
             Map.of('<', "&lt;", '>', "&gt;", '&', "&amp;");
 
     private final BufferedReader reader;
-    private final BufferedWriter writer;
-
-    private final List<MarkdownElement> blocks;
     private final StringBuilder builder;
+    private final MyStack stack;
 
     private int highlightingCharacter1Count;
     private int highlightingCharacter2Count;
     private int position;
-    private final MyStack stack;
 
-    public Parser(BufferedReader reader, BufferedWriter writer) {
+
+    public Parser(BufferedReader reader) {
         this.reader = reader;
-        this.writer = writer;
-        this.blocks = new ArrayList<>();
         this.builder = new StringBuilder();
         this.stack = new MyStack();
     }
 
-    public void parse() throws IOException {
+    public void parse(final Document document) throws IOException {
         while (reader.ready()) {
             builder.setLength(0);
             String line = reader.readLine();
@@ -48,7 +44,9 @@ public class Parser {
             }
             final MarkdownElement element;
             int count = 0;
-            while (line.charAt(count) == HEADER_CHARACTER) count++;
+            while (line.charAt(count) == HEADER_CHARACTER) {
+                count++;
+            }
             if (count > 0 && Character.isWhitespace(line.charAt(count))) {
                 element = new Header(Character.forDigit(count, 10));
             } else {
@@ -63,15 +61,10 @@ public class Parser {
                 builder.append(System.lineSeparator());
                 builder.append(line);
             }
-            ;
             parseBlock(element);
+            document.addBlock(stack.pop());
         }
-        for (MarkdownElement block : blocks) {
-            builder.setLength(0);
-            block.toHtml(builder);
-            writer.write(builder.toString());
-            writer.newLine();
-        }
+
     }
 
     private void extractText() {
@@ -110,8 +103,7 @@ public class Parser {
 
     private void parseHighlighting() {
         extractText();
-        if (position + 1 < builder.length() &&
-                builder.charAt(position + 1) == builder.charAt(position)) {
+        if (position + 1 < builder.length() && builder.charAt(position + 1) == builder.charAt(position)) {
             parseToken(Token.STRONG, new Strong());
             if (stack.top().getToken() != Token.STRONG) {
                 if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1) {
@@ -127,11 +119,9 @@ public class Parser {
                 return;
             }
             stack.add(new Emphasis());
-            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 &&
-                    highlightingCharacter1Count - 2 >= 0) {
+            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 && highlightingCharacter1Count - 2 >= 0) {
                 highlightingCharacter1Count -= 2;
-            } else if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_2 &&
-                    highlightingCharacter2Count - 2 >= 0) {
+            } else if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_2 && highlightingCharacter2Count - 2 >= 0) {
                 highlightingCharacter2Count -= 2;
             } else {
                 stack.pop();
@@ -181,7 +171,8 @@ public class Parser {
 
     private void parseBlock(final MarkdownElement block) {
         position = 0;
-        while (block.getToken() == Token.HEADER && builder.charAt(position) == HEADER_CHARACTER) {
+        while (block.getToken() == Token.HEADER &&
+                builder.charAt(position) == HEADER_CHARACTER) {
             position++;
         }
         if (position != 0) {
@@ -200,15 +191,16 @@ public class Parser {
             }
         }
         while (position < builder.length()) {
-            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 || builder.charAt(position) == HIGHLIGHTING_CHARACTER_2) {
+            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 ||
+                    builder.charAt(position) == HIGHLIGHTING_CHARACTER_2) {
                 parseHighlighting();
             } else if (position + 1 < builder.length() && builder.charAt(position) == STRIKEOUT_CHARACTER &&
                     builder.charAt(position + 1) == STRIKEOUT_CHARACTER) {
                 parseStrikeout();
             } else if (builder.charAt(position) == CODE_CHARACTER) {
                 parseCode();
-            } else if (position + 1 < builder.length() && builder.charAt(position) == IMAGE_START.charAt(0)
-                    && builder.charAt(position + 1) == IMAGE_START.charAt(1)) {
+            } else if (position + 1 < builder.length() && builder.charAt(position) == IMAGE_START.charAt(0) &&
+                    builder.charAt(position + 1) == IMAGE_START.charAt(1)) {
                 parseImage();
             } else {
                 parseText();
@@ -221,6 +213,5 @@ public class Parser {
         for (int i = elements.size() - 1; i >= 0; i--) {
             block.add(elements.get(i));
         }
-        blocks.add(block);
     }
 }

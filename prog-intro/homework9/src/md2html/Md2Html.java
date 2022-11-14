@@ -12,7 +12,8 @@ public class Md2Html {
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(args[0], StandardCharsets.UTF_8));
                 BufferedWriter writer = new BufferedWriter(new FileWriter(args[1], StandardCharsets.UTF_8))) {
-            new Parser(reader, writer).parse();
+            Document document = Document.markdownToDocument(reader);
+            document.writeHtmlIntoFile(writer);
         } catch (IOException e) {
             System.err.println("Can't read from the file or write to the file.");
         }
