@@ -17,14 +17,15 @@ public class Parser {
     private static final String IMAGE_START = "![";
     private static final char IMAGE_ALT_END = ']';
     private static final char IMAGE_SRC_END = ')';
+    private static final Map<Character, String> specialSymbols =
+            Map.of('<', "&lt;", '>', "&gt;", '&', "&amp;");
 
     private final BufferedReader reader;
     private final BufferedWriter writer;
 
     private final List<MarkdownElement> blocks;
     private final StringBuilder builder;
-    private final Map<Character, String> specialSymbols =
-            Map.of('<', "&lt;", '>', "&gt;", '&', "&amp;");
+
     private int highlightingCharacter1Count;
     private int highlightingCharacter2Count;
     private int position;
@@ -85,7 +86,7 @@ public class Parser {
     }
 
     private boolean extractToken(Token token) {
-        if (!stack.isEmpty() && stack.top().getToken() == token) {
+        if (stack.top().getToken() == token) {
             MarkdownElement element = stack.pop();
             stack.top().add(element);
             return true;
@@ -94,13 +95,14 @@ public class Parser {
     }
 
     private void parseToken(Token token, MarkdownElement newElement) {
+        extractText();
         if (!extractToken(token)) {
             stack.add(newElement);
         }
     }
 
     private void updateText(String value) {
-        if (stack.isEmpty() || stack.top().getToken() != Token.TEXT) {
+        if (stack.top().getToken() != Token.TEXT) {
             stack.add(new Text());
         }
         stack.top().addString(value);
@@ -111,7 +113,7 @@ public class Parser {
         if (position + 1 < builder.length() &&
                 builder.charAt(position + 1) == builder.charAt(position)) {
             parseToken(Token.STRONG, new Strong());
-            if (stack.isEmpty() || stack.top().getToken() != Token.STRONG) {
+            if (stack.top().getToken() != Token.STRONG) {
                 if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1) {
                     highlightingCharacter1Count -= 4;
                 } else {
@@ -141,13 +143,11 @@ public class Parser {
 
 
     private void parseStrikeout() {
-        extractText();
         parseToken(Token.STRIKEOUT, new Strikeout());
         position += 2;
     }
 
     private void parseCode() {
-        extractText();
         parseToken(Token.CODE, new Code());
         position++;
     }
@@ -176,12 +176,14 @@ public class Parser {
             src.append(builder.charAt(position++));
         }
         position++;
-        stack.add(new Image(alt.toString(), src.toString()));
+        stack.top().add(new Image(alt.toString(), src.toString()));
     }
 
     private void parseBlock(final MarkdownElement block) {
         position = 0;
-        while (block.getToken() == Token.HEADER && builder.charAt(position) == HEADER_CHARACTER) position++;
+        while (block.getToken() == Token.HEADER && builder.charAt(position) == HEADER_CHARACTER) {
+            position++;
+        }
         if (position != 0) {
             position++;
         }
@@ -189,10 +191,12 @@ public class Parser {
         stack.add(block);
         highlightingCharacter1Count = highlightingCharacter2Count = 0;
         for (int i = 0; i < builder.length(); i++) {
-            if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_1 && (i - 1 < 0 || builder.charAt(i - 1) != BACK_SLASH)) {
-                highlightingCharacter1Count++;
-            } else if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_2 && (i - 1 < 0 || builder.charAt(i - 1) != BACK_SLASH)) {
-                highlightingCharacter2Count++;
+            if (i - 1 < 0 || builder.charAt(i - 1) != BACK_SLASH) {
+                if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_1) {
+                    highlightingCharacter1Count++;
+                } else if (builder.charAt(i) == HIGHLIGHTING_CHARACTER_2) {
+                    highlightingCharacter2Count++;
+                }
             }
         }
         while (position < builder.length()) {
@@ -206,8 +210,6 @@ public class Parser {
             } else if (position + 1 < builder.length() && builder.charAt(position) == IMAGE_START.charAt(0)
                     && builder.charAt(position + 1) == IMAGE_START.charAt(1)) {
                 parseImage();
-                MarkdownElement element = stack.pop();
-                stack.top().add(element);
             } else {
                 parseText();
             }
