@@ -103,10 +103,11 @@ public class Parser {
 
     private void parseHighlighting() {
         extractText();
-        if (position + 1 < builder.length() && builder.charAt(position + 1) == builder.charAt(position)) {
+        char character = builder.charAt(position);
+        if (position + 1 < builder.length() && builder.charAt(position + 1) == character) {
             parseToken(Token.STRONG, new Strong());
             if (stack.top().getToken() != Token.STRONG) {
-                if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1) {
+                if (character == HIGHLIGHTING_CHARACTER_1) {
                     highlightingCharacter1Count -= 4;
                 } else {
                     highlightingCharacter2Count -= 4;
@@ -119,13 +120,13 @@ public class Parser {
                 return;
             }
             stack.add(new Emphasis());
-            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 && highlightingCharacter1Count - 2 >= 0) {
+            if (character == HIGHLIGHTING_CHARACTER_1 && highlightingCharacter1Count - 2 >= 0) {
                 highlightingCharacter1Count -= 2;
-            } else if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_2 && highlightingCharacter2Count - 2 >= 0) {
+            } else if (character == HIGHLIGHTING_CHARACTER_2 && highlightingCharacter2Count - 2 >= 0) {
                 highlightingCharacter2Count -= 2;
             } else {
                 stack.pop();
-                updateText(String.valueOf(builder.charAt(position)));
+                updateText(String.valueOf(character));
             }
             position++;
         }
@@ -191,15 +192,15 @@ public class Parser {
             }
         }
         while (position < builder.length()) {
-            if (builder.charAt(position) == HIGHLIGHTING_CHARACTER_1 ||
-                    builder.charAt(position) == HIGHLIGHTING_CHARACTER_2) {
+            char character = builder.charAt(position);
+            if (character == HIGHLIGHTING_CHARACTER_1 || character== HIGHLIGHTING_CHARACTER_2) {
                 parseHighlighting();
-            } else if (position + 1 < builder.length() && builder.charAt(position) == STRIKEOUT_CHARACTER &&
+            } else if (position + 1 < builder.length() && character == STRIKEOUT_CHARACTER &&
                     builder.charAt(position + 1) == STRIKEOUT_CHARACTER) {
                 parseStrikeout();
-            } else if (builder.charAt(position) == CODE_CHARACTER) {
+            } else if (character == CODE_CHARACTER) {
                 parseCode();
-            } else if (position + 1 < builder.length() && builder.charAt(position) == IMAGE_START.charAt(0) &&
+            } else if (position + 1 < builder.length() && character == IMAGE_START.charAt(0) &&
                     builder.charAt(position + 1) == IMAGE_START.charAt(1)) {
                 parseImage();
             } else {
