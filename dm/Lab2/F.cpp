@@ -2,29 +2,29 @@
 
 int mainF() {
     std::unordered_map<int, std::string> dict;
+    std::unordered_set<std::string> st;
     for (int i = 0; i < 26; ++i) {
         dict[i] = std::string(1, (char) ('a' + i));
+        st.insert(std::string(1, (char) ('a' + i)));
     }
-
+    int code = 26;
     int n;
     std::cin >> n;
-    std::string prev, next;
-    int code = 26;
+    std::string s, v;
     int a;
     std::cin >> a;
-    prev = dict[a];
+    s = dict[a];
     std::cout << dict[a];
     for (int i = 1; i < n; ++i) {
         std::cin >> a;
-        std::cout << dict[a];
-        next = dict[a];
-        std::string t = prev + next.substr(0, prev.size());
-        if (std::find_if(dict.begin(),
-                         dict.end(), [&t](const auto& lhs) {
-            return lhs.second == t;
-        }) == dict.end()) dict[code++] = t;
-        prev = next.substr(prev.size(), next.size() - prev.size());
+        if (dict.count(a)) {
+            v = dict[a];
+        } else {
+            v = s + s[0];
+        }
+        std::cout << v;
+        dict[code++] = s + v[0];
+        s = v;
     }
-    std::cout << std::endl;
     return 0;
 }
