@@ -11,7 +11,7 @@ public class Main {
         final int k = scanner.nextInt();
         final int result = new Game(new Board(m, n, k),
                 new Human(scanner),
-                new Human(scanner)).play(true);
+                new Human(scanner)).play(false);
         switch (result) {
             case 1 -> {
                 System.out.println("First player won!");

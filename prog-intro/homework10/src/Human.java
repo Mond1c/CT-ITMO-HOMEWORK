@@ -8,11 +8,7 @@ public class Human implements Player {
     }
 
     @Override
-    public Move makeMove(Position position) {
-        System.out.println();
-        System.out.println("Current position");
-        System.out.println(position);
-        System.out.println("Enter your move for " + position.getTurn());
-        return new Move(scanner.nextInt() - 1, scanner.nextInt() - 1, position.getTurn());
+    public Move makeMove(Cell turn) {
+        return new Move(scanner.nextInt() - 1, scanner.nextInt() - 1, turn);
     }
 }

@@ -13,20 +13,32 @@ public class Game {
         while (true) {
             final int result1 = makeMove(player1, 1, log);
             if (result1 != -1) {
+                System.out.println("Final position");
+                System.out.println(board);
                 return result1;
             }
             final int result2 = makeMove(player2, 2, log);
             if (result2 != -1) {
+                System.out.println("Final position");
+                System.out.println(board);
                 return result2;
             }
         }
     }
 
+    private Move getMoveFromPlayer(Player player) {
+        System.out.println();
+        System.out.println("Current position");
+        System.out.println(board);
+        System.out.println("Enter your move for " + board.getTurn());
+        return player.makeMove(board.getTurn());
+    }
+
     private int makeMove(Player player, int no, boolean log) {
-        Move move = player.makeMove(board);
+        Move move = getMoveFromPlayer(player);
         while (!board.isValid(move)) {
             System.out.println("You entered incorrect move. Try again.");
-            move = player.makeMove(board);
+            move = getMoveFromPlayer(player);
         }
         final GameResult result = board.makeMove(move);
         if (log) {

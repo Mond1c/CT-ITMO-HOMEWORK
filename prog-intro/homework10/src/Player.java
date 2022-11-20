@@ -1,3 +1,3 @@
 public interface Player {
-    Move makeMove(Position position);
+    Move makeMove(Cell turn);
 }
