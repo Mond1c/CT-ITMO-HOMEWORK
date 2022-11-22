@@ -1,3 +1,8 @@
+import game.MnkBoard;
+import game.Cell;
+import game.Move;
+import game.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,10 +14,10 @@ public class Winner implements Player {
     private final int k;
 
     private final int[][] score;
-    private final Board board;
+    private final MnkBoard board;
     private final Random random;
 
-    public Winner(final int m, final int n, final int k, final Board board) {
+    public Winner(final int m, final int n, final int k, final MnkBoard board) {
         this.m = m;
         this.n = n;
         this.k = k;
@@ -33,8 +38,8 @@ public class Winner implements Player {
         int row = startRow;
         int column = startColumn;
         while (0 <= row && row < m
-            && 0 <= column && column < n
-            && board.getCell(row, column) == board.getTurn()) {
+                && 0 <= column && column < n
+                && board.getCell(row, column) == board.getTurn()) {
             currentScore++;
             row += rowDir;
             column += columnDir;
@@ -45,9 +50,9 @@ public class Winner implements Player {
         row = startRow;
         column = startColumn;
         while (0 <= row && row < m
-            && 0 <= column && column < n
-            && board.getCell(row, column) != board.getTurn()
-            && board.getCell(row, column) != Cell.E) {
+                && 0 <= column && column < n
+                && board.getCell(row, column) != board.getTurn()
+                && board.getCell(row, column) != Cell.E) {
             currentOtherPlayerScore++;
             row += rowDir;
             column += columnDir;
@@ -60,7 +65,7 @@ public class Winner implements Player {
         currentScore = 0;
         currentOtherPlayerScore = 0;
         while (0 <= row && row < m
-            && 0 <= column && column < n) {
+                && 0 <= column && column < n) {
             if (board.getCell(row, column) == board.getTurn()) {
                 currentScore++;
             } else if (board.getCell(row, column) != Cell.E) {

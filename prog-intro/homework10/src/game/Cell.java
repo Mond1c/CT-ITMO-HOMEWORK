@@ -1,3 +1,5 @@
+package game;
+
 public enum Cell {
     E {
         @Override
@@ -17,4 +19,10 @@ public enum Cell {
             return "0";
         }
     },
+    B {
+        @Override
+        public String toString() {
+            return "#";
+        }
+    }
 }

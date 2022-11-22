@@ -1,3 +1,5 @@
+package game;
+
 public class Move {
     private final int row;
     private final int column;
@@ -23,6 +25,6 @@ public class Move {
 
     @Override
     public String toString() {
-        return String.format("Move(%s, %d, %d)", value, row + 1, column + 1);
+        return String.format("game.Move(%s, %d, %d)", value, row + 1, column + 1);
     }
 }

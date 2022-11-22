@@ -1,9 +1,11 @@
+package game;
+
 public class Game {
-    private final Board board;
+    private final MnkBoard board;
     private final Player player1;
     private final Player player2;
 
-    public Game(Board board, Player player1, Player player2) {
+    public Game(MnkBoard board, Player player1, Player player2) {
         this.board = board;
         this.player1 = player1;
         this.player2 = player2;
@@ -35,15 +37,20 @@ public class Game {
     }
 
     private int makeMove(Player player, int no, boolean log) {
-        Move move = getMoveFromPlayer(player);
-        while (!board.isValid(move)) {
-            System.out.println("You entered incorrect move. Try again.");
+        Move move;
+        try {
             move = getMoveFromPlayer(player);
+            while (!board.isValid(move)) {
+                System.out.println("You entered incorrect move. Try again.");
+                move = getMoveFromPlayer(player);
+            }
+        } catch (RuntimeException e) {
+            return 3 - no;
         }
         final GameResult result = board.makeMove(move);
         if (log) {
             System.out.println();
-            System.out.println("Player: " + no);
+            System.out.println("game.Player: " + no);
             System.out.println(move);
             System.out.println(board);
             System.out.println("Result: " + result);
