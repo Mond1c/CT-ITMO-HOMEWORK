@@ -9,9 +9,10 @@ public class Main {
         final int n = scanner.nextInt();
         System.out.println("Write length of winner combination");
         final int k = scanner.nextInt();
-        final int result = new Game(new Board(m, n, k),
+        final Board board = new Board(m, n, k);
+        final int result = new Game(board,
                 new Human(scanner),
-                new Human(scanner)).play(false);
+                new Winner(m, n, k, board)).play(false);
         switch (result) {
             case 1 -> {
                 System.out.println("First player won!");

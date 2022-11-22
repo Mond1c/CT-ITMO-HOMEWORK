@@ -75,36 +75,31 @@ public class Board implements Position {
         }
         turn = turn == Cell.X ? Cell.O : Cell.X;
         // This part of code calculate, who can win on the next move.
-        // TODO: Extract this code into methods to make it more readable.
+        // TODO: Extract this code into methods to make it more readable. (DONE)
         if (turn == Cell.X && !winMovesX.isEmpty()) {
-            if (winMovesX.size() > 1) {
-                return GameResult.LOOSE;
-            } else {
-                final Move nextMove = winMovesX.get(0);
-                if (field[nextMove.getRow()][nextMove.getColumn()] == Cell.E) {
-                    field[nextMove.getRow()][nextMove.getColumn()] = turn;
-                    return GameResult.LOOSE;
-                } else {
-                    winMovesX.remove(0);
-                }
-            }
-        } else if (turn == Cell.O && !winMovesO.isEmpty()){
-            if (winMovesO.size() > 1) {
-                return GameResult.LOOSE;
-            } else {
-                final Move nextMove = winMovesO.get(0);
-                if (field[nextMove.getRow()][nextMove.getColumn()] == Cell.E) {
-                    field[nextMove.getRow()][nextMove.getColumn()] = turn;
-                    return GameResult.LOOSE;
-                } else {
-                    winMovesO.remove(0);
-                }
-            }
+            if (getNextMoveWinner(winMovesX)) return GameResult.LOOSE;
+        } else if (turn == Cell.O && !winMovesO.isEmpty()) {
+            if (getNextMoveWinner(winMovesO)) return GameResult.LOOSE;
         }
         if (emptyCellsCount == 1) {
             return GameResult.DRAW;
         }
         return GameResult.UNKNOWN;
+    }
+
+    private boolean getNextMoveWinner(List<Move> winMoves) {
+        if (winMovesO.size() > 1) {
+            return true;
+        } else {
+            final Move nextMove = winMovesO.get(0);
+            if (field[nextMove.getRow()][nextMove.getColumn()] == Cell.E) {
+                field[nextMove.getRow()][nextMove.getColumn()] = turn;
+                return true;
+            } else {
+                winMovesO.remove(0);
+            }
+        }
+        return false;
     }
 
     private int checkDirection(int row, int column, int rowDir, int columnDir, int startCount) { // Time complexity = O(k)
@@ -131,10 +126,14 @@ public class Board implements Position {
     }
 
     private boolean checkAllDirections(int row, int column) { // Time complexity = 8k = O(k)
-        return checkDirection(row, column, 1, 0, checkDirection(row, column, -1, 0, 0) - 1) >= k
-                || checkDirection(row, column, 1, 1, checkDirection(row, column, -1, -1, 0) - 1) >= k
-                || checkDirection(row, column, 0, 1, checkDirection(row, column, 0, -1, 0) - 1) >= k
-                || checkDirection(row, column, -1, 1, checkDirection(row, column, 1, -1, 0) - 1) >= k;
+        return checkDirection(row, column, 1, 0,
+                    checkDirection(row, column, -1, 0, 0) - 1) >= k
+                || checkDirection(row, column, 1, 1,
+                    checkDirection(row, column, -1, -1, 0) - 1) >= k
+                || checkDirection(row, column, 0, 1,
+                    checkDirection(row, column, 0, -1, 0) - 1) >= k
+                || checkDirection(row, column, -1, 1,
+                    checkDirection(row, column, 1, -1, 0) - 1) >= k;
     }
 
     private boolean checkWin(Move move) { // Time complexity = O(K)
