@@ -1,15 +1,23 @@
 package utility;
-    // Start parameters
-    parameter MEM_SIZE = 1048576;
+    // Start parameters (bits) (cache)
+    parameter MEM_SIZE = 2097152;
     parameter CACHE_SIZE = 16384;
     parameter CACHE_LINE_SIZE = 128;
     parameter CACHE_LINE_COUNT = 128;
-    parameter CACHE_WAY = 8;
-    parameter CACHE_SETS_COUNT = 16;
+    parameter CACHE_WAY = 2;
+    parameter CACHE_SETS_COUNT = 64;
     parameter CACHE_TAG_SIZE = 8;
-    parameter CACHE_SET_SIZE = 4;
+    parameter CACHE_SET_SIZE = 6;
     parameter CACHE_OFFSET_SIZE = 7;
-    parameter CACHE_ADDR_SIZE = 20;
+    parameter CACHE_ADDR_SIZE = 21;
+
+    // Start parameters (bits) (bus)
+    parameter DATA1_BUS_SIZE = 16;
+    parameter DATA2_BUS_SIZE = 16;
+    parameter ADDR1_BUS_SIZE = 14;
+    parameter ADDR2_BUS_SIZE = 14;
+    parameter CTR1_BUS_SIZE = 16;
+    parameter CTR2_BUS_SIZE = 16;
 
     typedef struct packed {
         bit valid;
@@ -41,31 +49,4 @@ package utility;
 
     typedef bit[MEM_SIZE] memory;
     typedef cache_line[CACHE_LINE_COUNT] cache;
-
-
-    //Commands (enums)
-    enum {
-        C1_NOP,
-        C1_READ8,
-        C1_READ16,
-        C1_READ32,
-        C1_INVALIDATE_LINE,
-        C1_WRITE8,
-        C1_WRITE16,
-        C1_WRITE32
-    } cpu_cache_commands;
-
-    enum {
-        C1_RESPONSE=7
-    } cache_cpu_commands;
-
-    enum {
-        C2_NOP=0,
-        C2_READ_LINE=2,
-        C2_WRITE_LINE=3
-    } cache_mem_commands;
-
-    enum {
-        C2_RESPONSE
-    } mem_cache_memory;
 endpackage

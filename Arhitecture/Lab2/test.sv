@@ -3,6 +3,7 @@ module test #(parameter _SEED = 225526);
   reg[7:0] a[0:99];
   integer i = 0;
   initial begin    
+    $display("%d", utility.MEM_SIZE);
     for (i = 0; i < 100; i += 1) begin
       a[i] = $random(SEED)>>16;  
     end
