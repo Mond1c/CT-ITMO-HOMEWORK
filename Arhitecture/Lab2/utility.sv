@@ -23,7 +23,7 @@ package utility;
         bit valid;
         bit dirty;
         reg[CACHE_TAG_SIZE] tag;
-        reg[CACHE_LINE_SIZE] data;
+        bit data[CACHE_LINE_SIZE];
     } cache_line;
 
     typedef struct packed {

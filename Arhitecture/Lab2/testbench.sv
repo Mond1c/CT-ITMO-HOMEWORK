@@ -11,12 +11,19 @@ module testbench();
     inout wire[CTR1_BUS_SIZE] C1;
     inout wire[CTR2_BUS_SIZE] C2;
     cache_cpu c(CLK, RESET, A1, A2, D1, D2, C1, C2);
+    cache_address address;
 
     initial begin
-        c.execute_command_from_CPU(0);
-        c.execute_command_from_CPU(1);
-        c.execute_command_from_CPU(2);
-        c.execute_command_from_CPU(3);
-        c.execute_command_from_CPU(7);
+        c.init();
+        address.set = 0;
+        address.tag = 0;
+        address.offset = 0;
+        c.execute_command_from_CPU(1, address);
+        address.set = 0;
+        address.tag = 1;
+        address.offset = 0;
+        c.execute_command_from_CPU(2, address);
+        c.execute_command_from_CPU(4, address);
+        c.execute_command_from_CPU(3, address);
     end
 endmodule
