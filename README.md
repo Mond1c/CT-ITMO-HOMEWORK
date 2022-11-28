@@ -1,4 +1,4 @@
-# Homework's from CT ITMO university (Mikhail Kornilovich)
+# Homework's from CT (Computer technology) ITMO university (Mikhail Kornilovich)
 #### Subjects:
 - prog-intro
 - Algorithms and data structures
