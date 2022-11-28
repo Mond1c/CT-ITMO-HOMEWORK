@@ -11,7 +11,7 @@ module testbench();
     inout wire[CTR1_BUS_SIZE] C1;
     inout wire[CTR2_BUS_SIZE] C2;
     cache_cpu c(CLK, RESET, A1, A2, D1, D2, C1, C2);
-    cache_address address;
+    cache_address_t address;
 
     initial begin
         c.init();
