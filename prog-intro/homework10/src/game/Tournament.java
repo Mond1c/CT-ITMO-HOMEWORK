@@ -1,5 +1,6 @@
 package game;
 
+import java.io.PrintStream;
 import java.util.List;
 
 public class Tournament {
@@ -10,11 +11,12 @@ public class Tournament {
     private final int n;
     private final int k;
     private final List<Player> players;
+    private final PrintStream output;
     private final List<MnkBoard.BlockedCell> blockedCells;
     private final int[] points;
 
     public Tournament(int m, int n, int k, final List<Player> players,
-                      final List<MnkBoard.BlockedCell> blockedCells) {
+                      final List<MnkBoard.BlockedCell> blockedCells, final PrintStream output) {
         if (players.size() < 2) {
             throw new RuntimeException("You can't start tournament with only one (zero) player");
         }
@@ -22,39 +24,37 @@ public class Tournament {
         this.n = n;
         this.k = k;
         this.players = players;
+        this.output = output;
         this.blockedCells = blockedCells;
         this.points = new int[players.size()];
     }
 
     private void displayResults() {
-        System.out.print("Players | ");
+        output.print("Players | ");
         for (int i = 0; i < points.length; i++) {
-            System.out.print((i + 1) + " ");
+            output.print((i + 1) + " ");
         }
-        System.out.println();
-        System.out.print("Points | ");
+        output.println();
+        output.print("Points  | ");
         for (int point : points) {
-            System.out.print(point + " ");
+            output.print(point + " ");
         }
     }
 
     private void playGame(int player1Number, int player2Number) {
         final int result =
                 new Game(new MnkBoard(m, n, k, blockedCells), players.get(player1Number),
-                        players.get(player2Number), System.out).play(false);
+                        players.get(player2Number), output).play(false);
         switch (result) {
             case 1 -> {
                 points[player1Number] += WIN_POINTS;
-                break;
             }
             case 2 -> {
                 points[player2Number] += WIN_POINTS;
-                break;
             }
             case 0 -> {
                 points[player1Number] += DRAW_POINTS;
                 points[player2Number] += DRAW_POINTS;
-                break;
             }
             default -> {
                 throw new AssertionError("Unknown result " + result);

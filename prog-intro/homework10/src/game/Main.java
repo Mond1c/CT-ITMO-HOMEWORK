@@ -15,9 +15,12 @@ public class Main {
         final int k = scanner.nextInt();
         List<MnkBoard.BlockedCell> blockedCells = new ArrayList<>();
         for (int i = 0; i < Math.min(m, n); i++) {
-            blockedCells.add(new MnkBoard.BlockedCell(i, i));
+        //    blockedCells.add(new MnkBoard.BlockedCell(i, i));
         }
-        new Tournament(m, n, k, List.of(new RandomPlayer(m, n), new RandomPlayer(m, n), new RandomPlayer(m, n)), blockedCells).play();
+        new Tournament(m, n, k, List.of(new RandomPlayer(m, n),
+                new RandomPlayer(m, n),
+                new RandomPlayer(m, n)),
+                blockedCells, System.out).play();
         // :NOTE: хочу чтобы турнир игрался
     }
 }
