@@ -40,7 +40,8 @@ public class Tournament {
 
     private void playGame(int player1Number, int player2Number) {
         final int result =
-                new Game(new MnkBoard(m, n, k, blockedCells), players.get(player1Number), players.get(player2Number)).play(false);
+                new Game(new MnkBoard(m, n, k, blockedCells), players.get(player1Number),
+                        players.get(player2Number), System.out).play(false);
         switch (result) {
             case 1 -> {
                 points[player1Number] += WIN_POINTS;

@@ -22,7 +22,7 @@ public class MnkBoard implements Position, Board {
         this.m = m;
         this.n = n;
         this.k = k;
-        this.emptyCellsCount = m * n;
+        this.emptyCellsCount = m * n - blockedCells.size();
         this.turn = Cell.X;
         this.field = new Cell[m][n];
         this.winMovesO = new ArrayList<>();
@@ -51,7 +51,7 @@ public class MnkBoard implements Position, Board {
     }
 
     @Override
-    public Cell getCell(int row, int column) {
+    public Cell  getCell(int row, int column) {
         return field[row][column];
     }
 
@@ -88,14 +88,17 @@ public class MnkBoard implements Position, Board {
         return GameResult.UNKNOWN;
     }
 
-    private int checkDirection(int row, int column, int rowDir, int columnDir, int startCount) { // Time complexity = O(k)
+    private int checkDirection(int row, int column, int rowDx, int colDx, int startCount) { // Time complexity = O(k)
         int count = startCount;
+        int i = 0;
         while (0 <= row && row < m
                 && 0 <= column && column < n
-                && field[row][column] == turn) {
-            row += rowDir;
-            column += columnDir;
+                && field[row][column] == turn
+                && i < k) {
+            row += rowDx;
+            column += colDx;
             count++;
+            i++;
         }
         if (count == k - 1) {
             final Move move = new Move(row, column, turn);
@@ -103,7 +106,7 @@ public class MnkBoard implements Position, Board {
                 return count;
             }
             if (turn == Cell.O) {
-                winMovesO.add(move);
+                winMovesO.add(move); // :NOTE: непонятно зачем
             } else {
                 winMovesX.add(move);
             }

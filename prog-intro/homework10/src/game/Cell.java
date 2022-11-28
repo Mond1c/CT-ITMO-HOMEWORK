@@ -1,28 +1,20 @@
 package game;
 
 public enum Cell {
-    E {
-        @Override
-        public String toString() {
-            return ".";
-        }
-    },
-    X {
-        @Override
-        public String toString() {
-            return "X";
-        }
-    },
-    O {
-        @Override
-        public String toString() {
-            return "0";
-        }
-    },
-    B {
-        @Override
-        public String toString() {
-            return "#";
-        }
+    E("."),
+    X("X"),
+    O("0"),
+    B("#");
+
+    // :NOTE: constructor in enum with string token (DONE)
+    private final String value;
+
+    private Cell(final String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

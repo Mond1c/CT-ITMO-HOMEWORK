@@ -17,6 +17,7 @@ public class Main {
         for (int i = 0; i < Math.min(m, n); i++) {
             blockedCells.add(new MnkBoard.BlockedCell(i, i));
         }
-        new Tournament(m, n, k, List.of(new Human(scanner), new Human(scanner), new Human(scanner)), blockedCells).play();
+        new Tournament(m, n, k, List.of(new RandomPlayer(m, n), new RandomPlayer(m, n), new RandomPlayer(m, n)), blockedCells).play();
+        // :NOTE: хочу чтобы турнир игрался
     }
 }

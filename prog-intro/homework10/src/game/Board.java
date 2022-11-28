@@ -1,5 +1,5 @@
 package game;
 
 public interface Board {
-    public GameResult makeMove(Move move);
+    GameResult makeMove(Move move);
 }
