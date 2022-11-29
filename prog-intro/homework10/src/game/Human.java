@@ -11,6 +11,16 @@ public class Human implements Player {
 
     @Override
     public Move makeMove(Cell turn) {
-        return new Move(scanner.nextInt() - 1, scanner.nextInt() - 1, turn);
+        if (!scanner.hasNextInt()) {
+            scanner.next(); scanner.next();
+            return new Move(-1, -1, turn);
+        }
+        final int row = scanner.nextInt();
+        if (!scanner.hasNextInt()) {
+            scanner.next();
+            return new Move(-1, -1, turn);
+        }
+        final int column = scanner.nextInt();
+        return new Move(row - 1, column - 1, turn);
     }
 }

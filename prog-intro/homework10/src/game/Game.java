@@ -50,7 +50,7 @@ public class Game {
                 output.println("You entered incorrect move. Try again.");
                 move = getMoveFromPlayer(player);
             }
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) { // Если игрок звкрыл сканнер Ctrl(Command)+D, то он проигрывает игру и турнир
             return 3 - no;
         }
         final GameResult result = board.makeMove(move);
