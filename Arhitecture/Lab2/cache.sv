@@ -65,7 +65,7 @@ module cache_cpu #(
 
     // read from buses
     
-    always @(A1 or A2 or D1 or D2 or C1 or C2) begin
+    always @(posedge CLK or posedge RESET) begin
         if (A1) begin
             if (addr1_status == 0) begin
                 addr1.tag = A1[CACHE_TAG_SIZE:0];

@@ -1,7 +1,14 @@
 `include "cache.sv"
 
 import utility::*;
-module testbench();
+module testbench #(
+    parameter ADDR1_BUS_SIZE    = 14,
+    parameter ADDR2_BUS_SIZE    = 14,
+    parameter DATA1_BUS_SIZE    = 16,
+    parameter DATA2_BUS_SIZE    = 16,
+    parameter CTR1_BUS_SIZE     = 3,
+    parameter CTR2_BUS_SIZE     = 2
+) ();
     input CLK;
     input RESET;
     inout wire[ADDR1_BUS_SIZE] A1;
