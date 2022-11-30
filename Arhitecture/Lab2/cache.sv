@@ -1,5 +1,7 @@
-module cache_cpu #(   
-    parameter MEM_SIZE          = 2097152,
+`include "mem_ctr.sv"
+
+module cache #(
+	parameter MEM_SIZE          = 2097152,
     parameter CACHE_SIZE        = 16384,
     parameter CACHE_LINE_SIZE   = 128,
     parameter CACHE_LINE_COUNT  = 128,
@@ -31,284 +33,228 @@ module cache_cpu #(
     parameter C2_NOP                = 0,
     parameter C2_READ_LINE          = 2,
     parameter C2_WRITE_LINE         = 3,
-    parameter C2_RESPONSE           = 1)
-    (        
+    parameter C2_RESPONSE           = 1
+	) (
     input                           CLK,
     input                           RESET,
-    input   wire[ADDR1_BUS_SIZE]    A1,
-    output  wire[ADDR2_BUS_SIZE]    A2,
-    inout   wire[DATA1_BUS_SIZE]    D1,
-    inout   wire[DATA2_BUS_SIZE]    D2,
-    inout   wire[CTR1_BUS_SIZE]     C1,
-    inout   wire[CTR2_BUS_SIZE]     C2);
+    input   [ADDR1_BUS_SIZE-1:0]    A1,
+    inout   [DATA1_BUS_SIZE-1:0]    D1,
+    inout   [CTR1_BUS_SIZE-1:0]     C1
+);
+	inout 	wire[CTR2_BUS_SIZE-1:0] 	C2;
+	output 	wire[ADDR2_BUS_SIZE-1:0] 	A2;
+	inout 	wire[DATA2_BUS_SIZE-1:0] 	D2;
 
-    typedef struct packed {
-        bit valid;
-        bit dirty;
-        reg[CACHE_TAG_SIZE] tag;
-        bit data[CACHE_LINE_SIZE];
-    } cache_line_t;
+	mem_ctr ctr(CLK, RESET, A2, D2, C2);
 
-    typedef struct packed {
-        reg[CACHE_TAG_SIZE] tag;
-        reg[CACHE_SET_SIZE] set;
-        reg[CACHE_OFFSET_SIZE] offset;
-    } cache_address_t;
-    
-    // Variables
-    cache_line_t[CACHE_LINE_COUNT]  lines;
-    cache_line_t                    line;
-    bit                             data[];
-    bit                             data1[];
-    bit                             data2[];
-    int                             data1_size;
-    int                             data2_size;
-    int                             SEED = 10000;
-    byte                            command_C1;
-    byte                            command_C2;
-    cache_address_t                 addr1;
-    cache_address_t                 addr2;
-    bit                             addr1_status=0;
-    bit                             addr2_status=0;
-    bit                             addr1_is_ready=0;
-    bit                             addr2_is_ready=0;
-    byte                            CPU_answer;
-    byte                            MEM_answer;
 
-    // read from buses
-    
-    always @(posedge CLK or posedge RESET) begin
-        if (A1) begin
-            if (addr1_status == 0) begin
-                addr1.tag = A1[CACHE_TAG_SIZE:0];
-                addr1.set = A1[CACHE_ADDR1_SIZE:CACHE_TAG_SIZE];
-                addr1_status = 1;
-            end
-            else begin
-                addr1.offset = A1[CACHE_OFFSET_SIZE:0];
-                addr1_status = 0;
-                addr1_is_ready = 1;
-            end
-        end
-        if (A2) begin
-            if (addr2_status == 0) begin
-                addr2.tag = A2[CACHE_TAG_SIZE:0];
-                addr2.set = A2[CACHE_ADDR2_SIZE:CACHE_TAG_SIZE];
-                addr2_status = 1;
-            end
-            else begin
-                addr2.offset = A2[CACHE_OFFSET_SIZE:0];
-                addr2_status = 0;
-                addr2_is_ready = 1;
-            end
-        end
-        if (D1) begin
-            static bit tmp[] = data1;
-            data1 = new[data1_size + DATA1_BUS_SIZE];
-            for (int i = 0; i < data1_size; i++) begin
-                data1[i] = tmp[i];
-            end
-            for (int i = data1_size; i < data1_size + DATA1_BUS_SIZE; i++) begin
-                data1[i] = D1[i - data1_size];
-            end
-            data1_size += DATA1_BUS_SIZE;
-        end
-        if (D2) begin
-            static bit tmp[] = data2;
-            data2 = new [data2_size + DATA2_BUS_SIZE];
-            for (int i = 0; i < data2_size; i++) begin
-                data2[i] = tmp[i];
-            end
-            for (int i = data2_size; i < data2_size + DATA2_BUS_SIZE; i++) begin
-                data[i] = D2[i - data2_size];
-            end
-            data2_size += DATA2_BUS_SIZE;
-        end
-        if (C1) begin
-            command_C1 = C1;
-        end
-        if (C2) begin
-            command_C2 = C2;
-        end
+	bit 						valid[CACHE_LINE_COUNT];
+	bit 						dirty[CACHE_LINE_COUNT];
+	reg[CACHE_TAG_SIZE-1:0] 	tag[CACHE_LINE_COUNT];
+	reg[CACHE_LINE_SIZE-1:0] 	data[CACHE_LINE_COUNT];
+	reg[CACHE_SET_SIZE-1:0] 	set[CACHE_LINE_COUNT];
+	reg[CACHE_OFFSET_SIZE-1:0] 	offset[CACHE_LINE_COUNT];
 
-        if (check_if_command_from_CPU_is_ready(command_C1)) begin
-            execute_command_from_CPU(command_C1, addr1);
-        end
-        if (check_if_command_from_MEM_CTR_is_ready(command_C2)) begin
-            execute_command_from_MEM_CTR(command_C2, addr2);
-        end
-    end
 
-    initial begin
-        // I don't know what I need to do here ???
-    end
+	reg[CACHE_TAG_SIZE-1:0] 	addr_tag;
+	reg[CACHE_SET_SIZE-1:0] 	addr_set;
+	reg[CACHE_OFFSET_SIZE-1:0] 	addr_offset;
 
-    function bit check_if_command_from_CPU_is_ready(byte command); // TODO: I think I need to simplify this function
-        if (command == C1_NOP) begin
-            return 1;
-        end
-        if (command == C1_READ8 && addr1_is_ready == 1) begin
-            addr1_is_ready = 0;
-            return 1;
-        end
-        if (command == C1_READ16 && addr1_is_ready == 1) begin
-            addr1_is_ready = 0;
-            return 1;
-        end
-        if (command == C1_READ32 && addr1_is_ready == 1) begin
-            addr1_is_ready = 0;
-            return 1;
-        end
-        if (command == C1_INVALIDATE_LINE && addr1_is_ready == 1) begin
-            return 1;
-        end
-        if (command == C1_WRITE8 && addr1_is_ready == 1 && data1_size == 8) begin
-            return 1;
-        end
-        if (command == C1_WRITE16 && addr1_is_ready == 1 && data1_size == 16) begin
-        end
-        if (command == C1_WRITE32 && addr1_is_ready == 1 && data1_size == 32) begin
-            return 1;
-        end
-        return 0;        
-    endfunction
+	byte command_C1;
+	byte command_C2;
 
-    function bit check_if_command_from_MEM_CTR_is_ready(byte command); // TODO: Think about this fucntion
-        if (command == C2_NOP) begin
-            return 1;
-        end
-        if (command == C2_READ_LINE && addr2_is_ready == 1) begin
-            return 1;
-        end
-        if (command == C2_WRITE_LINE && addr2_is_ready == 1 && data2_size == CACHE_LINE_SIZE) begin
-            return 1;
-        end
-        return 0;
-    endfunction
+	byte need_to_read_D1;
+	byte need_to_read_D2=CACHE_LINE_SIZE;
 
-    function void init(); // for test TODO: need to delete
-        static int set_number = 0;
-        for (int i = 0; i < CACHE_LINE_COUNT; i++) begin
-            if (set_number % 2 == 0 && set_number != 0) begin
-                set_number += 1;
-            end
-            line.valid  = 1;
-            line.dirty  = 0;
-            line.tag    = i + set_number;
-            line.data   = $random(SEED);
-            lines[i]    = line;
-        end
-    endfunction
+	//Test variables TODO: Need to delete in finally version
+	reg[CTR1_BUS_SIZE-1:0] 		C1_test_value = C1_READ8;
+	reg[CACHE_TAG_SIZE-1:0] 	tag_test_value = 1;
+	reg[CACHE_SET_SIZE-1:0] 	set_test_value = 1;
+	reg[CACHE_OFFSET_SIZE-1:0] 	offset_test_value = 2;
+	reg 						CLK_test_value = 1;
 
-    function cache_line_t get_cache_line(cache_address_t address);
-        if (lines[address.set * CACHE_WAY].tag == address.tag) begin
-            return lines[address.set * CACHE_WAY];
-        end
-        if (lines[address.set * CACHE_WAY + 1].tag == address.tag) begin
-            return lines[address.set * CACHE_WAY + 1];
-        end
-        $error("It's illigal address");
-    endfunction
 
-    function void get_data(reg[CACHE_LINE_SIZE] source, int offset, int size);
-        data = new[size];
-        for (int i = offset; i < offset + size; i++) begin
-            data[i - offset] = source[i];
-        end
-    endfunction
+	reg[DATA1_BUS_SIZE-1:0] d1;
+	reg[DATA2_BUS_SIZE-1:0] d2;
+	reg[CTR1_BUS_SIZE-1:0] 	c1;
+	reg[CTR2_BUS_SIZE-1:0]  c2;
+	reg[ADDR2_BUS_SIZE-1:0] a2;
+	
+	reg C1_write_enabled=0;
+	reg D1_write_enabled=0;
 
-    function void write_into_cache_line(cache_address_t address);
-        static int i = address.set * CACHE_WAY;
-        if (lines[i].tag == address.tag) begin
-            line.valid  = lines[i].valid;
-            line.dirty  = lines[i].dirty;
-            line.tag    = lines[i].tag;
-            for (int j = 0; j < CACHE_LINE_SIZE; j++) begin
-                //line.data[j] = data[j];
-            end
-            lines[i] = line;
-        end
-        else if (lines[i + 1].tag == address.tag) begin
-            line.valid  = lines[i + 1].valid;
-            line.dirty  = lines[i + 1].dirty;
-            line.tag    = lines[i + 1].tag;
-            for (int j = 0; j < CACHE_LINE_SIZE; j++) begin
-                //line.data[j] = data[j];
-            end
-            lines[i + 1] = line;
-        end
-        else begin
-            $error("It's illigal address");
-        end
-    endfunction
+	assign C1=(C1_write_enabled) ? c1 : 'bz;
+	assign D1=(D1_write_enabled) ? d1 : 'bz;
 
-    task execute_command_from_CPU(byte command, cache_address_t address);
-        case(command)
-            0: begin
-                $display("C1_NOP");
-                CPU_answer = C1_NOP;
-            end
-            1: begin
-                line = get_cache_line(address);
-                if (line.valid == 0) begin
-                    $error("This cache line is not valid");
-                end
-                get_data(line.data, address.offset, 8);
-                $display("%b, %b, %b, ", line.valid, line.dirty, line.tag);
-                foreach (data[i]) begin
-                    $display("data[%0d] = %0b", i, data[i]);
-                end
-                $display("C1_READ8");
-                CPU_answer = C1_RESPONSE;
-            end
-            2: begin
-                line = get_cache_line(address);
-                if (line.valid == 0) begin
-                    $error("This cache line is not valid");
-                end
-                get_data(line.data, address.offset, 16);
-                $display("%b, %b, %b, ", line.valid, line.dirty, line.tag);
-                foreach (data[i]) begin
-                    $display("data[%0d] = %0b", i, data[i]);
-                end
-                $display("C1_READ16");
-                CPU_answer = C1_RESPONSE;
-            end
-            3: begin
-                line = get_cache_line(address);
-                if (line.valid == 0) begin
-                    $error("This cache line is not valid");
-                end
-                get_data(line.data, address.offset, 32);
-                $display("%b, %b, %b, ", line.valid, line.dirty, line.tag);
-                foreach (data[i]) begin
-                    $display("data[%0d] = %0b", i, data[i]);
-                end
-                $display("C1_READ32");
-                CPU_answer = C1_RESPONSE;
-            end
-            4: begin
-               // write_into_cache_line(address);
-                $display("line.data = %b", line.data); 
-                $display("C1_INVALIDATE_LINE");
-                CPU_answer = C1_RESPONSE;
-            end
-            5: begin
-                $display("C1_WRITE8");
-                CPU_answer = C1_RESPONSE;
-            end
-            6: begin
-                $display("C1_WRITE16");
-                CPU_answer = C1_RESPONSE;
-            end
-            7: begin
-                $display("C1_WRITE32");
-                CPU_answer = C1_RESPONSE;
-            end
-        endcase
-        return -1;
-    endtask
+	assign C2=c2;
+	assign D2=d2;
 
-    task execute_command_from_MEM_CTR(byte command, cache_address_t address);
-    endtask
-endmodule
+    //I need to create int (maybe byte now idk) array for lru priority
+    // Now for debug I use int type
+    int lru_priority[CACHE_LINE_COUNT];
+
+	//Logic
+
+	initial begin // test
+		//$monitor("#%t Cache: addr_tag=%0b, addr_set=%0b, addr_offset=%0b", $time(), addr_tag, addr_set, addr_offset);
+		valid[0] = 1;
+		tag[0] = 1;
+		set[0] = 1;
+		offset[0] = 2;
+		data[0] = 835093854354743893;
+	end
+
+	always @(posedge CLK or posedge RESET) begin
+		C1_write_enabled = 0;
+		D1_write_enabled = 0;
+		//$display("%0d %0d", $time(), C1);
+		if (C1 != 0) begin
+			command_C1 = C1;
+			addr_tag = A1[CACHE_TAG_SIZE-1:0];
+			addr_set = A1[ADDR1_BUS_SIZE-1:CACHE_TAG_SIZE];
+			#1 addr_offset = A1[CACHE_OFFSET_SIZE:0];
+			#5 C1_write_enabled = 1;
+			c1 = C1_RESPONSE;
+			case (command_C1)
+				C1_READ8: begin
+					D1_write_enabled = 1;
+					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
+						|| valid[CACHE_WAY * addr_set] == 0 && tag[CACHE_WAY * addr_set + 1] != addr_tag
+						|| valid[CACHE_WAY * addr_set + 1] == 0 && tag[CACHE_WAY * addr_set] != addr_tag
+						|| valid[CACHE_WAY * addr_set] == 1 && valid[CACHE_WAY * addr_set + 1] == 1
+						&& tag[CACHE_WAY * addr_set] != addr_tag && tag[CACHE_WAY * addr_set + 1] != addr_tag) begin
+						$display("Go to memory");
+						c2 = C2_READ_LINE;
+						a2[7:0] = addr_tag;
+						a2[13:8] = addr_set;
+						#1 a2[6:0] = addr_offset;
+						valid[CACHE_WAY * addr_set] = 1;
+					end
+					else begin
+						$display("Cache hit!");
+					end
+					if (valid[CACHE_WAY * addr_set] == 1 && tag[CACHE_WAY * addr_set] == addr_tag) begin // It's working now
+						d1 = data[CACHE_WAY * addr_set][addr_offset +:8];
+                        lru_priority[CACHE_WAY * addr_set]++;
+					end
+					else if (valid[CACHE_WAY * addr_set + 1] == 1 && tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
+						d1 = data[CACHE_WAY * addr_set + 1][addr_offset +:8];
+                        lru_priority[CACHE_WAY * addr_set + 1]++;
+					end
+				end
+				C1_READ16: begin
+					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
+						|| valid[CACHE_WAY * addr_set] == 0 && tag[CACHE_WAY * addr_set + 1] != addr_tag
+						|| valid[CACHE_WAY * addr_set + 1] == 0 && tag[CACHE_WAY * addr_set] != addr_tag
+						|| valid[CACHE_WAY * addr_set] == 1 && valid[CACHE_WAY * addr_set + 1] == 1
+						&& tag[CACHE_WAY * addr_set] != addr_tag && tag[CACHE_WAY * addr_set + 1] != addr_tag) begin
+						$display("Go to memory");
+						c2 = C2_READ_LINE;
+						a2[7:0] = addr_tag;
+						a2[13:8] = addr_set;
+						#1 a2[6:0] = addr_offset;
+						valid[CACHE_WAY * addr_set] = 1;
+					end
+					else begin
+						$display("Cache hit!");
+					end
+					if (valid[CACHE_WAY * addr_set] == 1 && tag[CACHE_WAY * addr_set] == addr_tag) begin
+						d1 = data[CACHE_WAY * addr_set][addr_offset +:16];
+                        lru_priority[CACHE_WAY * addr_set]++;
+					end
+					else if (valid[CACHE_WAY * addr_set + 1] == 1 && tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
+						d1 = data[CACHE_WAY * addr_set + 1][addr_offset +:16];
+                        lru_priority[CACHE_WAY * addr_set + 1]++;
+					end
+				end
+				C1_READ32: begin
+					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
+						|| valid[CACHE_WAY * addr_set] == 0 && tag[CACHE_WAY * addr_set + 1] != addr_tag
+						|| valid[CACHE_WAY * addr_set + 1] == 0 && tag[CACHE_WAY * addr_set] != addr_tag
+						|| valid[CACHE_WAY * addr_set] == 1 && valid[CACHE_WAY * addr_set + 1] == 1
+						&& tag[CACHE_WAY * addr_set] != addr_tag && tag[CACHE_WAY * addr_set + 1] != addr_tag) begin
+						$display("Go to memory");
+						c2 = C2_READ_LINE;
+						a2[7:0] = addr_tag;
+						a2[13:8] = addr_set;
+						#1 a2[6:0] = addr_offset;
+						valid[CACHE_WAY * addr_set] = 1;
+					end
+					else begin
+						$display("Cache hit!");
+					end
+					if (valid[CACHE_WAY * addr_set] == 1 && tag[CACHE_WAY * addr_set] == addr_tag) begin
+						d1 = data[CACHE_WAY * addr_set][addr_offset +:DATA1_BUS_SIZE];
+						#1 d1 = data[CACHE_WAY * addr_set][addr_offset+16 +:DATA1_BUS_SIZE];
+                        lru_priority[CACHE_WAY * addr_set]++;
+					end
+					else if (valid[CACHE_WAY * addr_set + 1] == 1 && tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
+						d1 = data[CACHE_WAY * addr_set + 1][addr_offset +:DATA1_BUS_SIZE];
+						#1 d1 = data[CACHE_WAY * addr_set + 1][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE];
+						lru_priority[CACHE_WAY * addr_set + 1]++;
+					end
+				end
+				C1_INVALIDATE_LINE: begin
+					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
+						data[CACHE_WAY * addr_set] = 0;
+						dirty[CACHE_WAY * addr_set] = 1;
+					end	
+					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
+						data[CACHE_WAY * addr_set + 2] = 0;
+						dirty[CACHE_WAY * addr_set + 1] = 1;
+					end
+				end
+				C1_WRITE8: begin
+					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
+						data[CACHE_WAY * addr_set][addr_offset +:8] = D1;
+						dirty[CACHE_WAY * addr_set] = 1;
+					end
+					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
+						data[CACHE_WAY * addr_set + 1][addr_offset +:8] = D1;
+						dirty[CACHE_WAY * addr_set + 1] = 1;
+					end
+				end
+				C1_WRITE16: begin
+					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
+						data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
+						dirty[CACHE_WAY * addr_set] = 1;
+					end
+					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
+						data[CACHE_WAY * addr_set + 1][addr_offset +:16] = D1;
+						dirty[CACHE_WAY * addr_set + 1] = 1;
+					end
+				end
+				C1_WRITE32: begin
+					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
+						data[CACHE_WAY * addr_set][addr_offset +:DATA1_BUS_SIZE] = D1;
+						#1 data[CACHE_WAY * addr_set][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE] = D1;
+						dirty[CACHE_WAY * addr_set] = 1;
+					end
+					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
+						data[CACHE_WAY * addr_set + 1][addr_offset +:DATA1_BUS_SIZE] = D1;
+						#1 data[CACHE_WAY * addr_set + 1][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE] = D1;
+						dirty[CACHE_WAY * addr_set + 1] = 1;
+					end
+				end
+			endcase
+
+		end
+		else begin
+			c1 = C1_NOP;
+		end
+	end
+
+
+	function byte get_data_size(byte command);
+		case(command)
+			C1_READ8: return 8;
+			C1_READ16: return 16;
+			C1_READ32: return 32;
+			C1_WRITE8: return 8;
+			C1_WRITE16: return 16;
+			C1_WRITE32: return 32;
+		endcase
+		return 0;
+	endfunction
+
+endmodule : cache
