@@ -18,8 +18,10 @@ module cache_tb();
     assign A1=a1;
     assign D1=d1;
 
+    reg a = 1;
+
     initial begin
-        $monitor("time=%0d\t%0d\t%b %0d", $time(), C1, D1, $size(D1));
+        $monitor("clk=%0d time=%0d\t%0d\t%b %0d", clk, $time(), C1, D1, $size(D1));
         clk = 1;        
         c1 = 5;
         a1[7:0] = 1;

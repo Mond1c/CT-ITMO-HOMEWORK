@@ -124,11 +124,62 @@ module cache #(
 						|| valid[CACHE_WAY * addr_set] == 1 && valid[CACHE_WAY * addr_set + 1] == 1
 						&& tag[CACHE_WAY * addr_set] != addr_tag && tag[CACHE_WAY * addr_set + 1] != addr_tag) begin
 						$display("Go to memory");
-						c2 = C2_READ_LINE;
-						a2[7:0] = addr_tag;
-						a2[13:8] = addr_set;
-						#1 a2[6:0] = addr_offset;
-						valid[CACHE_WAY * addr_set] = 1;
+						if (valid[CACHE_WAY * addr_set] == 0) begin
+							c2 = C2_READ_LINE;
+							a2[7:0] = addr_tag;
+							a2[13:8] = addr_set;
+							#1 a2[6:0] = addr_offset;
+							#100 valid[CACHE_WAY * addr_set] = 1;
+							for (int i = 0; i < CACHE_LINE_SIZE; i += DATA2_BUS_SIZE) begin
+								#(i > 0 ? 1 : 0) data[CACHE_WAY * addr_set][i +:DATA2_BUS_SIZE] = D2; 
+							end
+						end
+						else if (valid[CACHE_WAY * addr_set + 1] == 1) begin
+							c2 = C2_READ_LINE;
+							a2[7:0] = addr_tag;
+							a2[13:8] = addr_set;
+							#1 a2[6:0] = addr_offset;
+							#100 valid[CACHE_WAY * addr_set + 1] = 1;
+							for (int i = 0; i < CACHE_LINE_SIZE; i++) begin
+								#(i > 0 ? 1 : 0) data[CACHE_WAY * addr_set + 1][i +:DATA2_BUS_SIZE] = D2;
+							end
+						end
+						else if (lru_priority[CACHE_WAY * addr_set] < lru_priority[CACHE_WAY * addr_set + 1]) begin
+							if (dirty[CACHE_WAY * addr_set] == 1) begin
+								c2 = C2_WRITE_LINE;
+								a2[7:0] = addr_tag;
+								a2[13:8] = addr_set;
+								#1 a2[6:0] = addr_offset;
+								#100 dirty[CACHE_WAY * addr_set] = 0;
+							end
+							c2 = C2_READ_LINE;
+							a2[7:0] = addr_tag;
+							a2[13:8] = addr_set;
+							#1 a2[6:0] = addr_offset;
+							#100 valid[CACHE_WAY * addr_set] = 1;
+							for (int i = 0; i < CACHE_LINE_SIZE; i += DATA2_BUS_SIZE) begin
+								#(i > 0 ? 1 : 0) data[CACHE_WAY * addr_set][i +:DATA2_BUS_SIZE] = D2; 
+							end
+							lru_priority[CACHE_WAY * addr_set] = 0;
+						end
+						else begin
+							if (dirty[CACHE_WAY * addr_set + 1] == 1) begin
+								c2 = C2_WRITE_LINE;
+								a2[7:0] = addr_tag;
+								a2[13:8] = addr_set;
+								#1 a2[6:0] = addr_offset;
+								#100 dirty[CACHE_WAY * addr_set + 1] = 0;
+							end
+							c2 = C2_READ_LINE;
+							a2[7:0] = addr_tag;
+							a2[13:8] = addr_set;
+							#1 a2[6:0] = addr_offset;
+							#100 valid[CACHE_WAY * addr_set + 1] = 1;
+							for (int i = 0; i < CACHE_LINE_SIZE; i++) begin
+								#(i > 0 ? 1 : 0) data[CACHE_WAY * addr_set + 1][i +:DATA2_BUS_SIZE] = D2;
+							end
+							lru_priority[CACHE_WAY * addr_set + 1] = 0;
+						end
 					end
 					else begin
 						$display("Cache hit!");
