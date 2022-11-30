@@ -38,8 +38,7 @@ public class Game {
         output.println();
         output.println("Current position");
         output.println(board);
-        output.println("Enter your move for " + board.getTurn());
-        return player.makeMove(board.getTurn());
+        return player.makeMove(board.getTurn()); // :NOTE: а что если игрок по сети
     }
 
     private int makeMove(Player player, int no, boolean log) {
@@ -47,10 +46,9 @@ public class Game {
         try {
             move = getMoveFromPlayer(player);
             while (!board.isValid(move)) {
-                output.println("You entered incorrect move. Try again.");
                 move = getMoveFromPlayer(player);
             }
-        } catch (NoSuchElementException e) { // Если игрок звкрыл сканнер Ctrl(Command)+D, то он проигрывает игру и турнир
+        } catch (RuntimeException e) { // Если игрок звкрыл сканнер Ctrl(Command)+D, то он проигрывает игру и турнир
             return 3 - no;
         }
         final GameResult result = board.makeMove(move);

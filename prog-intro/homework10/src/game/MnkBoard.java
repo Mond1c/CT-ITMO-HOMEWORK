@@ -15,7 +15,7 @@ public class MnkBoard implements Position, Board {
     private int emptyCellsCount;
     private Cell turn;
 
-    private final List<Move> winMovesO;
+    private final List<Move> winMovesO; // :NOTE: зщачем...
     private final List<Move> winMovesX;
 
     public MnkBoard(int m, int n, int k, final List<BlockedCell> blockedCells) {

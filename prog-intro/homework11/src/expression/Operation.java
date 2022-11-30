@@ -1,5 +1,6 @@
 package expression;
 
+// :NOTE: new ops
 public enum Operation {
     ADD("+"),
     SUBTRACT("-"),

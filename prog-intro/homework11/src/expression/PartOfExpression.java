@@ -1,6 +1,6 @@
 package expression;
 
-public abstract class PartOfExpression implements Expression, ToMiniString {
+public abstract class PartOfExpression implements Expression, DoubleExpression, TripleExpression {
    // public abstract boolean equals(final PartOfExpression other);
 
     protected final Operation operation;

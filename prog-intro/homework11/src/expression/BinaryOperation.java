@@ -23,7 +23,10 @@ public abstract class BinaryOperation extends PartOfExpression {
 
     @Override
     public boolean equals(Object other) {
-        return other != null && other.toString().equals(toString());
+        if (!(other instanceof BinaryOperation otherOperation)) {
+            return false;
+        }
+        return otherOperation.operation == operation && left.equals(otherOperation.left) && right.equals(otherOperation.right);
     }
 
     @Override

@@ -1,6 +1,3 @@
-`include "utility.sv"
-
-import utility::*;
 module cache_cpu #(   
     parameter MEM_SIZE          = 2097152,
     parameter CACHE_SIZE        = 16384,
@@ -44,6 +41,19 @@ module cache_cpu #(
     inout   wire[DATA2_BUS_SIZE]    D2,
     inout   wire[CTR1_BUS_SIZE]     C1,
     inout   wire[CTR2_BUS_SIZE]     C2);
+
+    typedef struct packed {
+        bit valid;
+        bit dirty;
+        reg[CACHE_TAG_SIZE] tag;
+        bit data[CACHE_LINE_SIZE];
+    } cache_line_t;
+
+    typedef struct packed {
+        reg[CACHE_TAG_SIZE] tag;
+        reg[CACHE_SET_SIZE] set;
+        reg[CACHE_OFFSET_SIZE] offset;
+    } cache_address_t;
     
     // Variables
     cache_line_t[CACHE_LINE_COUNT]  lines;
@@ -62,6 +72,8 @@ module cache_cpu #(
     bit                             addr2_status=0;
     bit                             addr1_is_ready=0;
     bit                             addr2_is_ready=0;
+    byte                            CPU_answer;
+    byte                            MEM_answer;
 
     // read from buses
     
@@ -118,20 +130,20 @@ module cache_cpu #(
         if (C2) begin
             command_C2 = C2;
         end
-    end
 
-    initial begin
-        forever begin
-            if (check_if_command_from_CPU_is_ready(command_C1)) begin
-                execute_command_from_CPU(command_C1, addr1);
-            end
-            if (check_if_command_from_MEM_CTR_is_ready(command_C2)) begin
-                execute_command_from_MEM_CTR(command_C2, addr2);
-            end 
+        if (check_if_command_from_CPU_is_ready(command_C1)) begin
+            execute_command_from_CPU(command_C1, addr1);
+        end
+        if (check_if_command_from_MEM_CTR_is_ready(command_C2)) begin
+            execute_command_from_MEM_CTR(command_C2, addr2);
         end
     end
 
-    function bit check_if_command_from_CPU_is_ready(byte command);
+    initial begin
+        // I don't know what I need to do here ???
+    end
+
+    function bit check_if_command_from_CPU_is_ready(byte command); // TODO: I think I need to simplify this function
         if (command == C1_NOP) begin
             return 1;
         end
@@ -161,7 +173,7 @@ module cache_cpu #(
         return 0;        
     endfunction
 
-    function bit check_if_command_from_MEM_CTR_is_ready(byte command);
+    function bit check_if_command_from_MEM_CTR_is_ready(byte command); // TODO: Think about this fucntion
         if (command == C2_NOP) begin
             return 1;
         end
@@ -174,7 +186,7 @@ module cache_cpu #(
         return 0;
     endfunction
 
-    function void init(); // for test
+    function void init(); // for test TODO: need to delete
         static int set_number = 0;
         for (int i = 0; i < CACHE_LINE_COUNT; i++) begin
             if (set_number % 2 == 0 && set_number != 0) begin
@@ -186,14 +198,6 @@ module cache_cpu #(
             line.data   = $random(SEED);
             lines[i]    = line;
         end
-    endfunction
-
-    function void read_data_from_bus(bit number);
-        if (number == 0) begin      
-        end
-        else begin
-        end
-        $error("Something went wrong!");
     endfunction
 
     function cache_line_t get_cache_line(cache_address_t address);
@@ -238,11 +242,11 @@ module cache_cpu #(
         end
     endfunction
 
-    function int execute_command_from_CPU(byte command, cache_address_t address);
+    task execute_command_from_CPU(byte command, cache_address_t address);
         case(command)
             0: begin
                 $display("C1_NOP");
-                return C1_NOP;
+                CPU_answer = C1_NOP;
             end
             1: begin
                 line = get_cache_line(address);
@@ -255,7 +259,7 @@ module cache_cpu #(
                     $display("data[%0d] = %0b", i, data[i]);
                 end
                 $display("C1_READ8");
-                return C1_RESPONSE;
+                CPU_answer = C1_RESPONSE;
             end
             2: begin
                 line = get_cache_line(address);
@@ -268,7 +272,7 @@ module cache_cpu #(
                     $display("data[%0d] = %0b", i, data[i]);
                 end
                 $display("C1_READ16");
-                return C1_RESPONSE;
+                CPU_answer = C1_RESPONSE;
             end
             3: begin
                 line = get_cache_line(address);
@@ -281,29 +285,30 @@ module cache_cpu #(
                     $display("data[%0d] = %0b", i, data[i]);
                 end
                 $display("C1_READ32");
-                return C1_RESPONSE;
+                CPU_answer = C1_RESPONSE;
             end
             4: begin
                // write_into_cache_line(address);
                 $display("line.data = %b", line.data); 
                 $display("C1_INVALIDATE_LINE");
-                return C1_RESPONSE;
+                CPU_answer = C1_RESPONSE;
             end
             5: begin
                 $display("C1_WRITE8");
-                return C1_RESPONSE;
+                CPU_answer = C1_RESPONSE;
             end
             6: begin
                 $display("C1_WRITE16");
-                return C1_RESPONSE;
+                CPU_answer = C1_RESPONSE;
             end
             7: begin
                 $display("C1_WRITE32");
-                return C1_RESPONSE;
+                CPU_answer = C1_RESPONSE;
             end
         endcase
-    endfunction
+        return -1;
+    endtask
 
-    function void execute_command_from_MEM_CTR(byte command, cache_address_t address);
-    endfunction
+    task execute_command_from_MEM_CTR(byte command, cache_address_t address);
+    endtask
 endmodule

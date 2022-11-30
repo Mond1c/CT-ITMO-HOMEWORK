@@ -1,16 +1,20 @@
 package game;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Human implements Player {
     private final Scanner scanner;
+    private final PrintStream output;
 
-    public Human(Scanner scanner) {
+    public Human(final Scanner scanner, final PrintStream output) {
         this.scanner = scanner;
+        this.output = output;
     }
 
     @Override
     public Move makeMove(Cell turn) {
+        output.println("Enter your move for " + turn);
         if (!scanner.hasNextInt()) {
             scanner.next(); scanner.next();
             return new Move(-1, -1, turn);

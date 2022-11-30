@@ -12,6 +12,8 @@ import java.util.function.Function;
 public final class ExpressionTest {
     public static final Selector SELECTOR = new Selector(ExpressionTest.class, "easy", "hard")
             .variant("Base", v(Expression::tester))
+            .variant("Triple", v(TripleExpression::tester))
+            .variant("Double", v(DoubleExpression::tester))
             ;
 
     private ExpressionTest() {

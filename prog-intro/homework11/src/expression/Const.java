@@ -1,11 +1,20 @@
 package expression;
 
-    public class Const extends PartOfExpression {
-    private final int value;
+public class Const extends PartOfExpression {
+    private int value;
+    private double x;
+    private final boolean isDouble;
 
     public Const(final int value) {
         super(Operation.NONE);
         this.value = value;
+        this.isDouble = false;
+    }
+
+    public Const(double x) {
+        super(Operation.NONE);
+        this.x = x;
+        this.isDouble = true;
     }
 
     @Override
@@ -15,12 +24,15 @@ package expression;
 
     @Override
     public String toMiniString() {
+        if (isDouble) {
+            return String.valueOf(x);
+        }
         return String.valueOf(value);
     }
 
     @Override
     public boolean equals(final Object other) {
-        return other != null && toString().equals(other.toString());
+        return (other instanceof Const) && (isDouble && ((Const) other).x == x || !isDouble && ((Const) other).value == value);
     }
 
     @Override
@@ -30,11 +42,24 @@ package expression;
 
     @Override
     public String toString() {
+        if (isDouble) {
+            return String.valueOf(x);
+        }
         return String.valueOf(value);
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(value);
+        return Integer.hashCode(value) + Double.hashCode(x);
+    }
+
+    @Override
+    public double evaluate(double x) {
+        return this.x;
+    }
+
+    @Override
+    public int evaluate(int x, int y, int z) {
+        return value;
     }
 }

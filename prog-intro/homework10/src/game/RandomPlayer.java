@@ -14,7 +14,7 @@ public class RandomPlayer implements Player {
     }
 
     @Override
-    public Move makeMove(Cell turn) {
+    public Move makeMove(Cell turn) { // :NOTE: ход точка?
         return new Move(random.nextInt(m), random.nextInt(n), turn);
     }
 }
