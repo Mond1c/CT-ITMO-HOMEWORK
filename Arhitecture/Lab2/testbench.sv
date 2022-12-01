@@ -21,22 +21,31 @@ module cache_tb();
     reg a = 1;
 
     initial begin
-        $monitor("clk=%0d time=%0d\t%0d\t%b %0d", clk, $time(), C1, D1, $size(D1));
-        clk = 1;        
+        clk = 0;
+       // $monitor("clk=%0d time=%0d\t%0d\t%b %0d", clk, $time(), C1, D1, $size(D1));
+        d1 = 'bz;
+        c1 = 1;
+        a1[7:0] = 1;
+        a1[13:8] = 0;
+        #1 a1[6:0] = 0;
+        c1 = 'bz;
+        #200     
         c1 = 5;
         a1[7:0] = 1;
         a1[13:8] = 0;
         d1= 8'b10101010;
         #1 a1[6:0] = 0;
         c1 = 'bz;
-        clk=0;
         #8
-        clk=1;
         d1='bz;
         c1=1;
         a1[7:0] = 1;
         a1[13:8] = 0;
         #1 a1[6:0] = 0;
         c1 = 'bz;
+    end
+
+    always #1 if ($time() < 200) begin
+        clk = ~clk;
     end
 endmodule
