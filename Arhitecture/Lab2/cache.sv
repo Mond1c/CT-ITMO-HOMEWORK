@@ -90,7 +90,6 @@ module cache #(
     int lru_priority[CACHE_LINE_COUNT];
 
 	//Logic
-
 	function void reset();
 		for (int i = 0; i < CACHE_LINE_COUNT; i++) begin
 			valid[i] = 0;
@@ -136,8 +135,8 @@ module cache #(
 			d2 = 'bz;
 			#200 valid[CACHE_WAY * addr_set] = 1;
 			tag[CACHE_WAY * addr_set] = addr_tag;
-			for (int i = 0; i < CACHE_LINE_SIZE; i += DATA2_BUS_SIZE) begin
-				#(i > 0 ? 2 : 0) data[CACHE_WAY * addr_set][i +:DATA2_BUS_SIZE] = D2; 
+            for (int i = 0; i < CACHE_LINE_SIZE; i += DATA2_BUS_SIZE) begin
+				#2 data[CACHE_WAY * addr_set][i +:DATA2_BUS_SIZE] = D2; 
 			end
 		end
 		else if (valid[CACHE_WAY * addr_set + 1] == 0) begin
@@ -193,9 +192,6 @@ module cache #(
 		if (RESET) begin
 			reset();
 		end
-		C1_write_enabled = 0;
-		D1_write_enabled = 0;
-		//$display("%0d %0d", $time(), C1);
 		$display("time=%d, C1=%d", $time(), C1);
 		if (C1 != 0 && command_is_running == 0) begin
 			command_is_running = 1;
@@ -205,7 +201,7 @@ module cache #(
 			#2 addr_offset = A1[CACHE_OFFSET_SIZE:0];
 		//	#5 C1_write_enabled = 1;
 	//	c1 = C1_RESPONSE;
-			//$display("C1= %d", command_C1);
+			$display("C1= %d", command_C1);
 			case (command_C1)
 				C1_READ8: begin
 					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
@@ -218,18 +214,23 @@ module cache #(
 					else begin
 						#12 $display("Cache hit!"); // if cache hit we need to wait 6 ticks (check task document)
 					end
+                    $display("valid = %d", valid[CACHE_WAY * addr_set]);
 					C1_write_enabled = 1;
 					D1_write_enabled = 1;
 					c1 = C1_RESPONSE;
 					$display("cache line = %b, tag = %b, addr_tag = %b", data[addr_set * CACHE_WAY], tag[CACHE_WAY * addr_set], addr_tag);
 					if (tag[CACHE_WAY * addr_set] == addr_tag) begin // It's working now
+						$display("It's ok!");
 						d1 = data[CACHE_WAY * addr_set][addr_offset +:8];
-                        lru_priority[CACHE_WAY * addr_set]++;
+						lru_priority[CACHE_WAY * addr_set]++;
 					end
 					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
 						d1 = data[CACHE_WAY * addr_set + 1][addr_offset +:8];
-                        lru_priority[CACHE_WAY * addr_set + 1]++;
+            lru_priority[CACHE_WAY * addr_set + 1]++;
 					end
+            #2 c1 = 'bz; 
+            C1_write_enabled = 0;
+            D1_write_enabled = 0;
 				end
 				C1_READ16: begin
 					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
@@ -243,6 +244,7 @@ module cache #(
 						#12 $display("Cache hit!");
 					end
 					C1_write_enabled = 1;
+                    D1_write_enabled = 1;
 					c1 = C1_RESPONSE;
 					if (valid[CACHE_WAY * addr_set] == 1 && tag[CACHE_WAY * addr_set] == addr_tag) begin
 						d1 = data[CACHE_WAY * addr_set][addr_offset +:16];
@@ -252,6 +254,9 @@ module cache #(
 						d1 = data[CACHE_WAY * addr_set + 1][addr_offset +:16];
                         lru_priority[CACHE_WAY * addr_set + 1]++;
 					end
+                    #2 c2 = 'bz; 
+                    C1_write_enabled = 0;
+                    D1_write_enabled = 0;
 				end
 				C1_READ32: begin
 					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
@@ -265,6 +270,7 @@ module cache #(
 						#12 $display("Cache hit!");
 					end
 					C1_write_enabled = 1;
+                    D1_write_enabled = 1;
 					c1 = C1_RESPONSE;
 					if (valid[CACHE_WAY * addr_set] == 1 && tag[CACHE_WAY * addr_set] == addr_tag) begin
 						d1 = data[CACHE_WAY * addr_set][addr_offset +:DATA1_BUS_SIZE];
@@ -276,49 +282,70 @@ module cache #(
 						#2 d1 = data[CACHE_WAY * addr_set + 1][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE];
 						lru_priority[CACHE_WAY * addr_set + 1]++;
 					end
+                    #2 c1 = 'bz; 
+                    C1_write_enabled = 0;
+                    D1_write_enabled = 0;
 				end
 				C1_INVALIDATE_LINE: begin
-					//$display("123");
+					$display("invalidate: tag = %b, addr_tag = %b", tag[CACHE_WAY * addr_set], addr_tag);
 					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
 						if (dirty[CACHE_WAY * addr_set] == 1) begin
 							$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = addr_tag;
 							a2[13:8] = addr_set;
-						end
+						  #200 $display("Write back finished");
+                        end
+                        C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        tag[CACHE_WAY * addr_set] = 'bz;
 						data[CACHE_WAY * addr_set] = 0;
 						dirty[CACHE_WAY * addr_set] = 0;
 						valid[CACHE_WAY * addr_set] = 0;
-					end	
+				    end	
 					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
 						if (dirty[CACHE_WAY * addr_set + 1] == 1) begin
 							$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = addr_tag;
 							a2[13:8] = addr_set;
+                            #200 $display("Write back finished");
 						end
+                        C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        tag[CACHE_WAY * addr_set + 1] = 'bz;
 						data[CACHE_WAY * addr_set + 1] = 0;
 						dirty[CACHE_WAY * addr_set + 1] = 0;
 						valid[CACHE_WAY * addr_set] = 0;
 					end
+                    #2 c1 = 'bz;
+                    C1_write_enabled = 0;
 				end
 				C1_WRITE8: begin
 					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
+                        C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
 						data[CACHE_WAY * addr_set][addr_offset +:8] = D1;
 						dirty[CACHE_WAY * addr_set] = 1;
 					end
 					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
-						data[CACHE_WAY * addr_set + 1][addr_offset +:8] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set + 1][addr_offset +:8] = D1;
 						dirty[CACHE_WAY * addr_set + 1] = 1;
 					end
 					else if (valid[CACHE_WAY * addr_set] == 0) begin
-						data[CACHE_WAY * addr_set][addr_offset +:8] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set][addr_offset +:8] = D1;
 						dirty[CACHE_WAY * addr_set] = 1;
 						valid[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = addr_tag;
 					end
 					else if (valid[CACHE_WAY * addr_set + 1] == 0) begin
-						data[CACHE_WAY * addr_set + 1][addr_offset +:8] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set + 1][addr_offset +:8] = D1;
 						dirty[CACHE_WAY * addr_set + 1] = 1;
 						valid[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = addr_tag;
@@ -335,7 +362,9 @@ module cache #(
 						a2[7:0] = addr_tag;
 						a2[13:8] = addr_set;
 						#200 data[CACHE_WAY * addr_set][addr_offset +:8] = D1;
-						dirty[CACHE_WAY * addr_set] = 1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        dirty[CACHE_WAY * addr_set] = 1;
 						valid[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = addr_tag;
 					end
@@ -351,28 +380,40 @@ module cache #(
 						a2[7:0] = addr_tag;
 						a2[13:8] = addr_set;
 						#200 data[CACHE_WAY * addr_set + 1][addr_offset +:8] = D1;
-						dirty[CACHE_WAY * addr_set + 1] = 1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        dirty[CACHE_WAY * addr_set + 1] = 1;
 						valid[CACHE_WAY * addr_set + 1] = 1;
 						tag[CACHE_WAY * addr_set + 1] = addr_tag;
 					end
+                    #2 c1 = 'bz; 
+                    C1_write_enabled = 0;
 				end
 				C1_WRITE16: begin
 					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
-						data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
 						dirty[CACHE_WAY * addr_set] = 1;
 					end
 					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
-						data[CACHE_WAY * addr_set + 1][addr_offset +:16] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set + 1][addr_offset +:16] = D1;
 						dirty[CACHE_WAY * addr_set + 1] = 1;
 					end
 					else if (valid[CACHE_WAY * addr_set] == 0) begin
-						data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
 						dirty[CACHE_WAY * addr_set] = 1;
 						valid[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = addr_tag;
 					end
 					else if (valid[CACHE_WAY * addr_set + 1] == 0) begin
-						data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
 						dirty[CACHE_WAY * addr_set] = 1;
 						valid[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = 1;
@@ -389,7 +430,9 @@ module cache #(
 						a2[7:0] = addr_tag;
 						a2[13:8] = addr_set;
 						#200 data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
-						dirty[CACHE_WAY * addr_set] = 1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        dirty[CACHE_WAY * addr_set] = 1;
 						valid[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = addr_tag;
 					end
@@ -405,31 +448,43 @@ module cache #(
 						a2[7:0] = addr_tag;
 						a2[13:8] = addr_set;
 						#200 data[CACHE_WAY * addr_set + 1][addr_offset +:16] = D1;
-						dirty[CACHE_WAY * addr_set + 1] = 1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        dirty[CACHE_WAY * addr_set + 1] = 1;
 						valid[CACHE_WAY * addr_set + 1] = 1;
 						tag[CACHE_WAY * addr_set + 1] = addr_tag;
 					end
+                    #2 c1 = 'bz;
+                    C1_write_enabled = 0;
 				end
 				C1_WRITE32: begin
 					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
-						data[CACHE_WAY * addr_set][addr_offset +:DATA1_BUS_SIZE] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set][addr_offset +:DATA1_BUS_SIZE] = D1;
 						#2 data[CACHE_WAY * addr_set][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE] = D1;
 						dirty[CACHE_WAY * addr_set] = 1;
 					end
 					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
-						data[CACHE_WAY * addr_set + 1][addr_offset +:DATA1_BUS_SIZE] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set + 1][addr_offset +:DATA1_BUS_SIZE] = D1;
 						#2 data[CACHE_WAY * addr_set + 1][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE] = D1;
 						dirty[CACHE_WAY * addr_set + 1] = 1;
 					end
 					else if (valid[CACHE_WAY * addr_set] == 0) begin
-						data[CACHE_WAY * addr_set][addr_offset +:DATA1_BUS_SIZE] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set][addr_offset +:DATA1_BUS_SIZE] = D1;
 						#2 data[CACHE_WAY * addr_set][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE] = D1;
 						valid[CACHE_WAY * addr_set] = 1;
 						dirty[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = addr_tag;
 					end
 					else if (valid[CACHE_WAY * addr_set + 1] == 0) begin
-						data[CACHE_WAY * addr_set + 1][addr_offset +:DATA1_BUS_SIZE] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        data[CACHE_WAY * addr_set + 1][addr_offset +:DATA1_BUS_SIZE] = D1;
 						#2 data[CACHE_WAY * addr_set + 1][addr_offset+DATA1_BUS_SIZE +:DATA1_BUS_SIZE] = D1;
 						valid[CACHE_WAY * addr_set + 1] = 1;
 						dirty[CACHE_WAY * addr_set + 1] = 1;
@@ -447,7 +502,9 @@ module cache #(
 						a2[7:0] = addr_tag;
 						a2[13:8] = addr_set;
 						#200 data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
-						#2 data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        #2 data[CACHE_WAY * addr_set][addr_offset +:16] = D1;
 						dirty[CACHE_WAY * addr_set] = 1;
 						valid[CACHE_WAY * addr_set] = 1;
 						tag[CACHE_WAY * addr_set] = addr_tag;
@@ -465,12 +522,16 @@ module cache #(
 						a2[7:0] = addr_tag;
 						a2[13:8] = addr_set;
 						#200 data[CACHE_WAY * addr_set + 1][addr_offset +:16] = D1;
-						#2 data[CACHE_WAY * addr_set + 1][addr_offset +:16] = D1;
+						C1_write_enabled = 1;
+                        c1 = C1_RESPONSE;
+                        #2 data[CACHE_WAY * addr_set + 1][addr_offset +:16] = D1;
 						dirty[CACHE_WAY * addr_set + 1] = 1;
 						valid[CACHE_WAY * addr_set + 1] = 1;
 						tag[CACHE_WAY * addr_set + 1] = addr_tag;
 					end
-				end
+                    #2 c1 = 'bz;
+                    C1_write_enabled = 0;
+                end
 			endcase
 			command_is_running = 0;
 		end
