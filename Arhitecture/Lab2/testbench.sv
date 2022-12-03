@@ -22,9 +22,9 @@ module cache_tb #(parameter _SEED = 225526) ();
     int N = 60;
     int K = 32;
 
-    byte a[M][K];
-    shortint b[K][N];
-    int c[M][N];
+    //byte a[M][K];
+    //shortint b[K][N];
+    //int c[M][N];
 
     byte pa = 0;
     shortint pb = 0;
@@ -33,9 +33,8 @@ module cache_tb #(parameter _SEED = 225526) ();
 
     int SEED = _SEED;
 
-    reg a = 1;
 
-    task program;
+/*    task program;
         // generate a random data set
         for (int i = 0; i < M; i++) begin
             for (int j = 0; j < K; j++) begin
@@ -55,7 +54,7 @@ module cache_tb #(parameter _SEED = 225526) ();
         // program:
         
     endtask
-
+*/
     initial begin // TODO: Так как clk - это синхрониззация то вся задержка умножается на 2
         $monitor("clk=%d, time=%0d\tC1=%d\tD1=%b", clk, $time(), C1, D1);
         #1 d1 = 'bz;
@@ -75,6 +74,7 @@ module cache_tb #(parameter _SEED = 225526) ();
         a1[13:8] = 0;
         #2 a1[6:0] = 0;
         c1 = 'bz;
+        ch.cache_info();
         /*
         clk = 1;
         d1 = 'bz;

@@ -1,0 +1,3 @@
+/Users/apple/Documents/Homework/Arhitecture/Lab4/tutorial/cmake-build-debug/CMakeFiles/tutorial.dir
+/Users/apple/Documents/Homework/Arhitecture/Lab4/tutorial/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/apple/Documents/Homework/Arhitecture/Lab4/tutorial/cmake-build-debug/CMakeFiles/rebuild_cache.dir
