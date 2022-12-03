@@ -38,16 +38,22 @@ module mem_ctr #(
 	byte						command;
 	reg[MEM_TAG_SIZE-1:0]		addr_tag;
 
-	function void init();
+	// program variables
+
+    function void random_init();
 		for (int i = 0; i < CACHE_LINE_COUNT * MEM_SEGMENT_COUNT; i++) begin
 			data[i] = $random(SEED);
 			tag[i] = i;
 		end
 	endfunction
 
+    function void init();
+        
+    endfunction
+
 	initial begin // generate random memory
 	//	$monitor("D2 = %b", D2);
-		init();
+		random_init();
 	end
 
 	always @(posedge CLK or posedge RESET) begin
