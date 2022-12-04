@@ -64,6 +64,25 @@ class Cache:
         self.mem_ctr = Memory(data)
 
     def read(self, addr_set, addr_tag, addr_offset, data_size):
+        '''if addr_set * CACHE_WAY >= len(self.tag):
+            self.cache_misses += 1
+            if self.lru[(addr_set * CACHE_WAY) % CACHE_LINE_COUNT] < self.lru[((addr_set * CACHE_WAY) % CACHE_LINE_COUNT) + 1]:
+                index = (addr_set * CACHE_WAY) % CACHE_LINE_COUNT
+                if self.dirty[index] == 1:
+                    self.mem_ctr.write_line(self.tag[index], self.data[index])
+                self.tag[index] = addr_tag
+                self.valid[index] = 1
+                self.data[index] = self.mem_ctr.read_line(addr_tag)
+                return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]
+            else:
+                self.cache_misses += 1
+                index = ((addr_set * CACHE_WAY) % CACHE_LINE_COUNT) + 1
+                if self.dirty[index] == 1:
+                    self.mem_ctr.write_line(self.tag[index], self.data[index])
+                self.tag[index] = addr_tag
+                self.valid[index] = 1
+                self.data[index] = self.mem_ctr.read_line(addr_tag)
+                return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]'''
         if self.tag[addr_set * CACHE_WAY] == addr_tag:
             self.cache_hits += 1
             return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]
@@ -88,6 +107,7 @@ class Cache:
                 self.mem_ctr.write_line(self.tag[CACHE_WAY * addr_set], self.data[addr_set * CACHE_WAY])
             self.dirty[addr_set * CACHE_WAY] = 0
             self.tag[addr_set * CACHE_WAY] = addr_tag
+            self.lru[addr_set * CACHE_WAY] = 1
             return self.data[CACHE_WAY * addr_set][addr_offset:addr_offset + data_size]
         else:
             self.cache_misses += 1
@@ -95,6 +115,7 @@ class Cache:
                 self.mem_ctr.write_line(self.tag[CACHE_WAY * addr_set + 1], self.data[CACHE_WAY * addr_set + 1])
             self.dirty[addr_set * CACHE_WAY + 1] = 0
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
+            self.lru[addr_set * CACHE_WAY + 1] = 1
             return self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + data_size]
 
     def write(self, addr_set, addr_tag, addr_offset, data):
@@ -112,7 +133,7 @@ class Cache:
             self.dirty[addr_set * CACHE_WAY] = 1
             self.tag[addr_set * CACHE_WAY] = addr_tag
             self.data[addr_set * CACHE_WAY] = self.mem_ctr.read_line(addr_tag)
-            self.data[addr_tag * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
+            self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
         elif self.valid[addr_set * CACHE_WAY + 1] == 0:
             self.cache_misses += 1
             self.valid[addr_set * CACHE_WAY + 1] = 1
@@ -128,6 +149,7 @@ class Cache:
             self.tag[addr_set * CACHE_WAY] = addr_tag
             self.data[addr_set * CACHE_WAY] = self.mem_ctr.read_line(addr_tag)
             self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
+            self.lru[addr_set * CACHE_WAY] = 1
         else:
             self.cache_misses += 1
             if self.dirty[addr_set * CACHE_WAY + 1] == 1:
@@ -136,6 +158,7 @@ class Cache:
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
             self.data[addr_set * CACHE_WAY + 1] = self.mem_ctr.read_line(addr_tag)
             self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + len(data)] = data
+            self.lru[addr_set * CACHE_WAY + 1] = 1
 
     def invalidate_line(self, addr_set, addr_tag):
         if self.tag[addr_set * CACHE_WAY] == addr_tag:
@@ -203,7 +226,7 @@ def main():
             binary_form_of_number = list(map(int, number[2::]))
             for l in range(0, 16):
                 if l < len(binary_form_of_number):
-                    data[k][n] = binary_form_of_number[l]
+                    data[129 + k][n] = binary_form_of_number[l]
                 n += 1
     # b:     values in cache_line = 128 / 16 = 8, cache_lines_count = N * K / 8 = 240 lines
     #       tag = 129..369
@@ -219,7 +242,7 @@ def main():
             binary_form_of_number = list(map(int, number[2::]))
             for l in range(0, 32):
                 if l < len(binary_form_of_number):
-                    data[m][n] = binary_form_of_number[l]
+                    data[370 + m][n] = binary_form_of_number[l]
                 n += 1
     # c:     values in cache_line = 128 / 32 = 4, cache_lines_count = M * N / 4 = 960 lines
     #       tag = 370..1330
@@ -235,26 +258,40 @@ def main():
     cache = Cache(data)
     # pa = 0
     # pc = 0
+    a = 0
+    b = 0
+    c = 0
     for y in range(M):
-        for x in range(N):
+        x = 0
+        while x < N * 32:
             pb = 0
             s = 0
-            for k in range(K):
-                if k * 8 - pa * CACHE_LINE_SIZE >= CACHE_LINE_SIZE:
+            k = 0
+            m = 0
+            while k < K * 8 and m < K * 16:
+                #  print(k * 8)
+                if a - pa * CACHE_LINE_SIZE >= 0:
                     pa += 1
-                if k * 16 - pb * CACHE_LINE_SIZE >= CACHE_LINE_SIZE:
+                if b - pb * CACHE_LINE_SIZE >= 0:
                     pb += 1
-                a = ''.join(str(i) for i in cache.read(pa, pa % 128, (k * 8) % 128, 8))
-                b = ''.join(str(i) for i in cache.read(pb, pb % 128, (k * 16) % 128, 16))
-                s += int(a, 2) + int(b, 2)
+                #print(k * 8)
+                a_n = ''.join(str(i) for i in cache.read(pa % 64, pa, a % CACHE_LINE_SIZE, 8))
+                b_n = ''.join(str(i) for i in cache.read(pb % 64, 129 + pb, b % CACHE_LINE_SIZE, 16))
+                s += int(a_n, 2) + int(b_n, 2)
+                k += 8
+                m += 16
+                a += 8
+                b += 16
             data = [0] * 32
             binary_form_of_number = list(map(int, bin(s & 2147483647)[2::]))
             for l in range(32):
                 if l < len(binary_form_of_number):
                     data[l] = binary_form_of_number[l]
-            if x * 32 - pc * CACHE_LINE_SIZE >= CACHE_LINE_SIZE:
+            if c - pc * CACHE_LINE_SIZE >= 0:
                 pc += 1
-            cache.write(pc // 128, pc % 128, x * 32, data)
+            cache.write(pc % 64, 370 + pc, c % CACHE_LINE_SIZE, data)
+            x += 32
+            c += 32
     cache.cache_info()
 
 

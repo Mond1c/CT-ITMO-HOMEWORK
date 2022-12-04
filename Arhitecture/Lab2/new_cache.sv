@@ -111,8 +111,11 @@ module new_cache #(
     endfunction
 
     task read_data_from_mem;
-        #8 $display("Cache miss!");
+        #8// $display("Cache miss!");
         cache_miss_count++;
+        if (valid[CACHE_WAY * addr_set] == 0) begin
+            c2 = C2_READ_LINE;
+            a2[7:0]
     endtask
 endmodule : new_cache
 

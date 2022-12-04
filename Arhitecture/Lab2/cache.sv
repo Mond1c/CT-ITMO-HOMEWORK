@@ -137,7 +137,7 @@ module cache #(
 	endfunction
 
 	task read_data_from_mem;
-		#8 $display("Cache miss!"); // Check task document (about 4 ticks)
+		#8 //$display("Cache miss!"); // Check task document (about 4 ticks)
 		cache_miss_count++;
         if (valid[CACHE_WAY * addr_set] == 0) begin
 			c2 = C2_READ_LINE;
@@ -203,7 +203,7 @@ module cache #(
 		if (RESET) begin
 			reset();
 		end
-		$display("time=%d, C1=%d", $time(), C1);
+		//$display("time=%d, C1=%d", $time(), C1);
 		if (C1 != 0 && command_is_running == 0) begin
 			command_is_running = 1;
 			command_C1 = C1;
@@ -212,7 +212,7 @@ module cache #(
 			#2 addr_offset = A1[CACHE_OFFSET_SIZE:0];
 		//	#5 C1_write_enabled = 1;
 	//	c1 = C1_RESPONSE;
-			$display("C1= %d", command_C1);
+			//$display("C1= %d", command_C1);
 			case (command_C1)
 				C1_READ8: begin
 					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
@@ -223,16 +223,16 @@ module cache #(
 						read_data_from_mem();
 					end
 					else begin
-						#12 $display("Cache hit!"); // if cache hit we need to wait 6 ticks (check task document)
+						#12 //$display("Cache hit!"); // if cache hit we need to wait 6 ticks (check task document)
 					    cache_hits_count++;
                     end
-                    $display("valid = %d", valid[CACHE_WAY * addr_set]);
+                   // $display("valid = %d", valid[CACHE_WAY * addr_set]);
 					C1_write_enabled = 1;
 					D1_write_enabled = 1;
 					c1 = C1_RESPONSE;
-					$display("cache line = %b, tag = %b, addr_tag = %b", data[addr_set * CACHE_WAY], tag[CACHE_WAY * addr_set], addr_tag);
+				//	$display("cache line = %b, tag = %b, addr_tag = %b", data[addr_set * CACHE_WAY], tag[CACHE_WAY * addr_set], addr_tag);
 					if (tag[CACHE_WAY * addr_set] == addr_tag) begin // It's working now
-						$display("It's ok!");
+					//	$display("It's ok!");
 						d1 = data[CACHE_WAY * addr_set][addr_offset +:8];
 						lru_priority[CACHE_WAY * addr_set]++;
 					end
@@ -253,7 +253,7 @@ module cache #(
 						read_data_from_mem();
 					end
 					else begin
-						#12 $display("Cache hit!");
+						#12 //$display("Cache hit!");
 					    cache_hits_count++;
                     end
 					C1_write_enabled = 1;
@@ -280,7 +280,7 @@ module cache #(
 						read_data_from_mem();
 					end
 					else begin
-						#12 $display("Cache hit!");
+						#12 //$display("Cache hit!");
 					    cache_hits_count++;
                     end
 					C1_write_enabled = 1;
@@ -301,11 +301,11 @@ module cache #(
                     D1_write_enabled = 0;
 				end
 				C1_INVALIDATE_LINE: begin
-					$display("invalidate: tag = %b, addr_tag = %b", tag[CACHE_WAY * addr_set], addr_tag);
+					//$display("invalidate: tag = %b, addr_tag = %b", tag[CACHE_WAY * addr_set], addr_tag);
 					if (tag[CACHE_WAY * addr_set] == addr_tag) begin
 						cache_hits_count++;
                         if (dirty[CACHE_WAY * addr_set] == 1) begin
-							$display("Write back");
+					//		$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = addr_tag;
 							a2[13:8] = addr_set;
@@ -320,7 +320,7 @@ module cache #(
 				    end	
 					else if (tag[CACHE_WAY * addr_set + 1] == addr_tag) begin
 						if (dirty[CACHE_WAY * addr_set + 1] == 1) begin
-							$display("Write back");
+						//	$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = addr_tag;
 							a2[13:8] = addr_set;
@@ -373,7 +373,7 @@ module cache #(
 					else if (lru_priority[CACHE_WAY * addr_set] < lru_priority[CACHE_WAY * addr_set + 1]) begin
 						cache_miss_count++;
                         if (dirty[CACHE_WAY * addr_set] == 1) begin
-							$display("Write back");
+						//	$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = tag[CACHE_WAY * addr_set];
 							a2[13:8] = addr_set;
@@ -392,7 +392,7 @@ module cache #(
 					else begin
                         cache_miss_count++;
 						if (dirty[CACHE_WAY * addr_set] == 1) begin
-							$display("Write back");
+						//	$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = tag[CACHE_WAY * addr_set + 1];
 							a2[13:8] = addr_set;
@@ -447,7 +447,7 @@ module cache #(
 					else if (lru_priority[CACHE_WAY * addr_set] < lru_priority[CACHE_WAY * addr_set + 1]) begin
 						cache_miss_count++;
                         if (dirty[CACHE_WAY * addr_set] == 1) begin
-							$display("Write back");
+							//$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = tag[CACHE_WAY * addr_set];
 							a2[13:8] = addr_set;
@@ -466,7 +466,7 @@ module cache #(
 					else begin
                         cache_miss_count++;
 						if (dirty[CACHE_WAY * addr_set] == 1) begin
-							$display("Write back");
+							//$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = tag[CACHE_WAY * addr_set + 1];
 							a2[13:8] = addr_set;
@@ -525,7 +525,7 @@ module cache #(
 					else if (lru_priority[CACHE_WAY * addr_set] < lru_priority[CACHE_WAY * addr_set + 1]) begin
 						cache_miss_count++;
                         if (dirty[CACHE_WAY * addr_set] == 1) begin
-							$display("Write back");
+							//$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = tag[CACHE_WAY * addr_set];
 							a2[13:8] = addr_set;
@@ -545,7 +545,7 @@ module cache #(
 					else begin
                         cache_miss_count++;
 						if (dirty[CACHE_WAY * addr_set] == 1) begin
-							$display("Write back");
+						//	$display("Write back");
 							c2 = C2_WRITE_LINE;
 							a2[7:0] = tag[CACHE_WAY * addr_set + 1];
 							a2[13:8] = addr_set;

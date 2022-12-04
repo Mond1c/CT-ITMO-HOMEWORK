@@ -21,7 +21,7 @@ module mem_ctr #(
 	inout wire[DATA2_BUS_SIZE-1:0]	D2,
 	inout wire[CTR2_BUS_SIZE-1:0]	C2
 );
-	int SEED = _SEED;
+	int SEED = 225526;
 
 	reg[DATA2_BUS_SIZE-1:0] d2;
 	reg[CTR2_BUS_SIZE-1:0]	c2;
@@ -39,6 +39,12 @@ module mem_ctr #(
 	reg[MEM_TAG_SIZE-1:0]		addr_tag;
 
 	// program variables
+    localparam M = 64;
+    localparam N = 60;
+    localparam K = 32;
+    reg[7:0] a;
+    reg[15:0] b;
+    reg[31:0] c;
 
     function void random_init();
 		for (int i = 0; i < CACHE_LINE_COUNT * MEM_SEGMENT_COUNT; i++) begin
@@ -48,7 +54,48 @@ module mem_ctr #(
 	endfunction
 
     function void init();
-        
+        int n = 0;
+        int m = 0;
+        int k = 0;
+        for (int i = 0; i < M; i++) begin
+            for (int j = 0; j < K; j++) begin
+                if (k >= 128) begin
+                    m++;
+                    k = 0;
+                end
+                a = $random(SEED);
+                data[m][k +: 8] = a;
+                k += 8;
+            end
+        end
+        n = 0;
+        k = 0;
+        m = 0;
+        for (int i = 0; i < K; i++) begin
+            for (int j = 0; j < N; j++) begin
+                if (n >= 128) begin
+                    k++;
+                    n = 0;
+                end
+                b = $random(SEED);
+                data[k][m +: 16] = b;
+                m += 16;
+            end
+        end
+        n = 0;
+        k = 0;
+        m = 0;
+        for (int i = 0; i < M; i++) begin
+            for (int j = 0; j < N; j++) begin
+                if (n >= 128) begin
+                    m++;
+                    n = 0;
+                end
+                c = $random(SEED);
+                data[m][n +: 32] = c;
+                n += 32;
+            end
+        end
     endfunction
 
 	initial begin // generate random memory
