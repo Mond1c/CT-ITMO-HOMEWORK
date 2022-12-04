@@ -23,8 +23,8 @@ module mem_ctr #(
 );
 	int SEED = 225526;
 
-	reg[DATA2_BUS_SIZE-1:0] d2;
-	reg[CTR2_BUS_SIZE-1:0]	c2;
+	reg[DATA2_BUS_SIZE-1:0] d2='bz;
+	reg[CTR2_BUS_SIZE-1:0]	c2='bz;
 
 	bit D2_write_enabled = 0;
 	bit C2_write_enabled = 0;
@@ -32,8 +32,8 @@ module mem_ctr #(
 	reg[MEM_TAG_SIZE-1:0] 		tag[CACHE_LINE_COUNT];
 	bit[CACHE_LINE_SIZE-1:0] 	data[CACHE_LINE_COUNT];
 
-	assign D2 = (D2_write_enabled == 1) ? d2 : 'bz;
-	assign C2 = (C2_write_enabled == 1) ? c2 : 'bz;
+	assign D2 =  d2;
+	assign C2 =  c2;
 
 	byte						command;
 	reg[MEM_TAG_SIZE-1:0]		addr_tag;
@@ -105,6 +105,7 @@ module mem_ctr #(
 
 	always @(posedge CLK or posedge RESET) begin
 		// /$display("%0d", C2);
+		//$display("%d", C2);
 		C2_write_enabled=0;
 		D2_write_enabled=0;
 		if (RESET) begin
@@ -112,14 +113,13 @@ module mem_ctr #(
 		end
 		else begin
 			command = C2;
+			//$display(command);
 			case(command)
-				C2_NOP: begin
-					c2 = C2_NOP;
-				end
 				C2_READ_LINE: begin // I think it's ok
 					addr_tag = A2;
 					#200 C2_write_enabled = 1; 
 					c2 = C2_RESPONSE;
+					#2 c2 = 'bz;
 					for (int i = 0; i < CACHE_LINE_COUNT; i++) begin
 						if (tag[i] == addr_tag) begin
 							D2_write_enabled = 1;
@@ -128,6 +128,7 @@ module mem_ctr #(
 							end
 						end
 					end
+				//	#2 c2 = 'bz;
 				end
 				C2_WRITE_LINE: begin
 					//c2 = C2_RESPONSE;

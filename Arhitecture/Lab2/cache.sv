@@ -144,7 +144,9 @@ module cache #(
 			a2[7:0] = addr_tag;
 			a2[13:8] = addr_set;
 			d2 = 'bz;
-			#200 valid[CACHE_WAY * addr_set] = 1;
+			#2 c2 = 'bz;
+			wait (C2 != C2_RESPONSE);
+			valid[CACHE_WAY * addr_set] = 1;
 			tag[CACHE_WAY * addr_set] = addr_tag;
             for (int i = 0; i < CACHE_LINE_SIZE; i += DATA2_BUS_SIZE) begin
 				#2 data[CACHE_WAY * addr_set][i +:DATA2_BUS_SIZE] = D2; 
@@ -203,6 +205,7 @@ module cache #(
 		if (RESET) begin
 			reset();
 		end
+
 		//$display("time=%d, C1=%d", $time(), C1);
 		if (C1 != 0 && command_is_running == 0) begin
 			command_is_running = 1;
@@ -215,6 +218,7 @@ module cache #(
 			//$display("C1= %d", command_C1);
 			case (command_C1)
 				C1_READ8: begin
+					$display("%d", $time());
 					if (valid[CACHE_WAY * addr_set] == 0 && valid[CACHE_WAY * addr_set + 1] == 0
 						|| valid[CACHE_WAY * addr_set] == 0 && tag[CACHE_WAY * addr_set + 1] != addr_tag
 						|| valid[CACHE_WAY * addr_set + 1] == 0 && tag[CACHE_WAY * addr_set] != addr_tag

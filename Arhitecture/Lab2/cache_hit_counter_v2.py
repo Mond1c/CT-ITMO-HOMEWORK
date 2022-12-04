@@ -64,40 +64,29 @@ class Cache:
         self.mem_ctr = Memory(data)
 
     def read(self, addr_set, addr_tag, addr_offset, data_size):
-        '''if addr_set * CACHE_WAY >= len(self.tag):
-            self.cache_misses += 1
-            if self.lru[(addr_set * CACHE_WAY) % CACHE_LINE_COUNT] < self.lru[((addr_set * CACHE_WAY) % CACHE_LINE_COUNT) + 1]:
-                index = (addr_set * CACHE_WAY) % CACHE_LINE_COUNT
-                if self.dirty[index] == 1:
-                    self.mem_ctr.write_line(self.tag[index], self.data[index])
-                self.tag[index] = addr_tag
-                self.valid[index] = 1
-                self.data[index] = self.mem_ctr.read_line(addr_tag)
-                return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]
-            else:
-                self.cache_misses += 1
-                index = ((addr_set * CACHE_WAY) % CACHE_LINE_COUNT) + 1
-                if self.dirty[index] == 1:
-                    self.mem_ctr.write_line(self.tag[index], self.data[index])
-                self.tag[index] = addr_tag
-                self.valid[index] = 1
-                self.data[index] = self.mem_ctr.read_line(addr_tag)
-                return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]'''
         if self.tag[addr_set * CACHE_WAY] == addr_tag:
             self.cache_hits += 1
+            self.lru[addr_set * CACHE_WAY] = 1
+            self.lru[addr_set * CACHE_WAY + 1] = 0
             return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]
         elif self.tag[addr_set * CACHE_WAY + 1] == addr_tag:
             self.cache_hits += 1
+            self.lru[addr_set * CACHE_WAY + 1] = 1;
+            self.lru[addr_set * CACHE_WAY] = 0;
             return self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + data_size]
         elif self.valid[addr_set * CACHE_WAY] == 0:
             self.cache_misses += 1
             self.valid[addr_set * CACHE_WAY] = 1
+            self.lru[addr_set * CACHE_WAY] = 1
+            self.lru[addr_set * CACHE_WAY + 1] = 0
             self.tag[addr_set * CACHE_WAY] = addr_tag
             self.data[addr_set * CACHE_WAY] = self.mem_ctr.read_line(addr_tag)
             return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]
         elif self.valid[addr_set * CACHE_WAY + 1] == 0:
             self.cache_misses += 1
             self.valid[addr_set * CACHE_WAY + 1] = 1
+            self.lru[addr_set * CACHE_WAY + 1] = 1;
+            self.lru[addr_set * CACHE_WAY] = 0;
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
             self.data[addr_set * CACHE_WAY + 1] = self.mem_ctr.read_line(addr_tag)
             return self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + data_size]
@@ -121,14 +110,20 @@ class Cache:
     def write(self, addr_set, addr_tag, addr_offset, data):
         if self.tag[addr_set * CACHE_WAY] == addr_tag:
             self.cache_hits += 1
+            self.lru[addr_set * CACHE_WAY] = 1
+            self.lru[addr_set * CACHE_WAY + 1] = 0
             self.dirty[addr_set * CACHE_WAY] = 1
             self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
         elif self.tag[addr_set * CACHE_WAY + 1] == addr_tag:
             self.cache_hits += 1
+            self.lru[addr_set * CACHE_WAY + 1] = 1
+            self.lru[addr_set * CACHE_WAY] = 0
             self.dirty[addr_set * CACHE_WAY + 1] = 1
             self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + len(data)] = data
         elif self.valid[addr_set * CACHE_WAY] == 0:
             self.cache_misses += 1
+            self.lru[addr_set * CACHE_WAY] = 1
+            self.lru[addr_set * CACHE_WAY + 1] = 0
             self.valid[addr_set * CACHE_WAY] = 1
             self.dirty[addr_set * CACHE_WAY] = 1
             self.tag[addr_set * CACHE_WAY] = addr_tag
@@ -136,6 +131,8 @@ class Cache:
             self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
         elif self.valid[addr_set * CACHE_WAY + 1] == 0:
             self.cache_misses += 1
+            self.lru[addr_set * CACHE_WAY + 1] = 1
+            self.lru[addr_set * CACHE_WAY] = 0
             self.valid[addr_set * CACHE_WAY + 1] = 1
             self.dirty[addr_set * CACHE_WAY + 1] = 1
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
@@ -168,6 +165,7 @@ class Cache:
             self.dirty[addr_set * CACHE_WAY] = 0
             self.tag[addr_set * CACHE_WAY] = 0
             self.data[addr_set * CACHE_WAY] = 0
+            self.lru[addr_set * CACHE_WAY] = 0
         elif self.tag[addr_set * CACHE_WAY + 1] == addr_tag:
             if self.dirty[addr_set * CACHE_WAY + 1] == 1:
                 self.mem_ctr.write_line(addr_tag, self.data[addr_set * CACHE_WAY])
@@ -175,6 +173,7 @@ class Cache:
             self.dirty[addr_set * CACHE_WAY] = 0
             self.tag[addr_set * CACHE_WAY] = 0
             self.data[addr_set * CACHE_WAY] = 0
+            self.lru[addr_set * CACHE_WAY + 1] = 0
 
     def cache_info(self):
         requests = self.cache_hits + self.cache_misses
