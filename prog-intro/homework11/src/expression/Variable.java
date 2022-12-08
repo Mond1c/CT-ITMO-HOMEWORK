@@ -4,8 +4,13 @@ public class Variable extends PartOfExpression {
     private final String name;
 
     public Variable(final String name) {
-        super(Operation.NONE);
+        super("");
         this.name = name;
+    }
+
+    @Override
+    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
+        return name;
     }
 
     @Override
@@ -21,12 +26,7 @@ public class Variable extends PartOfExpression {
 
     @Override
     public String toMiniString() {
-        return name;
-    }
-
-    @Override
-    public String getMiniString(boolean isBracketsNeeded) {
-        return toMiniString();
+        return buildMiniString(false, false);
     }
 
     @Override

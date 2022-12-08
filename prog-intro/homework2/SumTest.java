@@ -85,7 +85,37 @@ public final class SumTest {
         return Named.of(prefix + inner.getName(), t -> outer.apply(inner.getValue().apply(t)));
     }
 
-    /* package-private */ static final Named<Function<String, Runner>> RUNNER = Named.of("", Runner::args);
+    private static final Named<Supplier<SumTester<Long>>> LONG = Named.of("Long", () -> new SumTester<>(
+            Long::sum, n -> n, (r, max) -> r.getRandom().nextLong() % max, TO_STRING,
+            10L, 100L, (long) Integer.MAX_VALUE, Long.MAX_VALUE)
+            .test(12345678901234567L, " +12345678901234567 ")
+            .test(0L, " +12345678901234567 -12345678901234567")
+            .test(0L, " +12345678901234567 -12345678901234567"));
+    
+    private static final Named<Supplier<SumTester<Double>>> DOUBLE = Named.of("Double", () -> new SumTester<>(
+            Double::sum, n -> (double) n, (r, max) -> (r.getRandom().nextDouble() - 0.5) * 2 * max,
+            approximate(Double::parseDouble, 1e-10),
+            10.0, 0.01, 1e20, 1e100, Double.MAX_VALUE / 10000)
+            .test(5, "2.5 2.5")
+            .test(0, "1e100 -1e100")
+            .testT(2e100, "1.5e100 0.5e100"));
+
+    private static final Named<Supplier<SumTester<Float>>> FLOAT = Named.of("Float", () -> new SumTester<>(
+            Float::sum, n -> (float) n, (r, max) -> (r.getRandom().nextFloat() - 0.5f) * 2 * max,
+            approximate(Float::parseFloat, 1e-5),
+            10.0f, 0.01f, 1e20f, Float.MAX_VALUE / 10000)
+            .test(5, "2.5 2.5")
+            .test(0, "1e10 -1e10")
+            .testT(2e10f, "1.5e10 0.5E10"));
+
+    private static BiConsumer<Number, String> approximate(final Function<String, Number> parser, final double precision) {
+        return (expected, out) ->
+                Asserts.assertEquals("Sum", expected.doubleValue(), parser.apply(out).doubleValue(), precision);
+    }
+
+    /* package-private */ static final Named<Function<String, Runner>> RUNNER =
+            Named.of("", Runner.packages("", "sum")::args);
+
     public static final Selector SELECTOR = selector(SumTest.class, RUNNER);
 
     private SumTest() {
@@ -96,6 +126,9 @@ public final class SumTest {
         return new Selector(owner)
                 .variant("Base",            variant(runner, BASE, plain()))
                 .variant("Octal",           variant(runner, BASE, local(octal(Integer::toOctalString))))
+                .variant("LongOctal",       variant(runner, LONG, local(octal(Long::toOctalString))))
+                .variant("Float",           variant(runner, FLOAT, plain()))
+                .variant("Double",          variant(runner, DOUBLE, plain()))
                 ;
     }
 

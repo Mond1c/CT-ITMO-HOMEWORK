@@ -6,13 +6,13 @@ public class Const extends PartOfExpression {
     private final boolean isDouble;
 
     public Const(final int value) {
-        super(Operation.NONE);
+        super("");
         this.value = value;
         this.isDouble = false;
     }
 
     public Const(double x) {
-        super(Operation.NONE);
+        super("");
         this.x = x;
         this.isDouble = true;
     }
@@ -36,16 +36,8 @@ public class Const extends PartOfExpression {
     }
 
     @Override
-    public String getMiniString(boolean isBracketsNeeded) {
-        return toMiniString();
-    }
-
-    @Override
     public String toString() {
-        if (isDouble) {
-            return String.valueOf(x);
-        }
-        return String.valueOf(value);
+        return buildMiniString(false, false);
     }
 
     @Override
@@ -61,5 +53,13 @@ public class Const extends PartOfExpression {
     @Override
     public int evaluate(int x, int y, int z) {
         return value;
+    }
+
+    @Override
+    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
+        if (isDouble) {
+            return String.valueOf(x);
+        }
+        return String.valueOf(value);
     }
 }

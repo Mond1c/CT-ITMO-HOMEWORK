@@ -2,7 +2,7 @@ package expression;
 
 public class Divide extends BinaryOperation {
     public Divide(PartOfExpression left, PartOfExpression right) {
-        super(left, right, Operation.DIVIDE);
+        super(left, right, "/");
     }
 
     @Override
@@ -18,5 +18,12 @@ public class Divide extends BinaryOperation {
     @Override
     public int evaluate(int x, int y, int z) {
         return left.evaluate(x, y, z) / right.evaluate(x, y, z);
+    }
+
+    @Override
+    public String toMiniString() {
+        return buildMiniString(left.getClass() == Add.class || left.getClass() == Subtract.class,
+                right.getClass() == Add.class || right.getClass() == Subtract.class
+                        || right.getClass() == Divide.class || right.getClass() == Multiply.class);
     }
 }

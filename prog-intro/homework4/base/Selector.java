@@ -70,13 +70,13 @@ public final class Selector {
             vars.add(0, "Base");
         }
 
-        vars.forEach(var -> check(variants.containsKey(var.toLowerCase()), "Unknown variant '%s'", var));
+        vars.forEach(variant -> check(variants.containsKey(variant.toLowerCase()), "Unknown variant '%s'", variant));
 
         final Map<String, String> properties = modes.isEmpty()
                                                ? Map.of("variant", String.join("+", vars))
                                                : Map.of("variant", String.join("+", vars), "mode", mode);
-        final TestCounter counter = new TestCounter(owner, 0, properties);
-        vars.forEach(var -> counter.scope("Testing " + var, () -> variants.get(var.toLowerCase()).accept(counter)));
+        final TestCounter counter = new TestCounter(owner, modeNo, properties);
+        vars.forEach(variant -> counter.scope("Testing " + variant, () -> variants.get(variant.toLowerCase()).accept(counter)));
         counter.printStatus();
     }
 
