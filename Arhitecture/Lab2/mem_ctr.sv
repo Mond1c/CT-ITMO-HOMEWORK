@@ -21,10 +21,10 @@ module mem_ctr #(
 	inout wire[DATA2_BUS_SIZE-1:0]	D2,
 	inout wire[CTR2_BUS_SIZE-1:0]	C2
 );
-	int SEED = _SEED;
+	int SEED = 225526;
 
-	reg[DATA2_BUS_SIZE-1:0] d2;
-	reg[CTR2_BUS_SIZE-1:0]	c2;
+	reg[DATA2_BUS_SIZE-1:0] d2='bz;
+	reg[CTR2_BUS_SIZE-1:0]	c2='bz;
 
 	bit D2_write_enabled = 0;
 	bit C2_write_enabled = 0;
@@ -32,26 +32,80 @@ module mem_ctr #(
 	reg[MEM_TAG_SIZE-1:0] 		tag[CACHE_LINE_COUNT];
 	bit[CACHE_LINE_SIZE-1:0] 	data[CACHE_LINE_COUNT];
 
-	assign D2 = (D2_write_enabled == 1) ? d2 : 'bz;
-	assign C2 = (C2_write_enabled == 1) ? c2 : 'bz;
+	assign D2 =  d2;
+	assign C2 =  c2;
 
 	byte						command;
 	reg[MEM_TAG_SIZE-1:0]		addr_tag;
 
-	function void init();
+	// program variables
+    localparam M = 64;
+    localparam N = 60;
+    localparam K = 32;
+    reg[7:0] a;
+    reg[15:0] b;
+    reg[31:0] c;
+
+    function void random_init();
 		for (int i = 0; i < CACHE_LINE_COUNT * MEM_SEGMENT_COUNT; i++) begin
 			data[i] = $random(SEED);
 			tag[i] = i;
 		end
 	endfunction
 
+    function void init();
+        int n = 0;
+        int m = 0;
+        int k = 0;
+        for (int i = 0; i < M; i++) begin
+            for (int j = 0; j < K; j++) begin
+                if (k >= 128) begin
+                    m++;
+                    k = 0;
+                end
+                a = $random(SEED);
+                data[m][k +: 8] = a;
+                k += 8;
+            end
+        end
+        n = 0;
+        k = 0;
+        m = 0;
+        for (int i = 0; i < K; i++) begin
+            for (int j = 0; j < N; j++) begin
+                if (n >= 128) begin
+                    k++;
+                    n = 0;
+                end
+                b = $random(SEED);
+                data[k][m +: 16] = b;
+                m += 16;
+            end
+        end
+        n = 0;
+        k = 0;
+        m = 0;
+        for (int i = 0; i < M; i++) begin
+            for (int j = 0; j < N; j++) begin
+                if (n >= 128) begin
+                    m++;
+                    n = 0;
+                end
+                c = $random(SEED);
+                data[m][n +: 32] = c;
+                n += 32;
+            end
+        end
+    endfunction
+
 	initial begin // generate random memory
 	//	$monitor("D2 = %b", D2);
-		init();
+		random_init();
 	end
 
 	always @(posedge CLK or posedge RESET) begin
 		// /$display("%0d", C2);
+		//$display("%d", C2);
 		C2_write_enabled=0;
 		D2_write_enabled=0;
 		if (RESET) begin
@@ -59,14 +113,13 @@ module mem_ctr #(
 		end
 		else begin
 			command = C2;
+			//$display(command);
 			case(command)
-				C2_NOP: begin
-					c2 = C2_NOP;
-				end
 				C2_READ_LINE: begin // I think it's ok
 					addr_tag = A2;
 					#200 C2_write_enabled = 1; 
 					c2 = C2_RESPONSE;
+					#2 c2 = 'bz;
 					for (int i = 0; i < CACHE_LINE_COUNT; i++) begin
 						if (tag[i] == addr_tag) begin
 							D2_write_enabled = 1;
@@ -75,6 +128,7 @@ module mem_ctr #(
 							end
 						end
 					end
+				//	#2 c2 = 'bz;
 				end
 				C2_WRITE_LINE: begin
 					//c2 = C2_RESPONSE;

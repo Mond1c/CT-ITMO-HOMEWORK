@@ -15,9 +15,6 @@ public class MnkBoard implements Position, Board {
     private int emptyCellsCount;
     private Cell turn;
 
-    private final List<Move> winMovesO; // :NOTE: зщачем...
-    private final List<Move> winMovesX;
-
     public MnkBoard(int m, int n, int k, final List<BlockedCell> blockedCells) {
         this.m = m;
         this.n = n;
@@ -25,8 +22,6 @@ public class MnkBoard implements Position, Board {
         this.emptyCellsCount = m * n - blockedCells.size();
         this.turn = Cell.X;
         this.field = new Cell[m][n];
-        this.winMovesO = new ArrayList<>();
-        this.winMovesX = new ArrayList<>();
         for (Cell[] row : field) {
             Arrays.fill(row, Cell.E);
         }
@@ -104,11 +99,6 @@ public class MnkBoard implements Position, Board {
             final Move move = new Move(row, column, turn);
             if (!isValid(move)) {
                 return count;
-            }
-            if (turn == Cell.O) {
-                winMovesO.add(move); // :NOTE: непонятно зачем
-            } else {
-                winMovesX.add(move);
             }
         }
         return count;
