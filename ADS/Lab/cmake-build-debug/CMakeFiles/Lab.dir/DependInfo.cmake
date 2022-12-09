@@ -8,7 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/mond1c/Documents/Homework/ADS/Lab/1H.cpp" "CMakeFiles/Lab.dir/1H.cpp.o" "gcc" "CMakeFiles/Lab.dir/1H.cpp.o.d"
+  "C:/Users/pocht/Desktop/Homework/ADS/Lab/1H.cpp" "CMakeFiles/Lab.dir/1H.cpp.obj" "gcc" "CMakeFiles/Lab.dir/1H.cpp.obj.d"
+  "C:/Users/pocht/Desktop/Homework/ADS/Lab/4C.cpp" "CMakeFiles/Lab.dir/4C.cpp.obj" "gcc" "CMakeFiles/Lab.dir/4C.cpp.obj.d"
+  "C:/Users/pocht/Desktop/Homework/ADS/Lab/4I.cpp" "CMakeFiles/Lab.dir/4I.cpp.obj" "gcc" "CMakeFiles/Lab.dir/4I.cpp.obj.d"
   )
 
 # Targets to which this target links.

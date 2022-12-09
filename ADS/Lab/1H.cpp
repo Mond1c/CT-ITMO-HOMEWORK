@@ -3,7 +3,7 @@ using namespace std;
 
 
 
-int main() {
+int main1H() {
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     int n, m, k;
