@@ -1,16 +1,14 @@
 package game;
 
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.NoSuchElementException;
 
-public class Game {
+public class MnkGame {
     private final MnkBoard board;
     private final PrintStream output;
     private final Player player1;
     private final Player player2;
 
-    public Game(final MnkBoard board, final Player player1, final Player player2, final PrintStream output) {
+    public MnkGame(final MnkBoard board, final Player player1, final Player player2, final PrintStream output) {
         this.board = board;
         this.player1 = player1;
         this.player2 = player2;
