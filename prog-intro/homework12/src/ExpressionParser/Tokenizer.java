@@ -40,5 +40,8 @@ public class Tokenizer {
                 builder.append(character);
             }
         }
+        if (!builder.isEmpty()) {
+            tokens.add(builder.toString());
+        }
     }
 }

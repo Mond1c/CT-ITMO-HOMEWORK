@@ -35,6 +35,8 @@ module cache #(
     ) (
     input                           CLK,
     input                           RESET,
+    input                           C_DUMP,
+    input                           M_DUMP,
     input wire[ADDR1_BUS_SIZE-1:0]  A1,
     inout wire[DATA1_BUS_SIZE-1:0]  D1,
     inout wire[CTR1_BUS_SIZE-1:0]   C1
@@ -49,9 +51,9 @@ module cache #(
     bit dirty[CACHE_LINE_COUNT];
     reg[CACHE_LINE_SIZE-1:0] data[CACHE_LINE_COUNT];
     reg[CACHE_TAG_SIZE-1:0] tag[CACHE_LINE_COUNT];
-    int lru[CACHE_LINE_COUNT];
+    bit lru[CACHE_LINE_COUNT];
 
-    mem_ctr mem(CLK, RESET, A2, D2, C2);
+    mem_ctr mem(CLK, RESET, M_DUMP, A2, D2, C2);
 
     reg[ADDR1_BUS_SIZE-1:0] a1='bz;
     reg[DATA1_BUS_SIZE-1:0] d1='bz;
@@ -78,8 +80,27 @@ module cache #(
     int count = 0;
 
     initial begin
-    //    $monitor("%b", D2);
+        //$monitor("%b", D1);
+        $dumpfile("dump_cache.vcd");
+        $dumpvars(0, cache);
+        $dumpoff;
     end
+
+    function int get_count();
+        return count;
+    endfunction
+
+    function void reset();
+        cache_hits_count = 0;
+        cache_miss_count = 0;
+        for (int i = 0; i < CACHE_LINE_COUNT; i++) begin
+            valid[i] = 0;
+            dirty[i] = 0;
+            data[i] = 0;
+            tag[i] = 'bz;
+            lru[i] = 0;
+        end
+    endfunction
 
     function void cache_info();
     $display(count);
@@ -126,12 +147,14 @@ module cache #(
     task write_data_in_mem(int index);
         c2 = C2_WRITE_LINE;
         a2 = {addr_tag, addr_set};
-        #2 c2 = 'bz;
         //wait (C2 == C2_RESPONSE);
         for (int i = 0; i < CACHE_LINE_SIZE; i += DATA2_BUS_SIZE) begin
             #(i > 0 ? one_tick : 0) d2 = data[index][i +: DATA2_BUS_SIZE];
         end
-        #200 dirty[index] = 0;
+        #200 c2 = 'bz;
+        dirty[index] = 0;
+        d2 = 'bz;
+        count += 100;
     endtask
 
     task read_data_from_mem(int index);
@@ -140,18 +163,19 @@ module cache #(
         end
         c2 = C2_READ_LINE;
         a2 = {addr_tag, addr_set};
-        #200 c2 = 'bz;
+        #200 c2 = 'bz; 
       //  $display("ok");
         //wait (C2 == C2_RESPONSE);
-        //$display("ok");
+      //  $display("ok");
         valid[index] = 1;
         tag[index] = addr_tag;
         lru[index] = 1;
         for (int i = 0; i < CACHE_LINE_SIZE; i += DATA2_BUS_SIZE) begin
-        //   $display("d2 = %b", D2);
-            #(i > 0 ? one_tick : 0) data[index][i +: DATA2_BUS_SIZE] = d2;
+           // $display("Take = %0b", D2);
+            #(i > 0 ? one_tick : 0) data[index][i +: DATA2_BUS_SIZE] = D2;
         end
-       // $display("%b", data[index]);
+        count += 100;
+        //$display("%b", data[index]);
     endtask
 
 
@@ -164,6 +188,7 @@ module cache #(
             lru[index2] = 0;
             cache_hits_count++;
             c1 = C1_RESPONSE;
+            count += 6;
             #12 read_from_cache(index1, data_size);
         end
         else if (valid[index2] == 1 && tag[index2] == addr_tag) begin
@@ -171,9 +196,11 @@ module cache #(
             lru[index1] = 0;
             cache_hits_count++;
             c1 = C1_RESPONSE;
+            count += 6;
             #12 read_from_cache(index2, data_size);
         end
         else if (valid[index1] == 0) begin
+            count += 4;
             cache_miss_count++;
             lru[index2] = 0;
             #8 read_data_from_mem(index1);
@@ -182,6 +209,7 @@ module cache #(
             read_from_cache(index1, data_size);
         end
         else if (valid[index2] == 0) begin
+            count += 4;
             cache_miss_count++;
             lru[index1] = 0;
             #8 read_data_from_mem(index2);
@@ -189,12 +217,14 @@ module cache #(
             read_from_cache(index2, data_size);
         end
         else if (lru[index1] < lru[index2]) begin
+            count += 4;
             cache_miss_count++;
             #8 read_data_from_mem(index1);
             c1 = C1_RESPONSE;
             read_from_cache(index1, data_size);
         end
         else begin
+            count += 4;
             cache_miss_count++;
             #8 read_data_from_mem(index2);
             c1 = C1_RESPONSE;
@@ -207,44 +237,50 @@ module cache #(
         index1 = addr_set * CACHE_WAY;
         index2 = addr_set * CACHE_WAY + 1;
         if (valid[index1] == 1 && tag[index1] == addr_tag) begin
+            count += 6;
             #12 cache_hits_count++;
             lru[index1] = 1;
             lru[index2] = 0;
             c1 = C1_RESPONSE;
-            write_in_cache(index1, data_size);
+            #1 write_in_cache(index1, data_size);
         end
         else if (valid[index2] == 1 && tag[index2] == addr_tag) begin
+            count += 6;
             #12 cache_hits_count++;
             lru[index2] = 1;
             lru[index1] = 0;
             c1 = C1_RESPONSE;
-            write_in_cache(index2, data_size);
+            #1 write_in_cache(index2, data_size);
         end
         else if (valid[index1] == 0) begin
+            count += 4;
             #8 cache_miss_count++;
             lru[index2] = 0;
             read_data_from_mem(index1);
             c1 = C1_RESPONSE;
-            write_in_cache(index1, data_size);
+            #1 write_in_cache(index1, data_size);
         end
         else if (valid[index2] == 0) begin
+            count += 4;
             #8 cache_miss_count++;
             lru[index1] = 0;
             read_data_from_mem(index2);
             c1 = C1_RESPONSE;
-            write_in_cache(index2, data_size);
+            #1 write_in_cache(index2, data_size);
         end
         else if (lru[index1] < lru[index2]) begin
+            count += 4;
             #8 cache_miss_count++;
             read_data_from_mem(index1);
             c1 = C1_RESPONSE;
-            write_in_cache(index1, data_size);
+            #1 write_in_cache(index1, data_size);
         end
         else begin
+            count += 4;
             #8 cache_miss_count++;
             read_data_from_mem(index2);
             c1 = C1_RESPONSE;
-            write_in_cache(index2, data_size);
+            #1 write_in_cache(index2, data_size);
         end
         #2 c1 = 'bz;
     endtask
@@ -273,15 +309,21 @@ module cache #(
         #2 c1 = 'bz;
     endtask
 
-    always @(posedge CLK or posedge RESET) begin
+    always @(posedge CLK or posedge RESET or posedge C_DUMP) begin
      //y(123);
      //$display("%d", C1);
      //$display(C1);
+        if (RESET) begin
+            reset();
+        end
+        if (C_DUMP) begin
+            $dumpon;
+        end
+        else begin
+            $dumpoff;
+        end 
         if (C1 != 0) begin
             cur_command = C1;
-            if (C1 == 1) begin
-                count++;
-            end
          //   $display("time = %d C1 = %d", $time(), C1);
             addr_tag = A1[7:0];
             addr_set = A1[13:8];

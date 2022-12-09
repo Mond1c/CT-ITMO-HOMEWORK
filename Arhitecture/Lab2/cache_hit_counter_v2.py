@@ -62,41 +62,52 @@ class Cache:
         self.tag = [0] * CACHE_LINE_COUNT
         self.lru = [0] * CACHE_LINE_COUNT
         self.mem_ctr = Memory(data)
+        self.ticks = 0
 
     def read(self, addr_set, addr_tag, addr_offset, data_size):
         if self.tag[addr_set * CACHE_WAY] == addr_tag:
+            self.ticks += 6
             self.cache_hits += 1
             self.lru[addr_set * CACHE_WAY] = 1
             self.lru[addr_set * CACHE_WAY + 1] = 0
             return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]
         elif self.tag[addr_set * CACHE_WAY + 1] == addr_tag:
+            self.ticks += 6
             self.cache_hits += 1
-            self.lru[addr_set * CACHE_WAY + 1] = 1;
-            self.lru[addr_set * CACHE_WAY] = 0;
+            self.lru[addr_set * CACHE_WAY + 1] = 1
+            self.lru[addr_set * CACHE_WAY] = 0
             return self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + data_size]
         elif self.valid[addr_set * CACHE_WAY] == 0:
+            self.ticks += 4
             self.cache_misses += 1
             self.valid[addr_set * CACHE_WAY] = 1
             self.lru[addr_set * CACHE_WAY] = 1
             self.lru[addr_set * CACHE_WAY + 1] = 0
             self.tag[addr_set * CACHE_WAY] = addr_tag
             self.data[addr_set * CACHE_WAY] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100
             return self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + data_size]
         elif self.valid[addr_set * CACHE_WAY + 1] == 0:
+            self.ticks += 4
             self.cache_misses += 1
             self.valid[addr_set * CACHE_WAY + 1] = 1
-            self.lru[addr_set * CACHE_WAY + 1] = 1;
-            self.lru[addr_set * CACHE_WAY] = 0;
+            self.lru[addr_set * CACHE_WAY + 1] = 1
+            self.lru[addr_set * CACHE_WAY] = 0
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
             self.data[addr_set * CACHE_WAY + 1] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100
             return self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + data_size]
         elif self.lru[addr_set * CACHE_WAY] < self.lru[addr_set * CACHE_WAY + 1]:
+            self.ticks += 4
             self.cache_misses += 1
             if self.dirty[addr_set * CACHE_WAY] == 1:
+                self.ticks += 100
                 self.mem_ctr.write_line(self.tag[CACHE_WAY * addr_set], self.data[addr_set * CACHE_WAY])
             self.dirty[addr_set * CACHE_WAY] = 0
             self.tag[addr_set * CACHE_WAY] = addr_tag
             self.lru[addr_set * CACHE_WAY] = 1
+            self.data[addr_set * CACHE_WAY] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100
             return self.data[CACHE_WAY * addr_set][addr_offset:addr_offset + data_size]
         else:
             self.cache_misses += 1
@@ -105,22 +116,27 @@ class Cache:
             self.dirty[addr_set * CACHE_WAY + 1] = 0
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
             self.lru[addr_set * CACHE_WAY + 1] = 1
+            self.data[addr_set * CACHE_WAY + 1] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100
             return self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + data_size]
 
     def write(self, addr_set, addr_tag, addr_offset, data):
         if self.tag[addr_set * CACHE_WAY] == addr_tag:
+            self.ticks += 6
             self.cache_hits += 1
             self.lru[addr_set * CACHE_WAY] = 1
             self.lru[addr_set * CACHE_WAY + 1] = 0
             self.dirty[addr_set * CACHE_WAY] = 1
             self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
         elif self.tag[addr_set * CACHE_WAY + 1] == addr_tag:
+            self.ticks += 6
             self.cache_hits += 1
             self.lru[addr_set * CACHE_WAY + 1] = 1
             self.lru[addr_set * CACHE_WAY] = 0
             self.dirty[addr_set * CACHE_WAY + 1] = 1
             self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + len(data)] = data
         elif self.valid[addr_set * CACHE_WAY] == 0:
+            self.ticks += 4
             self.cache_misses += 1
             self.lru[addr_set * CACHE_WAY] = 1
             self.lru[addr_set * CACHE_WAY + 1] = 0
@@ -128,8 +144,10 @@ class Cache:
             self.dirty[addr_set * CACHE_WAY] = 1
             self.tag[addr_set * CACHE_WAY] = addr_tag
             self.data[addr_set * CACHE_WAY] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100 + len(data) % DATA1_BUS_SIZE
             self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
         elif self.valid[addr_set * CACHE_WAY + 1] == 0:
+            self.ticks += 4
             self.cache_misses += 1
             self.lru[addr_set * CACHE_WAY + 1] = 1
             self.lru[addr_set * CACHE_WAY] = 0
@@ -137,23 +155,30 @@ class Cache:
             self.dirty[addr_set * CACHE_WAY + 1] = 1
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
             self.data[addr_set * CACHE_WAY + 1] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100 + len(data) % DATA1_BUS_SIZE
             self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + len(data)] = data
         elif self.lru[addr_set * CACHE_WAY] < self.lru[addr_set * CACHE_WAY + 1]:
+            self.ticks += 4
             self.cache_misses += 1
             if self.dirty[addr_set * CACHE_WAY] == 1:
+                self.ticks += 100
                 self.mem_ctr.write_line(self.tag[CACHE_WAY * addr_set], self.data[CACHE_WAY * addr_set])
             self.dirty[addr_set * CACHE_WAY] = 1
             self.tag[addr_set * CACHE_WAY] = addr_tag
             self.data[addr_set * CACHE_WAY] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100 + len(data) % DATA1_BUS_SIZE
             self.data[addr_set * CACHE_WAY][addr_offset:addr_offset + len(data)] = data
             self.lru[addr_set * CACHE_WAY] = 1
         else:
             self.cache_misses += 1
+            self.ticks += 4
             if self.dirty[addr_set * CACHE_WAY + 1] == 1:
                 self.mem_ctr.write_line(self.tag[CACHE_WAY * addr_set + 1], self.data[CACHE_WAY * addr_set + 1])
+                self.ticks += 100
             self.dirty[addr_set * CACHE_WAY + 1] = 1
             self.tag[addr_set * CACHE_WAY + 1] = addr_tag
             self.data[addr_set * CACHE_WAY + 1] = self.mem_ctr.read_line(addr_tag)
+            self.ticks += 100 + len(data) % DATA1_BUS_SIZE
             self.data[addr_set * CACHE_WAY + 1][addr_offset:addr_offset + len(data)] = data
             self.lru[addr_set * CACHE_WAY + 1] = 1
 
@@ -260,6 +285,7 @@ def main():
     a = 0
     b = 0
     c = 0
+    ticks = 0
     for y in range(M):
         x = 0
         while x < N * 32:
@@ -274,13 +300,14 @@ def main():
                 if b - pb * CACHE_LINE_SIZE >= 0:
                     pb += 1
                 #print(k * 8)
-                a_n = ''.join(str(i) for i in cache.read(pa % 64, pa, a % CACHE_LINE_SIZE, 8))
-                b_n = ''.join(str(i) for i in cache.read(pb % 64, 129 + pb, b % CACHE_LINE_SIZE, 16))
+                a_n = ''.join(str(i) for i in cache.read(pa % CACHE_SETS_COUNT, pa, a % CACHE_LINE_SIZE, 8))
+                b_n = ''.join(str(i) for i in cache.read(pb % CACHE_SETS_COUNT, 129 + pb, b % CACHE_LINE_SIZE, 16))
                 s += int(a_n, 2) + int(b_n, 2)
                 k += 8
                 m += 16
                 a += 8
                 b += 16
+                ticks += 5 + 1 + 1 + 1
             data = [0] * 32
             binary_form_of_number = list(map(int, bin(s & 2147483647)[2::]))
             for l in range(32):
@@ -288,10 +315,13 @@ def main():
                     data[l] = binary_form_of_number[l]
             if c - pc * CACHE_LINE_SIZE >= 0:
                 pc += 1
-            cache.write(pc % 64, 370 + pc, c % CACHE_LINE_SIZE, data)
+            cache.write(pc % CACHE_SETS_COUNT, 370 + pc, c % CACHE_LINE_SIZE, data)
             x += 32
             c += 32
+            ticks += 2
+        ticks += 1
     cache.cache_info()
+    print("Tick count =", cache.ticks + ticks)
 
 
 if __name__ == "__main__":
