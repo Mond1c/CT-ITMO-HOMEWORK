@@ -14,7 +14,7 @@ public class Variable extends PartOfExpression {
     }
 
     @Override
-    public int evaluate(int value) {
+    public int evaluate(final int value) {
         return value;
     }
 
@@ -40,7 +40,7 @@ public class Variable extends PartOfExpression {
     }
 
     @Override
-    public double evaluate(double x) {
+    public double evaluate(final double x) {
         return x;
     }
 
