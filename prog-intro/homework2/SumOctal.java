@@ -16,7 +16,7 @@ public class SumOctal {
                 if (characterIsWhitespace || i == arg.length() - 1) {
                     if (!stringBuilder.isEmpty()) {
                         if (isOctal) {
-                            sum += Integer.parseInt(stringBuilder.toString(), 8);
+                            sum += Integer.parseUnsignedInt(stringBuilder.toString(), 8);
                         } else {
                             sum += Integer.parseInt(stringBuilder.toString());
                         }

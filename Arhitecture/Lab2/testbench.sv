@@ -6,8 +6,10 @@ module cache_tb #(parameter _SEED = 225526) ();
     input wire[13:0]    A1;
     inout wire[15:0]    D1;
     inout wire[2:0]     C1;
+    input wire C_DUMP;
+    input wire M_DUMP;
 
-    cache ch(CLK, RESET, A1, D1, C1);
+    cache ch(CLK, RESET, C_DUMP, M_DUMP, A1, D1, C1);
     int SEED = _SEED;
 
     reg clk=0;
@@ -54,7 +56,7 @@ module cache_tb #(parameter _SEED = 225526) ();
                     a1[13:8] = pa % 64;
                     #2 a1[6:0] = a_i % 128;
                     c1 = 'bz;
-                    count += 1;
+                    //count += 1;
                     #300
                     a = D1[7:0];
                     #2 d1 = 'bz;
@@ -70,6 +72,7 @@ module cache_tb #(parameter _SEED = 225526) ();
                     s += a + b;
                     a_i += 8;
                     b_i += 16;
+                    count += 5 + 1 + 1 + 1;
                 end
                 c = s;
                 if (c_i - pc * 128 >= 0) begin
@@ -82,10 +85,12 @@ module cache_tb #(parameter _SEED = 225526) ();
                  c1 = 'bz;
                  #300
                  c_i += 32;
+                 count += 2;
             end
+            count += 1;
             $display("$d", y);
         end
-        $display(count);
+        $display(count + ch.get_count());
         ch.cache_info();
         $finish;
     end

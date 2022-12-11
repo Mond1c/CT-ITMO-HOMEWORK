@@ -42,17 +42,21 @@ public class Tournament {
     }
 
     private void playGame(int player1Number, int player2Number) {
+        output.println("Player " + player1Number + " plays with player " + player2Number );
         final int result =
-                new Game(new MnkBoard(m, n, k, blockedCells), players.get(player1Number),
+                new MnkGame(new MnkBoard(m, n, k, blockedCells), players.get(player1Number),
                         players.get(player2Number), output).play(false);
         switch (result) {
             case 1 -> {
+                output.println("Player " + player1Number + " won");
                 points[player1Number] += WIN_POINTS;
             }
             case 2 -> {
-                points[player2Number] += WIN_POINTS;
+                output.println("Player " + player2Number + " won");
+                points[player2Number] += WIN_POINTS;;
             }
             case 0 -> {
+                output.println("Players " + player1Number + " and " + player2Number + " had draw.");
                 points[player1Number] += DRAW_POINTS;
                 points[player2Number] += DRAW_POINTS;
             }

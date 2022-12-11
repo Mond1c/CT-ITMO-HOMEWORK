@@ -1,6 +1,7 @@
 package game;
 
 import java.io.PrintStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Human implements Player {
@@ -16,7 +17,8 @@ public class Human implements Player {
     public Move makeMove(Cell turn) {
         output.println("Enter your move for " + turn);
         if (!scanner.hasNextInt()) {
-            scanner.next(); scanner.next();
+            scanner.next();
+            scanner.next();
             return new Move(-1, -1, turn);
         }
         final int row = scanner.nextInt();
