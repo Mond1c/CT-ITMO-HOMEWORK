@@ -8,6 +8,10 @@ public abstract class PartOfExpression implements Expression, DoubleExpression, 
         this.operation = operation;
     }
 
+    @Override
+    public int evaluate(final int x) {
+        return evaluate(x, 0, 0);
+    }
 
     protected abstract String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide);
 }

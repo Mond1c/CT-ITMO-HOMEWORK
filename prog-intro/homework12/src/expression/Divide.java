@@ -5,18 +5,17 @@ public class Divide extends BinaryOperation {
         super(left, right, "/");
     }
 
-    @Override
-    public int evaluate(int value) {
-        return left.evaluate(value) / right.evaluate(value);
+    public Divide() {
+        super("/");
     }
 
     @Override
-    public double evaluate(double x) {
+    public double evaluate(final double x) {
         return left.evaluate(x) / right.evaluate(x);
     }
 
     @Override
-    public int evaluate(int x, int y, int z) {
+    public int evaluate(final int x, final int y, final int z) {
         return left.evaluate(x, y, z) / right.evaluate(x, y, z);
     }
 

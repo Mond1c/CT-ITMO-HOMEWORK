@@ -1,14 +1,31 @@
 package expression;
 
 public abstract class BinaryOperation extends PartOfExpression {
-    protected final PartOfExpression left;
-    protected final PartOfExpression right;
+    protected PartOfExpression left;
+    protected PartOfExpression right;
 
 
     public BinaryOperation(final PartOfExpression left, final PartOfExpression right, final String operation) {
         super(operation);
         this.left = left;
         this.right = right;
+    }
+
+    public BinaryOperation(final String operation) {
+        super(operation);
+    }
+
+    public void setLeft(final PartOfExpression left) {
+        this.left = left;
+    }
+
+    public void setRight(final PartOfExpression right) {
+        this.right = right;
+    }
+
+    @Override
+    public int evaluate(final int x) {
+        return this.evaluate(x, 0, 0);
     }
 
     @Override
@@ -20,7 +37,6 @@ public abstract class BinaryOperation extends PartOfExpression {
     public String toMiniString() {
         return buildMiniString(false, false);
     }
-
 
     @Override
     protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {

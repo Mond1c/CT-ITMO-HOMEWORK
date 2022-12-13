@@ -23,14 +23,6 @@ public class Const extends PartOfExpression {
     }
 
     @Override
-    public String toMiniString() {
-        if (isDouble) {
-            return String.valueOf(x);
-        }
-        return String.valueOf(value);
-    }
-
-    @Override
     public boolean equals(final Object other) {
         return (other instanceof Const) && (isDouble && ((Const) other).x == x || !isDouble && ((Const) other).value == value);
     }

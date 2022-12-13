@@ -13,20 +13,11 @@ public class Variable extends PartOfExpression {
         return name;
     }
 
-    @Override
-    public int evaluate(int value) {
-        return value;
-    }
 
     @Override
     public boolean equals(final Object other) {
         // :NOTE: toString
         return (other instanceof Variable) && ((Variable) other).name.equals(name);
-    }
-
-    @Override
-    public String toMiniString() {
-        return buildMiniString(false, false);
     }
 
     @Override
@@ -40,7 +31,7 @@ public class Variable extends PartOfExpression {
     }
 
     @Override
-    public double evaluate(double x) {
+    public double evaluate(final double x) {
         return x;
     }
 

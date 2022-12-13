@@ -5,9 +5,8 @@ public class Subtract extends  BinaryOperation {
         super(left, right, "-");
     }
 
-    @Override
-    public int evaluate(final int value) {
-        return left.evaluate(value) - right.evaluate(value);
+    public Subtract() {
+        super("-");
     }
 
     @Override

@@ -12,11 +12,6 @@ public abstract class BinaryOperation extends PartOfExpression {
     }
 
     @Override
-    public int evaluate(final int x) {
-        return this.evaluate(x, 0, 0);
-    }
-
-    @Override
     public String toString() {
         return "(" + left.toString() + " " + operation + " " + right.toString() + ")";
     }

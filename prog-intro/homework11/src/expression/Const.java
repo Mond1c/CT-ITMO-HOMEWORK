@@ -16,18 +16,9 @@ public class Const extends PartOfExpression {
         this.x = x;
         this.isDouble = true;
     }
-
-    @Override
-    public int evaluate(final int value) {
-        return this.value;
-    }
-
     @Override
     public String toMiniString() {
-        if (isDouble) {
-            return String.valueOf(x);
-        }
-        return String.valueOf(value);
+        return buildMiniString(false, false);
     }
 
     @Override

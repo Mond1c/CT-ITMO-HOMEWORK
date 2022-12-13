@@ -6,11 +6,6 @@ public class Multiply extends BinaryOperation {
     }
 
     @Override
-    public int evaluate(final int value) {
-        return left.evaluate(value) * right.evaluate(value);
-    }
-
-    @Override
     public double evaluate(final double x) {
         return left.evaluate(x) * right.evaluate(x);
     }

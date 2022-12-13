@@ -1,4 +1,4 @@
-package ExpressionParser;
+package expression.parser;
 
 import java.util.ArrayList;
 
