@@ -2,12 +2,13 @@ package expression;
 
 public class Divide extends BinaryOperation {
     public Divide(PartOfExpression left, PartOfExpression right) {
-        super(left, right, "/");
+        super(left, right, "/", 1);
     }
 
-    public Divide() {
-        super("/");
+    public Divide(PartOfExpression left, PartOfExpression right, final int additionalPriority) {
+        super(left, right, "/", additionalPriority + 1);
     }
+
 
     @Override
     public double evaluate(final double x) {

@@ -1,14 +1,9 @@
 package expression;
 
 public class Multiply extends BinaryOperation {
-    public Multiply(PartOfExpression left, PartOfExpression right) {
-        super(left, right, "*");
+    public Multiply(PartOfExpression left, PartOfExpression right, final int additionPriority) {
+        super(left, right, "*", additionPriority + 1);
     }
-
-    public Multiply() {
-        super("*");
-    }
-
     @Override
     public int evaluate(final int value) {
         return left.evaluate(value) * right.evaluate(value);

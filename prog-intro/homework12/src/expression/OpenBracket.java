@@ -1,7 +1,5 @@
 package expression;
 
-import expression.PartOfExpression;
-
 public class OpenBracket extends BinaryOperation {
     public OpenBracket() {
         super("(");
@@ -10,16 +8,6 @@ public class OpenBracket extends BinaryOperation {
     @Override
     public double evaluate(double x) {
         return 0;
-    }
-
-    @Override
-    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
-        return null;
-    }
-
-    @Override
-    public String toMiniString() {
-        return super.toMiniString();
     }
 
     @Override

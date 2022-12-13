@@ -1,13 +1,10 @@
 package expression;
 
 public class Subtract extends  BinaryOperation {
-    public Subtract(final PartOfExpression left, final PartOfExpression right) {
-        super(left, right, "-");
+    public Subtract(final PartOfExpression left, final PartOfExpression right, final int additionalPriority) {
+        super(left, right, "-", additionalPriority);
     }
 
-    public Subtract() {
-        super("-");
-    }
 
     @Override
     public double evaluate(final double x) {

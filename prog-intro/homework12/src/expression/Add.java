@@ -2,11 +2,11 @@ package expression;
 
 public class Add extends BinaryOperation {
     public Add(PartOfExpression left, PartOfExpression right) {
-        super(left, right, "+");
+        super(left, right, "+", 0);
     }
 
-    public Add() {
-        super("+");
+    public Add(PartOfExpression left, PartOfExpression right, final int additionPriority) {
+        super(left, right, "+", additionPriority);
     }
 
     @Override

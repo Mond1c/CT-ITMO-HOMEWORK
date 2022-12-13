@@ -16,10 +16,6 @@ public class Const extends PartOfExpression {
         this.x = x;
         this.isDouble = true;
     }
-    @Override
-    public String toMiniString() {
-        return buildMiniString(false, false);
-    }
 
     @Override
     public boolean equals(final Object other) {
@@ -28,7 +24,10 @@ public class Const extends PartOfExpression {
 
     @Override
     public String toString() {
-        return buildMiniString(false, false);
+        if (isDouble) {
+            return String.valueOf(x);
+        }
+        return String.valueOf(value);
     }
 
     @Override
@@ -44,13 +43,5 @@ public class Const extends PartOfExpression {
     @Override
     public int evaluate(int x, int y, int z) {
         return value;
-    }
-
-    @Override
-    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
-        if (isDouble) {
-            return String.valueOf(x);
-        }
-        return String.valueOf(value);
     }
 }

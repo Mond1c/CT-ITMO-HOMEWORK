@@ -3,7 +3,7 @@ package expression.parser;
 public class Main {
     public static void main(String[] args) {
         ExpressionParser parser = new ExpressionParser();
-        System.out.println(parser.parse("z + y - -30 + (z + x)").toMiniString());
+        System.out.println(parser.parse("(0 + 0)").toMiniString());
         // z + y - -30 + z + x
     }
 }

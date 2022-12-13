@@ -13,5 +13,7 @@ public abstract class PartOfExpression implements Expression, DoubleExpression, 
         return evaluate(x, 0, 0);
     }
 
-    protected abstract String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide);
+    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
+        return toString();
+    }
 }

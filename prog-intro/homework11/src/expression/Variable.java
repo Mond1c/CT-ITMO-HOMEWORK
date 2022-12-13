@@ -9,26 +9,10 @@ public class Variable extends PartOfExpression {
     }
 
     @Override
-    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
-        return name;
-    }
-
-    @Override
-    public int evaluate(final int value) {
-        return value;
-    }
-
-    @Override
     public boolean equals(final Object other) {
         // :NOTE: toString
         return (other instanceof Variable) && ((Variable) other).name.equals(name);
     }
-
-    @Override
-    public String toMiniString() {
-        return buildMiniString(false, false);
-    }
-
     @Override
     public String toString() {
         return name;

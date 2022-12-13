@@ -3,26 +3,15 @@ package expression;
 public abstract class BinaryOperation extends PartOfExpression {
     protected PartOfExpression left;
     protected PartOfExpression right;
+    protected final int priority;
 
 
-    public BinaryOperation(final PartOfExpression left, final PartOfExpression right, final String operation) {
+    public BinaryOperation(final PartOfExpression left, final PartOfExpression right, final String operation, final int priority) {
         super(operation);
         this.left = left;
         this.right = right;
+        this.priority = priority;
     }
-
-    public BinaryOperation(final String operation) {
-        super(operation);
-    }
-
-    public void setLeft(final PartOfExpression left) {
-        this.left = left;
-    }
-
-    public void setRight(final PartOfExpression right) {
-        this.right = right;
-    }
-
     @Override
     public int evaluate(final int x) {
         return this.evaluate(x, 0, 0);
@@ -41,19 +30,19 @@ public abstract class BinaryOperation extends PartOfExpression {
     @Override
     protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
         final StringBuilder builder = new StringBuilder();
-        if (isBracketsNeededOnTheLeftSide) {
+        if (left instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
             builder.append('(');
         }
         builder.append(left.toMiniString());
-        if (isBracketsNeededOnTheLeftSide) {
+        if (left instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
             builder.append(')');
         }
         builder.append(" ").append(operation).append(" ");
-        if (isBracketsNeededOnTheRightSide) {
+        if (right instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
             builder.append('(');
         }
         builder.append(right.toMiniString());
-        if (isBracketsNeededOnTheRightSide) {
+        if (right instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
             builder.append(')');
         }
         return builder.toString();
