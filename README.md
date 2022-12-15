@@ -1,4 +1,4 @@
-# Homework's from CT (Computer technology) ITMO (Mikhail Kornilovich)
+# Homework's  from CT (Computer technology) ITMO (Mikhail Kornilovich)
 #### Subjects:
 - prog-intro (term1)
 - Algorithms and data structures (term1, term2, term3 term4)
