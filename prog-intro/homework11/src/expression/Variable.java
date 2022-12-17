@@ -1,10 +1,9 @@
 package expression;
 
-public class Variable extends PartOfExpression {
+public class Variable implements PartOfExpression {
     private final String name;
 
     public Variable(final String name) {
-        super("");
         this.name = name;
     }
 
@@ -36,5 +35,10 @@ public class Variable extends PartOfExpression {
             case "z" -> z;
             default -> throw new IllegalArgumentException("Variable name is not available");
         };
+    }
+
+    @Override
+    public int evaluate(int x) {
+        return x;
     }
 }
