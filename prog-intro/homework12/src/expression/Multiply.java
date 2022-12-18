@@ -1,27 +1,18 @@
 package expression;
 
 public class Multiply extends BinaryOperation {
-    public Multiply(PartOfExpression left, PartOfExpression right, final int additionPriority) {
-        super(left, right, "*", additionPriority + 1);
+    public Multiply(PartOfExpression left, PartOfExpression right) {
+        super(left, right, "*", 1);
     }
+
+
     @Override
-    public int evaluate(final int value) {
-        return left.evaluate(value) * right.evaluate(value);
+    protected int calculate(int x, int y) {
+        return x * y;
     }
 
     @Override
-    public double evaluate(final double x) {
-        return left.evaluate(x) * right.evaluate(x);
-    }
-
-    @Override
-    public int evaluate(final int x, final int y, final int z) {
-        return left.evaluate(x, y, z) * right.evaluate(x, y, z);
-    }
-
-    @Override
-    public String toMiniString() {
-        return buildMiniString(left.getClass() == Add.class || left.getClass() == Subtract.class,
-                right.getClass() == Add.class || right.getClass() == Subtract.class || right.getClass() == Divide.class);
+    protected double calculate(double x, double y) {
+        return x * y;
     }
 }

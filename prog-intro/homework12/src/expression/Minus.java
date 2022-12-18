@@ -1,29 +1,23 @@
 package expression;
 
-public class Minus extends PartOfExpression {
+public class Minus implements PartOfExpression {
     private final PartOfExpression partOfExpression;
 
     public Minus(final PartOfExpression partOfExpression) {
-        super("");
         this.partOfExpression = partOfExpression;
     }
 
     @Override
-    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
-        if (partOfExpression instanceof Const || partOfExpression instanceof Variable || partOfExpression instanceof Minus) {
-            return "- " + partOfExpression.toMiniString();
-        }
+    public String toString() {
         return "-(" + partOfExpression.toMiniString() + ")";
     }
 
     @Override
     public String toMiniString() {
-        return buildMiniString(false, false);
-    }
-
-    @Override
-    public String toString() {
-        return "-(" + partOfExpression.toString() + ")";
+        if (partOfExpression instanceof Const || partOfExpression instanceof Variable) {
+            return "- " + partOfExpression.toMiniString();
+        }
+        return "-(" + partOfExpression.toMiniString() + ")";
     }
 
     @Override
@@ -33,6 +27,11 @@ public class Minus extends PartOfExpression {
 
     @Override
     public double evaluate(double x) {
+        return -partOfExpression.evaluate(x);
+    }
+
+    @Override
+    public int evaluate(int x) {
         return -partOfExpression.evaluate(x);
     }
 }

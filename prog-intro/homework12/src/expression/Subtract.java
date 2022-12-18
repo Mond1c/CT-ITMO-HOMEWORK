@@ -1,24 +1,17 @@
 package expression;
 
 public class Subtract extends  BinaryOperation {
-    public Subtract(final PartOfExpression left, final PartOfExpression right, final int additionalPriority) {
-        super(left, right, "-", additionalPriority);
-    }
-
-
-    @Override
-    public double evaluate(final double x) {
-        return left.evaluate(x) - right.evaluate(x);
+    public Subtract(final PartOfExpression left, final PartOfExpression right) {
+        super(left, right, "-", 0);
     }
 
     @Override
-    public int evaluate(final int x, final int y, final int z) {
-        // :NOTE: copypaste
-        return left.evaluate(x, y, z) - right.evaluate(x, y, z);
+    protected int calculate(int x, int y) {
+        return x - y;
     }
 
     @Override
-    public String toMiniString() {
-        return buildMiniString(false, right.getClass() == Add.class || right.getClass() == Subtract.class);
+    protected double calculate(double x, double y) {
+        return x - y;
     }
 }

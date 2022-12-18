@@ -1,20 +1,35 @@
 package expression;
 
-public abstract class BinaryOperation extends PartOfExpression {
-    protected PartOfExpression left;
-    protected PartOfExpression right;
-    protected final int priority;
+public abstract class BinaryOperation implements PartOfExpression {
+    protected final PartOfExpression left;
+    protected final PartOfExpression right;
+    private final int priority;
+    private final String operation;
 
 
     public BinaryOperation(final PartOfExpression left, final PartOfExpression right, final String operation, final int priority) {
-        super(operation);
+        this.operation = operation;
+        this.priority = priority;
         this.left = left;
         this.right = right;
-        this.priority = priority;
     }
+
+    protected abstract int calculate(int x, int y);
+    protected abstract double calculate(double x, double y);
+
     @Override
-    public int evaluate(final int x) {
-        return this.evaluate(x, 0, 0);
+    public int evaluate(int x) {
+        return calculate(left.evaluate(x), right.evaluate(x));
+    }
+
+    @Override
+    public double evaluate(double x) {
+        return calculate(left.evaluate(x), right.evaluate(x));
+    }
+
+    @Override
+    public int evaluate(int x, int y, int z) {
+        return calculate(left.evaluate(x, y, z), right.evaluate(x, y, z));
     }
 
     @Override
@@ -22,27 +37,41 @@ public abstract class BinaryOperation extends PartOfExpression {
         return "(" + left.toString() + " " + operation + " " + right.toString() + ")";
     }
 
-    @Override
-    public String toMiniString() {
-        return buildMiniString(false, false);
+    private boolean isBracketNeededForLeftSide() {
+        if (!(left instanceof BinaryOperation binaryOperation)) {
+            return false;
+        }
+        return binaryOperation.priority < priority;
+    }
+
+    private boolean isBracketNeededForRightSide() {
+        if (!(right instanceof BinaryOperation binaryOperation)) {
+            return false;
+        }
+        return binaryOperation.priority < priority
+                || (this instanceof Divide)
+                || (this instanceof Subtract || right instanceof Divide)
+                && priority == binaryOperation.priority;
     }
 
     @Override
-    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
+    public String toMiniString() {
         final StringBuilder builder = new StringBuilder();
-        if (left instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
+        boolean leftSide = isBracketNeededForLeftSide();
+        boolean rightSide = isBracketNeededForRightSide();
+        if (leftSide) {
             builder.append('(');
         }
         builder.append(left.toMiniString());
-        if (left instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
+        if (leftSide) {
             builder.append(')');
         }
-        builder.append(" ").append(operation).append(" ");
-        if (right instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
+        builder.append(' ').append(operation).append(' ');
+        if (rightSide) {
             builder.append('(');
         }
         builder.append(right.toMiniString());
-        if (right instanceof BinaryOperation binaryOperation && binaryOperation.priority > priority) {
+        if (rightSide) {
             builder.append(')');
         }
         return builder.toString();

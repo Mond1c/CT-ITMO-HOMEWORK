@@ -1,25 +1,17 @@
 package expression;
 
-public class Variable extends PartOfExpression {
+public class Variable implements PartOfExpression {
     private final String name;
 
     public Variable(final String name) {
-        super("");
         this.name = name;
     }
-
-    @Override
-    protected String buildMiniString(boolean isBracketsNeededOnTheLeftSide, boolean isBracketsNeededOnTheRightSide) {
-        return name;
-    }
-
 
     @Override
     public boolean equals(final Object other) {
         // :NOTE: toString
         return (other instanceof Variable) && ((Variable) other).name.equals(name);
     }
-
     @Override
     public String toString() {
         return name;
@@ -43,5 +35,10 @@ public class Variable extends PartOfExpression {
             case "z" -> z;
             default -> throw new IllegalArgumentException("Variable name is not available");
         };
+    }
+
+    @Override
+    public int evaluate(int x) {
+        return x;
     }
 }
