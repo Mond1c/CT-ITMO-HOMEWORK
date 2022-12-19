@@ -17,6 +17,10 @@ public abstract class BinaryOperation implements PartOfExpression {
     protected abstract int calculate(int x, int y);
     protected abstract double calculate(double x, double y);
 
+    public int getPriority() {
+        return priority;
+    }
+
     @Override
     public int evaluate(int x) {
         return calculate(left.evaluate(x), right.evaluate(x));
@@ -50,7 +54,7 @@ public abstract class BinaryOperation implements PartOfExpression {
         }
         return binaryOperation.priority < priority
                 || (this instanceof Divide)
-                || (this instanceof Subtract || right instanceof Divide)
+                || (this instanceof Set || this instanceof Clear || this instanceof Subtract || right instanceof Divide)
                 && priority == binaryOperation.priority;
     }
 

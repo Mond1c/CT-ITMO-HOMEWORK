@@ -174,7 +174,7 @@ public class ParserTestSet<E extends ToMiniString, C> {
                     .collect(Collectors.joining(", "));
             try {
                 final C actual = kind.kind.evaluate(expression, variables, kind.kind.fromInts(values));
-                counter.checkTrue(answer.isRight(), "Error expected for %s", args);
+                counter.checkTrue(answer.isRight(), "Error expected for f(%s)%n\twhere f=%s%n\tyour f=%s", args, unparsed, expression);
                 final String message = String.format("f(%s)%n\twhere f=%s%n\tyour f=%s", args, unparsed, expression);
                 Asserts.assertEquals(message, answer.getRight(), actual);
             } catch (final Exception e) {

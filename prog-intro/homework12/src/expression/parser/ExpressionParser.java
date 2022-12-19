@@ -2,120 +2,100 @@ package expression.parser;
 
 import expression.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ExpressionParser extends BaseParser implements TripleParser {
 
-    private static final String OPERATIONS = "+-*/";
-    private boolean unaryMinus = false;
-    private boolean minus = false;
-    private int brackets = 0;
-    private List<PartOfExpression> values;
-    private List<String> operations;
-
-
     @Override
-    public TripleExpression parse(final String expression) {
-        System.out.println(expression);
-        values = new ArrayList<>();
-        operations = new ArrayList<>();
-        List<Integer> openBracketStarts = new ArrayList<>();
-        brackets = 0;
+    public TripleExpression parse(String expression) {
         setSource(new StringSource(expression));
-        while (!eof()) {
-            skipWhitespaces();
-            if (take('(')) {
-                brackets++;
-                openBracketStarts.add(operations.size());
-                if (minus) {
-                    unaryMinus = true;
-                    minus = false;
-                }
-                continue;
-            } else if (take(')')) {
-                final int op = openBracketStarts.remove(openBracketStarts.size() - 1);
-                while (operations.size() != op) {
-                    makeOperation();
-                }
-                brackets--;
-            } else if (take('-')) {
-                if (between('0', '9')) {
-                    minus = true;
-                    unaryMinus = false;
-                    values.add(parseConst());
-                } else {
-                    operations.add("-");
-                }
-            } else if (between('0', '9')) {
-                values.add(parseConst());
-            } else if (isVariable(ch)) {
-                values.add(parseVariable(ch));
-                take();
-            } else if (OPERATIONS.indexOf(ch) != -1) {
-                operations.add(String.valueOf(ch));
-                take();
-                unaryMinus = false;
-                minus = false;
-                continue;
+        return parseExpression();
+    }
+
+    private PartOfExpression parseStart()  {
+        skipWhitespaces();
+        if (take('(')) {
+            PartOfExpression part = parseExpression();
+            expect(')');
+            return part;
+        } else if (between('0', '9')){
+            return parseConst(false);
+        } else if (between('x', 'z')) {
+            return parseVariable();
+        } else if (take('-')) {
+            if (between('0', '9')) {
+                return parseConst(true);
             }
-            unaryMinus = false;
-            minus = false;
+            return new Minus(parseStart());
+        } else if (take('c')) {
+            expect("ount");
+            return new Count(parseStart());
         }
-        while (!operations.isEmpty()) {
-            makeOperation();
+        throw new AssertionError("Invalid character in expression");
+    }
+
+    private PartOfExpression parseExpression() {
+        skipWhitespaces();
+        PartOfExpression part = parseSetClear();
+        skipWhitespaces();
+        return part;
+    }
+
+    private PartOfExpression parseSetClear() {
+        skipWhitespaces();
+        PartOfExpression part = parsePlusMinus();
+        skipWhitespaces();
+        while (true) {
+            if (test('s')) {
+                expect("set");
+                part = parseOperation("set", part, parsePlusMinus());
+            } else if (test('c') ) {
+                expect("clear");
+                part = parseOperation("clear", part, parsePlusMinus());
+            } else {
+                break;
+            }
         }
-        return values.get(0);
+        return part;
+    }
+
+    private PartOfExpression parsePlusMinus() {
+        skipWhitespaces();
+        PartOfExpression part = parseMulDiv();
+        skipWhitespaces();
+        while (test('+') || test('-')) { // z + y - -30 + (z + x)
+            part = parseOperation(String.valueOf(take()), part, parseMulDiv());
+        }
+        return part;
+    }
+
+    private PartOfExpression parseMulDiv() {
+        skipWhitespaces();
+        PartOfExpression part = parseStart();
+        skipWhitespaces();
+        while (test('*') || test('/')) {
+            part = parseOperation(String.valueOf(take()), part, parseStart());
+            skipWhitespaces();
+        }
+        return part;
     }
 
 
-    private void makeOperation() {
-        final PartOfExpression right = values.remove(values.size() - 1);
-        final PartOfExpression left = values.remove(values.size() - 1);
-        final BinaryOperation operation = parseOperation(
-                operations.remove(operations.size() - 1), left, right);
-        values.add(operation);
+    private Variable parseVariable() {
+        return new Variable(String.valueOf(take()));
     }
 
-    private static boolean isVariable(char ch) {
-        return ch == 'x' || ch == 'y' || ch == 'z';
-    }
-
-    private PartOfExpression parseConst() {
+    private Const parseConst(boolean minus) {
         final StringBuilder builder = new StringBuilder();
         if (minus) {
             builder.append('-');
         }
-        boolean isDouble = false;
-        while (between('0', '9')|| ch == '.') {
-            if (ch == '.') {
-                isDouble = true;
-            }
-            builder.append(ch);
-            take();
+        while (between('0', '9')) {
+            builder.append(take());
         }
-        final Const value;
-        if (isDouble) {
-            value = new Const(Double.parseDouble(builder.toString()));
-        } else {
-            value = new Const(Integer.parseInt(builder.toString()));
-        }
-        if (unaryMinus) {
-            unaryMinus = false;
-            return new Minus(value);
-        }
-        return value;
-    }
-
-    private static PartOfExpression parseVariable(char name) {
-        final Variable variable;
-        switch (name) {
-            case 'x' -> variable = new Variable("x");
-            case 'y' -> variable = new Variable("y");
-            case 'z' -> variable = new Variable("z");
-            default -> throw new AssertionError("Invalid variable name!");
-        }
-        return variable;
+        return new Const(Integer.parseInt(builder.toString()));
     }
 
     private static BinaryOperation parseOperation(final String operation, final PartOfExpression left, final PartOfExpression right) {
@@ -124,11 +104,12 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             case "-" -> new Subtract(left, right);
             case "*" -> new Multiply(left, right);
             case "/" -> new Divide(left, right);
-            default -> throw new AssertionError("Invalid operation!");
+            case "set" -> new Set(left, right);
+            case "clear" -> new Clear(left, right);
+            default -> throw new AssertionError("Invalid operation");
         };
     }
 }
-
 
 
 

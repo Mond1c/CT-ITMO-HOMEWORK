@@ -2,7 +2,7 @@ package expression;
 
 public class Divide extends BinaryOperation {
     public Divide(PartOfExpression left, PartOfExpression right) {
-        super(left, right, "/", 1);
+        super(left, right, "/", 2);
     }
 
 
