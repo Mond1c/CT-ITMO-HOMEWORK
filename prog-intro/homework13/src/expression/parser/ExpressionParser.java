@@ -3,22 +3,36 @@ package expression.parser;
 import expression.*;
 import expression.exceptions.*;
 
-public class ExpressionParser extends BaseParser implements TripleParser {
+import java.util.List;
+import java.util.NoSuchElementException;
 
+public class ExpressionParser extends BaseParser implements TripleParser {
+    private final static List<Character> supportedOperations = List.of('+', '-', '*', '/', 'c', 's');
     private String expression;
 
     @Override
-    public TripleExpression parse(String expression) throws Exception {
+    public TripleExpression parse(String expression)  {
+        //System.out.println(expression);
         setSource(new StringSource(expression));
         this.expression = expression;
-        return parseExpression();
+        final TripleExpression expr = parseExpression();
+        if (!eof()) {
+            if (take(')')) {
+                throw new NoSuchElementException("No opening parenthesis");
+            }
+            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
+        }
+        return expr;
     }
 
-    private PartOfExpression parseStart()  throws Exception {
+
+    private PartOfExpression parseStart()  {
         skipWhitespaces();
         if (take('(')) {
             PartOfExpression part = parseExpression();
-            expect(')');
+            if (!take(')')) {
+                throw new NoSuchElementException("No closing parenthesis in " + expression);
+            }
             return part;
         } else if (between('0', '9')){
             return parseConst(false);
@@ -33,17 +47,20 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             expect("ount");
             return new Count(parseStart());
         }
-        throw new AssertionError("Invalid character in " + expression + ": " + ch);
+        if (isUnsupportedCharacter()  && !eof()) {
+            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
+        }
+        throw new NoSuchElementException("No argument in " + expression);
     }
 
-    private PartOfExpression parseExpression() throws Exception {
+    private PartOfExpression parseExpression() {
         skipWhitespaces();
         PartOfExpression part = parseSetClear();
         skipWhitespaces();
         return part;
     }
 
-    private PartOfExpression parseSetClear() throws Exception {
+    private PartOfExpression parseSetClear() {
         skipWhitespaces();
         PartOfExpression part = parsePlusMinus();
         skipWhitespaces();
@@ -61,20 +78,30 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         return part;
     }
 
-    private PartOfExpression parsePlusMinus() throws Exception {
+    private boolean isUnsupportedCharacter() {
+        return !(between('x', 'z') || between('0', '9') || supportedOperations.contains(ch) || ch == ')');
+    }
+
+    private PartOfExpression parsePlusMinus() {
         skipWhitespaces();
         PartOfExpression part = parseMulDiv();
-        skipWhitespaces();
+       // System.out.println(ch);
+        if (isUnsupportedCharacter() && !eof()) {
+            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
+        }
         while (test('+') || test('-')) { // z + y - -30 + (z + x)
             part = parseOperation(String.valueOf(take()), part, parseMulDiv());
         }
         return part;
     }
 
-    private PartOfExpression parseMulDiv() throws Exception {
+    private PartOfExpression parseMulDiv() {
         skipWhitespaces();
         PartOfExpression part = parseStart();
         skipWhitespaces();
+        if (isUnsupportedCharacter() && !eof()) {
+            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
+        }
         while (test('*') || test('/')) {
             part = parseOperation(String.valueOf(take()), part, parseStart());
             skipWhitespaces();
@@ -101,6 +128,10 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         } catch (NumberFormatException e) {
             throw new ArithmeticException("Overflow");
         }
+        skipWhitespaces();
+        if (between('0', '9')) {
+            throw new NumberFormatException("Spaces in number");
+        }
         return new Const(value);
     }
 
@@ -112,7 +143,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             case "/" -> new CheckedDivide(left, right);
             case "set" -> new Set(left, right);
             case "clear" -> new Clear(left, right);
-            default -> throw new AssertionError("Invalid operation");
+            default -> throw new UnsupportedOperation("Unsupported operation operation " + operation);
         };
     }
 }
