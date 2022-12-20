@@ -8,10 +8,53 @@ import java.io.IOException;
 
 public class ExpressionParser extends BaseParser implements TripleParser {
 
+    private String expression;
+
     @Override
     public TripleExpression parse(String expression) {
         setSource(new StringSource(expression));
+        this.expression = expression;
         return parseExpression();
+    }
+
+    private PartOfExpression parseExpression() {
+        return parseSetClear();
+    }
+
+    private PartOfExpression parseSetClear() {
+        PartOfExpression part = parsePlusMinus();
+        skipWhitespaces();
+        while (true) {
+            if (test('s')) {
+                expect("set");
+                part = parseOperation("set", part, parsePlusMinus());
+            } else if (test('c') ) {
+                expect("clear");
+                part = parseOperation("clear", part, parsePlusMinus());
+            } else {
+                break;
+            }
+        }
+        return part;
+    }
+
+    private PartOfExpression parsePlusMinus() {
+        PartOfExpression part = parseMulDiv();
+        skipWhitespaces();
+        while (test('+') || test('-')) { // z + y - -30 + (z + x)
+            part = parseOperation(String.valueOf(take()), part, parseMulDiv());
+        }
+        return part;
+    }
+
+    private PartOfExpression parseMulDiv() {
+        PartOfExpression part = parseStart();
+        skipWhitespaces();
+        while (test('*') || test('/')) {
+            part = parseOperation(String.valueOf(take()), part, parseStart());
+            skipWhitespaces();
+        }
+        return part;
     }
 
     private PartOfExpression parseStart()  {
@@ -33,53 +76,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             expect("ount");
             return new Count(parseStart());
         }
-        throw new AssertionError("Invalid character in expression");
-    }
-
-    private PartOfExpression parseExpression() {
-        skipWhitespaces();
-        PartOfExpression part = parseSetClear();
-        skipWhitespaces();
-        return part;
-    }
-
-    private PartOfExpression parseSetClear() {
-        skipWhitespaces();
-        PartOfExpression part = parsePlusMinus();
-        skipWhitespaces();
-        while (true) {
-            if (test('s')) {
-                expect("set");
-                part = parseOperation("set", part, parsePlusMinus());
-            } else if (test('c') ) {
-                expect("clear");
-                part = parseOperation("clear", part, parsePlusMinus());
-            } else {
-                break;
-            }
-        }
-        return part;
-    }
-
-    private PartOfExpression parsePlusMinus() {
-        skipWhitespaces();
-        PartOfExpression part = parseMulDiv();
-        skipWhitespaces();
-        while (test('+') || test('-')) { // z + y - -30 + (z + x)
-            part = parseOperation(String.valueOf(take()), part, parseMulDiv());
-        }
-        return part;
-    }
-
-    private PartOfExpression parseMulDiv() {
-        skipWhitespaces();
-        PartOfExpression part = parseStart();
-        skipWhitespaces();
-        while (test('*') || test('/')) {
-            part = parseOperation(String.valueOf(take()), part, parseStart());
-            skipWhitespaces();
-        }
-        return part;
+        throw new AssertionError("Invalid character " + ch + " in " + expression);
     }
 
 
