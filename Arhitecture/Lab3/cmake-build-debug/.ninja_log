@@ -1,0 +1,5 @@
+# ninja log v5
+1	170	1671808619661795515	CMakeFiles/AsmParser.dir/symtable_parser.cpp.o	35cf100971f4bd21
+319	355	1671808619847795228	AsmParser	4552583661d5c6c
+1	316	1671808619808795288	CMakeFiles/AsmParser.dir/command_parser.cpp.o	cbbd0ea97f857ba3
+1	319	1671808619810795285	CMakeFiles/AsmParser.dir/main.cpp.o	9f0945053dcc9ae2

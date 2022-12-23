@@ -1,0 +1,8 @@
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/CMakeFiles/edit_cache.dir
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/CMakeFiles/rebuild_cache.dir
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/src/CMakeFiles/AsmParser.dir
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/src/CMakeFiles/edit_cache.dir
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/src/CMakeFiles/rebuild_cache.dir
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/src/utility/CMakeFiles/Utility.dir
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/src/utility/CMakeFiles/edit_cache.dir
+/home/mike/Documents/Homework/Arhitecture/Lab3/build/src/utility/CMakeFiles/rebuild_cache.dir
