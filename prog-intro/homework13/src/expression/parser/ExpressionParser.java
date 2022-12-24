@@ -12,7 +12,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
 
     @Override
     public TripleExpression parse(String expression)  {
-        //System.out.println(expression);
+       // System.out.println(expression);
         setSource(new StringSource(expression));
         this.expression = expression;
         final TripleExpression expr = parseExpression();
@@ -45,10 +45,24 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             return new CheckedNegate(parseStart());
         } else if (take('c')) {
             expect("ount");
+            if (!Character.isWhitespace(ch) && ch != '(') {
+                throw new UnsupportedOperation("No such operation " + "count" + ch + " in " + expression);
+            }
             return new Count(parseStart());
+        } else if (take('p')) {
+            expect("ow10");
+            if (!Character.isWhitespace(ch) && ch != '(') {
+                throw new UnsupportedOperation("No such operation " + "pow10" + ch + " in " + expression);
+            }
+            return new CheckedPow(parseStart());
+        } else if (take('l')) {
+            expect("og10");
+            if (!Character.isWhitespace(ch) && ch != '(') {
+                throw new UnsupportedOperation("No such operation " + "log10" + ch + " in " + expression);
+            }
+            return new CheckedLog(parseStart());
         }
         if (isUnsupportedCharacter()  && !eof()) {
-            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
         }
         throw new NoSuchElementException("No argument in " + expression);
     }
@@ -67,9 +81,15 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         while (true) {
             if (test('s')) {
                 expect("set");
+                if (!Character.isWhitespace(ch) && ch != '(' && ch != '-') {
+                    throw new UnsupportedOperation("No such operation " + "set" + ch + " in " + expression);
+                }
                 part = parseOperation("set", part, parsePlusMinus());
             } else if (test('c') ) {
                 expect("clear");
+                if (!Character.isWhitespace(ch) && ch != '(' && ch != '-') {
+                    throw new UnsupportedOperation("No such operation " + "clear" + ch + " in " + expression);
+                }
                 part = parseOperation("clear", part, parsePlusMinus());
             } else {
                 break;
