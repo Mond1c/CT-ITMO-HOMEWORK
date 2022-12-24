@@ -50,14 +50,14 @@ std::vector<std::string> parser::CommandParser::GetRiscvCommand(const std::strin
         unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 12), nullptr, 2);
         std::string instruction = RiscVParser::ParseLoadOP(funct3);
         char* buffer = new char[1024];
-        sprintf(buffer, "%s %s, %s(%s)", instruction.c_str(), GetRegister(rd).c_str(),
+        sprintf(buffer, "%s\t\t %s, %s(%s)", instruction.c_str(), GetRegister(rd).c_str(),
                 std::to_string(l).c_str(), GetRegister(rs1).c_str());
         return {buffer};
     } else if (opcode == "0100011") {
         unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 7) + str.substr(20, 5), nullptr, 2);
         std::string instruction = RiscVParser::ParseStoreOP(funct3);
         char* buffer = new char[1024];
-        sprintf(buffer, "%s %s, %s(%s)", instruction.c_str(), GetRegister(rs2).c_str(),
+        sprintf(buffer, "%s\t\t %s, %s(%s)", instruction.c_str(), GetRegister(rs2).c_str(),
                 std::to_string(l).c_str(), GetRegister(rs1).c_str());
         return {buffer};
     } else if (opcode == "1100011") {

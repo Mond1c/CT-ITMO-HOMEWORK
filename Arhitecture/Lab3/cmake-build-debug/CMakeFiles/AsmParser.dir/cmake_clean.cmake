@@ -1,16 +1,14 @@
 file(REMOVE_RECURSE
-  "AsmParser.exe"
-  "AsmParser.exe.manifest"
-  "AsmParser.lib"
+  "AsmParser"
   "AsmParser.pdb"
-  "CMakeFiles/AsmParser.dir/ElfParser.cpp.obj"
-  "CMakeFiles/AsmParser.dir/ElfParser.cpp.obj.d"
-  "CMakeFiles/AsmParser.dir/command_parser.cpp.obj"
-  "CMakeFiles/AsmParser.dir/command_parser.cpp.obj.d"
-  "CMakeFiles/AsmParser.dir/main.cpp.obj"
-  "CMakeFiles/AsmParser.dir/main.cpp.obj.d"
-  "CMakeFiles/AsmParser.dir/symtable_parser.cpp.obj"
-  "CMakeFiles/AsmParser.dir/symtable_parser.cpp.obj.d"
+  "CMakeFiles/AsmParser.dir/ElfParser.cpp.o"
+  "CMakeFiles/AsmParser.dir/ElfParser.cpp.o.d"
+  "CMakeFiles/AsmParser.dir/command_parser.cpp.o"
+  "CMakeFiles/AsmParser.dir/command_parser.cpp.o.d"
+  "CMakeFiles/AsmParser.dir/main.cpp.o"
+  "CMakeFiles/AsmParser.dir/main.cpp.o.d"
+  "CMakeFiles/AsmParser.dir/symtable_parser.cpp.o"
+  "CMakeFiles/AsmParser.dir/symtable_parser.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

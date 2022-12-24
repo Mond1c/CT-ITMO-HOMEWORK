@@ -6,7 +6,6 @@
 #define ASMPARSER_SYMTABLE_ELEMENT_H
 #include <string>
 #include <memory>
-#include <format>
 #include "../symtable_parser.h"
 
 namespace utility {
