@@ -1,0 +1,13 @@
+.text
+00010074             addi sp, sp, 4294967280
+00010078             sw ra, 12(sp)
+0001007c             jal ra, zero, 48
+00010080             lw ra, 12(sp)
+00010084             addi a0, zero, 0
+00010088             addi sp, sp, 16
+0001008c             jalr zero, ra, 0
+00010090             addi zero, zero, 0
+00010094             lui sp, 1048576
+00010098             jal ra, t6, 4294967260
+0001009c             addi a1, a0, 0
+000100a0             addi a7, zero, 10

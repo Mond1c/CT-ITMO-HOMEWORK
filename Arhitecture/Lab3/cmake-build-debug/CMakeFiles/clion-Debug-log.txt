@@ -1,4 +1,10 @@
-/home/mike/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/mike/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/ninja/linux/ninja -G Ninja -S /home/mike/Documents/Homework/Arhitecture/Lab3 -B /home/mike/Documents/Homework/Arhitecture/Lab3/cmake-build-debug
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" -S C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3 -B C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug
+-- The CXX compiler identification is MSVC 19.33.31629.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.33.31629/bin/Hostx86/x86/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/mike/Documents/Homework/Arhitecture/Lab3/cmake-build-debug
+-- Build files have been written to: C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug

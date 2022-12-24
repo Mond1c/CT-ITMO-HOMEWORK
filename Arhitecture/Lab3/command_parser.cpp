@@ -2,6 +2,11 @@
 // Created by mike on 12/23/22.
 //
 #include "command_parser.h"
+#include <iostream>
+
+std::vector<std::shared_ptr<utility::symtable_element>> parser::RiscVParser::elements;
+std::unordered_map<int, int> parser::RiscVParser::symTable;
+int parser::RiscVParser::textAddr;
 
 std::string parser::CommandParser::GetRegister(const std::string &str) {
     int value = std::stoi(str, nullptr, 2);
@@ -14,7 +19,7 @@ std::string parser::CommandParser::GetRegister(const std::string &str) {
         case 5: case 6: case 7: return "t" + std::to_string(value - 5);
         case 8: return "s0";
         case 9: return "s1";
-        case 10: case 12: case 13: case 14: case 15:
+        case 10: case 11: case 12: case 13: case 14: case 15:
         case 16: case 17: return "a" + std::to_string(value - 10);
         case 18: case 19: case 20: case 21: case 22: case 23:
         case 24: case 25: case 26: case 27: return "s" + std::to_string(value - 16);
@@ -23,37 +28,62 @@ std::string parser::CommandParser::GetRegister(const std::string &str) {
     throw std::invalid_argument("Unsupported register " + str);
 }
 
-std::shared_ptr<utility::riscv_command> parser::CommandParser::GetRiscvCommand(const std::string &str) { // TODO: Add support of symtable
-    utility::riscv_command command;
+std::vector<std::string> parser::CommandParser::GetRiscvCommand(const std::string &str) { // TODO: Add support of symtable
     if (str == "00000000000000000000000001110011") {
-        command.instruction = "ecall";
-        return std::shared_ptr<utility::riscv_command>(&command);
+        return {"ecall"};
     } else if (str == "00000000000100000000000001110011") {
-        command.instruction = "ebreak";
-        return std::shared_ptr<utility::riscv_command>(&command);
+        return {"ebreak"};
     }
-    command.rs2 = GetRegister(str.substr(20, 5));
-    command.rs1 = GetRegister(str.substr(15, 5));
-    command.rd = GetRegister(str.substr(7, 5));
-    std::string opcode = str.substr(0, 7);
-    std::string funct7 = str.substr(25, 7);
-    std::string funct3 = str.substr(12, 3);
+    std::string rs2 = str.substr(7, 5);
+    std::string rs1 = str.substr(12, 5);
+    std::string rd = str.substr(20, 5);
+    std::string opcode = str.substr(25, 7);
+    std::string funct7 = str.substr(0, 7);
+    std::string funct3 = str.substr(17, 3);
     if (opcode == "0110011") {
-        command.instruction = RiscVParser::ParseArithmeticOP(funct7, funct3);
+        std::string instruction = RiscVParser::ParseArithmeticOP(funct7, funct3);
+        return {instruction, GetRegister(rd), GetRegister(rs1), GetRegister(rs2)};
     } else if (opcode == "1110011") {
-        command.instruction = RiscVParser::ParseCSROP(funct3);
+        std::string instruction = RiscVParser::ParseCSROP(funct3);
+        return {instruction, GetRegister(rd), GetRegister(str.substr(0, 12)), GetRegister(rs1)};
     } else if (opcode == "0000011") {
-        command.instruction = RiscVParser::ParseLoadOP(funct3);
+        unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 12), nullptr, 2);
+        std::string instruction = RiscVParser::ParseLoadOP(funct3);
+        char* buffer = new char[1024];
+        sprintf(buffer, "%s %s, %s(%s)", instruction.c_str(), GetRegister(rd).c_str(),
+                std::to_string(l).c_str(), GetRegister(rs1).c_str());
+        return {buffer};
     } else if (opcode == "0100011") {
-        command.instruction = RiscVParser::ParseStoreOP(funct3);
+        unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 7) + str.substr(20, 5), nullptr, 2);
+        std::string instruction = RiscVParser::ParseStoreOP(funct3);
+        char* buffer = new char[1024];
+        sprintf(buffer, "%s %s, %s(%s)", instruction.c_str(), GetRegister(rs2).c_str(),
+                std::to_string(l).c_str(), GetRegister(rs1).c_str());
+        return {buffer};
     } else if (opcode == "1100011") {
-        command.instruction = RiscVParser::ParseLogicalOP(funct3);
-    } else if (opcode == "0110111") {
-        command.instruction = RiscVParser::ParseBitOP(opcode);
+        unsigned int l = std::stoul(str.substr(0, 20) + std::string(12, '0'), nullptr, 2);
+        std::string instruction = RiscVParser::ParseLogicalOP(funct3);
+        return {instruction, GetRegister(rs1), GetRegister(rs2), RiscVParser::GetLabel(l + 4)};
+    } else if (opcode == "0110111" || opcode == "0010111") {
+        unsigned int l = std::stoul(str.substr(0, 20) + std::string(12, '0'), nullptr, 2);
+        std::string instruction = RiscVParser::ParseBitOP(opcode);
+        return {instruction, GetRegister(rd), std::to_string(l)};
     } else if (opcode == "0010011") {
-        command.instruction = RiscVParser::ParseArithmeticIOP(funct7, funct3);
+        unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 12), nullptr, 2);
+        rs2 = std::to_string(((funct3 == "001" || funct3 == "101")
+                ? (unsigned int) std::stoul(str.substr(7, 5), nullptr, 2) : l));
+        std::string instruction = RiscVParser::ParseArithmeticIOP(funct7, funct3);
+        return {instruction, GetRegister(rd), GetRegister(rs1), rs2};
+    } else if (opcode == "1101111") {
+        std::string instruction = "jal";
+        unsigned int l = std::stoul(std::string(12, str[0]) + str.substr(12, 8) + str[11] + str.substr(1, 10) + "0", nullptr, 2);
+        return {instruction, GetRegister(rd), GetRegister(rs1), std::to_string(l)};
+    } else if (opcode == "1100111") {
+        std::string instruction = "jalr";
+        unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 12), nullptr, 2);
+        return {instruction, GetRegister(rd), GetRegister(rs1), std::to_string(l)};
     }
-    return std::shared_ptr<utility::riscv_command>(&command);
+    throw std::invalid_argument("Invalid command  = " + str);
 }
 
 std::string parser::RiscVParser::ParseArithmeticOP(const std::string &funct7, const std::string &funct3) {
@@ -169,4 +199,15 @@ std::string parser::RiscVParser::ParseArithmeticIOP(const std::string &funct7, c
         case 7: return "andi";
     }
     throw std::invalid_argument("Unsupported Risc-V arithmeticI instruction funct7 = " + funct7 + ", funct3 = " + funct3);
+}
+
+
+std::string parser::RiscVParser::GetLabel(unsigned int x) {
+    int addrCommand = textAddr + x;
+    if (symTable.count(addrCommand)) {
+        return elements[symTable[addrCommand]]->name;
+    }
+    symTable[addrCommand] = symTable.size();
+    elements.push_back(std::make_shared<utility::symtable_element>("LOC_" + std::to_string(addrCommand)));
+    return elements[symTable[addrCommand]]->name;
 }

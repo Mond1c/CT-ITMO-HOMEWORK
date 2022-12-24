@@ -33,7 +33,7 @@ namespace parser {
         ~ElfParser() = default;
     public:
         void parse();
-    private:
+    public:
         void parseHeader();
         void parseText();
         void parseSymTab();
