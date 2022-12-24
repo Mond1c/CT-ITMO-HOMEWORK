@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() {
-    auto parser = parser::ElfParser("../test_elf.elf", "../output.txt");
+    auto parser = parser::ElfParser("../test2.elf", "../output.txt");
     parser.parse();
     return 0;
 }

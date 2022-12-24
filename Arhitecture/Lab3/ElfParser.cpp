@@ -82,6 +82,7 @@ namespace parser {
             if (symTable.count(addr + i) && elements[symTable[addr + i]]->type == "FUNC") {
                 label = elements[symTable[addr + i]]->name;
             }
+            if (!label.empty()) std::cout << label << std::endl;
             sprintf(buffer, " %10s%s", label.c_str(), label.empty() ? " " : ":");
             writer->write(buffer);
             for (int j = 0; j < command.size(); ++j) {
@@ -130,10 +131,7 @@ namespace parser {
 
     void ElfParser::dumpSymTable() {
         writer->writeLine(".symtab");
-        char* buffer = new char[1024];
-        sprintf(buffer, "%s %-15s %7s %-8s %-8s %-8s %6s %s", "Symbol", "Value", "Size", "Type", "Bind", "Vis", "Index", "Name");
-        writer->writeLine(buffer);
-        delete[] buffer;
+        writer->writeLine("Symbol Value          \tSize Type \tBind \tVis   \tIndex Name\\n");
         for (const auto& element : elements) {
             writer->write(element->GetString());
         }

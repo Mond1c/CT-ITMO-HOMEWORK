@@ -82,6 +82,9 @@ std::vector<std::string> parser::CommandParser::GetRiscvCommand(const std::strin
         std::string instruction = "jalr";
         unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 12), nullptr, 2);
         return {instruction, GetRegister(rd), GetRegister(rs1), std::to_string(l)};
+    } else if (opcode == "0001111") {
+        std::string instruction = &"fence" [ *(funct3 == "001" ? ".i" : "")];
+        return {instruction};
     }
     throw std::invalid_argument("Invalid command  = " + str);
 }
