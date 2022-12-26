@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ExpressionParser extends BaseParser implements TripleParser {
-    private final static boolean IS_CHECKED = false;
+    private final static boolean IS_CHECKED = true;
     private final static List<Character> SUPPORTED_BEGIN_OF_OPERATIONS = List.of('+', '-', '*', '/', 'c', 's');
-    private final static List<String> OPERATIONS = List.of("+", "-", "*", "/", "count", "clear", "set");
     private String expression;
 
 
@@ -20,11 +19,16 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         final TripleExpression expr = parseExpression();
         if (!eof()) {
             if (take(')')) {
-                throw new NoSuchElementException("No opening parenthesis");
+                throw new NoSuchElementException(getMessageForException("No opening parenthesis", ch));
             }
-            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
+            throw new UnsupportedCharacter(getMessageForException("Unsupported character", ch));
         }
         return expr;
+    }
+
+    private String getMessageForException(final String message, char ch) {
+        final int index = expression.indexOf(ch);
+        return message + ": " + expression.substring(Math.max(0, index - 10), Math.min(expression.length(), index + 10)) + " at position " + index;
     }
 
 
@@ -33,7 +37,8 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         if (take('(')) {
             PartOfExpression part = parseExpression();
             if (!take(')')) {
-                throw new NoSuchElementException("No closing parenthesis in " + expression);
+                prev();
+                throw new NoSuchElementException(getMessageForException("No closing parenthesis", ch));
             }
             return part;
         } else if (between('0', '9')){
@@ -102,7 +107,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         PartOfExpression part = parseMulDiv();
        // System.out.println(ch);
         if (isUnsupportedCharacter() && !eof()) {
-            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
+            throw new UnsupportedCharacter(getMessageForException("Unsupported character", ch));
         }
         while (test('+') || test('-')) { // z + y - -30 + (z + x)
             part = parseOperation(String.valueOf(take()), part, parseMulDiv());
@@ -115,7 +120,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         PartOfExpression part = parseStart();
         skipWhitespaces();
         if (isUnsupportedCharacter() && !eof()) {
-            throw new UnsupportedCharacter("Unsupported character " + ch + " in " + expression);
+            throw new UnsupportedCharacter(getMessageForException("Unsupported character", ch));
         }
         while (test('*') || test('/')) {
             part = parseOperation(String.valueOf(take()), part, parseStart());

@@ -6,6 +6,7 @@ import expression.common.Reason;
 
 import java.math.BigInteger;
 import java.util.function.Consumer;
+import java.util.function.DoubleUnaryOperator;
 import java.util.function.LongBinaryOperator;
 import java.util.function.LongUnaryOperator;
 import java.util.stream.LongStream;
@@ -31,7 +32,7 @@ public final class Operations {
         if (a == 0 && b == 0) {
             return 0;
         }
-        return a * b / gcd(a, b);
+        return a / gcd(a, b) * b;
     });
 
     private static int gcd(final long a, final long b) {
@@ -42,6 +43,18 @@ public final class Operations {
     private static long reduceDigits(final long v, final LongBinaryOperator op) {
         return LongStream.iterate(v, n -> n != 0, n -> n / 10).map(n -> n % 10).reduce(0, op);
     }
+
+    private static Operation checkedPowN(final String name, final int base, final int limit) {
+        return unary(name, NEG_POW.less(0, Reason.OVERFLOW.greater(limit, a -> (long) Math.pow(base, a))));
+    }
+    private static final Reason NEG_POW = new Reason("Exponentiation to negative power");
+    public static final Operation CHECKED_POW_10 = checkedPowN("pow10", 10, 9);
+
+    private static Operation checkedLogN(final String name, final DoubleUnaryOperator op) {
+        return unary(name, NEG_LOG.less(1, a -> (long) op.applyAsDouble(a)));
+    }
+    private static final Reason NEG_LOG = new Reason("Logarithm of negative value");
+    public static final Operation CHECKED_LOG_10 = checkedLogN("log10", Math::log10);
 
 
     private Operations() {

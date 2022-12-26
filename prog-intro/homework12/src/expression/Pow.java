@@ -7,11 +7,15 @@ public class Pow extends UnaryOperation {
 
     @Override
     protected int calculate(int x) {
-        return (int)Math.pow(10, x);
+        int result = 1;
+        while (x-- > 0) {
+            result *= 10;
+        }
+        return result;
     }
 
     @Override
     protected double calculate(double x) {
-        return Math.pow(10, x);
+        throw new ArithmeticException("You can't calculate pow10(x) where x is double");
     }
 }

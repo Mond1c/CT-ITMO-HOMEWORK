@@ -13,6 +13,11 @@ public class CheckedLog extends Log {
         if (x <= 0) {
             throw new ArithmeticException("You can calculate log10 only with x greater than 0");
         }
-        return (int) Math.log10(x);
+        int ans = 0;
+        while (x > 9) {
+            ans++;
+            x /= 10;
+        }
+        return ans;
     }
 }

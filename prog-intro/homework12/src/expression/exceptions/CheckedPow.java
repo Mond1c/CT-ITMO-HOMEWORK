@@ -13,10 +13,14 @@ public class CheckedPow extends Pow {
         if (x < 0) {
             throw new ArithmeticException("You can calculate log10 only with x greater than -1");
         }
-        double result = Math.pow(10, x);  // :NOTE:
-        if (result > Integer.MAX_VALUE) {
+        if (x >= 10) {
             throw new ArithmeticException("Overflow");
         }
-        return (int) result;
+       // double result = Math.pow(10, x);  // :NOTE:
+        int result = 1;
+        while (x-- > 0) {
+            result *= 10;
+        }
+        return result;
     }
 }

@@ -7,11 +7,16 @@ public class Log extends UnaryOperation {
 
     @Override
     protected int calculate(int x) {
-        return (int) Math.log10(x);
+        int ans = 0;
+        while (x > 9) {
+            ans++;
+            x /= 10;
+        }
+        return ans;
     }
 
     @Override
     protected double calculate(double x) {
-        return Math.log10(x);
+        throw new ArithmeticException("You can't calculate log10(x) where x is double");
     }
 }
