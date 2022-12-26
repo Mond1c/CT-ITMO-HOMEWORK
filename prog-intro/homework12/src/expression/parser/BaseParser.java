@@ -32,6 +32,19 @@ public class BaseParser {
         return ch == expected;
     }
 
+    protected boolean take(final String value) {
+        int i = 0;
+        for (; i < value.length(); i++) {
+            if (!take(value.charAt(i))) {
+                while (i-- > 0) {
+                    source.back();
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
     protected boolean take(final char expected) {
         if (test(expected)) {
             take();

@@ -22,6 +22,11 @@ public class StringSource implements CharSource {
     }
 
     @Override
+    public char back() {
+        return data.charAt(pos--);
+    }
+
+    @Override
     public IllegalArgumentException error(final String message) {
         return new IllegalArgumentException(pos + ": " + message);
     }
