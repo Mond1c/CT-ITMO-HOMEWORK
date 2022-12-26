@@ -19,7 +19,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         final TripleExpression expr = parseExpression();
         if (!eof()) {
             if (take(')')) {
-                throw new NoSuchElementException(getMessageForException("No opening parenthesis", ch));
+                throw new NoSuchElementException(getMessageForException("No opening parenthesis", '('));
             }
             throw new UnsupportedCharacter(getMessageForException("Unsupported character", ch));
         }
@@ -27,8 +27,13 @@ public class ExpressionParser extends BaseParser implements TripleParser {
     }
 
     private String getMessageForException(final String message, char ch) {
-        final int index = expression.indexOf(ch);
-        return message + ": " + expression.substring(Math.max(0, index - 10), Math.min(expression.length(), index + 10)) + " at position " + index;
+        int index = expression.indexOf(ch);
+        if (eof() && index == -1) {
+            index = expression.length() - 1;
+        } else if (index == -1) {
+            index = 0;
+        }
+        return message + " " + ch + ": " + expression.substring(Math.max(0, index - 10), Math.min(expression.length(), index + 10)) + " at position " + index;
     }
 
 
@@ -37,8 +42,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         if (take('(')) {
             PartOfExpression part = parseExpression();
             if (!take(')')) {
-                prev();
-                throw new NoSuchElementException(getMessageForException("No closing parenthesis", ch));
+                throw new NoSuchElementException(getMessageForException("No closing parenthesis", ')'));
             }
             return part;
         } else if (between('0', '9')){
@@ -66,7 +70,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             }
             return IS_CHECKED ? new CheckedLog(parseStart()) : new Log(parseStart());
         }
-        throw new NoSuchElementException("No argument in " + expression);
+        throw new NoSuchElementException(getMessageForException("No argument", ch));
     }
 
     private PartOfExpression parseExpression() {
@@ -150,12 +154,12 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         }
         skipWhitespaces();
         if (between('0', '9')) {
-            throw new NumberFormatException("Spaces in number");
+            throw new NumberFormatException(getMessageForException("Spaces in number", ch));
         }
         return new Const(value);
     }
 
-    private static BinaryOperation parseOperation(final String operation, final PartOfExpression left, final PartOfExpression right) {
+    private BinaryOperation parseOperation(final String operation, final PartOfExpression left, final PartOfExpression right) {
         return switch (operation) {
             case "+" -> IS_CHECKED ? new CheckedAdd(left, right) : new Add(left, right);
             case "-" -> IS_CHECKED ? new CheckedSubtract(left, right) : new Subtract(left, right);
@@ -163,7 +167,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             case "/" -> IS_CHECKED ? new CheckedDivide(left, right) : new Divide(left, right);
             case "set" -> new Set(left, right);
             case "clear" -> new Clear(left, right);
-            default -> throw new UnsupportedOperation("Unsupported operation operation " + operation);
+            default -> throw new UnsupportedOperation(getMessageForException("Unsupported operation " + operation, ch));
         };
     }
 }
