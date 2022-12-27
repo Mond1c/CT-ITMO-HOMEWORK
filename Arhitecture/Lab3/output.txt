@@ -1,50 +1,50 @@
 .text
 00010074   <main>:
-   10074:	 addi	 sp, sp, 18446744073709551615
-   10078:	 sw		 ra, 12(sp)	
-   1007c:	 jal	 ra, zero, 48
-   10080:	 lw		 ra, 12(sp)	
-   10084:	 addi	 a0, zero, 0
-   10088:	 addi	 sp, sp, 10000
-   1008c:	 jalr	 zero, ra, 0
-   10090:	 addi	 zero, zero, 0
-   10094:	 lui	 sp, 1048576
-   10098:	 jal	 ra, t6, 4294967260
-   1009c:	 addi	 a1, a0, 0
-   100a0:	 addi	 a7, zero, 1010
-   100a4:	 fence	
-   100a8:	 ecall	
+   10074:	ff010113	   addi	sp, sp, -16
+   10078:	00112623	     sw	ra, 12(sp)
+   1007c:	030000ef	    jal	ra, zero(__SDATA_BEGIN__)
+   10080:	00c12083	     lw	ra, 12(sp)
+   10084:	00000513	   addi	a0, zero, 0
+   10088:	01010113	   addi	sp, sp, 16
+   1008c:	00008067	   jalr	zero, ra(0)
+   10090:	00000013	   addi	zero, zero, 0
+   10094:	00100137	    lui	sp, 1048576
+   10098:	fddff0ef	    jal	ra, t6(mmul)
+   1009c:	00050593	   addi	a1, a0, 0
+   100a0:	00a00893	   addi	a7, zero, 10
+fence
+ecall
 000100ac   <mmul>:
-   100ac:	 lui	 t5, 69632
-   100b0:	 addi	 a0, t5, 100100100
-   100b4:	 addi	 a0, a0, 18446744073709551615
-   100b8:	 addi	 t5, t5, 100100100
-   100bc:	 addi	 t0, gp, 18446744073709551615
-   100c0:	 addi	 t6, gp, 18446744073709551615
-   100c4:	 addi	 t4, zero, 101000
-   100c8:	 addi	 t3, a0, 18446744073709551615
-   100cc:	 addi	 t1, t5, 0
-   100d0:	 addi	 a7, t6, 0
-   100d4:	 addi	 a6, zero, 0
-   100d8:	 addi	 a3, a7, 0
-   100dc:	 addi	 a5, t3, 0
-   100e0:	 addi	 a2, zero, 0
-   100e4:	 lb		 a4, 0(a5)	
-   100e8:	 lh		 a1, 0(a3)	
-   100ec:	 addi	 a5, a5, 1
-   100f0:	 addi	 a3, a3, 101000
-   100f4:	 mul	 a4, a4, a1
-   100f8:	 add	 a2, a2, a4
-   100fc:	 bne	 a5, a0, __SDATA_BEGIN__
-   10100:	 sw		 a2, 0(t1)	
-   10104:	 addi	 a6, a6, 10
-   10108:	 addi	 t1, t1, 100
-   1010c:	 addi	 a7, a7, 10
-   10110:	 bne	 a6, t4, mmul
-   10114:	 addi	 t5, t5, 1010000
-   10118:	 addi	 a0, a5, 10100
-   1011c:	 bne	 t5, t0, _start
-   10120:	 jalr	 zero, ra, 0
+   100ac:	00011f37	    lui	t5, 69632
+   100b0:	124f0513	   addi	a0, t5, 292
+   100b4:	65450513	   addi	a0, a0, 1620
+   100b8:	124f0f13	   addi	t5, t5, 292
+   100bc:	e4018293	   addi	t0, gp, -448
+   100c0:	fd018f93	   addi	t6, gp, -48
+   100c4:	02800e93	   addi	t4, zero, 40
+   100c8:	fec50e13	   addi	t3, a0, -20
+   100cc:	000f0313	   addi	t1, t5, 0
+   100d0:	000f8893	   addi	a7, t6, 0
+   100d4:	00000813	   addi	a6, zero, 0
+   100d8:	00088693	   addi	a3, a7, 0
+   100dc:	000e0793	   addi	a5, t3, 0
+   100e0:	00000613	   addi	a2, zero, 0
+   100e4:	00078703	     lb	a4, 0(a5)
+   100e8:	00069583	     lh	a1, 0(a3)
+   100ec:	00178793	   addi	a5, a5, 1
+   100f0:	02868693	   addi	a3, a3, 40
+   100f4:	02b70733	    mul	a4, a4, a1
+   100f8:	00e60633	    add	a2, a2, a4
+   100fc:	fea794e3	    bne	a5, a0, _start
+   10100:	00c32023	     sw	a2, 0(t1)
+   10104:	00280813	   addi	a6, a6, 2
+   10108:	00430313	   addi	t1, t1, 4
+   1010c:	00288893	   addi	a7, a7, 2
+   10110:	fdd814e3	    bne	a6, t4, c
+   10114:	050f0f13	   addi	t5, t5, 80
+   10118:	01478513	   addi	a0, a5, 20
+   1011c:	fa5f16e3	    bne	t5, t0, __BSS_END__
+   10120:	00008067	   jalr	zero, ra(0)
 
 .symtab
 Symbol Value          	Size Type 	Bind 	Vis   	Index Name

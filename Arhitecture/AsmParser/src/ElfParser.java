@@ -59,6 +59,10 @@ public class ElfParser {
                     params[8], params[9]
             ));
         }
+
+        for (var section : sections.entrySet()) {
+            System.out.println(section.getKey() + ": " + section.getValue().toString());
+        }
     }
 
 
@@ -67,6 +71,7 @@ public class ElfParser {
         final Section symtab = sections.get(".symtab");
         final int offset = symtab.offset;
         final int count = symtab.size / 16;
+        System.out.println(offset);
         for (int i = 0; i < count; i++) {
             final StringBuilder builder = new StringBuilder();
             for (int j = 0; j < 4; j++) {
@@ -78,7 +83,7 @@ public class ElfParser {
             final int size = cnt(offset + i * 16 + 8, 4);
             final int info = Integer.parseInt(new StringBuilder(str.substring(0, 8)).reverse().toString(), 2);
             final int other = Integer.parseInt(new StringBuilder(str.substring(8)).reverse().toString(), 2);
-            System.out.println(value + " " + size + " " + info + " " + other);
+            //System.out.println(value + " " + size + " " + info + " " + other);
             symTable.put(value, entities.size());
             entities.add(new SymTableEntity(name, value, size, i, info, other));
         }

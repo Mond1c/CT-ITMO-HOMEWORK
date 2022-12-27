@@ -28,12 +28,6 @@ public class BaseParser {
         return result;
     }
 
-    protected char prev() {
-        final char result = ch;
-        ch = source.back();
-        return result;
-    }
-
     protected boolean test(final char expected) {
         return ch == expected;
     }

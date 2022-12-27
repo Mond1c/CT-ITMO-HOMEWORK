@@ -1,0 +1,5 @@
+﻿  2.c
+C:\Users\pocht\Desktop\Homework\dm\ConsoleApplication1\ConsoleApplication1\2.c(34,14): error C2057: требуется константное выражение
+C:\Users\pocht\Desktop\Homework\dm\ConsoleApplication1\ConsoleApplication1\2.c(34,15): error C2466: невозможно выделить память для массива постоянного нулевого размера
+C:\Users\pocht\Desktop\Homework\dm\ConsoleApplication1\ConsoleApplication1\2.c(34,9): error C2133: perm: неизвестный размер
+C:\Users\pocht\Desktop\Homework\dm\ConsoleApplication1\ConsoleApplication1\2.c(51,18): error C4996: 'getche': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getche. See online help for details.

@@ -4,6 +4,7 @@
 
 #ifndef ASMPARSER_RISCV_COMMAND_H
 #define ASMPARSER_RISCV_COMMAND_H
+
 #include <string>
 
 namespace utility {
