@@ -128,6 +128,7 @@ namespace parser {
             std::reverse(otherStr.begin(), otherStr.end());
             int info = std::stoi(infoStr, nullptr, 2);
             int other = std::stoi(otherStr, nullptr, 2);
+            std::cout << value << " " << size << " " << info << " " << other << std::endl;
             symTable[value] = elements.size();
             elements.push_back(std::make_shared<utility::symtable_element>(name, value, size, i, info, other));
 

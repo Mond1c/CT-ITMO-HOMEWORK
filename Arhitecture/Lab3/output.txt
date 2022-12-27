@@ -1,28 +1,28 @@
 .text
 00010074   <main>:
-   10074:	 addi	 sp, sp, 4294967280
+   10074:	 addi	 sp, sp, 18446744073709551615
    10078:	 sw		 ra, 12(sp)	
    1007c:	 jal	 ra, zero, 48
    10080:	 lw		 ra, 12(sp)	
    10084:	 addi	 a0, zero, 0
-   10088:	 addi	 sp, sp, 16
+   10088:	 addi	 sp, sp, 10000
    1008c:	 jalr	 zero, ra, 0
    10090:	 addi	 zero, zero, 0
    10094:	 lui	 sp, 1048576
    10098:	 jal	 ra, t6, 4294967260
    1009c:	 addi	 a1, a0, 0
-   100a0:	 addi	 a7, zero, 10
+   100a0:	 addi	 a7, zero, 1010
    100a4:	 fence	
    100a8:	 ecall	
 000100ac   <mmul>:
    100ac:	 lui	 t5, 69632
-   100b0:	 addi	 a0, t5, 292
-   100b4:	 addi	 a0, a0, 1620
-   100b8:	 addi	 t5, t5, 292
-   100bc:	 addi	 t0, gp, 4294966848
-   100c0:	 addi	 t6, gp, 4294967248
-   100c4:	 addi	 t4, zero, 40
-   100c8:	 addi	 t3, a0, 4294967276
+   100b0:	 addi	 a0, t5, 100100100
+   100b4:	 addi	 a0, a0, 18446744073709551615
+   100b8:	 addi	 t5, t5, 100100100
+   100bc:	 addi	 t0, gp, 18446744073709551615
+   100c0:	 addi	 t6, gp, 18446744073709551615
+   100c4:	 addi	 t4, zero, 101000
+   100c8:	 addi	 t3, a0, 18446744073709551615
    100cc:	 addi	 t1, t5, 0
    100d0:	 addi	 a7, t6, 0
    100d4:	 addi	 a6, zero, 0
@@ -32,17 +32,17 @@
    100e4:	 lb		 a4, 0(a5)	
    100e8:	 lh		 a1, 0(a3)	
    100ec:	 addi	 a5, a5, 1
-   100f0:	 addi	 a3, a3, 40
+   100f0:	 addi	 a3, a3, 101000
    100f4:	 mul	 a4, a4, a1
    100f8:	 add	 a2, a2, a4
    100fc:	 bne	 a5, a0, __SDATA_BEGIN__
    10100:	 sw		 a2, 0(t1)	
-   10104:	 addi	 a6, a6, 2
-   10108:	 addi	 t1, t1, 4
-   1010c:	 addi	 a7, a7, 2
+   10104:	 addi	 a6, a6, 10
+   10108:	 addi	 t1, t1, 100
+   1010c:	 addi	 a7, a7, 10
    10110:	 bne	 a6, t4, mmul
-   10114:	 addi	 t5, t5, 80
-   10118:	 addi	 a0, a5, 20
+   10114:	 addi	 t5, t5, 1010000
+   10118:	 addi	 a0, a5, 10100
    1011c:	 bne	 t5, t0, _start
    10120:	 jalr	 zero, ra, 0
 

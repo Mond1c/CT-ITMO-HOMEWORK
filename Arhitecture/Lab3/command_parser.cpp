@@ -3,6 +3,8 @@
 //
 #include "command_parser.h"
 #include <iostream>
+#include <sstream>
+#include <numeric>
 
 std::vector<std::shared_ptr<utility::symtable_element>> parser::RiscVParser::elements;
 std::unordered_map<int, int> parser::RiscVParser::symTable;
@@ -69,9 +71,16 @@ std::vector<std::string> parser::CommandParser::GetRiscvCommand(const std::strin
         std::string instruction = RiscVParser::ParseBitOP(opcode);
         return {instruction, GetRegister(rd), std::to_string(l)};
     } else if (opcode == "0010011") {
-        unsigned int l = std::stoul(std::string(20, str[0]) + str.substr(0, 12), nullptr, 2);
+        std::istringstream iss(std::string(20, str[0]) + str.substr(0, 12));
+        unsigned int i;
+        iss >> i;
+        int l = (int)i;
+        if (i > std::numeric_limits<unsigned int>::max()) {
+            l = std::numeric_limits<int>::min() + (i - std::numeric_limits<unsigned int>::max()) ;
+        }
+       // std::cout << l << std::endl;
         rs2 = std::to_string(((funct3 == "001" || funct3 == "101")
-                ? (unsigned int) std::stoul(str.substr(7, 5), nullptr, 2) : l));
+                ? std::stoul(str.substr(7, 5), nullptr, 2) : l));
         std::string instruction = RiscVParser::ParseArithmeticIOP(funct7, funct3);
         return {instruction, GetRegister(rd), GetRegister(rs1), rs2};
     } else if (opcode == "1101111") {

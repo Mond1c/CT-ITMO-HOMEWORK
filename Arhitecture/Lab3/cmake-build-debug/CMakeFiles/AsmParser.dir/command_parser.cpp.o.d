@@ -177,4 +177,7 @@ CMakeFiles/AsmParser.dir/command_parser.cpp.o: \
  /home/mond1c/Documents/Homework/Arhitecture/Lab3/utility/symtable_element.h \
  /home/mond1c/Documents/Homework/Arhitecture/Lab3/utility/../symtable_parser.h \
  /usr/include/c++/12/iostream /usr/include/c++/12/istream \
- /usr/include/c++/12/bits/istream.tcc
+ /usr/include/c++/12/bits/istream.tcc /usr/include/c++/12/sstream \
+ /usr/include/c++/12/bits/sstream.tcc /usr/include/c++/12/numeric \
+ /usr/include/c++/12/bits/stl_numeric.h /usr/include/c++/12/limits \
+ /usr/include/c++/12/pstl/glue_numeric_defs.h
