@@ -4,17 +4,17 @@
 	<Project>
 		<Option title="AsmParser"/>
 		<Option makefile_is_custom="1"/>
-		<Option compiler="msvc8"/>
+		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 all"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AsmParser">
@@ -22,23 +22,23 @@
 				<Option working_dir="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="msvc8"/>
+				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include"/>
-					<Add directory="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\ATLMFC\include"/>
-					<Add directory="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\um"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\shared"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\winrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\cppwinrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Users\pocht\scoop\apps\gcc\current\include"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="/mingw/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 AsmParser"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 AsmParser"/>
+					<CompileFile command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AsmParser/fast">
@@ -46,80 +46,80 @@
 				<Option working_dir="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="msvc8"/>
+				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include"/>
-					<Add directory="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\ATLMFC\include"/>
-					<Add directory="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\um"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\shared"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\winrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\\include\10.0.19041.0\\cppwinrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Users\pocht\scoop\apps\gcc\current\include"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="/mingw/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 AsmParser/fast"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 AsmParser/fast"/>
+					<CompileFile command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/ElfParser.cpp">
-			<Option target="AsmParser"/>
-		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/ElfParser.h">
-			<Option target="AsmParser"/>
-		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/command_parser.cpp">
-			<Option target="AsmParser"/>
-		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/command_parser.h">
-			<Option target="AsmParser"/>
-		</Unit>
 		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/main.cpp">
 			<Option target="AsmParser"/>
 		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/symtable_parser.cpp">
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/CommandParser.cpp">
 			<Option target="AsmParser"/>
 		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/symtable_parser.h">
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/CommandParser.h">
+			<Option target="AsmParser"/>
+		</Unit>
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/ElfParser.cpp">
+			<Option target="AsmParser"/>
+		</Unit>
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/ElfParser.h">
+			<Option target="AsmParser"/>
+		</Unit>
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/SymtableParser.cpp">
+			<Option target="AsmParser"/>
+		</Unit>
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/SymtableParser.h">
+			<Option target="AsmParser"/>
+		</Unit>
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/FileReader.h">
+			<Option target="AsmParser"/>
+		</Unit>
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/FileWriter.h">
 			<Option target="AsmParser"/>
 		</Unit>
 		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/Section.h">
 			<Option target="AsmParser"/>
 		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/file_reader.hpp">
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/SymtableElement.h">
 			<Option target="AsmParser"/>
 		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/file_writer.hpp">
-			<Option target="AsmParser"/>
-		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/riscv_command.h">
-			<Option target="AsmParser"/>
-		</Unit>
-		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/symtable_element.h">
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/Utility.h">
 			<Option target="AsmParser"/>
 		</Unit>
 		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/CMakeLists.txt">

@@ -48,27 +48,27 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /home/mike/.local/lib/python3.8/site-packages/cmake/data/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E rm -f
+RM = /home/mike/.local/lib/python3.8/site-packages/cmake/data/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mike/Documents/Homework/Arhitecture/Lab3
+CMAKE_SOURCE_DIR = /mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mike/Documents/Homework/Arhitecture/Lab3/build
+CMAKE_BINARY_DIR = /mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/mike/.local/lib/python3.8/site-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/mike/.local/lib/python3.8/site-packages/cmake/data/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mike/Documents/Homework/Arhitecture/Lab3/build/CMakeFiles /home/mike/Documents/Homework/Arhitecture/Lab3/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/CMakeFiles /mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mike/Documents/Homework/Arhitecture/Lab3/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -126,7 +126,7 @@ AsmParser: cmake_check_build_system
 
 # fast build rule for target.
 AsmParser/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/AsmParser.dir/build.make src/CMakeFiles/AsmParser.dir/build
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/build
 .PHONY : AsmParser/fast
 
 #=============================================================================
@@ -139,8 +139,80 @@ Utility: cmake_check_build_system
 
 # fast build rule for target.
 Utility/fast:
-	$(MAKE) $(MAKESILENT) -f src/utility/CMakeFiles/Utility.dir/build.make src/utility/CMakeFiles/Utility.dir/build
+	$(MAKE) $(MAKESILENT) -f utility/CMakeFiles/Utility.dir/build.make utility/CMakeFiles/Utility.dir/build
 .PHONY : Utility/fast
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+parser/CommandParser.o: parser/CommandParser.cpp.o
+.PHONY : parser/CommandParser.o
+
+# target to build an object file
+parser/CommandParser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.o
+.PHONY : parser/CommandParser.cpp.o
+
+parser/CommandParser.i: parser/CommandParser.cpp.i
+.PHONY : parser/CommandParser.i
+
+# target to preprocess a source file
+parser/CommandParser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.i
+.PHONY : parser/CommandParser.cpp.i
+
+parser/CommandParser.s: parser/CommandParser.cpp.s
+.PHONY : parser/CommandParser.s
+
+# target to generate assembly for a file
+parser/CommandParser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.s
+.PHONY : parser/CommandParser.cpp.s
+
+parser/ElfParser.o: parser/ElfParser.cpp.o
+.PHONY : parser/ElfParser.o
+
+# target to build an object file
+parser/ElfParser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.o
+.PHONY : parser/ElfParser.cpp.o
+
+parser/ElfParser.i: parser/ElfParser.cpp.i
+.PHONY : parser/ElfParser.i
+
+# target to preprocess a source file
+parser/ElfParser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.i
+.PHONY : parser/ElfParser.cpp.i
+
+parser/ElfParser.s: parser/ElfParser.cpp.s
+.PHONY : parser/ElfParser.s
+
+# target to generate assembly for a file
+parser/ElfParser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AsmParser.dir/build.make CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.s
+.PHONY : parser/ElfParser.cpp.s
 
 # Help Target
 help:
@@ -152,6 +224,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... AsmParser"
 	@echo "... Utility"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... parser/CommandParser.o"
+	@echo "... parser/CommandParser.i"
+	@echo "... parser/CommandParser.s"
+	@echo "... parser/ElfParser.o"
+	@echo "... parser/ElfParser.i"
+	@echo "... parser/ElfParser.s"
 .PHONY : help
 
 

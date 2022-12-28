@@ -8,7 +8,7 @@
 #include <string>
 
 namespace utility {
-    struct section { // TODO: rewrite this code
+    struct Section {
         int name;
         int type;
         int flags;
@@ -20,10 +20,10 @@ namespace utility {
         int addrAlign;
         int entSize;
 
-        section(int name, int type, int flags, int addr, int offset, int size, int link, int info, int addrAlign,
+        Section(int name, int type, int flags, int addr, int offset, int size, int link, int info, int addrAlign,
                 int entSize)
-                : name(name), type(type), flags(flags), addr(addr), offset(offset), size(size), link(link)
-                , info(info), addrAlign(addrAlign), entSize(entSize) {}
+                : name(name), type(type), flags(flags), addr(addr), offset(offset), size(size), link(link), info(info),
+                  addrAlign(addrAlign), entSize(entSize) {}
 
     };
 }

@@ -7,29 +7,28 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/mike/Documents/Homework/Arhitecture/Lab3/CMakeLists.txt"
-  "CMakeFiles/3.25.1/CMakeCCompiler.cmake"
-  "CMakeFiles/3.25.1/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.25.1/CMakeSystem.cmake"
-  "/home/mike/Documents/Homework/Arhitecture/Lab3/src/CMakeLists.txt"
-  "/home/mike/Documents/Homework/Arhitecture/Lab3/src/utility/CMakeLists.txt"
-  "/usr/share/cmake/Modules/CMakeCInformation.cmake"
-  "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
-  "/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
-  "/usr/share/cmake/Modules/CMakeGenericSystem.cmake"
-  "/usr/share/cmake/Modules/CMakeInitializeConfigs.cmake"
-  "/usr/share/cmake/Modules/CMakeLanguageInformation.cmake"
-  "/usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake"
-  "/usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake"
-  "/usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
-  "/usr/share/cmake/Modules/Compiler/GNU-C.cmake"
-  "/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake"
-  "/usr/share/cmake/Modules/Compiler/GNU.cmake"
-  "/usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake"
-  "/usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake"
-  "/usr/share/cmake/Modules/Platform/Linux-GNU.cmake"
-  "/usr/share/cmake/Modules/Platform/Linux.cmake"
-  "/usr/share/cmake/Modules/Platform/UnixPaths.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeCInformation.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeCXXInformation.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeGenericSystem.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Compiler/GNU-C.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Compiler/GNU.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Platform/Linux-GNU-C.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Platform/Linux-GNU-CXX.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Platform/Linux-GNU.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Platform/Linux.cmake"
+  "/home/mike/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.25/Modules/Platform/UnixPaths.cmake"
+  "/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/CMakeLists.txt"
+  "CMakeFiles/3.25.0/CMakeCCompiler.cmake"
+  "CMakeFiles/3.25.0/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.25.0/CMakeSystem.cmake"
+  "/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/CMakeLists.txt"
   )
 
 # The corresponding makefile is:
@@ -41,12 +40,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "src/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "src/utility/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "utility/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "src/CMakeFiles/AsmParser.dir/DependInfo.cmake"
-  "src/utility/CMakeFiles/Utility.dir/DependInfo.cmake"
+  "CMakeFiles/AsmParser.dir/DependInfo.cmake"
+  "utility/CMakeFiles/Utility.dir/DependInfo.cmake"
   )

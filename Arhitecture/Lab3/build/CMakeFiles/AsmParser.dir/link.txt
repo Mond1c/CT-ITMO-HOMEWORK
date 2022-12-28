@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/AsmParser.dir/src/main.cpp.o -o AsmParser 
+/usr/bin/c++ CMakeFiles/AsmParser.dir/main.cpp.o CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.o CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.o -o AsmParser 

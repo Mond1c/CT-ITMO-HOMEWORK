@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/ElfParser.cpp" "CMakeFiles/AsmParser.dir/ElfParser.cpp.obj" "msvc" "CMakeFiles/AsmParser.dir/ElfParser.cpp.obj.d"
-  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/command_parser.cpp" "CMakeFiles/AsmParser.dir/command_parser.cpp.obj" "msvc" "CMakeFiles/AsmParser.dir/command_parser.cpp.obj.d"
-  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/main.cpp" "CMakeFiles/AsmParser.dir/main.cpp.obj" "msvc" "CMakeFiles/AsmParser.dir/main.cpp.obj.d"
-  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/symtable_parser.cpp" "CMakeFiles/AsmParser.dir/symtable_parser.cpp.obj" "msvc" "CMakeFiles/AsmParser.dir/symtable_parser.cpp.obj.d"
+  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/main.cpp" "CMakeFiles/AsmParser.dir/main.cpp.obj" "gcc" "CMakeFiles/AsmParser.dir/main.cpp.obj.d"
+  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/CommandParser.cpp" "CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.obj" "gcc" "CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.obj.d"
+  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/ElfParser.cpp" "CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj" "gcc" "CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj.d"
+  "C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/SymtableParser.cpp" "CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj" "gcc" "CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj.d"
   )
 
 # Targets to which this target links.
