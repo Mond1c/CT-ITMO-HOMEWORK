@@ -197,7 +197,7 @@ CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj: \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/uses_allocator_args.h \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/pstl/glue_memory_defs.h \
  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/SymtableElement.h \
- C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/SymtableParser.h \
+ C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/SymtableParser.h \
  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/Utility.h \
  C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\parser\ElfParser.h \
  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/FileWriter.h \
@@ -209,4 +209,4 @@ CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj: \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/fstream.tcc \
  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/FileReader.h \
  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/Section.h \
- C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\parser\SymtableParser.h
+ C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/SymtableParser.h

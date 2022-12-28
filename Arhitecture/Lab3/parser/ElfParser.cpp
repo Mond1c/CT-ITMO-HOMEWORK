@@ -24,10 +24,8 @@ namespace parser {
     int ElfParser::GetValue(int offset, int size) const {
         int ans = 0;
         for (int i = size - 1; i >= 0; --i) {
-            std::cout << (int) bytes[offset + i] << " ";
             ans = ans * 256 + bytes[offset + i];
         }
-        std::cout << ans << std::endl;
         return ans;
     }
 
@@ -66,7 +64,6 @@ namespace parser {
         int offset = text->offset;
         int size = text->size;
         int addr = text->addr;
-        std::cout << addr << std::endl;
         CommandParser parser(bytes, elements, symTable, addr);
         for (int i = 0; i < size; i += 4) {
             std::stringstream ss;
@@ -97,7 +94,6 @@ namespace parser {
         auto symtab = sections[".symtab"];
         int offset = symtab->offset;
         int num = symtab->size / 16;
-        int strOffset = sections[".strtab"]->offset;
         for (int i = 0; i < num; ++i) {
             std::stringstream ss;
             for (int j = 0; j < 4; ++j) {
@@ -105,26 +101,26 @@ namespace parser {
                 ss << str;
             }
             std::string str = ss.str();
-            std::string name = GetName(GetValue(offset + i * 16, 4) + strOffset);
-            std::cout << name << std::endl;
+            std::string name = GetName(GetValue(offset + i * 16, 4) + sections[".strtab"]->offset);
             std::string infoStr = str.substr(0, 8);
             std::reverse(infoStr.begin(), infoStr.end());
             std::string otherStr = str.substr(8, str.size() - 8);
             std::reverse(otherStr.begin(), otherStr.end());
-            int8_t value = GetValue(offset + i * 16 + 4, 4);
-            int8_t size = GetValue(offset + i * 16 + 8, 4);
-            int8_t info = std::stoi(infoStr, nullptr, 2);
-            int8_t other = std::stoi(otherStr, nullptr, 2);
+            int value = GetValue(offset + i * 16 + 4, 4);
+            int size = GetValue(offset + i * 16 + 8, 4);
+            int info = std::stoi(infoStr, nullptr, 2);
+            int other = std::stoi(otherStr, nullptr, 2);
             symTable[value] = elements.size();
             elements.push_back(std::make_shared<utility::SymtableElement>(name, value, size, i, info, other));
         }
+        elementsSizeAfterSymtabParsing = elements.size();
     }
 
     void ElfParser::SaveSymtab() {
         writer->writeLine(".symtab");
         writer->writeLine("Symbol Value          \t  Size Type \tBind \t Vis   \t   Index Name");
-        for (const auto &element: elements) {
-            writer->write(element->GetString());
+        for (int i = 0; i < elementsSizeAfterSymtabParsing; i++) {
+            writer->write(elements[i]->GetString());
         }
     }
 

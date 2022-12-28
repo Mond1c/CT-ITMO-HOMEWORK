@@ -96,8 +96,8 @@ std::string parser::CommandParser::GetRiscvCommand(int addr, const std::string &
     } else if (opcode == "1100011") {
         int imm = (int) std::stoul(str.substr(24, 1) + str.substr(20, 4) + str.substr(1, 6) + str[0] , nullptr, 2);
         std::string instruction = RiscVParser::ParseLogicalOP(funct3);
-        std::cout << "imm: " << utility::GetFormatString("%05x", imm) << std::endl;
-        if (imm > 4096) { // 4 KiBs
+        //std::cout << "imm: " << utility::GetFormatString("%05x", imm) << std::endl;
+        if (imm > 4096) {
             imm = imm - 4096;
             imm = -imm;
         } else if (imm < -4096) {
@@ -105,7 +105,7 @@ std::string parser::CommandParser::GetRiscvCommand(int addr, const std::string &
             imm = -imm;
         }
         return utility::GetFormatString(formatFor3Args, addr, code, instruction.c_str(), GetRegister(rs1).c_str(),
-                               GetRegister(rs2).c_str(), GetLabel(addr + imm + 4).c_str());
+                               GetRegister(rs2).c_str(), GetLabel(addr + imm + 4, false).c_str());
     } else if (opcode == "0110111" || opcode == "0010111") {
         int imm = (int) std::stoul(str.substr(0, 20), nullptr, 2);
         std::string instruction = RiscVParser::ParseBitOP(opcode);
@@ -122,7 +122,7 @@ std::string parser::CommandParser::GetRiscvCommand(int addr, const std::string &
         std::string instruction = "jal";
         int imm = std::stoi(str.substr(12, 8) + str[11] + str.substr(1, 10) + str[0],
                             nullptr, 2);
-        if (imm > 1048505) { // 1 MiB
+        if (imm > 1048505) {
             imm = imm - 1048505;
             imm = -imm;
         } else if (imm < -1048506) {
@@ -131,7 +131,7 @@ std::string parser::CommandParser::GetRiscvCommand(int addr, const std::string &
         }
         return utility::GetFormatString("   %05x:\t%08x\t%7s\t%s, %05x(%s)\n", addr, code, instruction.c_str(),
                                GetRegister(rd).c_str(),
-                               addr + imm, GetLabel(addr + imm).c_str());
+                               addr + imm, GetLabel(addr + imm, true).c_str());
     } else if (opcode == "1100111") {
         std::string instruction = "jalr";
         int imm = (int) std::stoul(std::string(20, str[0]) + str.substr(0, 12), nullptr, 2);
@@ -139,8 +139,7 @@ std::string parser::CommandParser::GetRiscvCommand(int addr, const std::string &
                                std::to_string(imm).c_str(), GetRegister(rs1).c_str());
     } else if (opcode == "0001111") {
         std::string part = (funct3 == "001" ? ".i" : "");
-        return utility::GetFormatString(formatFor2Args, addr, code, ("fence" + part).c_str(),
-                               GetRegister(str.substr(20, 5)).c_str(), GetRegister(str.substr(12, 5)).c_str());
+        return utility::GetFormatString(formatFor2Args, addr, code, ("fence" + part).c_str(), "iorw", "iorw");
     }
     throw std::invalid_argument("Invalid command  = " + str);
 }
@@ -194,8 +193,7 @@ std::string parser::RiscVParser::ParseArithmeticOP(const std::string &funct7, co
                 return "remu";
         }
     }
-    throw std::invalid_argument(
-            "Unsupported Risc-V arithmetic instruction funct7 = " + funct7 + ", funct3 = " + funct3);
+    return  "unknown_instruction";
 }
 
 std::string parser::RiscVParser::ParseCSROP(const std::string &funct3) {
@@ -214,7 +212,7 @@ std::string parser::RiscVParser::ParseCSROP(const std::string &funct3) {
         case 7:
             return "csrci";
     }
-    throw std::invalid_argument("Unsupported Risc-V csr instruction funct3 = " + funct3);
+    return  "unknown_instruction";
 }
 
 std::string parser::RiscVParser::ParseLoadOP(const std::string &funct3) {
@@ -231,7 +229,7 @@ std::string parser::RiscVParser::ParseLoadOP(const std::string &funct3) {
         case 5:
             return "lhu";
     }
-    throw std::invalid_argument("Unsupported Risc-V load operation funct3 = " + funct3);
+    return  "unknown_instruction";
 }
 
 std::string parser::RiscVParser::ParseStoreOP(const std::string &funct3) {
@@ -244,7 +242,7 @@ std::string parser::RiscVParser::ParseStoreOP(const std::string &funct3) {
         case 2:
             return "sw";
     }
-    throw std::invalid_argument("Unsupported Risc-V store instruction funct3 = " + funct3);
+    return  "unknown_instruction";
 }
 
 std::string parser::RiscVParser::ParseLogicalOP(const std::string &funct3) {
@@ -263,7 +261,7 @@ std::string parser::RiscVParser::ParseLogicalOP(const std::string &funct3) {
         case 7:
             return "bgeu";
     }
-    throw std::invalid_argument("Unsupported Risc-V logical instruction funct3 = " + funct3);
+    return  "unknown_instruction";
 }
 
 std::string parser::RiscVParser::ParseBitOP(const std::string &opcode) {
@@ -272,7 +270,7 @@ std::string parser::RiscVParser::ParseBitOP(const std::string &opcode) {
     } else if (opcode == "0010111") {
         return "auipc";
     }
-    throw std::invalid_argument("Unsupported Risc-V instruction with opcode = " + opcode);
+    return  "unknown_instruction";
 }
 
 std::string parser::RiscVParser::ParseArithmeticIOP(const std::string &funct7, const std::string &funct3) {
@@ -303,17 +301,20 @@ std::string parser::RiscVParser::ParseArithmeticIOP(const std::string &funct7, c
         case 7:
             return "andi";
     }
-    throw std::invalid_argument(
-            "Unsupported Risc-V arithmeticI instruction funct7 = " + funct7 + ", funct3 = " + funct3);
+    return  "unknown_instruction";
 }
 
 
-std::string parser::CommandParser::GetLabel(int addrCommand) {
+std::string parser::CommandParser::GetLabel(int addrCommand, bool isJ) {
     if (symTable.count(addrCommand)) {
         return elements[symTable[addrCommand]]->name;
     }
     symTable[addrCommand] = elements.size();
-    elements.push_back(std::make_shared<utility::SymtableElement>(utility::GetFormatString("%x", addrCommand)));
+    if (isJ) {
+        elements.push_back(std::make_shared<utility::SymtableElement>(utility::GetFormatString("0x%x", addrCommand)));
+    } else {
+        elements.push_back(std::make_shared<utility::SymtableElement>(utility::GetFormatString("L%i", labelCount++)));
+    }
     return elements[symTable[addrCommand]]->name;
 }
 

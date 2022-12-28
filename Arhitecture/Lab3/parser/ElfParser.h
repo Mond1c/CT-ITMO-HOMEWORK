@@ -10,7 +10,7 @@
 #include "../utility/SymtableElement.h"
 #include "../utility/Section.h"
 #include "CommandParser.h"
-#include "SymtableParser.h"
+#include "../utility/SymtableParser.h"
 
 #include <unordered_map>
 #include <vector>
@@ -25,6 +25,7 @@ namespace parser {
         std::vector<std::shared_ptr<utility::SymtableElement>> elements;
         std::unordered_map<std::string, std::shared_ptr<utility::Section>> sections;
         std::unordered_map<int, int> symTable;
+        int elementsSizeAfterSymtabParsing=0;
     public:
         ElfParser(const std::string &inputFile, const std::string &outputFile) {
             reader = std::make_unique<utility::FileReader>(inputFile);

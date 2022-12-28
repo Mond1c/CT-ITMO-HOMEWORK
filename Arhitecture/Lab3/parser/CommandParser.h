@@ -12,6 +12,7 @@
 namespace parser {
     class CommandParser {
     private:
+        int labelCount = 0;
         std::vector<std::shared_ptr<utility::SymtableElement>> &elements;
         std::unordered_map<int, int> &symTable;
         int textAddr;
@@ -35,7 +36,7 @@ namespace parser {
                 : bytes(bytes), elements(elements), symTable(symTable), textAddr(textAddr) {}
 
     public:
-        std::string GetLabel(int addrCommand);
+        std::string GetLabel(int addrCommand, bool isJ);
 
         std::string GetRiscvCommand(int addr, const std::string &str);
 

@@ -96,19 +96,19 @@ CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.s"
 	C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\parser\CommandParser.cpp -o CMakeFiles\AsmParser.dir\parser\CommandParser.cpp.s
 
-CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj: CMakeFiles/AsmParser.dir/flags.make
-CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/SymtableParser.cpp
-CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj: CMakeFiles/AsmParser.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj"
-	C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj -MF CMakeFiles\AsmParser.dir\parser\SymtableParser.cpp.obj.d -o CMakeFiles\AsmParser.dir\parser\SymtableParser.cpp.obj -c C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\parser\SymtableParser.cpp
+CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj: CMakeFiles/AsmParser.dir/flags.make
+CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/utility/SymtableParser.cpp
+CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj: CMakeFiles/AsmParser.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj"
+	C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj -MF CMakeFiles\AsmParser.dir\utility\SymtableParser.cpp.obj.d -o CMakeFiles\AsmParser.dir\utility\SymtableParser.cpp.obj -c C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\utility\SymtableParser.cpp
 
-CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.i"
-	C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\parser\SymtableParser.cpp > CMakeFiles\AsmParser.dir\parser\SymtableParser.cpp.i
+CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.i"
+	C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\utility\SymtableParser.cpp > CMakeFiles\AsmParser.dir\utility\SymtableParser.cpp.i
 
-CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.s"
-	C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\parser\SymtableParser.cpp -o CMakeFiles\AsmParser.dir\parser\SymtableParser.cpp.s
+CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.s"
+	C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\pocht\Desktop\Homework\Arhitecture\Lab3\utility\SymtableParser.cpp -o CMakeFiles\AsmParser.dir\utility\SymtableParser.cpp.s
 
 CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj: CMakeFiles/AsmParser.dir/flags.make
 CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/parser/ElfParser.cpp
@@ -128,7 +128,7 @@ CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.s: cmake_force
 AsmParser_OBJECTS = \
 "CMakeFiles/AsmParser.dir/main.cpp.obj" \
 "CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.obj" \
-"CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj" \
+"CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj" \
 "CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj"
 
 # External object files for target AsmParser
@@ -136,7 +136,7 @@ AsmParser_EXTERNAL_OBJECTS =
 
 AsmParser.exe: CMakeFiles/AsmParser.dir/main.cpp.obj
 AsmParser.exe: CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.obj
-AsmParser.exe: CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj
+AsmParser.exe: CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj
 AsmParser.exe: CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj
 AsmParser.exe: CMakeFiles/AsmParser.dir/build.make
 AsmParser.exe: CMakeFiles/AsmParser.dir/linklibs.rsp

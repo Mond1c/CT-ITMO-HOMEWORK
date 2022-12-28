@@ -8,8 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/AsmParser.dir/parser/CommandParser.cpp.obj.d"
   "CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj"
   "CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.obj.d"
-  "CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj"
-  "CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj.d"
+  "CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj"
+  "CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj.d"
   "libAsmParser.dll.a"
 )
 

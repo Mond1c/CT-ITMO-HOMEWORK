@@ -7,7 +7,7 @@
 
 #include <string>
 #include <memory>
-#include "../parser/SymtableParser.h"
+#include "SymtableParser.h"
 #include "Utility.h"
 
 namespace utility {

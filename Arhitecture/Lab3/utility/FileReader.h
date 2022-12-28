@@ -15,7 +15,10 @@ namespace utility {
         explicit FileReader(const std::string &fileName)
                 : file_(fileName, std::ios_base::binary) {
             if (!file_.is_open()) {
-                throw std::invalid_argument("File with name \"" + fileName + "\" does not exist");
+                throw std::runtime_error("File with name \"" + fileName + "\" does not exist");
+            }
+            if (!fileName.ends_with(".elf")) {
+                throw std::runtime_error("You can parse only *.elf files");
             }
         }
 

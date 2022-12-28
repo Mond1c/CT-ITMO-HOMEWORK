@@ -200,29 +200,29 @@ parser/ElfParser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\AsmParser.dir\build.make CMakeFiles/AsmParser.dir/parser/ElfParser.cpp.s
 .PHONY : parser/ElfParser.cpp.s
 
-parser/SymtableParser.obj: parser/SymtableParser.cpp.obj
-.PHONY : parser/SymtableParser.obj
+utility/SymtableParser.obj: utility/SymtableParser.cpp.obj
+.PHONY : utility/SymtableParser.obj
 
 # target to build an object file
-parser/SymtableParser.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AsmParser.dir\build.make CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.obj
-.PHONY : parser/SymtableParser.cpp.obj
+utility/SymtableParser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AsmParser.dir\build.make CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.obj
+.PHONY : utility/SymtableParser.cpp.obj
 
-parser/SymtableParser.i: parser/SymtableParser.cpp.i
-.PHONY : parser/SymtableParser.i
+utility/SymtableParser.i: utility/SymtableParser.cpp.i
+.PHONY : utility/SymtableParser.i
 
 # target to preprocess a source file
-parser/SymtableParser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AsmParser.dir\build.make CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.i
-.PHONY : parser/SymtableParser.cpp.i
+utility/SymtableParser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AsmParser.dir\build.make CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.i
+.PHONY : utility/SymtableParser.cpp.i
 
-parser/SymtableParser.s: parser/SymtableParser.cpp.s
-.PHONY : parser/SymtableParser.s
+utility/SymtableParser.s: utility/SymtableParser.cpp.s
+.PHONY : utility/SymtableParser.s
 
 # target to generate assembly for a file
-parser/SymtableParser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AsmParser.dir\build.make CMakeFiles/AsmParser.dir/parser/SymtableParser.cpp.s
-.PHONY : parser/SymtableParser.cpp.s
+utility/SymtableParser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AsmParser.dir\build.make CMakeFiles/AsmParser.dir/utility/SymtableParser.cpp.s
+.PHONY : utility/SymtableParser.cpp.s
 
 # Help Target
 help:
@@ -242,9 +242,9 @@ help:
 	@echo ... parser/ElfParser.obj
 	@echo ... parser/ElfParser.i
 	@echo ... parser/ElfParser.s
-	@echo ... parser/SymtableParser.obj
-	@echo ... parser/SymtableParser.i
-	@echo ... parser/SymtableParser.s
+	@echo ... utility/SymtableParser.obj
+	@echo ... utility/SymtableParser.i
+	@echo ... utility/SymtableParser.s
 .PHONY : help
 
 

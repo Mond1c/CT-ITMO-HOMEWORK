@@ -27,7 +27,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 8,
+				"line" : 7,
 				"parent" : 0
 			}
 		]
@@ -58,7 +58,7 @@
 				0,
 				4,
 				5,
-				8
+				9
 			]
 		}
 	],
@@ -98,7 +98,7 @@
 				0,
 				4,
 				5,
-				8
+				9
 			]
 		},
 		{
@@ -110,7 +110,7 @@
 				3,
 				6,
 				7,
-				9,
+				8,
 				10,
 				11
 			]
@@ -126,17 +126,17 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "parser/CommandParser.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
 			"path" : "utility/FileReader.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"path" : "utility/FileWriter.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "parser/CommandParser.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -148,12 +148,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "parser/SymtableParser.cpp",
+			"path" : "utility/SymtableParser.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "parser/SymtableParser.h",
+			"path" : "utility/SymtableParser.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -163,14 +163,14 @@
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "parser/ElfParser.cpp",
-			"sourceGroupIndex" : 0
+			"path" : "parser/ElfParser.h",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "parser/ElfParser.h",
-			"sourceGroupIndex" : 1
+			"compileGroupIndex" : 0,
+			"path" : "parser/ElfParser.cpp",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
