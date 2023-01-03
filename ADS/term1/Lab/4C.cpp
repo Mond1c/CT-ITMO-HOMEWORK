@@ -1,102 +1,90 @@
 #include <bits/stdc++.h>
+#define ll long long
 
-const std::vector<char> operators = {'+', '-', '*', '/'};
+const char OPERATIONS[] = {'+', '-', '*', '/'};
 
-int calc(int x, int y, char op);
 
-int main4C() {
-    std::cin.tie(nullptr);
-    std::ios::sync_with_stdio(false);
-    std::string expression;
-    std::getline(std::cin, expression);
-    std::stack<int> operands;
-    std::stack<char> ops;
-    std::string num;
-    int bracket = 0;
-    for (char i : expression) {
-        if (!std::isdigit(i) && !num.empty()) {
-            operands.push(std::stoi(num));
-            num = "";
-        }
-        if (i == '(') {
-            ops.push(i);
-            bracket++;
-        } else if (i == ')') {
-            while (!ops.empty() && ops.top() != '(') {
-                if (operands.empty()) {
-                    std::cout << "WRONG" << std::endl;
-                    return 0;
-                }
-                int x = operands.top(); operands.pop();
-                if (operands.empty()) {
-                    std::cout << "WRONG" << std::endl;
-                    return 0;
-                }
-                int y = operands.top(); operands.pop();
-                char op = ops.top(); ops.pop();
-                operands.push(calc(x, y, op));
-            }
-            if (!ops.empty()) ops.pop();
-            bracket--;
-        } else if (std::find(operators.begin(), operators.end(), i) != operators.end()) {
-            if (ops.size() - bracket > (operands.size() / 2 + (operands.size() % 2))) {
-                std::cout << "WRONG" << std::endl;
-                return 0;
-            }
-            while (!ops.empty() && (ops.top() == '*' || ops.top() == '/')) {
-                if (operands.empty()) {
-                    std::cout << "WRONG" << std::endl;
-                    return 0;
-                }
-                int x = operands.top(); operands.pop();
-                if (operands.empty()) {
-                    std::cout << "WRONG" << std::endl;
-                    return 0;
-                }
-                int y = operands.top(); operands.pop();
-                char op = ops.top(); ops.pop();
-                operands.push(calc(x, y, op));
-            }
-            ops.push(i);
-        } else if (std::isdigit(i)) {
-            if (ops.size()  < (operands.size() / 2 + (operands.size() % 2))) {
-                std::cout << "WRONG" << std::endl;
-                return 0;
-            }
-            num.push_back(i);
-        } else if (i != ' ') {
-            std::cout << "WRONG" << std::endl;
-            return 0;
-        }
-
-    }
-    if (!num.empty()) {
-        operands.push(std::stoi(num));
-    }
-    while (!ops.empty()) {
-        if (operands.empty()) {
-            std::cout << "WRONG" << std::endl;
-            return 0;
-        }
-        int x = operands.top(); operands.pop();
-        if (operands.empty()) {
-            std::cout << "WRONG" << std::endl;
-            return 0;
-        }
-        int y = operands.top(); operands.pop();
-        char op = ops.top(); ops.pop();
-        operands.push(calc(x, y, op));
-    }
-    std::cout << operands.top() << std::endl;
-    return 0;
+int get_priority(char ch) {
+	if (ch == '*' || ch == '/') return 2;
+	if (ch == '+' || ch == '-') return 1;
+	return 0;
 }
 
-int calc(int x, int y, char op) {
-    switch (op) {
-        case '+': return x + y;
-        case '-': return y - x;
-        case '*': return x * y;
-        case '/': return y / x;
-        default: return 0;
-    }
+bool is_operation(char ch) {
+	return std::find(&OPERATIONS[0], &OPERATIONS[4], ch) != &OPERATIONS[4];
+}
+
+ll calc(ll x, ll y, char operation) {
+	switch (operation) {
+	case '+': return x + y;
+	case '-': return x - y;
+	case '*': return x * y;
+	case '/': return x / y;
+	}
+}
+
+bool extract(std::stack<ll>& values, std::stack<char>& operations) {
+	if (values.size() < 2 || operations.empty()) {
+		return false;
+	}
+	ll y = values.top(); values.pop();
+	ll x = values.top(); values.pop();
+	char operation = operations.top(); operations.pop();
+	values.push(calc(x, y, operation));
+	return true;
+}
+
+int main() {
+	std::istringstream ss;
+	std::string expression;
+	std::getline(std::cin, expression);
+	std::stack<ll> values;
+	std::stack<char> operations;
+	for (int i = 0; i < expression.size(); ++i) {
+		char ch = expression[i];
+		if (ch == ' ') continue;
+		if (ch == '(') {
+			operations.push(ch);
+		} else if (ch == ')') {
+			while (!operations.empty() && operations.top() != '(') {
+				if (!extract(values, operations)) {
+					std::cout << "WRONG" << std::endl;
+					return 0;
+				}
+			}
+			if (!operations.empty()) {
+				operations.pop();
+			}
+		} else if (is_operation(ch)) {
+			while (!operations.empty() && get_priority(operations.top()) >= get_priority(ch)) {
+				if (!extract(values, operations)) {
+					std::cout << "WRONG" << std::endl;
+					return 0;
+				}
+			}
+			operations.push(ch);
+		} else if (isdigit(ch)) {
+			ll value = 0;
+			while (i < expression.size() && isdigit(expression[i])) {
+				value = (value * 10) + (expression[i++] - '0');
+			}
+			values.push(value);
+			--i;
+		} else {
+			std::cout << "WRONG" << std::endl;
+			return 0;
+		}
+	}
+	while (!operations.empty()) {
+		if (!extract(values, operations)) {
+			std::cout << "WRONG" << std::endl;
+			return 0;
+		}
+	}
+	if (values.size() != 1) {
+		std::cout << "WRONG" << std::endl;
+		return 0;
+	}
+	std::cout << values.top() << std::endl;
+	return 0;
 }

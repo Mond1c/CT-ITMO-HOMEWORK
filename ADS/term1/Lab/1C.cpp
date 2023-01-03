@@ -9,8 +9,8 @@ ostream& operator<<(ostream& out, const vector<T>& a) {
 }
 
 void anti_quick_sort(vector<int>& a) {
-	for (size_t i = 0; i < a.size() - 1; ++i) {
-		swap(a[i], a[i / 2]);
+	for (size_t i = 2; i < a.size(); ++i) {
+		    swap(a[i], a[i / 2]);
 	}
 }
 
