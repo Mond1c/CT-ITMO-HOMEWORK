@@ -1,0 +1,11 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+
+int main() {
+  cin.tie(nullptr);
+  
+  return 0;
+}

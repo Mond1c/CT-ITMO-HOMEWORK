@@ -1,0 +1,6 @@
+public class Twelve {
+    public static void main(String[] args) {
+	final int n = new Scanner(System.in).nextInt();
+	System.out.println("Hello, World!");
+    }
+}

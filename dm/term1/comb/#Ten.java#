@@ -1,0 +1,11 @@
+import java.util.*;
+
+public class Ten {
+    private static void generate(int n) {
+	
+    }
+    
+    public static void main(String[] args) {
+	
+    }
+}
