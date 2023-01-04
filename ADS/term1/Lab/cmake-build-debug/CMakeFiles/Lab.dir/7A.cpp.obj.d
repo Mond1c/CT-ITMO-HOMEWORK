@@ -1,5 +1,5 @@
-CMakeFiles/Lab.dir/4C.cpp.obj: \
- C:\Users\pocht\Desktop\Homework\ADS\term1\Lab\4C.cpp \
+CMakeFiles/Lab.dir/7A.cpp.obj: \
+ C:\Users\pocht\Desktop\Homework\ADS\term1\Lab\7A.cpp \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/stdc++.h \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/cassert \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \

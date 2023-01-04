@@ -34,7 +34,7 @@ bool extract(std::stack<ll>& values, std::stack<char>& operations) {
 	return true;
 }
 
-int main() {
+int main4C() {
 	std::istringstream ss;
 	std::string expression;
 	std::getline(std::cin, expression);

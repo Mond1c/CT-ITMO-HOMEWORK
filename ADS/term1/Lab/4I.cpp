@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-int main() {
+int main4I() {
     std::cin.tie(nullptr);
     std::ios::sync_with_stdio(false);
     int n;

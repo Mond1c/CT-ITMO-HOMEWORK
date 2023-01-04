@@ -1,0 +1,3 @@
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\Lab.dir/objects.a
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\ar.exe qc CMakeFiles\Lab.dir/objects.a @CMakeFiles\Lab.dir\objects1.rsp
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\Lab.dir/objects.a -Wl,--no-whole-archive -o Lab.exe -Wl,--out-implib,libLab.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Lab.dir\linklibs.rsp
