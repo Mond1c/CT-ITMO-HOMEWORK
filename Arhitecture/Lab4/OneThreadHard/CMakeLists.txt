@@ -3,4 +3,4 @@ project(OneThreadHard)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(OneThreadHard main.cpp Image.cpp Image.h Histogram.cpp Histogram.h)
+add_executable(OneThreadHard hard.cpp Image.cpp Image.h Histogram.cpp Histogram.h Otsu.cpp Otsu.h FileWriter.h)

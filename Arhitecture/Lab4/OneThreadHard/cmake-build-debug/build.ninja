@@ -49,8 +49,8 @@ cmake_ninja_workdir = /home/mond1c/Documents/Homework/Arhitecture/Lab4/OneThread
 
 build cmake_object_order_depends_target_OneThreadHard: phony || CMakeFiles/OneThreadHard.dir
 
-build CMakeFiles/OneThreadHard.dir/main.cpp.o: CXX_COMPILER__OneThreadHard_Debug /home/mond1c/Documents/Homework/Arhitecture/Lab4/OneThreadHard/main.cpp || cmake_object_order_depends_target_OneThreadHard
-  DEP_FILE = CMakeFiles/OneThreadHard.dir/main.cpp.o.d
+build CMakeFiles/OneThreadHard.dir/hard.cpp.o: CXX_COMPILER__OneThreadHard_Debug /home/mond1c/Documents/Homework/Arhitecture/Lab4/OneThreadHard/hard.cpp || cmake_object_order_depends_target_OneThreadHard
+  DEP_FILE = CMakeFiles/OneThreadHard.dir/hard.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++20
   OBJECT_DIR = CMakeFiles/OneThreadHard.dir
   OBJECT_FILE_DIR = CMakeFiles/OneThreadHard.dir
@@ -67,6 +67,12 @@ build CMakeFiles/OneThreadHard.dir/Histogram.cpp.o: CXX_COMPILER__OneThreadHard_
   OBJECT_DIR = CMakeFiles/OneThreadHard.dir
   OBJECT_FILE_DIR = CMakeFiles/OneThreadHard.dir
 
+build CMakeFiles/OneThreadHard.dir/Otsu.cpp.o: CXX_COMPILER__OneThreadHard_Debug /home/mond1c/Documents/Homework/Arhitecture/Lab4/OneThreadHard/Otsu.cpp || cmake_object_order_depends_target_OneThreadHard
+  DEP_FILE = CMakeFiles/OneThreadHard.dir/Otsu.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+  OBJECT_DIR = CMakeFiles/OneThreadHard.dir
+  OBJECT_FILE_DIR = CMakeFiles/OneThreadHard.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target OneThreadHard
@@ -75,7 +81,7 @@ build CMakeFiles/OneThreadHard.dir/Histogram.cpp.o: CXX_COMPILER__OneThreadHard_
 #############################################
 # Link the executable OneThreadHard
 
-build OneThreadHard: CXX_EXECUTABLE_LINKER__OneThreadHard_Debug CMakeFiles/OneThreadHard.dir/main.cpp.o CMakeFiles/OneThreadHard.dir/Image.cpp.o CMakeFiles/OneThreadHard.dir/Histogram.cpp.o
+build OneThreadHard: CXX_EXECUTABLE_LINKER__OneThreadHard_Debug CMakeFiles/OneThreadHard.dir/hard.cpp.o CMakeFiles/OneThreadHard.dir/Image.cpp.o CMakeFiles/OneThreadHard.dir/Histogram.cpp.o CMakeFiles/OneThreadHard.dir/Otsu.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/OneThreadHard.dir
   POST_BUILD = :
