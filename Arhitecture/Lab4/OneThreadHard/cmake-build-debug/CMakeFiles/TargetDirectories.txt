@@ -1,0 +1,3 @@
+/home/mond1c/Documents/Homework/Arhitecture/Lab4/OneThreadHard/cmake-build-debug/CMakeFiles/OneThreadHard.dir
+/home/mond1c/Documents/Homework/Arhitecture/Lab4/OneThreadHard/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/mond1c/Documents/Homework/Arhitecture/Lab4/OneThreadHard/cmake-build-debug/CMakeFiles/rebuild_cache.dir
