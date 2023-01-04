@@ -22,7 +22,7 @@ namespace utility {
         int height_{};
     public:
         explicit Image(const std::string& fileName)
-            : file_(std::make_unique<std::ifstream>(fileName)) {
+            : file_(std::make_unique<std::ifstream>(fileName, std::ifstream::binary)) {
             if (!(*file_)) {
                 throw std::runtime_error("Can't open file " + fileName);
             }

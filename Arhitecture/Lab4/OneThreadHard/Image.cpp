@@ -16,17 +16,12 @@ void utility::Image::ReadFromFile() {
         throw std::runtime_error("Invalid file format, expected 255");
     }
     colors_ = std::vector<std::vector<uint8_t>>(height_, std::vector<uint8_t>(width_));
-    int i = 0, j = 0;
-    int count = 0;
-    while (*file_) {
-        *file_ >> str;
-        count += str.size();
-        for (char ch : str) {
-            if (j == width_) {
-                j = 0;
-                ++i;
-            }
-            colors_[i][j++] = 0xFF & ch;
+    std::unique_ptr<char[]> buffer(new char[width_ * height_]);
+    file_->read(buffer.get(), width_ * height_);
+    int pos = 0;
+    for (int i = 0; i < height_; ++i) {
+        for (int j = 0; j < width_; ++j) {
+            colors_[i][j] =(uint8_t) buffer[pos++];
         }
     }
 }

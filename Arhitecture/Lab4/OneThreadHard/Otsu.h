@@ -11,14 +11,20 @@ class Otsu {
 private:
     std::shared_ptr<utility::Image> image_;
     std::map<int, int> histogram_;
+    std::map<int, double> chances_;
 public:
-    Otsu(const std::string& fileName)
+    explicit Otsu(const std::string& fileName)
         : image_(std::make_shared<utility::Image>(fileName))
-        , histogram_(Histogram::Generate(image_)) {}
+        , histogram_(Histogram::Generate(image_)) {
+        CalculateChances();
+    }
 public:
-    void Calculate();
+    void Generate();
 private:
-    int CalculateThreshold(int start, int end);
+    void CalculateChances();
+    double CalculateChanceForThreshold(int start, int end);
+    double CalculateAverage(int start, int end, double q);
+    std::vector<int> CalculateThreshold();
 };
 
 
