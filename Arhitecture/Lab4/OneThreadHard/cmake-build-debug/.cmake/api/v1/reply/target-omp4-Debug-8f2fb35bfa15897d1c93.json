@@ -108,7 +108,8 @@
 				2,
 				4,
 				6,
-				7
+				7,
+				8
 			]
 		}
 	],
@@ -156,6 +157,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "FileWriter.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Utility.h",
 			"sourceGroupIndex" : 1
 		}
 	],

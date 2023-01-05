@@ -187,4 +187,5 @@ CMakeFiles/omp4.dir/Image.cpp.obj: \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_vector.h \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_bvector.h \
  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/vector.tcc \
- C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iostream
+ C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iostream \
+ C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/omp.h

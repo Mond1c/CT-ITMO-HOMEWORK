@@ -12,4 +12,4 @@ IF(USE_OpenMP)
     ENDIF()
 ENDIF()
 
-add_executable(omp4 hard.cpp Image.cpp Image.h Histogram.cpp Histogram.h Otsu.cpp Otsu.h FileWriter.h)
+add_executable(omp4 hard.cpp Image.cpp Image.h Histogram.cpp Histogram.h Otsu.cpp Otsu.h FileWriter.h Utility.h)

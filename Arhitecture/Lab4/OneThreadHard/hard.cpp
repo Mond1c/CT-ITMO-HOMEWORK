@@ -1,15 +1,28 @@
 #include "Otsu.h"
-#include <chrono>
+#include "Utility.h"
+#include <omp.h>
 
 int main(int argc, char **argv) {
-    if (argc != 4 && argc != 1) {
-        throw std::runtime_error("Invalid count of program arguments");
+    try {
+        int threadCount = std::stoi(argv[1]);
+        bool isOpenMPEnabled = true;
+        if (threadCount > 0) {
+            omp_set_num_threads(threadCount);
+        } else if (threadCount == -1) {
+            isOpenMPEnabled = false;
+        }
+        if (argc == 5) {
+            chunk_size = std::stoi(argv[4]);
+        }
+        double startTime = omp_get_wtime();
+        Otsu otsu(argv[2], argv[3], isOpenMPEnabled);
+        otsu.Generate();
+        double endTime = omp_get_wtime();
+        std::cout
+            << utility::GetFormatString("Time (%i thread(s)): %g ms\n", threadCount, (endTime - startTime) * 1000);
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return -1;
     }
-    auto startTime = std::chrono::high_resolution_clock::now();
-    Otsu otsu("../baboon.pgm");
-    otsu.Generate();
-    auto endTime = std::chrono::high_resolution_clock::now();
-    auto time = endTime - startTime;
-    std::cout << "Time: " << time / std::chrono::milliseconds(1) << "ms" << std::endl;
     return 0;
 }

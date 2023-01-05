@@ -107,6 +107,9 @@
 		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Otsu.h">
 			<Option target="omp4"/>
 		</Unit>
+		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Utility.h">
+			<Option target="omp4"/>
+		</Unit>
 		<Unit filename="C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/hard.cpp">
 			<Option target="omp4"/>
 		</Unit>

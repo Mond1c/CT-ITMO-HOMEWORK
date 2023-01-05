@@ -386,30 +386,34 @@ CMakeFiles/omp4.dir/Image.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/L
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_vector.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_bvector.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/vector.tcc \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iostream
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iostream \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/omp.h
 
 CMakeFiles/omp4.dir/Otsu.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Otsu.cpp \
   C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Otsu.h \
-  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Image.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/string \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/utility \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/pstl/pstl_config.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_relops.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_pair.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/move.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/type_traits \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/compare \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/concepts \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/initializer_list \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/numeric_traits.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/cpp_type_traits.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/type_traits.h \
+  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Image.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/string \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stringfwd.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/memoryfwd.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/char_traits.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_algobase.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/functexcept.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/exception_defines.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/cpp_type_traits.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/type_traits.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/numeric_traits.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_pair.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/move.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/type_traits \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/compare \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/concepts \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/iterator_concepts.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/ptr_traits.h \
@@ -472,7 +476,6 @@ CMakeFiles/omp4.dir/Otsu.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/La
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/x86_64-w64-mingw32/include/errno.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_abs.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/algorithmfwd.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/initializer_list \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_heap.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_tempbuf.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_construct.h \
@@ -549,8 +552,6 @@ CMakeFiles/omp4.dir/Otsu.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/La
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bit \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/uses_allocator.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_ptr.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/utility \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_relops.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/tuple \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/array \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/invoke.h \
@@ -586,30 +587,34 @@ CMakeFiles/omp4.dir/Otsu.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/La
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_multimap.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/erase_if.h \
   C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/FileWriter.h \
+  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Utility.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/omp.h
 
 CMakeFiles/omp4.dir/hard.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/hard.cpp \
   C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Otsu.h \
-  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Image.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/string \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/utility \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/pstl/pstl_config.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_relops.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_pair.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/move.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/type_traits \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/compare \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/concepts \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/initializer_list \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/numeric_traits.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/cpp_type_traits.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/type_traits.h \
+  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Image.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/string \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stringfwd.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/memoryfwd.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/char_traits.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_algobase.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/functexcept.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/exception_defines.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/cpp_type_traits.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/type_traits.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/numeric_traits.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_pair.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/move.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/type_traits \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/compare \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/concepts \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_iterator_base_types.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/iterator_concepts.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/ptr_traits.h \
@@ -672,7 +677,6 @@ CMakeFiles/omp4.dir/hard.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/La
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/x86_64-w64-mingw32/include/errno.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_abs.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/algorithmfwd.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/initializer_list \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_heap.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_tempbuf.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_construct.h \
@@ -749,8 +753,6 @@ CMakeFiles/omp4.dir/hard.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/La
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bit \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/uses_allocator.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_ptr.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/utility \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_relops.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/tuple \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/array \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/invoke.h \
@@ -785,11 +787,8 @@ CMakeFiles/omp4.dir/hard.cpp.obj: C:/Users/pocht/Desktop/Homework/Arhitecture/La
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_map.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_multimap.h \
   C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/erase_if.h \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/chrono \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ratio \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/limits \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ctime \
-  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/parse_numbers.h
+  C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Utility.h \
+  C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/omp.h
 
 
 C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/vector:
@@ -1188,20 +1187,12 @@ C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/m
 
 C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Image.cpp:
 
+C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/omp.h:
+
 C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Otsu.cpp:
 
 C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/FileWriter.h:
 
-C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/omp.h:
+C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/Utility.h:
 
 C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/hard.cpp:
-
-C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/chrono:
-
-C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ratio:
-
-C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/limits:
-
-C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ctime:
-
-C:/Users/pocht/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/parse_numbers.h:

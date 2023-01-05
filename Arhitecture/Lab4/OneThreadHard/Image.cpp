@@ -3,6 +3,7 @@
 //
 
 #include "Image.h"
+#include <omp.h>
 
 void utility::Image::ReadFromFile() {
     std::string str;
@@ -18,10 +19,10 @@ void utility::Image::ReadFromFile() {
     colors_ = std::vector<std::vector<uint8_t>>(height_, std::vector<uint8_t>(width_));
     std::unique_ptr<char[]> buffer(new char[width_ * height_]);
     file_->read(buffer.get(), width_ * height_);
-    int pos = 0;
     for (int i = 0; i < height_; ++i) {
+#pragma omp parallel for
         for (int j = 0; j < width_; ++j) {
-            colors_[i][j] =(uint8_t) buffer[pos++];
+            colors_[i][j] =(uint8_t) buffer[i * width_ + j];
         }
     }
 }
