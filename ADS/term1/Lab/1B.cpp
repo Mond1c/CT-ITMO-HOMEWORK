@@ -4,23 +4,19 @@
 #include <cmath>
 using namespace std;
 
-constexpr unsigned long long MOD = pow(2, 31);
-
-unsigned long long partition(vector<unsigned long long>& a, int l, int r) {
-	unsigned long long x = a[l + (r - l) / 2];
-	while (l <= r) {
-		while (a[l] < x) l++;
-		while (a[r] > x) r--;
-		if (l >= r) break;
-		swap(a[l++], a[r--]);
-	}
-	return r;
+constexpr unsigned long long pow2(int i) {
+    unsigned long long ans = 1;
+    while (i--) ans *= 2;
+    return ans;
 }
 
-unsigned long long solve(vector<unsigned long long>& a, int k) {
-	int l = 0, r = a.size() - 1;
+constexpr unsigned long long MOD = pow2(31);
+
+unsigned long long solve(vector<unsigned long long>& a, unsigned long long k) {
+	unsigned long long l = 0, r = a.size() - 1;
 	while (true) {
-		int mid = partition(a, l, r);
+		auto pivot = *next(a.begin() + l, distance(a.begin() + l, a.begin() + r + 1) / 2);
+		unsigned long long mid = partition(a.begin() + l, a.begin() + r + 1, [&pivot](const auto& x) { return x < pivot; }) - a.begin();
 		if (mid == k) {
 			return a[k];
 		}
@@ -35,12 +31,12 @@ unsigned long long solve(vector<unsigned long long>& a, int k) {
 int main() {
 	cin.tie(nullptr);
 	ios::sync_with_stdio(false);
-	int n, k;
+	unsigned long long n, k;
 	cin >> n;
 	vector<unsigned long long> a(n);
 	cin >> a[0] >> k;
-	for (int i = 1; i < n; i++) {
-		a[i] = (1103515245 * a[i - 1] + 12345) % MOD;
+	for (unsigned long long i = 1; i < n; i++) {
+		a[i] = (1103515245 * (unsigned long long)a[i - 1] + 12345) % MOD;
 	}
 	cout << solve(a, k) << endl;
 	return 0;

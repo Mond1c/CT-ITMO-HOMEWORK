@@ -66,6 +66,7 @@ std::vector<int> Otsu::CalculateThreshold() {
 }
 
 void Otsu::Generate() {
+   // Histogram::Print(histogram_);
     auto f = CalculateThreshold();
     int f0 = f[0];
     int f1 = f[1];

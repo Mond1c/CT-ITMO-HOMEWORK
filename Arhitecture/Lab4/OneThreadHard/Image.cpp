@@ -25,6 +25,7 @@ void utility::Image::ReadFromFile() {
             colors_[i][j] =(uint8_t) buffer[i * width_ + j];
         }
     }
+    file_->close();
 }
 
 int utility::Image::GetWidth() const {

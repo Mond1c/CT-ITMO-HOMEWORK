@@ -1,18 +1,48 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-vector<int> sort(std::vector<int> a, int& counter) {
-  if (a.size() == 1) return a;
-  int mid = a.size() / 2;
-  merge(sort(std::vector<int>(a.begin(), a.begin() + mid), counter), sort(std::vector<int>(a.begin() + mid, a.end()), counter), a, counter);
+int count = 0;
+
+void merge(vector<int>& a, int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    vector<int> left(n1), right(n2);
+    for (int i = 0; i < n1; i++) {
+        left[i] = a[l + i];
+    }
+    for (int i = 0; i < n2; i++) {
+        right[i] = a[m + 1 + i];
+    }
+    int i = 0, j = 0;
+    int k = l;
+    while (i < n1 && j < n2) {
+        if (left[i] <= right[j]) {
+            arr[k] = left[i];
+            i++;
+            count += ();
+        } else {
+            arr[k] = right[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k++] = left[i++];
+    }
+
+    while (j < n2) {
+        arr[k++] = right[j++];
+    }
 }
 
-void merge(std::vector<int> a, std::vector<int> b, std::vector<int>& c, int& counter) {
-  int l = 0, r = 0;
-  c = std::vector<int>(a.size() + b.size());
-  for (int i = 0; i < a.size() + b.size(); i++) {
-    if (r < 
 
-int main() {
-  return 0;
+void sort(vector<int>& a, int l, int r) {
+    if (l >= r) return;
+    int m = l + (r - l) / 2;
+    sort(a, l, m);
+    sort(a, m + 1, r);
+
+    merge(a, l, m, r);
 }

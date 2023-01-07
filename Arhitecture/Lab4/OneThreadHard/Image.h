@@ -35,9 +35,6 @@ namespace utility {
         Image& operator=(Image&) = delete;
         Image& operator=(Image&&) = delete;
 
-        ~Image() {
-            file_->close();
-        }
     public:
         [[nodiscard]] int GetWidth() const;
         [[nodiscard]] int GetHeight() const;

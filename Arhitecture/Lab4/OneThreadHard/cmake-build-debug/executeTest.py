@@ -28,7 +28,7 @@ def test():
             if line.startswith('Time'):
                 sum_time += int(line.split(':')[1].split('ms')[0].strip())
         print("TEST", i + 1, "PASSED!")
-        time.sleep(10) # This line need to solve a problem with throttling
+       # time.sleep(10) # This line need to solve a problem with throttling
     OUTPUT.write('AVERAGE TIME: ' + str(sum_time / TEST_COUNT) + ' ms\n')
 
 def main():

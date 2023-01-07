@@ -1,0 +1,4 @@
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - MinGW Makefiles" -S C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard -B C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\cmake-build-release
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/cmake-build-release
