@@ -1,15 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/omp4.dir/Histogram.cpp.obj"
-  "CMakeFiles/omp4.dir/Histogram.cpp.obj.d"
-  "CMakeFiles/omp4.dir/Image.cpp.obj"
-  "CMakeFiles/omp4.dir/Image.cpp.obj.d"
-  "CMakeFiles/omp4.dir/Otsu.cpp.obj"
-  "CMakeFiles/omp4.dir/Otsu.cpp.obj.d"
-  "CMakeFiles/omp4.dir/hard.cpp.obj"
-  "CMakeFiles/omp4.dir/hard.cpp.obj.d"
-  "libomp4.dll.a"
-  "omp4.exe"
-  "omp4.exe.manifest"
+  "CMakeFiles/omp4.dir/Histogram.cpp.o"
+  "CMakeFiles/omp4.dir/Image.cpp.o"
+  "CMakeFiles/omp4.dir/Otsu.cpp.o"
+  "CMakeFiles/omp4.dir/hard.cpp.o"
+  "omp4"
   "omp4.pdb"
 )
 

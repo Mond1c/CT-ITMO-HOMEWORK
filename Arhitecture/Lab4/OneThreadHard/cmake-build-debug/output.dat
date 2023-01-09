@@ -1,106 +1,0 @@
-======TEST DIFFERENT THREADS COUNT======
-========================
-RUN TESTS WITH 1 THREADS
-TEST 1:
-77 130 187Time (1 thread(s)): 102726 msAVERAGE TIME: 102726.0 ms
-========================
-RUN TESTS WITH 2 THREADS
-TEST 1:
-77 130 187Time (2 thread(s)): 52577 msAVERAGE TIME: 52577.0 ms
-========================
-RUN TESTS WITH 3 THREADS
-TEST 1:
-77 130 187Time (3 thread(s)): 36907 msAVERAGE TIME: 36907.0 ms
-========================
-RUN TESTS WITH 4 THREADS
-TEST 1:
-77 130 187Time (4 thread(s)): 30256 msAVERAGE TIME: 30256.0 ms
-========================
-RUN TESTS WITH 5 THREADS
-TEST 1:
-77 130 187Time (5 thread(s)): 25375 msAVERAGE TIME: 25375.0 ms
-========================
-RUN TESTS WITH 6 THREADS
-TEST 1:
-77 130 187Time (6 thread(s)): 22842 msAVERAGE TIME: 22842.0 ms
-========================
-RUN TESTS WITH 7 THREADS
-TEST 1:
-77 130 187Time (7 thread(s)): 21408 msAVERAGE TIME: 21408.0 ms
-========================
-RUN TESTS WITH 8 THREADS
-TEST 1:
-77 130 187Time (8 thread(s)): 20165 msAVERAGE TIME: 20165.0 ms
-========================
-RUN TESTS WITH 9 THREADS
-TEST 1:
-77 131 189Time (9 thread(s)): 19638 msAVERAGE TIME: 19638.0 ms
-========================
-RUN TESTS WITH 10 THREADS
-TEST 1:
-77 130 187Time (10 thread(s)): 18040 msAVERAGE TIME: 18040.0 ms
-========================
-RUN TESTS WITH 11 THREADS
-TEST 1:
-77 130 187Time (11 thread(s)): 17227 msAVERAGE TIME: 17227.0 ms
-========================
-RUN TESTS WITH 12 THREADS
-TEST 1:
-77 130 187Time (12 thread(s)): 16556 msAVERAGE TIME: 16556.0 ms
-========================
-RUN TESTS WITH 13 THREADS
-TEST 1:
-74 121 165Time (13 thread(s)): 16291 msAVERAGE TIME: 16291.0 ms
-========================
-RUN TESTS WITH 14 THREADS
-TEST 1:
-77 130 187Time (14 thread(s)): 15423 msAVERAGE TIME: 15423.0 ms
-========================
-RUN TESTS WITH 15 THREADS
-TEST 1:
-77 130 187Time (15 thread(s)): 15412 msAVERAGE TIME: 15412.0 ms
-========================
-RUN TESTS WITH 16 THREADS
-TEST 1:
-77 130 187Time (16 thread(s)): 15393 msAVERAGE TIME: 15393.0 ms
-========================
-RUN TESTS WITH 17 THREADS
-TEST 1:
-77 130 187Time (17 thread(s)): 15847 msAVERAGE TIME: 15847.0 ms
-========================
-RUN TESTS WITH 18 THREADS
-TEST 1:
-77 130 187Time (18 thread(s)): 41808 msAVERAGE TIME: 41808.0 ms
-========================
-RUN TESTS WITH 19 THREADS
-TEST 1:
-77 130 187Time (19 thread(s)): 15302 msAVERAGE TIME: 15302.0 ms
-========================
-RUN TESTS WITH 20 THREADS
-TEST 1:
-77 130 187Time (20 thread(s)): 15580 msAVERAGE TIME: 15580.0 ms
-======TEST DIFFERENT CHUNK_SIZE======
-========================
-RUN TESTS WITH CHUNK_SIZE = 1TEST 1:
-77 130 187Time (20 thread(s)): 15387 msAVERAGE TIME: 15387.0 ms
-========================
-RUN TESTS WITH CHUNK_SIZE = 2TEST 1:
-77 130 187Time (20 thread(s)): 15238 msAVERAGE TIME: 15238.0 ms
-========================
-RUN TESTS WITH CHUNK_SIZE = 3TEST 1:
-77 130 187Time (20 thread(s)): 16086 msAVERAGE TIME: 16086.0 ms
-========================
-RUN TESTS WITH CHUNK_SIZE = 4TEST 1:
-77 130 187Time (20 thread(s)): 15282 msAVERAGE TIME: 15282.0 ms
-========================
-RUN TESTS WITH CHUNK_SIZE = 5TEST 1:
-77 130 187Time (20 thread(s)): 15372 msAVERAGE TIME: 15372.0 ms
-========================
-RUN TESTS WITH CHUNK_SIZE = 6TEST 1:
-77 130 187Time (20 thread(s)): 15282 msAVERAGE TIME: 15282.0 ms
-========================
-RUN TESTS WITH CHUNK_SIZE = 7TEST 1:
-77 130 187Time (20 thread(s)): 15237 msAVERAGE TIME: 15237.0 ms
-========================
-RUN TESTS WITH CHUNK_SIZE = 8TEST 1:
-77 130 187Time (20 thread(s)): 15200 msAVERAGE TIME: 15200.0 ms

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\hard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\Image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\Histogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\Otsu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\Histogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\Otsu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\FileWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4C273D00-EEA9-38D9-A948-10EF2175039B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4AC46DFB-551F-3BDE-9CB4-777B30D66F4C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

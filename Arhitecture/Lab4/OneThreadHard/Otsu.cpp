@@ -77,7 +77,7 @@ void Otsu::Generate() {
     writer.WriteLine(std::to_string(image_->GetWidth()) + " " + std::to_string(image_->GetHeight()));
     writer.WriteLine("255");
     for (int i = 0; i < image_->GetHeight(); ++i) {
-#pragma omp parallel for ordered
+//#pragma omp parallel for ordered
         for (int j = 0; j < image_->GetWidth(); ++j) {
             char ch;
             if (image_->GetPixel(i, j) <= f0) {
@@ -89,7 +89,7 @@ void Otsu::Generate() {
             } else {
                 ch = (char)255;
             }
-#pragma omp ordered
+//#pragma omp ordered
             writer.Write(ch);
         }
     }
@@ -103,19 +103,25 @@ void Otsu::CalculateChances() {
 }
 
 double Otsu::CalculateChanceForThreshold(int start, int end) {
-    double sum = 0;
-    for (int i = start; i <= end; ++i) {
-        sum += chances_[i];
-    }
-    return sum;
+    return q_[end] - q_[std::max(0, start - 1)];
 }
 
 double Otsu::CalculateAverage(int start, int end, double q) {
-    double u = 0;
-    for (int i = start; i <= end; ++i) {
-        u += (i * chances_[i]) / q;
+    return (u_[end] - u_[std::max(0, start - 1)]) / q;
+}
+
+void Otsu::PrecalculateChanceForThreshold() {
+    q_[0] = chances_[0];
+    for (int i = 1; i < 256; i++) {
+        q_[i] = q_[i - 1] + chances_[i];
     }
-    return u;
+}
+
+void Otsu::PrecalculateAverage() {
+    u_[0] = 0;
+    for (int i = 1; i < 256; i++) {
+        u_[i] = u_[i - 1] + (i * chances_[i]);
+    }
 }
 
 

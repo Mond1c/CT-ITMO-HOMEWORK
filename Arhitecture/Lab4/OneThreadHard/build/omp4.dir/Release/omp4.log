@@ -1,0 +1,10 @@
+﻿  Building Custom Rule C:/Users/pocht/Desktop/Homework/Arhitecture/Lab4/OneThreadHard/CMakeLists.txt
+cl : командная строка  warning D9025: переопределение "/openmp" на "/openmp:llvm"
+cl : командная строка  warning D9002: пропуск неизвестного параметра "-march=native"
+cl : командная строка  warning D9002: пропуск неизвестного параметра "-O3"
+  hard.cpp
+  Image.cpp
+  Histogram.cpp
+  Otsu.cpp
+  Создание кода...
+  omp4.vcxproj -> C:\Users\pocht\Desktop\Homework\Arhitecture\Lab4\OneThreadHard\build\Release\omp4.exe
