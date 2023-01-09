@@ -1,1 +1,1 @@
-/usr/bin/c++   -fopenmp -march=native -O3 -g   CMakeFiles/omp4.dir/hard.cpp.o CMakeFiles/omp4.dir/Image.cpp.o CMakeFiles/omp4.dir/Histogram.cpp.o CMakeFiles/omp4.dir/Otsu.cpp.o  -o omp4 
+/usr/bin/c++  -fopenmp -march=native -O3 -g CMakeFiles/omp4.dir/hard.cpp.o CMakeFiles/omp4.dir/Image.cpp.o CMakeFiles/omp4.dir/Histogram.cpp.o CMakeFiles/omp4.dir/Otsu.cpp.o -o omp4 

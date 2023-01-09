@@ -3,6 +3,8 @@
 #include <omp.h>
 
 int main(int argc, char **argv) {
+    std::cin.tie(nullptr);
+    std::ios::sync_with_stdio(false);
     try {
         int threadCount = std::stoi(argv[1]);
         bool isOpenMPEnabled = true;
