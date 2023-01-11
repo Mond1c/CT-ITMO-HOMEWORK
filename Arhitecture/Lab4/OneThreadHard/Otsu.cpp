@@ -6,47 +6,51 @@
 #include "FileWriter.h"
 #include "Utility.h"
 #include <omp.h>
+#include <queue>
 
+struct Result {
+    int f0, f1, f2;
+    int v_max;
+};
 
 std::vector<int> Otsu::CalculateThreshold() {
     int f0_ans = 0, f1_ans = 0, f2_ans = 0;
     double v_max = 0;
-#pragma omp parallel for schedule(dynamic)
-    for (int f0 = 0; f0 < 254; ++f0) {
-        for (int f1 = f0 + 1; f1 < 255; ++f1) {
-            for (int f2 = f1 + 1; f2 < 256; ++f2) {
-                double q0 = CalculateChanceForThreshold(0, f0);
-                double q1 = CalculateChanceForThreshold(f0 + 1, f1);
-                double q2 = CalculateChanceForThreshold(f1 + 1, f2);
-                double q3 = CalculateChanceForThreshold(f2 + 1, 255);
-                double u0 = CalculateAverage(0, f0, q0);
-                double u1 = CalculateAverage(f0 + 1, f1, q1);
-                double u2 = CalculateAverage(f1 + 1, f2, q2);
-                double u3 = CalculateAverage(f2 + 1, 255, q3);
-                double u = q0 * u0 + q1 * u1 + q2 * u2 + q3 * u3;
-                double v0 = q0 * (u0 - u) * (u0 - u);
-                double v1 = q1 * (u1 - u) * (u1 - u);
-                double v2 = q2 * (u2 - u) * (u2 - u);
-                double v3 = q3 * (u3 - u) * (u3 - u);
-                double v = v0 + v1 + v2 + v3;
-#pragma omp critical
-                {
+//#pragma omp parallel default(none) shared(f0_ans, f1_ans, f2_ans, v_max)
+    {
+        int f0, f1, f2;
+#pragma omp for schedule(static) private(f0, f1, f2)
+        for (f0 = 0; f0 < 254; ++f0) {
+            for (f1 = f0 + 1; f1 < 255; ++f1) {
+                for (f2 = f1 + 1; f2 < 256; ++f2) {
+                    double q0 = CalculateChanceForThreshold(0, f0);
+                    double q1 = CalculateChanceForThreshold(f0 + 1, f1);
+                    double q2 = CalculateChanceForThreshold(f1 + 1, f2);
+                    double q3 = CalculateChanceForThreshold(f2 + 1, 255);
+                    double u0 = CalculateAverage(0, f0, q0);
+                    double u1 = CalculateAverage(f0 + 1, f1, q1);
+                    double u2 = CalculateAverage(f1 + 1, f2, q2);
+                    double u3 = CalculateAverage(f2 + 1, 255, q3);
+                    double u = q0 * u0 + q1 * u1 + q2 * u2 + q3 * u3;
+                    double v = q0 * (u0 - u) * (u0 - u) + q1 * (u1 - u) * (u1 - u)
+                            + q2 * (u2 - u) * (u2 - u) + q3 * (u3 - u) * (u3 - u);
                     if (v > v_max) {
-                        f0_ans = f0;
-                        f1_ans = f1;
-                        f2_ans = f2;
-                        v_max = v;
+//#pragma omp critical
+                        if (v > v_max) {
+                            f0_ans = f0;
+                            f1_ans = f1;
+                            f2_ans = f2;
+                            v_max = v;
+                        }
                     }
                 }
             }
         }
     }
-  //  std::cout << v_max << std::endl;
     return {f0_ans, f1_ans, f2_ans};
 }
 
 void Otsu::Generate() {
-   // Histogram::Print(histogram_);
     auto f = CalculateThreshold();
     int f0 = f[0];
     int f1 = f[1];

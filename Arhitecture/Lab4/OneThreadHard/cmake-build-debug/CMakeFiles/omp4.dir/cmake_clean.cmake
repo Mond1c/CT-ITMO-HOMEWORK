@@ -1,12 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/omp4.dir/Histogram.cpp.o"
-  "CMakeFiles/omp4.dir/Histogram.cpp.o.d"
   "CMakeFiles/omp4.dir/Image.cpp.o"
-  "CMakeFiles/omp4.dir/Image.cpp.o.d"
   "CMakeFiles/omp4.dir/Otsu.cpp.o"
-  "CMakeFiles/omp4.dir/Otsu.cpp.o.d"
   "CMakeFiles/omp4.dir/hard.cpp.o"
-  "CMakeFiles/omp4.dir/hard.cpp.o.d"
   "omp4"
   "omp4.pdb"
 )
