@@ -9,7 +9,8 @@ int main(int argc, char **argv) {
         int threadCount = std::stoi(argv[1]);
         bool isOpenMPEnabled = true;
         if (threadCount > 0) {
-            omp_set_num_threads(threadCount);
+          //  omp_set_num_threads(threadCount);
+          thread_count = threadCount;
         } else if (threadCount == -1) {
             isOpenMPEnabled = false;
         }

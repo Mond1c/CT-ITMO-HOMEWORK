@@ -1,1 +1,3 @@
-/usr/bin/c++   -fopenmp -march=native -O3 -O3 -DNDEBUG   CMakeFiles/omp4.dir/hard.cpp.o CMakeFiles/omp4.dir/Image.cpp.o CMakeFiles/omp4.dir/Histogram.cpp.o CMakeFiles/omp4.dir/Otsu.cpp.o  -o omp4 
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\omp4.dir/objects.a
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\ar.exe qc CMakeFiles\omp4.dir/objects.a @CMakeFiles\omp4.dir\objects1.rsp
+C:\Users\pocht\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8214.51\bin\mingw\bin\g++.exe  -fopenmp -march=native -O3 -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\omp4.dir/objects.a -Wl,--no-whole-archive -o omp4.exe -Wl,--out-implib,libomp4.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\omp4.dir\linklibs.rsp
