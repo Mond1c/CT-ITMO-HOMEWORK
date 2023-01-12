@@ -88,4 +88,4 @@ def main():
 
 main()
 OUTPUT.close()
-WORKBOOK.save('data_static.xlsx')
+WORKBOOK.save('data_dynamic.xlsx')

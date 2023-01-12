@@ -1,0 +1,674 @@
+======TEST DIFFERENT THREADS COUNT======
+========================
+RUN TESTS WITH 1 THREADS
+TEST 1:
+77 130 187Time (1 thread(s)): 11.9998 msTEST 2:
+77 130 187Time (1 thread(s)): 12.0001 msTEST 3:
+77 130 187Time (1 thread(s)): 10.9999 msTEST 4:
+77 130 187Time (1 thread(s)): 10.9999 msTEST 5:
+77 130 187Time (1 thread(s)): 12.0001 msAVERAGE TIME: 11.599960000000001 ms
+========================
+RUN TESTS WITH 2 THREADS
+TEST 1:
+77 130 187Time (2 thread(s)): 7.9999 msTEST 2:
+77 130 187Time (2 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (2 thread(s)): 8.00014 msTEST 4:
+77 130 187Time (2 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (2 thread(s)): 6.99997 msAVERAGE TIME: 7.600024 ms
+========================
+RUN TESTS WITH 3 THREADS
+TEST 1:
+77 130 187Time (3 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (3 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (3 thread(s)): 5.00011 msTEST 4:
+77 130 187Time (3 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (3 thread(s)): 6.99997 msAVERAGE TIME: 5.400036 ms
+========================
+RUN TESTS WITH 4 THREADS
+TEST 1:
+77 130 187Time (4 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (4 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (4 thread(s)): 4.99988 msTEST 4:
+77 130 187Time (4 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (4 thread(s)): 4.99988 msAVERAGE TIME: 4.9999720000000005 ms
+========================
+RUN TESTS WITH 5 THREADS
+TEST 1:
+77 130 187Time (5 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (5 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (5 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (5 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (5 thread(s)): 3.99995 msAVERAGE TIME: 4.199982 ms
+========================
+RUN TESTS WITH 6 THREADS
+TEST 1:
+77 130 187Time (6 thread(s)): 3.00002 msTEST 2:
+77 130 187Time (6 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (6 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (6 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (6 thread(s)): 3.99995 msAVERAGE TIME: 3.799964 ms
+========================
+RUN TESTS WITH 7 THREADS
+TEST 1:
+77 130 187Time (7 thread(s)): 4.00019 msTEST 2:
+77 130 187Time (7 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (7 thread(s)): 3.00002 msTEST 4:
+77 130 187Time (7 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (7 thread(s)): 3.00002 msAVERAGE TIME: 3.6000260000000006 ms
+========================
+RUN TESTS WITH 8 THREADS
+TEST 1:
+77 130 187Time (8 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (8 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (8 thread(s)): 4.00019 msTEST 4:
+77 130 187Time (8 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (8 thread(s)): 3.99995 msAVERAGE TIME: 3.9999979999999993 ms
+========================
+RUN TESTS WITH 9 THREADS
+TEST 1:
+77 130 187Time (9 thread(s)): 4.00019 msTEST 2:
+77 130 187Time (9 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (9 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (9 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (9 thread(s)): 4.00019 msAVERAGE TIME: 4.000045999999999 ms
+========================
+RUN TESTS WITH 10 THREADS
+TEST 1:
+77 130 187Time (10 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (10 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (10 thread(s)): 4.00019 msTEST 4:
+77 130 187Time (10 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (10 thread(s)): 4.00019 msAVERAGE TIME: 4.000045999999999 ms
+========================
+RUN TESTS WITH 11 THREADS
+TEST 1:
+77 130 187Time (11 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (11 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (11 thread(s)): 3.00002 msTEST 4:
+77 130 187Time (11 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (11 thread(s)): 4.99988 msAVERAGE TIME: 3.9999499999999997 ms
+========================
+RUN TESTS WITH 12 THREADS
+TEST 1:
+77 130 187Time (12 thread(s)): 3.00002 msTEST 2:
+77 130 187Time (12 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (12 thread(s)): 4.00019 msTEST 4:
+77 130 187Time (12 thread(s)): 4.00019 msTEST 5:
+77 130 187Time (12 thread(s)): 4.00019 msAVERAGE TIME: 3.8001080000000003 ms
+========================
+RUN TESTS WITH 13 THREADS
+TEST 1:
+77 130 187Time (13 thread(s)): 4.00019 msTEST 2:
+77 130 187Time (13 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (13 thread(s)): 3.00002 msTEST 4:
+77 130 187Time (13 thread(s)): 4.00019 msTEST 5:
+77 130 187Time (13 thread(s)): 3.99995 msAVERAGE TIME: 4.000046 ms
+========================
+RUN TESTS WITH 14 THREADS
+TEST 1:
+77 130 187Time (14 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (14 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (14 thread(s)): 4.00019 msTEST 4:
+77 130 187Time (14 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (14 thread(s)): 3.99995 msAVERAGE TIME: 3.9999979999999993 ms
+========================
+RUN TESTS WITH 15 THREADS
+TEST 1:
+77 130 187Time (15 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (15 thread(s)): 4.00019 msTEST 3:
+77 130 187Time (15 thread(s)): 3.00002 msTEST 4:
+77 130 187Time (15 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (15 thread(s)): 3.99995 msAVERAGE TIME: 3.800012 ms
+========================
+RUN TESTS WITH 16 THREADS
+TEST 1:
+77 130 187Time (16 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (16 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (16 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (16 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (16 thread(s)): 3.00002 msAVERAGE TIME: 3.799964 ms
+========================
+RUN TESTS WITH 17 THREADS
+TEST 1:
+77 130 187Time (17 thread(s)): 4.99988 msTEST 2:
+77 130 187Time (17 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (17 thread(s)): 4.00019 msTEST 4:
+77 130 187Time (17 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (17 thread(s)): 5.00011 msAVERAGE TIME: 4.600047999999999 ms
+========================
+RUN TESTS WITH 18 THREADS
+TEST 1:
+77 130 187Time (18 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (18 thread(s)): 4.00019 msTEST 3:
+77 130 187Time (18 thread(s)): 4.00019 msTEST 4:
+77 130 187Time (18 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (18 thread(s)): 5.00011 msAVERAGE TIME: 4.2000779999999995 ms
+========================
+RUN TESTS WITH 19 THREADS
+TEST 1:
+77 130 187Time (19 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (19 thread(s)): 4.00019 msTEST 3:
+77 130 187Time (19 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (19 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (19 thread(s)): 5.00011 msAVERAGE TIME: 4.400062 ms
+========================
+RUN TESTS WITH 20 THREADS
+TEST 1:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 2:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (20 thread(s)): 4.00019 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 4.400015999999999 ms
+======TEST DIFFERENT CHUNK_SIZE======
+========================
+RUN TESTS WITH CHUNK_SIZE = 1
+TEST 1:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 4.199935999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 2
+TEST 1:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 2:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 3:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 4.399967999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 3
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 3:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 4.600046000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 4
+TEST 1:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 3.9999499999999997 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 5
+TEST 1:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (20 thread(s)): 4.00019 msTEST 3:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 4.99988 msAVERAGE TIME: 4.400016 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 6
+TEST 1:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 4.199982 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 7
+TEST 1:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 4.399967999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 8
+TEST 1:
+77 130 187Time (20 thread(s)): 5.9998 msTEST 2:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 4.599906 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 9
+TEST 1:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 2:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 3:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 3.9999499999999997 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 10
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 4:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 5:
+77 130 187Time (20 thread(s)): 5.00011 msAVERAGE TIME: 5.400082 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 11
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 3:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 4:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 5:
+77 130 187Time (20 thread(s)): 4.99988 msAVERAGE TIME: 4.9999720000000005 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 12
+TEST 1:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 2:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 5:
+77 130 187Time (20 thread(s)): 6.00004 msAVERAGE TIME: 5.599976 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 13
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 4:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (20 thread(s)): 3.99995 msAVERAGE TIME: 5.000064 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 14
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 5.9998 msAVERAGE TIME: 5.2000020000000005 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 15
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (20 thread(s)): 5.9998 msAVERAGE TIME: 5.600020000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 16
+TEST 1:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 4:
+77 130 187Time (20 thread(s)): 5.9998 msTEST 5:
+77 130 187Time (20 thread(s)): 6.00004 msAVERAGE TIME: 5.7999600000000004 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 17
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (20 thread(s)): 7.00021 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 5.9998 msAVERAGE TIME: 5.999994 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 18
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 3.99995 msTEST 5:
+77 130 187Time (20 thread(s)): 5.00011 msAVERAGE TIME: 5.20005 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 19
+TEST 1:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 2:
+77 130 187Time (20 thread(s)): 7.00021 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 6.4000140000000005 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 20
+TEST 1:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 6.400012000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 21
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 6.00004 msAVERAGE TIME: 6.199980000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 22
+TEST 1:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 2:
+77 130 187Time (20 thread(s)): 5.9998 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 6.00004 msAVERAGE TIME: 6.199978 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 23
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 5.9998 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 6.399964000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 24
+TEST 1:
+77 130 187Time (20 thread(s)): 7.00021 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 7.00021 msAVERAGE TIME: 7.200052000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 25
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 3:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 6.00004 msAVERAGE TIME: 7.199954000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 26
+TEST 1:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 2:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 7.00021 msTEST 5:
+77 130 187Time (20 thread(s)): 5.00011 msAVERAGE TIME: 5.800056 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 27
+TEST 1:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 2:
+77 130 187Time (20 thread(s)): 4.99988 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 5.00011 msTEST 5:
+77 130 187Time (20 thread(s)): 6.00004 msAVERAGE TIME: 5.599976 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 28
+TEST 1:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 2:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 7.9999 msAVERAGE TIME: 6.599998000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 29
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 8.00014 msAVERAGE TIME: 7.599976 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 30
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 4:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 7.400085999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 31
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 7.9999 msAVERAGE TIME: 7.999994000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 32
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 3:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 4:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 5:
+77 130 187Time (20 thread(s)): 7.9999 msAVERAGE TIME: 7.399987999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 33
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 7.599976 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 34
+TEST 1:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 5:
+77 130 187Time (20 thread(s)): 8.00014 msAVERAGE TIME: 8.600046 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 35
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 4:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 8.200026 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 36
+TEST 1:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 2:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 5:
+77 130 187Time (20 thread(s)): 8.00014 msAVERAGE TIME: 7.800008 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 37
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.400009999999998 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 38
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.40006 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 39
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 4:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 7.8001059999999995 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 40
+TEST 1:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 2:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.199978 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 41
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 3:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 7.9999 msAVERAGE TIME: 8.599948000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 42
+TEST 1:
+77 130 187Time (20 thread(s)): 7.00021 msTEST 2:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 8.99982 msAVERAGE TIME: 8.599995999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 43
+TEST 1:
+77 130 187Time (20 thread(s)): 10.9999 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.599993999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 44
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 7.3999880000000005 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 45
+TEST 1:
+77 130 187Time (20 thread(s)): 7.00021 msTEST 2:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 3:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 4:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 7.2000519999999995 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 46
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 6.00004 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 7.199956 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 47
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 3:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 6.00004 msAVERAGE TIME: 7.800056 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 48
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 11.0002 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 8.00014 msAVERAGE TIME: 8.400022000000002 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 49
+TEST 1:
+77 130 187Time (20 thread(s)): 10.9999 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 4:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 5:
+77 130 187Time (20 thread(s)): 9.99999 msAVERAGE TIME: 9.799954 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 50
+TEST 1:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 4:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 5:
+77 130 187Time (20 thread(s)): 8.00014 msAVERAGE TIME: 8.800030000000001 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 51
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 4:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 5:
+77 130 187Time (20 thread(s)): 7.9999 msAVERAGE TIME: 8.400012 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 52
+TEST 1:
+77 130 187Time (20 thread(s)): 6.99997 msTEST 2:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 7.9999 msAVERAGE TIME: 8.19998 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 53
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.599996 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 54
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 5:
+77 130 187Time (20 thread(s)): 6.99997 msAVERAGE TIME: 8.200026 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 55
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 12.0001 msTEST 5:
+77 130 187Time (20 thread(s)): 12.0001 msAVERAGE TIME: 10.000043999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 56
+TEST 1:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 4:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 9.2 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 57
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.800028 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 58
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 3:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 4:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 5:
+77 130 187Time (20 thread(s)): 8.99982 msAVERAGE TIME: 8.599996 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 59
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.999963999999999 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 60
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 4:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 5:
+77 130 187Time (20 thread(s)): 9.99999 msAVERAGE TIME: 9.400032 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 61
+TEST 1:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 9.99999 msTEST 5:
+77 130 187Time (20 thread(s)): 7.9999 msAVERAGE TIME: 9.2 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 62
+TEST 1:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 2:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 7.9999 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 8.800028 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 63
+TEST 1:
+77 130 187Time (20 thread(s)): 8.00014 msTEST 2:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 12.0001 msTEST 5:
+77 130 187Time (20 thread(s)): 9.00006 msAVERAGE TIME: 9.400035999999998 ms
+========================
+RUN TESTS WITH CHUNK_SIZE = 64
+TEST 1:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 2:
+77 130 187Time (20 thread(s)): 8.99982 msTEST 3:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 4:
+77 130 187Time (20 thread(s)): 9.00006 msTEST 5:
+77 130 187Time (20 thread(s)): 8.99982 msAVERAGE TIME: 8.999915999999999 ms

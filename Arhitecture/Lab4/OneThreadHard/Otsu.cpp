@@ -12,47 +12,40 @@
 std::vector<int> Otsu::CalculateThreshold() {
     int f0_ans = 0, f1_ans = 0, f2_ans = 0;
     double v_max = 0;
-    int f1, f2;
-    double q0, q1, q2, q3;
-    double u0, u1, u2, u3;
-    double u, v;
-    double *q_;
-    double *u_;
-#pragma omp parallel for num_threads(thread_count) default(none) shared(chunk_size, v_max, f0_ans, f1_ans, f2_ans, f1, f2, Q, U) \
-    private(q0, q1, q2, q3, u0, u1, u2, u3, u, v, q_, u_) schedule(static, chunk_size)
+    omp_set_num_threads(thread_count);
+   // double *q_ = Q.data();
+    //double *u_ = U.data();
+#pragma omp parallel for schedule(dynamic, chunk_size) default(none) shared(chunk_size)
         for (int f0 = 0; f0 < 254; ++f0) {
-            q_ = Q.data();
-            u_ = U.data();
-            for (f1 = f0 + 1; f1 < 255; ++f1) {
-                for (f2 = f1 + 1; f2 < 256; ++f2) {
-                    q0 = q_[f0] - q_[0];
-                    q1 = q_[f1] - q_[f0];
-                    q2 = q_[f2] - q_[f1];
-                    q3 = q_[255] - q_[f2];
-                    //double q0 = CalculateChanceForThreshold(0, f0);
-                    //double q1 = CalculateChanceForThreshold(f0 + 1, f1);
-                    //double q2 = CalculateChanceForThreshold(f1 + 1, f2);
-                    //double q3 = CalculateChanceForThreshold(f2 + 1, 255);
-                    u0 = (u_[f0] - u_[0]) / q0;
-                    u1 = (u_[f1] - u_[f0]) / q1;
-                    u2 = (u_[f2] - u_[f1]) / q2;
-                    u3 = (u_[255] - u_[f2]) / q3;
-                    //double u0 = CalculateAverage(0, f0, q0);
-                    //double u1 = CalculateAverage(f0 + 1, f1, q1);
-                    //double u2 = CalculateAverage(f1 + 1, f2, q2);
-                    //double u3 = CalculateAverage(f2 + 1, 255, q3);
-                    u = q0 * u0 + q1 * u1 + q2 * u2 + q3 * u3;
-                    v = q0 * (u0 - u) * (u0 - u) + q1 * (u1 - u) * (u1 - u)
+            for (int f1 = f0 + 1; f1 < 255; ++f1) {
+                for (int f2 = f1 + 1; f2 < 256; ++f2) {
+                  //  double *q_ = Q.data();
+                    //double *u_ = U.data();
+                    //double q0 = q_[f0] - q_[0];
+                    //double q1 = q_[f1] - q_[f0];
+//                    double q2 = q_[f2] - q_[f1];
+//                    double q3 = q_[255] - q_[f2];
+//                    double u0 = (u_[f0] - u_[0]) / q0;
+//                    double u1 = (u_[f1] - u_[f0]) / q1;
+//                    double u2 = (u_[f2] - u_[f1]) / q2;
+//                    double u3 = (u_[255] - u_[f2]) / q3;
+                    double q0 = CalculateChanceForThreshold(0, f0);
+                    double q1 = CalculateChanceForThreshold(f0 + 1, f1);
+                    double q2 = CalculateChanceForThreshold(f1 + 1, f2);
+                    double q3 = CalculateChanceForThreshold(f2 + 1, 255);
+                    double u0 = CalculateAverage(0, f0, q0);
+                    double u1 = CalculateAverage(f0 + 1, f1, q1);
+                    double u2 = CalculateAverage(f1 + 1, f2, q2);
+                    double u3 = CalculateAverage(f2 + 1, 255, q3);
+                    double u = q0 * u0 + q1 * u1 + q2 * u2 + q3 * u3;
+                    double v = q0 * (u0 - u) * (u0 - u) + q1 * (u1 - u) * (u1 - u)
                             + q2 * (u2 - u) * (u2 - u) + q3 * (u3 - u) * (u3 - u);
-                    if (v > v_max) {
-#pragma omp critical
-                        if (v > v_max) {
-                            f0_ans = f0;
-                            f1_ans = f1;
-                            f2_ans = f2;
-                            v_max = v;
-                        }
-                    }
+                   /* if (v > v_max) {
+                        f0_ans = f0;
+                        f1_ans = f1;
+                        f2_ans = f2;
+                        v_max = v;
+                    } */
                 }
             }
         }

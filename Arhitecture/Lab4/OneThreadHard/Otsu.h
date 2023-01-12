@@ -5,6 +5,7 @@
 #ifndef ONETHREADHARD_OTSU_H
 #define ONETHREADHARD_OTSU_H
 #include <utility>
+#include <omp.h>
 
 #include "Image.h"
 #include "Histogram.h"
@@ -19,6 +20,7 @@ private:
     std::map<int, double> chances_;
     std::vector<double> Q;
     std::vector<double> U;
+#pragma omp firstprivate(Q, U)
     std::string outputFileName_;
     bool isOpenMPEnabled_;
 public:
