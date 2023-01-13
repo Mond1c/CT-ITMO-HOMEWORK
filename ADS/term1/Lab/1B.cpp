@@ -1,43 +1,49 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <cmath>
 using namespace std;
-
-constexpr unsigned long long pow2(int i) {
-    unsigned long long ans = 1;
-    while (i--) ans *= 2;
-    return ans;
-}
-
-constexpr unsigned long long MOD = pow2(31);
-
-unsigned long long solve(vector<unsigned long long>& a, unsigned long long k) {
-	unsigned long long l = 0, r = a.size() - 1;
+#define ull unsigned long long
+ 
+ 
+ 
+ull partition(vector<ull>& a, size_t l, size_t r) {
+	if (l == r) {
+		return l;
+	}
+	size_t i = l, j = r;
 	while (true) {
-		auto pivot = *next(a.begin() + l, distance(a.begin() + l, a.begin() + r + 1) / 2);
-		unsigned long long mid = partition(a.begin() + l, a.begin() + r + 1, [&pivot](const auto& x) { return x < pivot; }) - a.begin();
-		if (mid == k) {
-			return a[k];
-		}
-		if (k < mid) {
-			r = mid;
-		} else {
-			l = mid + 1;
-		}
+		while (a[i] < a[r]) ++i;
+		while (a[j] > a[r]) --j;
+		if (i >= j) break;
+		swap(a[i++], a[j--]);
+	}
+	std::swap(a[i], a[r]);
+	return i;
+}
+ 
+ull find_k(vector<ull>& a, size_t k) {
+	size_t l = 0, r = a.size() - 1;
+	while (true) {
+		size_t m = partition(a, l, r);
+		if (m == k) return a[k];
+		if (k < m) r = m - 1;
+		else l = m + 1;
 	}
 }
-
+ 
+ 
 int main() {
-	cin.tie(nullptr);
-	ios::sync_with_stdio(false);
-	unsigned long long n, k;
-	cin >> n;
-	vector<unsigned long long> a(n);
-	cin >> a[0] >> k;
-	for (unsigned long long i = 1; i < n; i++) {
-		a[i] = (1103515245 * (unsigned long long)a[i - 1] + 12345) % MOD;
-	}
-	cout << solve(a, k) << endl;
-	return 0;
+    ull MOD = 1;
+    for (int i = 0; i < 31; ++i) MOD *= 2;
+ 
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    size_t n;
+    cin >> n;
+    vector<ull> a(n);
+    size_t k;
+    cin >> a[0] >> k;
+    for (size_t i = 1; i < n; ++i) a[i] = (1103515245 * a[i - 1] + 12345) % MOD;
+    cout << find_k(a, k) << endl;
+    return 0;
 }

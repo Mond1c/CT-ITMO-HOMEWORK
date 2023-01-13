@@ -1,3 +1,0 @@
-C:/Users/pocht/Desktop/Homework/ADS/term1/Lab/cmake-build-debug/CMakeFiles/Lab.dir
-C:/Users/pocht/Desktop/Homework/ADS/term1/Lab/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/pocht/Desktop/Homework/ADS/term1/Lab/cmake-build-debug/CMakeFiles/rebuild_cache.dir
