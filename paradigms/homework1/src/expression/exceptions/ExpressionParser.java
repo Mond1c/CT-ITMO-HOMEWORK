@@ -1,14 +1,14 @@
 package expression.exceptions;
 
 import expression.*;
-import expression.parser.BaseParser;
-import expression.parser.StringSource;
-import expression.parser.TripleParser;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ExpressionParser extends BaseParser implements TripleParser {
+    private final static String UNSUPPORTED_CHARACTER_MESSAGE = "Unsupported character";
+    private final static String INVALID_CHARACTER_AFTER_OPERATION_MESSAGE = "You need to use whitespace or ( after unary operation";
+
     private final static List<Character> SUPPORTED_BEGIN_OF_OPERATIONS = List.of('+', '-', '*', '/', 'c', 's');
     private String expression;
 
@@ -22,7 +22,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             if (take(')')) {
                 throw new NoSuchElementException(getMessageForException("No opening parenthesis", '('));
             }
-            throw new UnsupportedCharacterException(getMessageForException("Unsupported character", ch));
+            throw new UnsupportedCharacterException(getMessageForException(UNSUPPORTED_CHARACTER_MESSAGE, ch));
         }
         return expr;
     }
@@ -37,6 +37,19 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         return message + " " + ch + ": " + expression.substring(Math.max(0, index - 10), index)
                 + " --> " + ch + " <-- " + expression.substring(index + 1, Math.min(index + 10, expression.length()))
                 + " at position " + index;
+    }
+
+    private void checkCharacterAfterUnaryOperation(final String operation) {
+        if (!Character.isWhitespace(ch) && ch != '(') {
+            throw new IllegalArgumentException(getMessageForException(
+                    INVALID_CHARACTER_AFTER_OPERATION_MESSAGE + " " + operation, ch));
+        }
+    }
+
+    private void checkIfOperationExist(final String operation) {
+        if (!Character.isWhitespace(ch) && ch != '(' && ch != '-') {
+            throw new UnsupportedOperationException(getMessageForException("No such operation " + operation + ch, ch));
+        }
     }
 
 
@@ -58,22 +71,13 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             }
             return new CheckedNegate(parseConstVariablesUnaryOperationsParenthesis());
         } else if (take("count")) {
-            if (!Character.isWhitespace(ch) && ch != '(') {
-                throw new IllegalArgumentException(getMessageForException(
-                        "You need to use whitespace or ( after unary operation count", ch));
-            }
+            checkCharacterAfterUnaryOperation("count");
             return new Count(parseConstVariablesUnaryOperationsParenthesis());
         } else if (take("pow10")) {
-            if (!Character.isWhitespace(ch) && ch != '(') {
-                throw new IllegalArgumentException(getMessageForException(
-                        "You need to use whitespace or ( after unary operation pow10", ch));
-            }
+            checkCharacterAfterUnaryOperation("pow10");
             return new CheckedPow(parseConstVariablesUnaryOperationsParenthesis());
         } else if (take("log10")) {
-            if (!Character.isWhitespace(ch) && ch != '(') {
-                throw new IllegalArgumentException(getMessageForException(
-                        "You need to use whitespace or ( after unary operation log10", ch));
-            }
+            checkCharacterAfterUnaryOperation("log10");
             return new CheckedLog(parseConstVariablesUnaryOperationsParenthesis());
         }
         throw new NoSuchElementException(getMessageForException("No argument", ch));
@@ -88,14 +92,10 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         PartOfExpression part = parsePlusMinus();
         while (true) {
             if (take("set")) {
-                if (!Character.isWhitespace(ch) && ch != '(' && ch != '-') {
-                    throw new UnsupportedOperationException("No such operation " + "set" + ch + " in " + expression);
-                }
+                checkIfOperationExist("set");
                 part = parseOperation("set", part, parsePlusMinus());
             } else if (take("clear") ) {
-                if (!Character.isWhitespace(ch) && ch != '(' && ch != '-') {
-                    throw new UnsupportedOperationException("No such operation " + "clear" + ch + " in " + expression);
-                }
+                checkIfOperationExist("clear");
                 part = parseOperation("clear", part, parsePlusMinus());
             } else {
                 break;
@@ -111,11 +111,10 @@ public class ExpressionParser extends BaseParser implements TripleParser {
     private PartOfExpression parsePlusMinus() {
         PartOfExpression part = parseMulDiv();
         skipWhitespaces();
-        // System.out.println(ch);
         if (isUnsupportedCharacter() && !eof()) {
-            throw new UnsupportedCharacterException(getMessageForException("Unsupported character", ch));
+            throw new UnsupportedCharacterException(getMessageForException(UNSUPPORTED_CHARACTER_MESSAGE, ch));
         }
-        while (test('+') || test('-')) { // z + y - -30 + (z + x)
+        while (test('+') || test('-')) {
             part = parseOperation(String.valueOf(take()), part, parseMulDiv());
         }
         return part;
@@ -125,7 +124,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         PartOfExpression part = parseConstVariablesUnaryOperationsParenthesis();
         skipWhitespaces();
         if (isUnsupportedCharacter() && !eof()) {
-            throw new UnsupportedCharacterException(getMessageForException("Unsupported character", ch));
+            throw new UnsupportedCharacterException(getMessageForException(UNSUPPORTED_CHARACTER_MESSAGE, ch));
         }
         while (test('*') || test('/')) {
             part = parseOperation(String.valueOf(take()), part, parseConstVariablesUnaryOperationsParenthesis());
@@ -172,6 +171,3 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         };
     }
 }
-
-
-

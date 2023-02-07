@@ -2,7 +2,6 @@ package expression.parser;
 
 import expression.*;
 import expression.exceptions.*;
-import expression.exceptions.UnsupportedOperationException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
