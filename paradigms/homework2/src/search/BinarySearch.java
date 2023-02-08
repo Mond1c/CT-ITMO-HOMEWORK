@@ -24,24 +24,38 @@ public class BinarySearch {
         return l;
     }
 
+    // Pre: l >= 0 && r >= 0
+    // Post: a[R] <= x && R = min(a[i] <= x)
     private static int binarySearchRecursive(int[] arr, int x, int l, int r) {
         if (l >= r) {
+            // l' >= r'
             return l;
         }
+        // r' - l' > 0
         int m = l + (r - l) / 2;
+        // r' - l' > 0 && m' = min(l', r')
         if (arr[m] <= x) {
+            // r' - l' > 0 && m' = min(l', r') && arr[m'] <= x
             return binarySearchRecursive(arr, x, l, m);
         } else {
+            // r' - l' > 0 && m' = min(l', r') && arr[m'] > x
             return binarySearchRecursive(arr, x, m + 1, r);
         }
     }
 
+    // Pre: args.length > 0;
     public static void main(String[] args) {
+        // args.length > 0
         final int x = Integer.parseInt(args[0]);
+        // args.length > 0 && x = args[0]
         final int n = args.length - 1;
+        // args.length > 0 && x = args[0] && n = args.length - 1 >= 0
         final int[] arr = new int[n];
+        //args.length > 0 && x = args[0] && n = args.length - 1 >= 0 && arr = new int[n]
         for (int i = 0; i < n; ++i) {
+            // i < n
             arr[i] = Integer.parseInt(args[i + 1]);
+            // i < n && arr[i] = args[i + 1] && i++
         }
         System.out.println(binarySerachIterative(arr, x));
     }
