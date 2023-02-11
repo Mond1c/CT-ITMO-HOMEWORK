@@ -39,6 +39,18 @@ public class ExpressionParser extends BaseParser implements TripleParser {
                 + " at position " + index;
     }
 
+    private RuntimeException throwAfterUnaryOperation(final String operation) {
+        return new IllegalArgumentException(getMessageForException("You need to use whitespace or ( after unary operation " + operation, ch));
+    }
+
+    private RuntimeException throwUnsupportedOperation(final String operation) {
+        return new UnsupportedOperationException(getMessageForException("No such operation " + operation, ch));
+    }
+
+    private RuntimeException throwUnsupportedCharacter() {
+        return new UnsupportedCharacter(getMessageForException("Unsupported character", ch));
+    }
+
 
     private PartOfExpression parseConstVariablesUnaryOperationsParenthesis()  {
         skipWhitespaces();
@@ -59,20 +71,17 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             return new CheckedNegate(parseConstVariablesUnaryOperationsParenthesis());
         } else if (take("count")) {
             if (!Character.isWhitespace(ch) && ch != '(') {
-                throw new IllegalArgumentException(getMessageForException(
-                        "You need to use whitespace or ( after unary operation count", ch));
+                throw throwAfterUnaryOperation("count");
             }
             return new Count(parseConstVariablesUnaryOperationsParenthesis());
         } else if (take("pow10")) {
             if (!Character.isWhitespace(ch) && ch != '(') {
-                throw new IllegalArgumentException(getMessageForException(
-                        "You need to use whitespace or ( after unary operation pow10", ch));
+                throw throwAfterUnaryOperation("pow10");
             }
             return new CheckedPow(parseConstVariablesUnaryOperationsParenthesis());
         } else if (take("log10")) {
             if (!Character.isWhitespace(ch) && ch != '(') {
-                throw new IllegalArgumentException(getMessageForException(
-                        "You need to use whitespace or ( after unary operation log10", ch));
+                throw throwAfterUnaryOperation("log10");
             }
             return new CheckedLog(parseConstVariablesUnaryOperationsParenthesis());
         }
@@ -89,12 +98,12 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         while (true) {
             if (take("set")) {
                 if (!Character.isWhitespace(ch) && ch != '(' && ch != '-') {
-                    throw new UnsupportedOperationException("No such operation " + "set" + ch + " in " + expression);
+                    throw throwUnsupportedOperation("set");
                 }
                 part = parseOperation("set", part, parsePlusMinus());
             } else if (take("clear") ) {
                 if (!Character.isWhitespace(ch) && ch != '(' && ch != '-') {
-                    throw new UnsupportedOperationException("No such operation " + "clear" + ch + " in " + expression);
+                    throw throwUnsupportedOperation("clear");
                 }
                 part = parseOperation("clear", part, parsePlusMinus());
             } else {
@@ -113,7 +122,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         skipWhitespaces();
         // System.out.println(ch);
         if (isUnsupportedCharacter() && !eof()) {
-            throw new UnsupportedCharacterException(getMessageForException("Unsupported character", ch));
+            throw throwUnsupportedCharacter();
         }
         while (test('+') || test('-')) { // z + y - -30 + (z + x)
             part = parseOperation(String.valueOf(take()), part, parseMulDiv());
@@ -125,7 +134,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
         PartOfExpression part = parseConstVariablesUnaryOperationsParenthesis();
         skipWhitespaces();
         if (isUnsupportedCharacter() && !eof()) {
-            throw new UnsupportedCharacterException(getMessageForException("Unsupported character", ch));
+            throw throwUnsupportedCharacter();
         }
         while (test('*') || test('/')) {
             part = parseOperation(String.valueOf(take()), part, parseConstVariablesUnaryOperationsParenthesis());
@@ -168,7 +177,7 @@ public class ExpressionParser extends BaseParser implements TripleParser {
             case "/" -> new CheckedDivide(left, right);
             case "set" -> new Set(left, right);
             case "clear" -> new Clear(left, right);
-            default -> throw new UnsupportedOperationException(getMessageForException("Unsupported operation " + operation, ch));
+            default -> throw throwUnsupportedOperation(operation);
         };
     }
 }

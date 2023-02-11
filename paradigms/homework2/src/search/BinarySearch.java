@@ -2,9 +2,9 @@ package search;
 
 public class BinarySearch {
 
-    // Pre: true
+    // Pre: arr[i] >= arr[j] for all i < j
     // Post: a[R] <= x && R = min(a[i] <= x)
-    private static int binarySerachIterative(int[] arr, int x) {
+    private static int binarySearchIterative(int[] arr, int x) {
         // arr != null
         int l = 0, r = arr.length;
         // arr[l'] >= arr[r']
@@ -24,7 +24,7 @@ public class BinarySearch {
         return l;
     }
 
-    // Pre: l >= 0 && r >= 0
+    // Pre: l >= 0 && r >= 0 && (arr[i] >= arr[j] for all i < j)
     // Post: a[R] <= x && R = min(a[i] <= x)
     private static int binarySearchRecursive(int[] arr, int x, int l, int r) {
         if (l >= r) {
@@ -44,6 +44,7 @@ public class BinarySearch {
     }
 
     // Pre: args.length > 0;
+    // Post: i where a[i] <= x && i = min(a[i] <= x)
     public static void main(String[] args) {
         // args.length > 0
         final int x = Integer.parseInt(args[0]);
@@ -57,6 +58,6 @@ public class BinarySearch {
             arr[i] = Integer.parseInt(args[i + 1]);
             // i < n && arr[i] = args[i + 1] && i++
         }
-        System.out.println(binarySerachIterative(arr, x));
+        System.out.println(binarySearchIterative(arr, x));
     }
 }

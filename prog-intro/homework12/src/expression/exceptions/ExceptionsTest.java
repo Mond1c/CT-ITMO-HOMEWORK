@@ -2,7 +2,6 @@ package expression.exceptions;
 
 import base.Selector;
 import expression.TripleExpression;
-import expression.parser.ExpressionParser;
 
 import static expression.parser.Operations.*;
 
