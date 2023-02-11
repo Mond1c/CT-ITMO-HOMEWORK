@@ -1,3 +1,0 @@
-C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/CMakeFiles/rv3.dir
-C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/pocht/Desktop/Homework/Arhitecture/Lab3/cmake-build-debug/CMakeFiles/rebuild_cache.dir

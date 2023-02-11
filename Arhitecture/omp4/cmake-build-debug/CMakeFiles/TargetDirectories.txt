@@ -1,3 +1,0 @@
-C:/Users/pocht/Desktop/Homework/Architercture/omp4/cmake-build-debug/CMakeFiles/omp4.dir
-C:/Users/pocht/Desktop/Homework/Architercture/omp4/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/pocht/Desktop/Homework/Architercture/omp4/cmake-build-debug/CMakeFiles/rebuild_cache.dir

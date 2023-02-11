@@ -1,6 +1,0 @@
-/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/CMakeFiles/AsmParser.dir
-/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/utility/CMakeFiles/Utility.dir
-/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/utility/CMakeFiles/edit_cache.dir
-/mnt/c/Users/pocht/Desktop/Homework/Arhitecture/Lab3/build/utility/CMakeFiles/rebuild_cache.dir
