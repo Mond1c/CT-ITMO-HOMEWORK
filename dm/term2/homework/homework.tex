@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{Homework DM term2}
+\author{Михаил Корнилович}
+
+\begin{document}
+    \pagenumbering{gobble}
+    \maketitle
+    \newpage
+    \pagenumbering{arabic}
+	
+	\section{Task 1}
+	$N = 28 * 27 = 756$. Пусть первая кость - дубль (7 вариантов). $n_1 = 7 * 6 = 42$
+	
+	\noindent Теперь пусть первая кость не дубль (21 вариант). Получается подходит 6 костей с одной стороны и 6 с другой. Тогда всего вариантов $n_2 = 12 * 21 = 252$.
+	
+	$$
+		P = \frac{n_0 + n_1}{N} = \frac{294}{754} = 0.39
+	$$
+	
+	\section{Task 2}
+	
+	\begin{align*}
+		N = 6 * 6 = 36
+		(1): 1 : 1 \\
+		(2): 2 : 2, 2 : 1 \\
+		(3): 3 : 3, 3 : 1 \\
+		(4): 4 : 4, 4 : 2, 4 : 1 \\
+		(5): 5 : 5, 5 : 1 \\
+		(6): 6 : 6, 6 : 3, 6 : 2, 6 : 1 \\
+		n = 1 + 2 + 2 + 3 + 2 + 4 = 14 \\
+		P = \frac{n}{N} = \frac{14}{36} = 0.39
+	\end{align*}
+\end{document}

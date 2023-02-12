@@ -1,1 +1,0 @@
-javac -cp . search/BinarySearch.java && java -ea -jar BinarySearchTest.jar Base
