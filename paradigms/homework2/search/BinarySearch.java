@@ -1,63 +1,75 @@
 package search;
 
 public class BinarySearch {
-
-    // Pre: arr[i] >= arr[j] for all i < j
-    // Post: a[R] <= x && R = min(a[i] <= x)
-    private static int binarySearchIterative(int[] arr, int x) {
-        // arr != null
+    // P: for all i < j < arr.length arr[i] >= arr[j]
+    // Q: R = min(i: a[i] <= x for all 0 <= i < arr.length)
+    private static int binarySearchIterative(final int[] arr, final int x) {
+        // P1: P
         int l = 0, r = arr.length;
-        // arr[l'] >= arr[r']
+        // Q1: l = 0 && r = arr.length && l <= arr.length
+        // I: r < arr.length && arr[l] >= arr[r] || r == arr.length && arr[l] >= arr[r - 1]
         while (l < r) {
-            // arr[l'] >= arr[r'] && r' - l' > 0
+            // P2: I & Q1 && l' < r'
             int m = l + (r - l) / 2;
-            // arr[l'] >= arr[r'] && r' - l' > 0 && m' = mid(l', r')
+            // Q2: m' = l' + (r' - l') / 2 && l' <= m' <= r'
+            // P3: P2 && Q2
             if (arr[m] <= x) {
-                // arr[l'] >= arr[r'] && r' - l' > 0 && m' = mid(l', r') && arr[m'] <= x
+                // P4: P3 && arr[m'] <= x
                 r = m;
+                // Q4: r = m'
             } else {
-                // arr[l'] >= arr[r'] && r' - l' > 0 && m' = mid(l', r') && arr[m'] > x
+                // P5: P3 && arr[m'] > x
                 l = m + 1;
+                // Q5: l = m' + 1
             }
-            // arr[l'] >= arr[r']
         }
+        // P6: l' = min(i: arr[i] <= x for all 0 <= i < arr.length)
         return l;
+        // P6 -> Q
     }
 
-    // Pre: l >= 0 && r >= 0 && (arr[i] >= arr[j] for all i < j)
-    // Post: a[R] <= x && R = min(a[i] <= x)
-    private static int binarySearchRecursive(int[] arr, int x, int l, int r) {
+    // P: for all i < j < arr.length arr[i] >= arr[j] && 0 <= l && r <= arr.length
+    // Q: R = min(i: a[i] <= x for all 0 <= i < arr.length)
+    private static int binarySearchRecursive(final int[] arr, final int x, final int l, final int r) {
         if (l >= r) {
-            // l' >= r'
             return l;
         }
-        // r' - l' > 0
+        // P1: P && l' < r'
         int m = l + (r - l) / 2;
-        // r' - l' > 0 && m' = min(l', r')
+        // Q1: m' = l' + (r' - l') / 2 && l' <= m' <= r'
+        // P2: P1 && Q1
         if (arr[m] <= x) {
-            // r' - l' > 0 && m' = min(l', r') && arr[m'] <= x
+            // P3: P2 && arr[m'] <= x
             return binarySearchRecursive(arr, x, l, m);
+            // Q3: Q
         } else {
-            // r' - l' > 0 && m' = min(l', r') && arr[m'] > x
+            // P4: P2 && arr[m'] > x
             return binarySearchRecursive(arr, x, m + 1, r);
+            // Q4: Q
         }
     }
-
-    // Pre: args.length > 0;
-    // Post: i where a[i] <= x && i = min(a[i] <= x)
+    
+    // P: args.length > 0 && x = args[0] is a number && (args.length > 2 -> for all 0 < i < j < args.length  : args[i] >= args[j] && args[i] is a number && args[j] is a number)
+    // Q: i: i = min(arr[j] <= x for all j < args.length - 1)
     public static void main(String[] args) {
-        // args.length > 0
+        // P1: args.length > 0 && args[0] is a number
         final int x = Integer.parseInt(args[0]);
-        // args.length > 0 && x = args[0]
-        final int n = args.length - 1;
-        // args.length > 0 && x = args[0] && n = args.length - 1 >= 0
-        final int[] arr = new int[n];
-        //args.length > 0 && x = args[0] && n = args.length - 1 >= 0 && arr = new int[n]
-        for (int i = 0; i < n; ++i) {
-            // i < n
+        // Q1: x = args[0]
+        // P2: args.length - 1  >= 0
+        final int[] arr = new int[args.length - 1];
+        // Q2: arr = an array of args.length - 1 elements
+        // I: i < arr.length
+        for (int i = 0; i < arr.length; i++) {
+            // P3: i < arr.length && (arr.length + 1 == args.length -> i + 1 < args.length) && P
             arr[i] = Integer.parseInt(args[i + 1]);
-            // i < n && arr[i] = args[i + 1] && i++
+            // Q3: arr[i] = args[i + 1] && (i > 0 && P -> arr[i - 1] >= arr[i])
         }
+        // P4: Q1 && Q2 && Q3
         System.out.println(binarySearchIterative(arr, x));
+        // Q4: Q
+        
+        // P5: Q1 && Q2 && Q3 && l = 0 && r = arr.length
+        // System.out.println(binarySearchRecursive(arr, x, 0, arr.length));
+        // Q5: Q
     }
 }
