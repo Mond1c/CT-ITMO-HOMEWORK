@@ -65,6 +65,10 @@ public class BinarySearch {
             // P3: i < arr.length && (arr.length + 1 == args.length -> i + 1 < args.length) && P
             arr[i] = Integer.parseInt(args[i + 1]);
             // Q3: arr[i] = args[i + 1] && (i > 0 && P -> arr[i - 1] >= arr[i])
+            /*  i < arr.length
+             *  i++;
+             *  i <= arr.length
+             */
         }
         // P4: Q1 && Q2 && Q3
         System.out.println(binarySearchIterative(arr, x));
