@@ -8,7 +8,7 @@ public class BinarySearch {
         int l = 0, r = arr.length;
         // Q1: l = 0 && r = arr.length && l <= arr.length
         // I: r < arr.length && arr[l] >= arr[r] || r == arr.length && arr[l] >= arr[r - 1]
-        while (l < r) {
+        while (l != r) {
             // P2: I & Q1 && l' < r'
             int m = l + (r - l) / 2;
             // Q2: m' = l' + (r' - l') / 2 && l' <= m' <= r'
@@ -20,7 +20,7 @@ public class BinarySearch {
             } else {
                 // P5: P3 && arr[m'] > x
                 l = m + 1;
-                // Q5: l = m' + 1
+                // Q5: l' = m' + 1
             }
         }
         // P6: l' = min(i: arr[i] <= x for all 0 <= i < arr.length)
@@ -28,10 +28,12 @@ public class BinarySearch {
         // P6 -> Q
     }
 
-    // P: for all i < j < arr.length arr[i] >= arr[j] && 0 <= l && r <= arr.length
+    // P: for all i < j < arr.length arr[i] >= arr[j] && 0 <= l <= r <= arr.length
     // Q: R = min(i: a[i] <= x for all 0 <= i < arr.length)
     private static int binarySearchRecursive(final int[] arr, final int x, final int l, final int r) {
-        if (l >= r) {
+        // P0: P 
+        if (l == r) {
+            // P && l == r
             return l;
         }
         // P1: P && l' < r'
