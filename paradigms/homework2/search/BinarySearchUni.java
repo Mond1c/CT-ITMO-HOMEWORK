@@ -1,7 +1,5 @@
 package search;
 
-import java.util.Arrays;
-
 public class BinarySearchUni {
     // P: arr is an array with numbers && if arr.length > 0 -> (exists i: for all 0 <= j < k < i args[j] < args[k] &&s
     //              for all i <= j < k < arr.length args[j] > args[k])
