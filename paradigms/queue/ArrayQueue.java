@@ -57,8 +57,8 @@ public class ArrayQueue {
         size++;
     }
 
-    private void ensureCapacity(int size) {
-        if (elements.length < size) {
+    private void ensureCapacity(int newSize) {
+        if (elements.length < newSize) {
             Object[] tmp = new Object[size * 2];
             int i = 0;
             for (int j = left; j < size; j++) {

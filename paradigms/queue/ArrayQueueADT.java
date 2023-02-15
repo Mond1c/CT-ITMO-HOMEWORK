@@ -42,13 +42,12 @@ public class ArrayQueueADT {
     private int left;
     private int right;
 
-    private ArrayQueueADT() {
-
+    public ArrayQueueADT() {
+        elements = new Object[2];
     }
 
     public static ArrayQueueADT create() {
         final ArrayQueueADT queue = new ArrayQueueADT();
-        queue.elements = new Object[2];
         return queue;
     }
 
@@ -65,11 +64,11 @@ public class ArrayQueueADT {
         queue.size++;
     }
 
-    private static void ensureCapacity(final ArrayQueueADT queue, int size) {
-        if (queue.elements.length < size) {
-            Object[] tmp = new Object[size * 2];
+    private static void ensureCapacity(final ArrayQueueADT queue, int newSize) {
+        if (queue.elements.length < newSize) {
+            Object[] tmp = new Object[queue.size * 2];
             int i = 0;
-            for (int j = queue.left; j < size; j++) {
+            for (int j = queue.left; j < queue.size; j++) {
                 if (queue.elements[j] != null) {
                     tmp[i++] = queue.elements[j];
                 }
@@ -80,7 +79,7 @@ public class ArrayQueueADT {
                 }
             }
             queue.left = 0;
-            queue.right = size;
+            queue.right = queue.size;
             queue.elements = tmp;
         }
     }
@@ -93,7 +92,7 @@ public class ArrayQueueADT {
         if (queue.left >= queue.elements.length) {
             queue.left = 0;
         }
-        return queue.elements[queue.size - 1];
+        return queue.elements[queue.left];
     }
 
     // Pred: n > 0

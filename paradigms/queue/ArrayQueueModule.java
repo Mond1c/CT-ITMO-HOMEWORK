@@ -51,10 +51,15 @@ public class ArrayQueueModule {
         }
         elements[right++] = element;
         size++;
+        // System.err.println("Added: " + element + ", left = " + left + ", right = " + right + ", size = " + size);
+        // for (int i = 0; i < elements.length; i++) {
+        //     System.err.print(elements[i] + " ");
+        // }
+        // System.err.println();
     }
 
-    private static void ensureCapacity(int size) {
-        if (elements.length < size) {
+    private static void ensureCapacity(int newSize) {
+        if (elements.length < newSize) {
             Object[] tmp = new Object[size * 2];
             int i = 0;
             for (int j = left; j < size; j++) {
@@ -95,6 +100,7 @@ public class ArrayQueueModule {
         size--;
         Object result = elements[left];
         elements[left++] = null;
+        //System.err.println("Deleted: " + result + ", left = " + left + ", right = " + right);
         return result;
     }
 
@@ -116,6 +122,7 @@ public class ArrayQueueModule {
     // Post: n' = 0 && for all i < n elements[i] = null 
     // clear()
     public static void clear() {
+       // System.err.println("clear");
         for (int i = 0; i < elements.length; i++) {
             elements[i] = null;
         }
