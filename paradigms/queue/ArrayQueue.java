@@ -7,26 +7,26 @@ import java.util.Objects;
  * Model: a[1]..a[n]
  * Invariant: for i=1..n: a[i] != null
  *
- * Let immutable(n): for i=1..n: a'[i] == a[i]
+ * Let immutable(start, n): for i=start..n: a'[i] == a[i]
  * 
  * Pred: element != null
- * Post: n' = n + 1 && a[n'] == element && immutable(n)
+ * Post: n' = n + 1 && a[n'] == element && immutable(0, n)
  *      enqueue(element)
  * 
  * Pred: n > 0
- * Post: R == a[n] && immutable(n) && n' = n
+ * Post: R == a[0] && immutable(0, n) && n' = n
  *      element()
  *
  * Pred: n > 0
- * Post: n' = n - 1 && immutable(n') && R = a[n]
+ * Post: n' = n - 1 && immutable(1, n) && R = a[0]
  *      dequeue()
  *
  * Pred: true
- * Post: R == n && n' == n && immutable(n)
+ * Post: R == n && n' == n && immutable(0, n)
  *      size()
  *
  * Pred: true
- * Post: R == (n == 0) && n' == n && immutable(n)
+ * Post: R == (n == 0) && n' == n && immutable(0, n)
  *      isEmpty()
  *
  * Pred: true
