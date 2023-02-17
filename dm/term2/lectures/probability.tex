@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{Lectures DM term2}
+\author{Михаил Корнилович}
+
+\begin{document}
+    \pagenumbering{gobble}
+    \maketitle
+    \newpage
+    \pagenumbering{arabic}
+
+	\section{Теория вероятности}
+	\subsection{Вероятное пр-во}
+	$\Omega$ - элементарные исходы (мн-во конечное и счётное) 
+	
+	\noindent$p$ - дискретное плотность вероятности
+	$p: \Omega \to [0, 1]$
+	
+	$$
+	\sum\limits_{\omega \in \Omega}p(w) = 1
+	$$
+	
+	\noindent Событие (случайное) $A \subset \Omega$
+	
+	\subsection{Примеры}
+	\begin{enumerate}
+		\item Честная монета $\Omega = \{0, 1\},\ p(0) = p(1) = \frac{1}{2}$.
+		\item Нечестная монета $\Omega = \{0, 1\},\ p(1) = p, p(0) = q, p + q = 1$
+		\item Честная игральная кость $\Omega = \{1, 2, 3, 4, 5, 6\}, p(\omega) = \frac{1}{6}$
+	\end{enumerate}
+	
+	\subsection{Верояиность события}
+	$P(A) = \sum\limits_{\omega \in A}p(\omega) = \mathbb{P}(A) = Pr(A)$ - формула вероятности события.
+	
+	{\bf Nota bene} 
+	
+	\noindent Не существет дискретного вероятного пространства с бесконечным числом равновероятных исходов.
+	
+	\subsection{Независимые события}
+	$A$ и $B$ независимы, если $P(A \cap B) = P(A) \cdot P(B)$
+	
+	\begin{align*}
+		P(A \cap B) = P(A) \cdot P(B) \\
+		\frac{P(A \cap B)}{P(B)} = \frac{P(A)}{P(\Omega)} \\
+		P(A|B) = \frac{P(A \cap B)}{P(B)} \textbf{ - условная вероятность A при условии B}
+	\end{align*}
+	
+	\subsection{Произведение вероятных пространств}
+	\begin{align*}
+		\Omega_1, p_1 \\
+		\Omega_2, p_2 \\
+		\Omega = \Omega_1 \times \Omega_2 \\
+		p(<\omega_1, \omega_2>) = p_1(\omega_1) \cdot p_2(\omega_2)
+	\end{align*}
+	
+	\noindent $\forall A_1 \subset \Omega_1 \ \forall A_2 \subset \Omega_2$ 
+	
+	\noindent $A_1 \times \Omega_2, \Omega_1 \times A_2$ - независимы.
+	
+	{ \bf Доказательство }
+	$$
+		P(A_1 \times \Omega_2 \cap \Omega_1 \times A_2) = P(A_1 \times A_2) =
+		\sum\limits_{a \in A_1, b \in A_2}p(<a, b>) =
+		\sum\limits_{a \in A_1}\sum\limits_{b \in B_1}p_1(a)p_2(b) =
+	$$
+	$$
+			\sum\limits_{a \in A_1}p_1(a)(\sum\limits_{b \in A_2}p_2(b)) =
+		P_1(A_1)P_2(A_2)
+	$$
+	
+	{ \bf Конец доказательства }
+
+	\subsection{Независимость для более чем 2 событий}
+	$A_1A_2..A_n$ - события
+	
+	\begin{enumerate}
+		\item Попарно независимы. $A_i, A_j $ - независимы
+		\item Независимы в совокупности. 
+		$$
+			\forall I \subset \{1, 2, .., n\} P(\bigcap\limits_{i \in I}A_i) = \prod\limits_{i \in I}P(A_i), \quad
+			P(A_1 \cap A_2 \cap A_3) = P(A_1)P(A_2)P(A_3)
+		$$
+	\end{enumerate}
+	
+	\subsection{Формула полной вероятности}
+	$$
+		\Omega = A_1 \cup A_2 \cup .. \cup A_n, \quad i \neq j: A_i \cap A_j = \varnothing
+	$$
+	Полная система событий.
+	
+	Дано: $P(A_i) \quad P(B|A_i)$
+	
+	Найти: $P(B)$
+	
+	$$
+		P(B) = \sum\limits_{i = 1}^np(B \cap A_i) =
+		\sum\limits_{i = 1}^nP(B|A_i)P(A_i) \textbf{ - формула полной вероятности}		
+	$$
+	
+	\subsection{Формула Байеса}
+	
+	$$
+		P(A_j|B) = \frac{P(A_j \cap B)}{P(B)} =
+		\frac{P(B|A_j)P(A_j)}{\sum\limits_{i = 1}^n  p(B|A_i)p(A_i)}
+	$$
+	
+\end{document}

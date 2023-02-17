@@ -1,25 +1,26 @@
 #include <bits/stdc++.h>
 
-int main4I() {
+int main() {
     std::cin.tie(nullptr);
     std::ios::sync_with_stdio(false);
+    long long m = 0;
     int n;
     std::cin >> n;
-    std::deque<int> q;
+    std::deque<long long> q;
     for (int i = 0; i < n; i++) {
         int t;
         std::cin >> t;
         if (t == 1) {
-            int a;
+            long long a;
             std::cin >> a;
-            q.push_back(a);
+            q.push_back(a - m);
         } else if (t == 2) {
-            int x, y;
+            long long x, y;
             std::cin >> x >> y;
-            q[0] += x;
-            for (int j = 1; j < q.size(); j++) q[j] += y;
+            m += y;
+            q[0] += x - y;
         } else {
-            std::cout << q.front() << std::endl;
+            std::cout << q.front() + m << std::endl;
             q.pop_front();
         }
     }
