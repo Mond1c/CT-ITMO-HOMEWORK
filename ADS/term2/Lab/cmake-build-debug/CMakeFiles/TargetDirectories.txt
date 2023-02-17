@@ -1,0 +1,5 @@
+C:/Users/pocht/OneDrive/Рабочий стол/Homework/ADS/term2/Lab/cmake-build-debug/CMakeFiles/1A.dir
+C:/Users/pocht/OneDrive/Рабочий стол/Homework/ADS/term2/Lab/cmake-build-debug/CMakeFiles/1B.dir
+C:/Users/pocht/OneDrive/Рабочий стол/Homework/ADS/term2/Lab/cmake-build-debug/CMakeFiles/1C.dir
+C:/Users/pocht/OneDrive/Рабочий стол/Homework/ADS/term2/Lab/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/pocht/OneDrive/Рабочий стол/Homework/ADS/term2/Lab/cmake-build-debug/CMakeFiles/rebuild_cache.dir
