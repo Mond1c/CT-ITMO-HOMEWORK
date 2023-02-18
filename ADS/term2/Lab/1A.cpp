@@ -11,9 +11,8 @@ struct Node {
 Node combine(Node a, Node b) {
     if (a.val > b.val) {
 		return Node{a.val, a.pos};
-	} else {
-		return Node{b.val, b.pos};
 	}
+	return Node{b.val, b.pos};
 }
 
 template<typename T>

@@ -1,4 +1,4 @@
-D:\Jetbrains\apps\CLion\ch-0\231.6890.13\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=D:/Jetbrains/apps/CLion/ch-0/231.6890.13/bin/ninja/win/x64/ninja.exe -G Ninja -S "C:\Users\pocht\OneDrive\Рабочий стол\Homework\ADS\term2\Lab" -B "C:\Users\pocht\OneDrive\Рабочий стол\Homework\ADS\term2\Lab\cmake-build-debug"
+/home/mikhail/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.6890.13/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/mikhail/Documents/Homework/ADS/term2/Lab -B /home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/pocht/OneDrive/Рабочий стол/Homework/ADS/term2/Lab/cmake-build-debug
+-- Build files have been written to: /home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug
