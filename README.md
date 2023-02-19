@@ -7,3 +7,4 @@
 - Math (term1 (Done), term2, term3, term4) In progress
 - Digital culture (term1) Done
 - Paradigms (term2) In progress
+- C++ course (term2) In progress
