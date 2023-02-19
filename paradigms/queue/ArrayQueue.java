@@ -45,7 +45,7 @@ public class ArrayQueue {
     }
 
     // Pred: element != null
-    // Post: n' = n + 1 && a[n'] == element && immutable(n)
+    // Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     // enqueue(element)
     public void enqueue(final Object element) {
         Objects.requireNonNull(element);
@@ -57,6 +57,9 @@ public class ArrayQueue {
         size++;
     }
 
+    // Pred: newSize > 0
+    // Post: n' = n * 2 && immutable(0, n)
+    // ensureCapacity(newSize)
     private void ensureCapacity(int newSize) {
         if (elements.length < newSize) {
             Object[] tmp = new Object[size * 2];
@@ -78,7 +81,7 @@ public class ArrayQueue {
     }
 
     // Pred: n > 0
-    // Post: R == a[n] && immutable(n) && n' = n
+    // Post: R == a[0] && immutable(0, n) && n' = n
     // element()
     public Object element() {
         assert size > 0;
@@ -89,7 +92,7 @@ public class ArrayQueue {
     }
 
     // Pred: n > 0
-    // Post: n' = n - 1 && immutable(n') && R = a[n]
+    // Post: n' = n - 1 && immutable(1, n) && R = a[0]
     // dequeue()
     public Object dequeue() {
         assert size > 0;
@@ -103,7 +106,7 @@ public class ArrayQueue {
     }
 
     // Pred: true
-    // Post: R == n && n' == n && immutable(n)
+    // Post: R == n && n' == n && immutable(0, n)
     // size()
     public int size() {
         return size;

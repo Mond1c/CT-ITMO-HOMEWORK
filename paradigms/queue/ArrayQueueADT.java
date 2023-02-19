@@ -37,22 +37,21 @@ import queue.ArrayQueue;
 */
 
 public class ArrayQueueADT {
-    private Object[] elements;
+    private Object[] elements = new Object[2];
     private int size;
     private int left;
     private int right;
 
-    public ArrayQueueADT() {
-        elements = new Object[2];
-    }
-
+    // Pred: true
+    // Post: R = new ArrayQueueADT()
+    // create()
     public static ArrayQueueADT create() {
         final ArrayQueueADT queue = new ArrayQueueADT();
         return queue;
     }
 
     // Pred: element != null
-    // Post: n' = n + 1 && a[n'] == element && immutable(n)
+    // Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     // enqueue(element)
     public static void enqueue(final ArrayQueueADT queue, final Object element) {
         Objects.requireNonNull(element);
@@ -64,6 +63,9 @@ public class ArrayQueueADT {
         queue.size++;
     }
 
+    // Pred: newSize > 0
+    // Post: n' = n * 2 && immutable(0, n)
+    // ensureCapacity(newSize)
     private static void ensureCapacity(final ArrayQueueADT queue, int newSize) {
         if (queue.elements.length < newSize) {
             Object[] tmp = new Object[queue.size * 2];
@@ -85,7 +87,7 @@ public class ArrayQueueADT {
     }
 
     // Pred: n > 0
-    // Post: R == a[n] && immutable(n) && n' = n
+    // Post: R == a[0] && immutable(0, n) && n' = n
     // element()
     public static Object element(final ArrayQueueADT queue) {
         assert queue.size > 0;
@@ -96,7 +98,7 @@ public class ArrayQueueADT {
     }
 
     // Pred: n > 0
-    // Post: n' = n - 1 && immutable(n') && R = a[n]
+    // Post: n' = n - 1 && immutable(1, n) && R = a[0]
     // dequeue()
     public static Object dequeue(final ArrayQueueADT queue) {
         assert queue.size > 0;
@@ -110,14 +112,14 @@ public class ArrayQueueADT {
     }
 
     // Pred: true
-    // Post: R == n && n' == n && immutable(n)
+    // Post: R == n && n' == n && immutable(0, n)
     // size()
     public static int size(final ArrayQueueADT queue) {
         return queue.size;
     }
 
     // Pred: true
-    // Post: R == (n == 0) && n' == n && immutable(n)
+    // Post: R == (n == 0) && n' == n && immutable(0, n)
     // isEmpty()
     public static boolean isEmpty(final ArrayQueueADT queue) {
         return queue.size == 0;

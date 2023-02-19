@@ -41,7 +41,7 @@ public class ArrayQueueModule {
     private static int right;
 
     // Pred: element != null
-    // Post: n' = n + 1 && a[n'] == element && immutable(n)
+    // Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     // enqueue(element)
     public static void enqueue(final Object element) {
         Objects.requireNonNull(element);
@@ -51,13 +51,11 @@ public class ArrayQueueModule {
         }
         elements[right++] = element;
         size++;
-        // System.err.println("Added: " + element + ", left = " + left + ", right = " + right + ", size = " + size);
-        // for (int i = 0; i < elements.length; i++) {
-        //     System.err.print(elements[i] + " ");
-        // }
-        // System.err.println();
     }
 
+    // Pred: newSize > 0
+    // Post: n' = n * 2 && immutable(0, n)
+    // ensureCapacity(newSize)
     private static void ensureCapacity(int newSize) {
         if (elements.length < newSize) {
             Object[] tmp = new Object[size * 2];
@@ -79,7 +77,7 @@ public class ArrayQueueModule {
     }
 
     // Pred: n > 0
-    // Post: R == a[n] && immutable(n) && n' = n
+    // Post: R == a[0] && immutable(0, n) && n' = n
     // element()
     public static Object element() {
         assert size > 0;
@@ -90,7 +88,7 @@ public class ArrayQueueModule {
     }
 
     // Pred: n > 0
-    // Post: n' = n - 1 && immutable(n') && R = a[n]
+    // Post: n' = n - 1 && immutable(1, n) && R = a[0]
     // dequeue()
     public static Object dequeue() {
         assert size > 0;
@@ -105,14 +103,14 @@ public class ArrayQueueModule {
     }
 
     // Pred: true
-    // Post: R == n && n' == n && immutable(n)
+    // Post: R == n && n' == n && immutable(0, n)
     // size()
     public static int size() {
         return size;
     }
 
     // Pred: true
-    // Post: R == (n == 0) && n' == n && immutable(n)
+    // Post: R == (n == 0) && n' == n && immutable(0, n)
     // isEmpty()
     public static boolean isEmpty() {
         return size == 0;
