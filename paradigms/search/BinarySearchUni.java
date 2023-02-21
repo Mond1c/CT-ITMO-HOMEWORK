@@ -1,8 +1,8 @@
 package search;
 
 public class BinarySearchUni {
-    // P: arr is an array with numbers && if arr.length > 0 -> (exists i: for all 0 <= j < k < i args[j] < args[k] &&s
-    //              for all i <= j < k < arr.length args[j] > args[k])
+    // P: arr is an array with numbers && if arr.length > 0 -> (exists i: for all 0 <= j < k < i arr[j] < arr[k] &&s
+    //              for all i <= j < k < arr.length arr[j] > arr[k])
     // Q: the smallest length of the left part of the array
     private static int binarySearchIterative(final int[] arr) {
         // P1: P
@@ -10,30 +10,29 @@ public class BinarySearchUni {
         // Q1: l = 0 && r = arr.length && l <= r
         // I: l <= r
         while (l != r) {
-            // P2: l <  r
+            // P2: l' <  r'
             int m = l + (r - l) / 2;
-            // Q2: l <= m < r
+            // Q2: l' <= m' < r'
             // P3: Q2
             if (m + 1 < arr.length && arr[m] <= arr[m + 1]) {
-                // P4: P3 && m + 1 < arr.length && arr[m] <= arr[m + 1]
+                // P4: P3 && m' + 1 < arr.length && arr[m'] <= arr[m' + 1]
                 l = m + 1;
-                // Q4: l' = m + 1
-                // l will be the leftest index because arr[m] <= arr[m + 1] -> 
+                // Q4: l' = m' + 1
             } else {
-                // P5: P3 && (m + 1 >= arr.length || arr[m] > arr[m + 1])
+                // P5: P3 && (m' + 1 >= arr.length || arr[m'] > arr[m' + 1])
                 r = m;
-                // Q5: r' = m
+                // Q5: r' = m'
             }
         }
-        // After this while we have l: for all 0 <= j < k < l  args[j] < args[k] && l == r &&
-        //  for all l <= j < k < arr.length args[j] > args[k]
+        // After this while we have l: for all 0 <= j < k < l  arr[j] < arr[k] && l == r &&
+        //  for all l <= j < k < arr.length arr[j] > arr[k]
+        // l is the smallest because l == r
         // So l is the answer
-        // l is the smallest becase l == r
         return l;
     }
 
-    // P: arr is an array with numbers && if arr.length > 0 -> (exists i: for all 0 <= j < k < i args[j] < args[k] &&s
-    //              for all i <= j < k < arr.length args[j] > args[k]) && l <= r
+    // P: arr is an array with numbers && if arr.length > 0 -> (exists i: for all 0 <= j < k < i arr[j] < arr[k] &&s
+    //              for all i <= j < k < arr.length arr[j] > arr[k]) && l <= r
     // Q: the smallest length of the left part of the array
     private static int binarySearchRecursive(final int[] arr, final int l, final int r) {
         // P1: P
@@ -41,6 +40,10 @@ public class BinarySearchUni {
             // P2: l == r 
             return l;
             // Q2: Q because P2
+            // After this recursive function we have l: forr all 0 <= j < k < l: arr[j] < arr[k] && l == r &&
+            //      for all l <= j < k < arr.length: arr[j] > arr[k]
+            // l is the smallest because l == 3
+            // So l is the answer
         }
         // P3: l < r
         int m = l + (r - l) / 2;
