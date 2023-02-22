@@ -76,12 +76,17 @@ public class BinarySearch {
              *  i <= arr.length
              */
         }
-        // P4: Q1 && Q2 && Q3 && a[n] = -inf
-        System.out.println(binarySearchIterative(arr, x));
-        // Q4: Q
+        if (args.length % 2 == 0) {
+            // P4: Q1 && Q2 && Q3 && l = 0 && r = arr.length && a[n] = -ing
+            System.out.println(binarySearchRecursive(arr, x, 0, arr.length));
+            // Q4: Q
+        } else {
+            // P5: Q1 && Q2 && Q3 && a[n] = -inf
+            System.out.println(binarySearchIterative(arr, x));
+            // Q5: Q            
+        }
+
         
-        // P5: Q1 && Q2 && Q3 && l = 0 && r = arr.length && a[n] = -ing
-        // System.out.println(binarySearchRecursive(arr, x, 0, arr.length));
-        // Q5: Q
+
     }
 }

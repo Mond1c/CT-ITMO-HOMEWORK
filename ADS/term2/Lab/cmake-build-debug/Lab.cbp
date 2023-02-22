@@ -8,225 +8,272 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1A">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1A" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1A" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1A"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1A"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1A/fast">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1A" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1A" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1A/fast"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1A/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1B">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1B" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1B" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1B"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1B"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1B/fast">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1B" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1B" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1B/fast"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1B/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1C">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1C" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1C" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1C"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1C"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1C/fast">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1C" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1C" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1C/fast"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1C/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1D">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1D" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1D" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1D"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1D"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="1D/fast">
-				<Option output="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1D" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/1D" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1D/fast"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 1D/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="2A">
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/2A" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 2A"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="2A/fast">
+				<Option output="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/2A" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/../../../../include/c++/12.2.1/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 2A/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
+				<Option working_dir="/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j20 -f &quot;/home/mikhail/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mike/Documents/Homework/ADS/term2/Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/mikhail/Documents/Homework/ADS/term2/Lab/1A.cpp">
+		<Unit filename="/home/mike/Documents/Homework/ADS/term2/Lab/1A.cpp">
 			<Option target="1A"/>
 		</Unit>
-		<Unit filename="/home/mikhail/Documents/Homework/ADS/term2/Lab/1B.cpp">
+		<Unit filename="/home/mike/Documents/Homework/ADS/term2/Lab/1B.cpp">
 			<Option target="1B"/>
 		</Unit>
-		<Unit filename="/home/mikhail/Documents/Homework/ADS/term2/Lab/1C.cpp">
+		<Unit filename="/home/mike/Documents/Homework/ADS/term2/Lab/1C.cpp">
 			<Option target="1C"/>
 		</Unit>
-		<Unit filename="/home/mikhail/Documents/Homework/ADS/term2/Lab/1D.cpp">
+		<Unit filename="/home/mike/Documents/Homework/ADS/term2/Lab/1D.cpp">
 			<Option target="1D"/>
 		</Unit>
-		<Unit filename="/home/mikhail/Documents/Homework/ADS/term2/Lab/CMakeLists.txt">
+		<Unit filename="/home/mike/Documents/Homework/ADS/term2/Lab/2A.cpp">
+			<Option target="2A"/>
+		</Unit>
+		<Unit filename="/home/mike/Documents/Homework/ADS/term2/Lab/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

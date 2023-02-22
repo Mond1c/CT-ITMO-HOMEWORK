@@ -24,15 +24,15 @@ struct tree {
         data.resize(n * 4);
     }
 
-	void build(std::vector<T>& a, int v, int l, int r) {
-        if (l == r) {
-			data[v] = a[l];
-		} else {
-			int m = (l + r) / 2;
-			build(a, v * 2, l, m);
-			build(a, v * 2 + 1, m + 1, r);
-			data[v] = operation(data[v * 2], data[v * 2 + 1]);
-		}
+	void build(std::vector<T>& a, int v, int tl, int tr) {
+        if (tr - tl == 1) {
+            data[v] = a[tl];
+        } else {
+            int tm = tl + (tr - tl) / 2;
+            build(a, 2 * v + 1, tl, tm);
+            build(a, 2 * v + 2, tm, tr);
+            data[v] = operation(data[v * 2 + 1], data[v * 2 + 2]);
+        }
 	}
 
 	T get(int v, int tl, int tr, int l, int r) {
@@ -72,7 +72,7 @@ int main() {
 		a[i].pos = i;
 	}
 	tree<Node> t(n, combine);
-	t.build(a, 1, 0, n - 1);
+	t.build(a, 0, 0, n - 1);
 	int k;
 	std::cin >> k;
 	for (int i = 0; i < k; ++i) {

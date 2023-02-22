@@ -78,10 +78,15 @@ public class BinarySearchUni {
              * Q3: i' = i + 1 && i' <= arr.length
              */ 
         }
+        // args.length >= 0
         if (args.length % 2 == 0) {
+            // P4: args.length % 2 == 0 && P
             System.out.println(binarySearchRecursive(arr, 0, arr.length));
+            // Q4: Q
         } else {
+            // P5: P && args.length % 2 == 1
             System.out.println(binarySearchIterative(arr));
+            // Q5: Q
         }
     }
 }

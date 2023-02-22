@@ -2,6 +2,7 @@ package queue;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.ArrayDeque;
 
 /*
  * Model: a[1]..a[n]
@@ -40,6 +41,17 @@ public class ArrayQueueModule {
     private static int left;
     private static int right;
 
+
+    public static Object[] toArray() {
+        final Object[] arr = new Object[size];
+        if (left < right) {
+            for (int i = left; i <= right; i++) {
+                arr[i - left] = elements[i];
+            }
+        }
+        return arr;
+    }
+
     // Pred: element != null
     // Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     // enqueue(element)
@@ -48,9 +60,44 @@ public class ArrayQueueModule {
         ensureCapacity(size + 1);
         if (right >= elements.length) {
             right = 0;
+        } else if (right < 0) {
+            right = 0;
         }
         elements[right++] = element;
         size++;
+    }
+
+    public static void push(final Object element) {
+        Objects.requireNonNull(element);
+        ensureCapacity(size + 1);
+        if (left < 0) {
+            left = size - 1;
+            if (elements[right] == null) {
+                right = left;
+            }
+        }
+        elements[left--] = element;
+        size++;
+    }
+
+    public static Object peek() {
+        assert size > 0;
+        if (right < 0) {
+            right = elements.length - 1;
+        }
+        return elements[right];
+    }
+
+    public static Object remove() {
+        assert size > 0;
+       // System.err.println(right);
+        if (right < 0) {
+            right = elements.length - 1;
+        }
+        size--;
+        Object result = elements[right];
+        elements[right--] = null;
+        return result;
     }
 
     // Pred: newSize > 0
@@ -84,7 +131,7 @@ public class ArrayQueueModule {
         if (left >= elements.length) {
             left = 0;
         }
-        return elements[left];
+        return elements[Math.max(left, 0)];
     }
 
     // Pred: n > 0
@@ -94,7 +141,10 @@ public class ArrayQueueModule {
         assert size > 0;
         if (left >= elements.length) {
             left = 0;
+        } else if (left < 0) {
+            left = 0;
         }
+        // System.err.println(left + ": " + Arrays.toString(elements));
         size--;
         Object result = elements[left];
         elements[left++] = null;

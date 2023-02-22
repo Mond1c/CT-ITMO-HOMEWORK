@@ -1,7 +1,7 @@
 package queue;
 
-import java.util.Arrays;
 import java.util.Objects;
+import java.util.Arrays;
 
 /*
  * Model: a[1]..a[n]
@@ -44,6 +44,16 @@ public class ArrayQueue {
         this.elements = new Object[2];
     }
 
+    public Object[] toArray() {
+        final Object[] arr = new Object[size];
+        if (left < right) {
+            for (int i = left; i <= right; i++) {
+                arr[i - left] = elements[i];
+            }
+        }
+        return arr;
+    }
+
     // Pred: element != null
     // Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     // enqueue(element)
@@ -55,6 +65,38 @@ public class ArrayQueue {
         }
         elements[right++] = element;
         size++;
+    }
+
+    public void push(final Object element) {
+        Objects.requireNonNull(element);
+        ensureCapacity(size + 1);
+        if (left <= 0) {
+            left = elements.length;
+            if (elements[right] == null) {
+                right = left - 1;
+            }
+        }
+        elements[--left] = element;
+        size++;
+    }
+
+    public Object peek() {
+        assert size > 0;
+        if (right < 0) {
+            right = elements.length - 1;
+        }
+        return elements[right];
+    }
+
+    public Object remove() {
+        assert size > 0;
+        if (right < 0) {
+            right = elements.length - 1;
+        }
+        size--;
+        Object result = elements[right];
+        elements[right--] = null;
+        return result;
     }
 
     // Pred: newSize > 0
@@ -96,6 +138,7 @@ public class ArrayQueue {
     // dequeue()
     public Object dequeue() {
         assert size > 0;
+        //System.err.println(Arrays.toString(elements));
         if (left >= elements.length) {
             left = 0;
         }

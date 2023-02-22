@@ -50,6 +50,16 @@ public class ArrayQueueADT {
         return queue;
     }
 
+    public static Object[] toArray(final ArrayQueueADT queue) {
+        final Object[] arr = new Object[queue.size];
+        if (queue.left < queue.right) {
+            for (int i = queue.left; i <= queue.right; i++) {
+                arr[i - queue.left] = queue.elements[i];
+            }
+        }
+        return arr;
+    }
+
     // Pred: element != null
     // Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     // enqueue(element)
@@ -61,6 +71,36 @@ public class ArrayQueueADT {
         }
         queue.elements[queue.right++] = element;
         queue.size++;
+    }
+
+    public static Object peek(final ArrayQueueADT deque) {
+        assert deque.size > 0;
+        if (deque.right < 0) {
+            deque.right = deque.elements.length - 1;
+        }
+        return deque.elements[deque.right];
+    }
+
+    public static Object remove(final ArrayQueueADT deque) {
+        assert deque.size > 0;
+        if (deque.right < 0) {
+            deque.right = deque.elements.length - 1;
+        }
+        deque.size--;
+        Object result = deque.elements[deque.right];
+        deque.elements[deque.right--] = null;
+        return result;
+    }
+
+
+    public static void push(final ArrayQueueADT deque, final Object element) {
+        Objects.requireNonNull(element);
+        ensureCapacity(deque, deque.size + 1);
+        if (deque.left <= 0) {
+            deque.left = deque.size - 1;
+        }
+        deque.elements[deque.left--] = element;
+        deque.size++;
     }
 
     // Pred: newSize > 0
