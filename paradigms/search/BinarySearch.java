@@ -2,62 +2,68 @@ package search;
 
 public class BinarySearch {
     // P: (for all i < j < arr.length arr[i] >= arr[j]) && a[n] = -inf
-    // Q: R = min(i: a[i] <= x for all 0 <= i < arr.length)
+    // Q: R = min(i: arr[i] <= x for all 0 <= i < arr.length)
     private static int binarySearchIterative(final int[] arr, final int x) {
         // P1: P
-        int l = 0, r = arr.length;
+        int l = -1, r = arr.length;
         // Q1: l = 0 && r = arr.length && l <= r
-        // I: l <= r && arr[l] >= arr[r]
-        while (l != r) {
-            // P2: I & Q1 && l' < r'
+        // I: arr[l] > x && arr[r] <= x && l' >= l && r' <= r && -1 <= l' < r' <= len(arr)
+        while (r - l > 1) {
+            // P2: I & Q1 && r' - l' > 1 && I
             int m = l + (r - l) / 2;
-            // Q2: l' <= m' <= r'
-            // P3: P2 && Q2
+            // Q2: m' = l' + (r' - l') / 2 && l' < m' < r'
+            // P3: P2 && Q2 && I
             if (arr[m] <= x) {
-                // P4: P3 && arr[m'] <= x
+                // P4: P3 && arr[m'] <= x && I
+                // :NOTE: бесконечная рекурсия (fixed)
                 r = m;
-                // Q4: r = m'
+                // Q4: r' = m' && arr[r'] <= x
             } else {
-                // P5: P3 && arr[m'] > x
-                l = m + 1;
-                // Q5: l' = m' + 1
+                // P5: P3 && arr[m'] > x && I
+                l = m;
+                // Q5: l' = m' && arr[l'] > x
             }
         }
-        // P6: l' = min(i: arr[i] <= x for all 0 <= i < arr.length)
-        return l;
-        // P6 -> Q
-        // l is the smallest because for all 0 <= j < l: arr[j] > x
-        // See P4 and P5
+        // P6: 0 < r - l <= 1 && P
+        return r;
+        // Q6: Q
+        // P6 -> arr[l] > arr[r] <= x -> r is the answer 
     }
 
-    // P: (for all i < j < arr.length arr[i] >= arr[j] && 0 <= l <= r <= arr.length) && a[n] = -inf
+    // :NOTE: i=-1 (fixed)
+    // P: (for all 0 <= i < j < arr.length arr[i] >= arr[j] && -1 <= l < r <= arr.length) && a[n] = -inf
     // Q: R = min(i: a[i] <= x for all 0 <= i < arr.length)
     private static int binarySearchRecursive(final int[] arr, final int x, final int l, final int r) {
-        // P0: P 
-        if (l == r) {
-            // P && l == r
-            return l;
-            // l is the smallest because for all 0 <= j < l: arr[j] > x
-            // See P3 and P4 
+        // P0: P && arr[l'] > x && arr[r'] <= x && -1 <= l' < r' <= len(arr)
+        if (r - l == 1) {
+            // P && l' == r'
+            return r;
+            // (P0 && r' - l' < 2)  -> arr[l'] > arr[r'] <= x -> r' is the answer
         }
-        // P1: P && l' < r'
+        // P1: P && r' - l' > 1
         int m = l + (r - l) / 2;
-        // Q1: m' = l' + (r' - l') / 2 && l' <= m' <= r'
+        // :NOTE: m = r (fixed)
+        // Q1: m' = l' + (r' - l') / 2 && l' < m' < r'
         // P2: P1 && Q1
         if (arr[m] <= x) {
             // P3: P2 && arr[m'] <= x
+            // :NOTE: бесконечная рекурсия (fixed)
             return binarySearchRecursive(arr, x, l, m);
             // Q3: Q
         } else {
             // P4: P2 && arr[m'] > x
-            return binarySearchRecursive(arr, x, m + 1, r);
+            return binarySearchRecursive(arr, x, m, r);
             // Q4: Q
         }
+        // Start We always take half of the array -> exists k: 1/2^k == 1 -> recursive is not infinite
+        // If array is empty we have l == -1 and r == 0 and r - l == 1 -> recursive is not infinite
     }
-    
-    // P: args.length > 0 && x = args[0] is a number
+
+    // :NOTE: args[i] = 2^64 (fixed)
+    // :NOTE: строковое сравнение (fixed)
+    // P: args.length > 0 && x = args[0] is an integer
     //  && (args.length > 2 -> for all 0 < i < j < args.length  : 
-    //          args[i] >= args[j] && args[i] is a number && args[j] is a number)
+    //          args[i] is an integer && args[j] is an integer && int(args[i]) >= int(args[j]))
     // Q: i: i = min(arr[j] <= x for all j < args.length - 1)
     public static void main(String[] args) {
         // P1: args.length > 0 && args[0] is a number
@@ -77,16 +83,13 @@ public class BinarySearch {
              */
         }
         if (args.length % 2 == 0) {
-            // P4: Q1 && Q2 && Q3 && l = 0 && r = arr.length && a[n] = -ing
-            System.out.println(binarySearchRecursive(arr, x, 0, arr.length));
+            // P4: Q1 && Q2 && Q3 && l = 0 && r = arr.length && a[n] = -inf
+            System.out.println(binarySearchRecursive(arr, x, -1, arr.length));
             // Q4: Q
         } else {
             // P5: Q1 && Q2 && Q3 && a[n] = -inf
             System.out.println(binarySearchIterative(arr, x));
             // Q5: Q            
-        }
-
-        
-
+        }     
     }
 }

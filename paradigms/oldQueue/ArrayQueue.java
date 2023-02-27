@@ -1,8 +1,6 @@
-package queue;
+package oldQueue;
 
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /*
  * Model: a[1]..a[n]
@@ -51,10 +49,11 @@ import java.util.function.Predicate;
  *      toArray()
 */
 
-public class ArrayQueue extends AbstractQueue {
+public class ArrayQueue {
     private Object[] elements;
     private int left;
     private int right;
+    private int size;
 
     public ArrayQueue() {
         this.elements = new Object[2];
@@ -95,6 +94,19 @@ public class ArrayQueue extends AbstractQueue {
         return copyToArray(size);
     }
 
+    // Pred: true
+    // Post: R == (n == 0) && n' == n && immutable(0, n)
+    //      isEmpty()
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Pred: true
+    // Post: R == n && n' == n && immutable(0, n)
+    //      size()
+    public int size() {
+        return size;
+    }
 
     // Pred: newSize > 0
     // Post: elements.length' == 2 * elements.length && immutable(0, n) && n == n' 
@@ -127,22 +139,24 @@ public class ArrayQueue extends AbstractQueue {
     //  Pred: element != null
     //  Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     //       enqueue(element)
-    protected void enqueueImpl(final Object element) {
+    public void enqueue(final Object element) {
         ensureCapacity(size + 1);
         right = (right + 1) % elements.length;
         if (isEmpty()) {
             left = right;
         }
         elements[right] = element;
+        size++;
     }
 
     // Pred: n > 0
     // Post: n' = n - 1 && immutable(1, n) && R = a[0]
     //      dequeue()
-    protected Object dequeueImpl() {
+    public Object dequeue() {
         final Object element = elements[left];
         elements[left] = null;
         left = (left + 1) % elements.length;
+        size--;
         return element;
     }
 
@@ -160,7 +174,7 @@ public class ArrayQueue extends AbstractQueue {
     // Pred: n > 0
     // Post: R == a[0] && immutable(0, n) && n' = n
     //      element()
-    protected Object elementImpl() {
+    public Object element() {
         return elements[left];
     }
 
@@ -174,59 +188,12 @@ public class ArrayQueue extends AbstractQueue {
     // Pred: true
     // Post: n' = 0 && for all i < n elements[i] = null 
     // clear()
-    protected void clearImpl() {
+    public void clear() {
         for (int i = 0; i < elements.length; i++) {
             elements[i] = null;
         }
         left = 0;
         right = 0;
-    }
-
-    @Override
-    protected ArrayQueue filterImpl(Predicate<Object> predicate) {
-        ArrayQueue ans = new ArrayQueue();
-        if (left <= right) {
-            for (int i = left; i <= right; i++) {
-                if (elements[i] != null && predicate.test(elements[i])) {
-                    ans.enqueue(elements[i]);
-                }
-            }
-        } else {
-            for (int i = left; i < elements.length; i++) {
-                if (elements[i] != null && predicate.test(elements[i])) {
-                    ans.enqueue(elements[i]);
-                }
-            }
-            for (int i = 0; i <= right; i++) {
-                if (elements[i] != null && predicate.test(elements[i])) {
-                    ans.enqueue(elements[i]);
-                }
-            }
-        }
-        return ans;
-    }
-
-    @Override
-    protected ArrayQueue mapImpl(Function<Object, Object> function) {
-        ArrayQueue ans = new ArrayQueue();
-        if (left <= right) {
-            for (int i = left; i <= right; i++) {
-                if (elements[i] != null) {
-                    ans.enqueue(function.apply(elements[i]));
-                }
-            }
-        } else {
-            for (int i = left; i < elements.length; i++) {
-                if (elements[i] != null) {
-                    ans.enqueue(function.apply(elements[i]));
-                }
-            }
-            for (int i = 0; i <= right; i++) {
-                if (elements[i] != null) {
-                    ans.enqueue(function.apply(elements[i]));
-                }
-            }
-        }
-        return ans;
+        size = 0;
     }
 }
