@@ -1,4 +1,4 @@
-package oldQueue;
+package newQueue;
 
 import java.util.Objects;
 
@@ -49,20 +49,16 @@ import java.util.Objects;
  *      toArray()
 */
 
-public class ArrayQueue {
-    private Object[] elements;
-    private int left;
-    private int right;
-    private int size;
-
-    public ArrayQueue() {
-        this.elements = new Object[2];
-    }
+public class ArrayQueueModule {
+    private static Object[] elements = new Object[2];
+    private static int left;
+    private static int right;
+    private static int size;
 
     // Pred: newSize >= n
     // Post: len(R) == newSize && (for i=0..n R[i] == a[i])
     //      copyToArray(newSize)
-    private Object[] copyToArray(int newSize) {
+    private static Object[] copyToArray(int newSize) {
         Object[] tmp = new Object[newSize];
         int k = 0;
         if (right > left) {
@@ -83,28 +79,28 @@ public class ArrayQueue {
                     tmp[k++] = elements[i];
                 }
             }
-        }
-        return tmp;       
+        } 
+        return tmp;      
     }
 
     // Pred: true
     // Post: len(R) == n && (for i=0..n R[i] = a[i])
-    //      toArray()    
-    public Object[] toArray() {
+    //      toArray()   
+    public static Object[] toArray() {
         return copyToArray(size);
     }
 
     // Pred: true
     // Post: R == (n == 0) && n' == n && immutable(0, n)
     //      isEmpty()
-    public boolean isEmpty() {
+    public static boolean isEmpty() {
         return size == 0;
     }
 
     // Pred: true
     // Post: R == n && n' == n && immutable(0, n)
     //      size()
-    public int size() {
+    public static int size() {
         return size;
     }
 
@@ -112,7 +108,7 @@ public class ArrayQueue {
     // Post: elements.length' == 2 * elements.length && immutable(0, n) && n == n' 
     //      || n == n' && immutable(0, n)
     //      ensureCapacity(newSize)  
-    private void ensureCapacity(int newSize) {
+    private static void ensureCapacity(int newSize) {
         if (newSize > elements.length) {
             Object[] tmp = copyToArray(elements.length * 2);
             elements = tmp;
@@ -124,7 +120,7 @@ public class ArrayQueue {
     // Pred: element != null
     // Post: n = n + 1 && a'[0] == element && (for i = 1..n+1: a'[i] = a[i - 1]) 
     //      push(element) 
-    public void push(final Object element) {
+    public static void push(final Object element) {
         ensureCapacity(size + 1);
         if (!isEmpty() && elements[left] != null) {
             left = (left + elements.length - 1) % elements.length;
@@ -139,7 +135,7 @@ public class ArrayQueue {
     //  Pred: element != null
     //  Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     //       enqueue(element)
-    public void enqueue(final Object element) {
+    public static void enqueue(final Object element) {
         ensureCapacity(size + 1);
         right = (right + 1) % elements.length;
         if (isEmpty()) {
@@ -152,7 +148,7 @@ public class ArrayQueue {
     // Pred: n > 0
     // Post: n' = n - 1 && immutable(1, n) && R = a[0]
     //      dequeue()
-    public Object dequeue() {
+    public static Object dequeue() {
         final Object element = elements[left];
         elements[left] = null;
         left = (left + 1) % elements.length;
@@ -163,7 +159,7 @@ public class ArrayQueue {
     // Pred: n > 0
     // Post: n' = n - 1 && immutable(0, n') && R == a[n] && a'[n] == null
     //      remove()
-    public Object remove() {
+    public static Object remove() {
         final Object element = elements[right];
         elements[right] = null;
         right = (right + elements.length - 1) % elements.length;
@@ -174,21 +170,21 @@ public class ArrayQueue {
     // Pred: n > 0
     // Post: R == a[0] && immutable(0, n) && n' = n
     //      element()
-    public Object element() {
+    public static Object element() {
         return elements[left];
     }
 
     // Pred: n > 0
     // Post: R == a[n] && immutable(0, n) && n' == n
     //      peek()
-    public Object peek() {
+    public static Object peek() {
         return elements[right];
     }
-    
+
     // Pred: true
     // Post: n' = 0 && for all i < n elements[i] = null 
     // clear()
-    public void clear() {
+    public static void clear() {
         for (int i = 0; i < elements.length; i++) {
             elements[i] = null;
         }

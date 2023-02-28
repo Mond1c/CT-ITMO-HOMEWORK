@@ -11,7 +11,7 @@ public class BinarySearchUni {
         // P1: P
         int l = -1, r = arr.length;
         // Q1: l = 0 && r = arr.length && l <= r
-        // I: arr[l'] >= arr[l' + 1] && arr[r' - 1] < arr[r'] && (l' > l && r' < r) && -1 <= l' < r' <= len(arr)
+        // I: arr[l'] >= arr[l' + 1] && arr[r' - (r' == len(arr))] < arr[r' + (r' != len(arr))] && (l' > l && r' < r) && -1 <= l' < r' <= len(arr)
         // :NOTE: нет связи инварианта и самой задачи, решается ли она действительно? (fixed)
         while (r - l > 1) {
             // P2: r' - l' > 1 && I
@@ -27,7 +27,10 @@ public class BinarySearchUni {
                 r = m;
                 // Q5: r' = m' && r' < r
             }
-            // (Q4 || Q5) && -1 <= l' < r' <= len(arr) && arr[l'] >= arr[l' + 1] && arr[r' - 1] < arr[r']
+            // (Q4 || Q5) && -1 <= l' < r' <= len(arr) && arr[l'] >= arr[l' + 1] && arr[r' - (r' == len(arr))] < arr[r' + (r' != len(arr))]
+
+            //  we always take the half of the array -> exists k: (r - l)/2^k == 1 -> while is not infinite
+            // If array is empty we have l == -1 and r == 0 and r - l == 1 -> while is not infinite
         }
         // r == l + 1 && -1 <= r < len(arr) -> r in [0, len(arr))
         // arr[l] >= arr[l + 1] && arr[l + 1] == arr[r] && arr[r] < arr[r + 1] -> r is the answer.
@@ -37,9 +40,11 @@ public class BinarySearchUni {
     // :NOTE: l = INT_MIN (fixed)
     // P: arr is an array with numbers && if arr.length > 0 -> (exists i: for all 0 <= j < k < i arr[j] < arr[k] &&
     //              for all i <= j < k < arr.length arr[j] > arr[k]) && -1 <= l < r <= len(arr)
+    // exists i:    for all 0 <= j < k < i arr[j] < arr[k] := left part of the array
+    //              for all i <= j < k < arr.length arr[j] > arr[k] := right part of the array
     // Q: the smallest length of the left part of the array
     private static int binarySearchRecursive(final int[] arr, final int l, final int r) {
-        // P1: P && arr[l'] >= arr[l' + 1] && arr[r' - 1] < arr[r'] && -1 <= l' < r' <= len(arr) && (Q5 || Q6)
+        // P1: P && arr[l'] >= arr[l' + 1] && arr[r' - (r' == len(arr))] < arr[r' + (r' != len(arr))] && -1 <= l' < r' <= len(arr) && (Q5 || Q6)
         if (r - l == 1) {
             // P2: r == l + 1
             return r;
@@ -55,12 +60,14 @@ public class BinarySearchUni {
         if (m + 1 < arr.length && arr[m] <= arr[m + 1]) {
             // P5: P4 && m' + 1 < arr.length && arr[m'] <= arr[m' + 1]
             return binarySearchRecursive(arr, m, r);
-            // Q5: r' == r && l' == m && arr[l'] >= arr[l'] && arr[r' - 1] < a[r']
+            // Q5: r' == r && l' == m && arr[l'] >= arr[l'] && arr[r' - (r' == len(arr))] < arr[r' + (r' != len(arr))]
         } else {
             // P6: P4 && (m' + 1 >= arr.length || arr[m'] > arr[m' + 1])
             return binarySearchRecursive(arr, l, m);
-            // Q6: l' == l && r' == m && arr[l'] >= arr[l'] && arr[r' - 1] < a[r']
+            // Q6: l' == l && r' == m && arr[l'] >= arr[l'] && arr[r' - (r' == len(arr))] < arr[r' + (r' != len(arr))]
         }
+        // Start We always take the half of the array -> exists k: (r - l)/2^k == 1 -> recursive is not infinite
+        // If array is empty we have l == -1 and r == 0 and r - l == 1 -> recursive is not infinite
     }
 
 
@@ -75,7 +82,7 @@ public class BinarySearchUni {
         // Q1: arr is an array with length equals args.length
         // I: i <= arr.length
         for (int i = 0; i < arr.length; i++) {
-            // P2: args[i'] is a number
+            // P2: args[i'] is an integer
             arr[i] = Integer.parseInt(args[i]);
             // Q2: arr[i'] = args[i'] 
 

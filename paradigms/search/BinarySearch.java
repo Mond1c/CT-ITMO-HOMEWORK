@@ -23,6 +23,8 @@ public class BinarySearch {
                 l = m;
                 // Q5: l' = m' && arr[l'] > x
             }
+            //  we always take the half of the array -> exists k: (r - l)/2^k == 1 -> while is not infinite
+            // If array is empty we have l == -1 and r == 0 and r - l == 1 -> while is not infinite
         }
         // P6: 0 < r - l <= 1 && P && arr[l] > x && arr[r] <= x
         return r;
@@ -55,7 +57,7 @@ public class BinarySearch {
             return binarySearchRecursive(arr, x, m, r);
             // Q4: Q
         }
-        // Start We always take half of the array -> exists k: 1/2^k == 1 -> recursive is not infinite
+        // Start We always take half of the array -> exists k: (r - l)/2^k == 1 -> recursive is not infinite
         // If array is empty we have l == -1 and r == 0 and r - l == 1 -> recursive is not infinite
     }
 
