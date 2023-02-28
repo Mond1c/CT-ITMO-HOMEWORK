@@ -24,10 +24,10 @@ public class BinarySearch {
                 // Q5: l' = m' && arr[l'] > x
             }
         }
-        // P6: 0 < r - l <= 1 && P
+        // P6: 0 < r - l <= 1 && P && arr[l] > x && arr[r] <= x
         return r;
         // Q6: Q
-        // P6 -> arr[l] > arr[r] <= x -> r is the answer 
+        // P6 -> arr[l] > x <= arr[r] -> r is the answer 
     }
 
     // :NOTE: i=-1 (fixed)
@@ -38,7 +38,7 @@ public class BinarySearch {
         if (r - l == 1) {
             // P && l' == r'
             return r;
-            // (P0 && r' - l' < 2)  -> arr[l'] > arr[r'] <= x -> r' is the answer
+            // (P0 && r' - l' < 2)  -> arr[l'] > x <= arr[l'] -> r' is the answer
         }
         // P1: P && r' - l' > 1
         int m = l + (r - l) / 2;

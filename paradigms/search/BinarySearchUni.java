@@ -41,10 +41,10 @@ public class BinarySearchUni {
     private static int binarySearchRecursive(final int[] arr, final int l, final int r) {
         // P1: P && arr[l'] >= arr[l' + 1] && arr[r' - 1] < arr[r'] && -1 <= l' < r' <= len(arr) && (Q5 || Q6)
         if (r - l == 1) {
-            // P2: r - l < 2 
+            // P2: r == l + 1
             return r;
             // Q2: Q 
-            // (P1 && r' - l' == 1) -> arr[l'] >= arr[l' + 1] && arr[l' + 1] == arr[r'] && arr[r'] < arr[r' + 1] -> r is the answer
+            // (P1 && r' == l' + 1) -> arr[l'] >= arr[l' + 1] && arr[l' + 1] == arr[r'] && arr[r'] < arr[r' + 1] -> r is the answer
             // 
         }
         // P3: r' - l' < 2
@@ -66,7 +66,7 @@ public class BinarySearchUni {
 
     // :NOTE: сравнение строк (fixed)
     // P: for all 0 <= i < args.length: args[i] is an integer
-    //      && if args.length > 0 -> (exists i: for all 0 <= j < k < i int(args[j]) < int(args[k]) && 
+    //      && if args.length > 0 -> (exists 0 <= i <= args.length: for all 0 <= j < k < i int(args[j]) < int(args[k]) && 
     //          for all i <= j < k < arr.length int(args[j]) > int(args[k]))
     // Q: the smallest length of the array 
     public static void main(String[] args) {
