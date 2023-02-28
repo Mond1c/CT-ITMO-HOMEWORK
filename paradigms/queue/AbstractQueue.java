@@ -1,8 +1,6 @@
-package newQueue;
+package queue;
 
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 public abstract class AbstractQueue implements Queue {
     protected int size;
@@ -11,8 +9,8 @@ public abstract class AbstractQueue implements Queue {
     protected abstract Object dequeueImpl();
     protected abstract Object elementImpl();
     protected abstract void clearImpl();
-    protected abstract AbstractQueue filterImpl(Predicate<Object> predicate);
-    protected abstract AbstractQueue mapImpl(Function<Object, Object> function);
+    protected abstract boolean containsImpl(final Object element);
+    protected abstract boolean removeFirstOccurrenceImpl(final Object element);
 
     @Override
     public void enqueue(final Object element) {
@@ -52,12 +50,14 @@ public abstract class AbstractQueue implements Queue {
     }
 
     @Override
-    public AbstractQueue filter(Predicate<Object> predicate) {
-        return filterImpl(predicate);
+    public boolean contains(final Object element) {
+        Objects.requireNonNull(element);
+        return containsImpl(element);
     }
 
     @Override
-    public AbstractQueue map(Function<Object, Object> function) {
-        return mapImpl(function);
+    public boolean removeFirstOccurrence(final Object element) {
+        Objects.requireNonNull(element);
+        return removeFirstOccurrenceImpl(element);
     }
 }

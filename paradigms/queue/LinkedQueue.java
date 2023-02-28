@@ -1,7 +1,7 @@
-package newQueue;
+package queue;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.List;
+import java.util.ArrayList;
 
 public class LinkedQueue extends AbstractQueue {
 
@@ -32,7 +32,7 @@ public class LinkedQueue extends AbstractQueue {
     protected Object dequeueImpl() {
         final Object result = head.element;
         head = head.next;
-        if (isEmpty()) {
+        if (head == null) {
             tail = null;
         }
         return result;
@@ -50,26 +50,46 @@ public class LinkedQueue extends AbstractQueue {
     }
 
     @Override
-    protected LinkedQueue filterImpl(Predicate<Object> predicate) {
-        LinkedQueue ans = new LinkedQueue();
+    protected boolean containsImpl(final Object element) {
         Node ptr = head;
         while (ptr != null) {
-            if (predicate.test(ptr.element)) {
-                ans.enqueue(ptr.element);
+            if (ptr.element.equals(element)) {
+                return true;
             }
             ptr = ptr.next;
         }
-        return ans;
+        return false;
     }
 
     @Override
-    protected LinkedQueue mapImpl(Function<Object, Object> function) {
-        LinkedQueue ans = new LinkedQueue();
+    protected boolean removeFirstOccurrenceImpl(final Object element) {
         Node ptr = head;
         while (ptr != null) {
-            ans.enqueue(function.apply(ptr.element));
+            if (ptr.element.equals(element)) {
+                break;
+            }
             ptr = ptr.next;
         }
-        return ans;
+        if (ptr == null) {
+            return false;
+        }
+        size--;
+        if (ptr == head) {
+            head = head.next;
+            if (head == null) {
+                tail = null;
+            }
+            return true;
+        }
+        Node slow = head;
+        while (slow.next != ptr) {
+            slow = slow.next;
+        }
+        if (ptr == tail) {
+            tail = slow;
+        }
+        slow.next = ptr.next;
+        ptr.next = null;
+        return true;
     }
 }

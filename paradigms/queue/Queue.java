@@ -1,4 +1,4 @@
-package newQueue;
+package queue;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -75,13 +75,7 @@ public interface Queue {
     //      clear()
     void clear();
 
-    // Pred: predicate != null
-    // Post: n == n' && immutable(0, n) && R is a queue && {k = 0; for i=0..n: if predicate.test(a[i]): R[k++] = a[i]}
-    //      filter(predicate)
-    Queue filter(Predicate<Object> predicate);
+    boolean contains(final Object element);
 
-    // Pred: function != null
-    // Post: n == n' && immutable(0, n) && R is a queue && for i=0..n: R[i] = function.apply(a[i])
-    //      map(function)
-    Queue map(Function<Object, Object> function);
+    boolean removeFirstOccurrence(final Object element);
 }
