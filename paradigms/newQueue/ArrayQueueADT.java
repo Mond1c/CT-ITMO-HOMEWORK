@@ -1,4 +1,4 @@
-package oldQueue;
+package newQueue;
 
 import java.util.Objects;
 
