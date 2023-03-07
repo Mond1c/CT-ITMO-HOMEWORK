@@ -51,9 +51,10 @@ package queue;
 import java.util.Arrays;
 
 public class ArrayQueueADT {
-    private Object[] elements = new Object[2];
+    private final static int START_CAPACITY = 8;
+
+    private Object[] elements = new Object[START_CAPACITY];
     private int left;
-    private int right;
     private int size;
 
 
@@ -168,8 +169,7 @@ public class ArrayQueueADT {
     // Post: n' = 0 && for all i < n elements[i] = null 
     // clear()
     public static void clear(final ArrayQueueADT queue) {
-        Arrays.fill(queue.elements, queue.left, queue.elements.length, null);
-        Arrays.fill(queue.elements, 0, queue.left, null);
+        queue.elements = new Object[START_CAPACITY];
         queue.left = 0;
         queue.size = 0;
     }

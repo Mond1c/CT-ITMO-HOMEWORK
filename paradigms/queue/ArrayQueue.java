@@ -172,8 +172,7 @@ public class ArrayQueue {
     // clear()
     //:note: too slow
     public void clear() {
-        Arrays.fill(elements, left, elements.length, null);
-        Arrays.fill(elements, 0, left, null);
+        elements = new Object[START_CAPACITY];
         left = 0;
         size = 0;
     }

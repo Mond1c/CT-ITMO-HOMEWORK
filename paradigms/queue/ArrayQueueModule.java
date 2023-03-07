@@ -50,7 +50,8 @@ package queue;
 import java.util.Arrays;
 
 public class ArrayQueueModule {
-    private static Object[] elements = new Object[2];
+    private final static int START_CAPACITY = 8;
+    private static Object[] elements = new Object[START_CAPACITY];
     private static int left;
     private static int size;
 
@@ -164,8 +165,7 @@ public class ArrayQueueModule {
     // Post: n' = 0 && for all i < n elements[i] = null 
     // clear()
     public static void clear() {
-        Arrays.fill(elements, left, elements.length, null);
-        Arrays.fill(elements, 0, left, null);
+        elements = new Object[START_CAPACITY];
         left = 0;
         size = 0;
     }
