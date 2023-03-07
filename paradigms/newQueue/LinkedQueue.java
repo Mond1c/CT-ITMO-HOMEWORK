@@ -1,7 +1,4 @@
-package queue;
-
-import java.util.List;
-import java.util.ArrayList;
+package newQueue;
 
 public class LinkedQueue extends AbstractQueue {
 

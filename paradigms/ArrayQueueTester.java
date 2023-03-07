@@ -3,6 +3,8 @@ package queue;
 import base.Asserts;
 import base.ExtendedRandom;
 import base.TestCounter;
+import newQueue.Queues;
+import newQueue.ReflectionTest;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
-public class ArrayQueueTester<M extends Queues.QueueModel> {
+public class ArrayQueueTester<M extends newQueue.Queues.QueueModel> {
     private static final int OPERATIONS = 50_000;
     /* package-private */ static final Object[] ELEMENTS = new Object[]{
             "Hello",
@@ -28,11 +30,11 @@ public class ArrayQueueTester<M extends Queues.QueueModel> {
     };
 
     private final Class<M> model;
-    private final Queues.QueueChecker<M> tester;
+    private final newQueue.Queues.QueueChecker<M> tester;
 
-    protected ArrayQueueTester(final Class<M> model, final Queues.QueueChecker<M> tester, final Queues.Splitter<M> splitter) {
+    protected ArrayQueueTester(final Class<M> model, final newQueue.Queues.QueueChecker<M> tester, final newQueue.Queues.Splitter<M> splitter) {
         this.model = model;
-        this.tester = new Queues.QueueChecker<>() {
+        this.tester = new newQueue.Queues.QueueChecker<>() {
             @Override
             public M wrap(final ArrayDeque<Object> reference) {
                 return tester.wrap(reference);
@@ -66,11 +68,11 @@ public class ArrayQueueTester<M extends Queues.QueueModel> {
     }
 
     protected void test(final TestCounter counter) {
-        test(counter, "ArrayQueue", ReflectionTest.Mode.values());
+        test(counter, "ArrayQueue", newQueue.ReflectionTest.Mode.values());
     }
 
-    protected void test(final TestCounter counter, final String className, final ReflectionTest.Mode... modes) {
-        for (final ReflectionTest.Mode mode : modes) {
+    protected void test(final TestCounter counter, final String className, final newQueue.ReflectionTest.Mode... modes) {
+        for (final newQueue.ReflectionTest.Mode mode : modes) {
             final String scope = String.format("Running %s for %s in %s mode%n", model.getEnclosingClass().getSimpleName(), className, mode);
             counter.scope(scope, () -> new Variant(counter).test(className, mode));
         }
@@ -82,7 +84,7 @@ public class ArrayQueueTester<M extends Queues.QueueModel> {
         // Do nothing by default
     }
 
-    private static List<Object> toList(final Queues.QueueModel queue) {
+    private static List<Object> toList(final newQueue.Queues.QueueModel queue) {
         final List<Object> list = Stream.generate(queue::dequeue).limit(queue.size()).collect(Collectors.toUnmodifiableList());
         list.forEach(queue::enqueue);
         return list;
@@ -152,8 +154,8 @@ public class ArrayQueueTester<M extends Queues.QueueModel> {
 
         @Override
         protected void checkResult(final String call, final Object expected, final Object actual) {
-            if (expected instanceof Queues.QueueModel) {
-                super.checkResult(call, toList((Queues.QueueModel) expected), toList((Queues.QueueModel) actual));
+            if (expected instanceof newQueue.Queues.QueueModel) {
+                super.checkResult(call, toList((newQueue.Queues.QueueModel) expected), toList((Queues.QueueModel) actual));
             } else {
                 super.checkResult(call, expected, actual);
             }

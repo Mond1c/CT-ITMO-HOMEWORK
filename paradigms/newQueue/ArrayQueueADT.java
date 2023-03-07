@@ -1,6 +1,4 @@
-package oldQueue;
-
-import java.util.Objects;
+package newQueue;
 
 /*
  * Model: a[1]..a[n]

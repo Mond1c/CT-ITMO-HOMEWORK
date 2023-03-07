@@ -1,4 +1,4 @@
-package queue;
+package newQueue;
 
 import base.ExtendedRandom;
 
@@ -62,7 +62,7 @@ public final class Queues {
         }
 
         default Object randomElement(final ExtendedRandom random) {
-            return ArrayQueueTester.ELEMENTS[random.nextInt(ArrayQueueTester.ELEMENTS.length)];
+            return newQueue.ArrayQueueTester.ELEMENTS[random.nextInt(ArrayQueueTester.ELEMENTS.length)];
         }
 
         default void remove(final T queue, final ExtendedRandom random) {
