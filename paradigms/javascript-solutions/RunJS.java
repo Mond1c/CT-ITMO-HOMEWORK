@@ -51,7 +51,7 @@ public final class RunJS {
         if (engine == null) {
             System.err.println("Graal.js not found");
             System.err.println("Use the following command line to run RunJS:");
-            System.err.println("java --module-path=graal -cp . RunJS");
+            System.err.println("java --module-path=jstest.graal -cp . RunJS");
             return;
         }
 

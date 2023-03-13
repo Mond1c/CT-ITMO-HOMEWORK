@@ -16,6 +16,6 @@ if not exist "%OUT%" mkdir "%OUT%"
 javac ^
     -encoding utf-8 ^
     -d "%OUT%" ^
-    "--class-path=%JS%;%JS%/graal/*;%JAVA%" ^
+    "--class-path=%JS%;%JS%/jstest.graal/*;%JAVA%" ^
     "%JS%%CLASS:.=\%.java" ^
-  && java -ea "--module-path=%JS%graal" "--class-path=%OUT%" "%CLASS%" %ARGS%
+  && java -ea "--module-path=%JS%jstest.graal" "--class-path=%OUT%" "%CLASS%" %ARGS%
