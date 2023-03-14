@@ -1,1 +1,1 @@
-javac -cp . queue/*.java && java -ea -jar ArrayQueueTest.jar DequeToArray && rm queue/*.class
+javac -cp . base/*.java && javac -cp . queue/*.java && java -ea -jar QueueTest.jar contains && rm queue/*.class && rm base/*.class

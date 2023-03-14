@@ -1,4 +1,4 @@
-package newQueue;
+package queue;
 
 import base.ExtendedRandom;
 
@@ -62,7 +62,7 @@ public final class Queues {
         }
 
         default Object randomElement(final ExtendedRandom random) {
-            return newQueue.ArrayQueueTester.ELEMENTS[random.nextInt(ArrayQueueTester.ELEMENTS.length)];
+            return ArrayQueueTester.ELEMENTS[random.nextInt(ArrayQueueTester.ELEMENTS.length)];
         }
 
         default void remove(final T queue, final ExtendedRandom random) {
@@ -160,7 +160,7 @@ public final class Queues {
 
     // === Reflection
 
-    /* package-private */ interface ReflectionModel extends Queues.QueueModel {
+    /* package-private */ interface ReflectionModel extends QueueModel {
         Field ELEMENTS = getField("elements");
         Field HEAD = getField("head");
 
@@ -228,23 +228,23 @@ public final class Queues {
         }
     }
 
-    /* package-private */ interface IndexedChecker<T extends IndexedModel> extends Queues.QueueChecker<T> {
+    /* package-private */ interface IndexedChecker<T extends IndexedModel> extends QueueChecker<T> {
         @Override
         default void check(final T queue, final ExtendedRandom random) {
-            Queues.QueueChecker.super.check(queue, random);
+            QueueChecker.super.check(queue, random);
             queue.get(randomIndex(queue, random));
         }
 
         @Override
         default void add(final T queue, final Object element, final ExtendedRandom random) {
             if (queue.isEmpty() || random.nextBoolean()) {
-                Queues.QueueChecker.super.add(queue, element, random);
+                QueueChecker.super.add(queue, element, random);
             } else {
                 queue.set(randomIndex(queue, random), randomElement(random));
             }
         }
 
-        private static int randomIndex(final Queues.QueueModel queue, final ExtendedRandom random) {
+        private static int randomIndex(final QueueModel queue, final ExtendedRandom random) {
             return random.nextInt(queue.size());
         }
     }
@@ -277,7 +277,7 @@ public final class Queues {
 
     // === Contains
 
-    /* package-private */ interface ContainsModel extends Queues.QueueModel {
+    /* package-private */ interface ContainsModel extends QueueModel {
         default boolean contains(final Object element) {
             return model().contains(element);
         }
@@ -288,7 +288,7 @@ public final class Queues {
         }
     }
 
-    /* package-private */ static final Queues.LinearTester<ContainsModel> CONTAINS = (tester, queue, random) -> {
+    /* package-private */ static final LinearTester<ContainsModel> CONTAINS = (tester, queue, random) -> {
         final Object element = random.nextBoolean() ? tester.randomElement(random) : random.nextInt();
         if (random.nextBoolean()) {
             queue.contains(element);
@@ -300,7 +300,7 @@ public final class Queues {
 
     // === Nth
 
-    /* package-private */ interface NthModel extends Queues.QueueModel {
+    /* package-private */ interface NthModel extends QueueModel {
         // Deliberately ugly implementation
         @ReflectionTest.Wrap
         default NthModel getNth(final int n) {
@@ -336,7 +336,7 @@ public final class Queues {
         }
     }
 
-    /* package-private */ static final Queues.Splitter<NthModel> NTH = (tester, queue, random) -> {
+    /* package-private */ static final Splitter<NthModel> NTH = (tester, queue, random) -> {
         final int n = random.nextInt(5) + 1;
         switch (random.nextInt(3)) {
             case 0:
@@ -354,14 +354,45 @@ public final class Queues {
 
     // === ToStr
 
-    /* package-private */ interface ToStrModel extends Queues.QueueModel {
+    /* package-private */ interface ToStrModel extends QueueModel {
         @SuppressWarnings("UnusedReturnValue")
         default String toStr() {
             return model().toString();
         }
     }
 
-    /* package-private */ static final Queues.LinearTester<ToStrModel> TO_STR = (tester, queue, random) -> queue.toStr();
+    /* package-private */ static final LinearTester<ToStrModel> TO_STR = (tester, queue, random) -> queue.toStr();
+
+    // === Count
+
+    /* package-private */ interface CountModel extends ReflectionModel {
+        default int count(final Object element) {
+            return reduce(0, element, (v, i) -> v + 1);
+        }
+    }
+
+    /* package-private */ static final LinearTester<CountModel> COUNT =
+            (tester, queue, random) -> queue.count(tester.randomElement(random));
+
+    /* package-private */
+    interface IndexModel extends ReflectionModel {
+        default int indexOf(final Object element) {
+            return reduce(-1, element, (v, i) -> v == -1 ? i : v);
+        }
+
+        default int lastIndexOf(final Object element) {
+            return reduce(-1, element, (v, i) -> i);
+        }
+    }
+
+    /* package-private */ static final LinearTester<IndexModel> INDEX = (tester, queue, random) -> {
+        if (random.nextBoolean()) {
+            queue.indexOf(tester.randomElement(random));
+        } else {
+            queue.lastIndexOf(tester.randomElement(random));
+        }
+    };
+
 
 
 }

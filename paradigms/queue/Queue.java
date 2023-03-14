@@ -1,7 +1,4 @@
-package newQueue;
-
-import java.util.function.Function;
-import java.util.function.Predicate;
+package queue;
 
 /*
  * Model: a[1]...a[n]

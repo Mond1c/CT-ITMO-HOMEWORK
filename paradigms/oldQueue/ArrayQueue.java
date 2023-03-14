@@ -1,6 +1,6 @@
-package newQueue;
+package oldQueue;
 
-import java.util.Objects;
+import java.util.Arrays;
 
 /*
  * Model: a[1]..a[n]
@@ -49,58 +49,49 @@ import java.util.Objects;
  *      toArray()
 */
 
-public class ArrayQueueModule {
-    private static Object[] elements = new Object[2];
-    private static int left;
-    private static int right;
-    private static int size;
+public class ArrayQueue {
+    private final static int START_CAPACITY = 8;
 
-    // Pred: newSize >= n
-    // Post: len(R) == newSize && (for i=0..n R[i] == a[i])
-    //      copyToArray(newSize)
-    private static Object[] copyToArray(int newSize) {
-        Object[] tmp = new Object[newSize];
-        int k = 0;
-        if (right > left) {
-            for (int i = left; i <= right; i++) {
-                if (elements[i] != null) {
-                    tmp[k++] = elements[i];
-                }
-            }
-        } else {
-            for (int i = left; i < elements.length; i++) {
-                if (elements[i] != null) {
-                    tmp[k++] = elements[i];
-                }
-            }
-            int bound = left == right ? right - 1 : right;
-            for (int i = 0; i <= bound; i++) {
-                if (elements[i] != null) {
-                    tmp[k++] = elements[i];
-                }
-            }
-        } 
-        return tmp;      
+    private Object[] elements;
+    private int left;
+    //:note: pointer
+    private int size;
+
+    public ArrayQueue() {
+        //:note: bigger
+        this.elements = new Object[START_CAPACITY];
     }
 
     // Pred: true
     // Post: len(R) == n && (for i=0..n R[i] = a[i])
-    //      toArray()   
-    public static Object[] toArray() {
-        return copyToArray(size);
+    //      toArray()    
+    public Object[] toArray() {
+        Object[] tmp = new Object[size];
+        int k = 0;
+        for (int i = left; i <= ((left + size) % elements.length >= i ? (left + size) % elements.length : elements.length - 1); i++) {
+            if (elements[i] != null) {
+                tmp[k++] = elements[i];
+            }
+        }
+        for (int i = 0; i < (left + size >= elements.length ? left + size - elements.length : 0); i++) {
+            if (elements[i] != null) {
+                tmp[k++] = elements[i];
+            }
+        }
+        return tmp;
     }
 
     // Pred: true
     // Post: R == (n == 0) && n' == n && immutable(0, n)
     //      isEmpty()
-    public static boolean isEmpty() {
+    public boolean isEmpty() {
         return size == 0;
     }
 
     // Pred: true
     // Post: R == n && n' == n && immutable(0, n)
     //      size()
-    public static int size() {
+    public int size() {
         return size;
     }
 
@@ -108,26 +99,22 @@ public class ArrayQueueModule {
     // Post: elements.length' == 2 * elements.length && immutable(0, n) && n == n' 
     //      || n == n' && immutable(0, n)
     //      ensureCapacity(newSize)  
-    private static void ensureCapacity(int newSize) {
+    private void ensureCapacity(int newSize) {
         if (newSize > elements.length) {
-            Object[] tmp = copyToArray(elements.length * 2);
+            Object[] tmp = new Object[elements.length * 2];
+            System.arraycopy(elements, left, tmp, 0, elements.length - left);
+            System.arraycopy(elements, 0, tmp, elements.length - left, left);
             elements = tmp;
             left = 0;
-            right = size - 1;
         }
     }
 
     // Pred: element != null
     // Post: n = n + 1 && a'[0] == element && (for i = 1..n+1: a'[i] = a[i - 1]) 
     //      push(element) 
-    public static void push(final Object element) {
+    public void push(final Object element) {
         ensureCapacity(size + 1);
-        if (!isEmpty() && elements[left] != null) {
-            left = (left + elements.length - 1) % elements.length;
-        }
-        if (isEmpty()) {
-            right = left;
-        }
+        left = (left - 1 + elements.length) % elements.length;
         elements[left] = element;
         size++;
     }
@@ -135,20 +122,16 @@ public class ArrayQueueModule {
     //  Pred: element != null
     //  Post: n' = n + 1 && a[n'] == element && immutable(0, n)
     //       enqueue(element)
-    public static void enqueue(final Object element) {
+    public void enqueue(final Object element) {
         ensureCapacity(size + 1);
-        right = (right + 1) % elements.length;
-        if (isEmpty()) {
-            left = right;
-        }
-        elements[right] = element;
+        elements[(left + size) % elements.length] = element;
         size++;
     }
 
     // Pred: n > 0
     // Post: n' = n - 1 && immutable(1, n) && R = a[0]
     //      dequeue()
-    public static Object dequeue() {
+    public Object dequeue() {
         final Object element = elements[left];
         elements[left] = null;
         left = (left + 1) % elements.length;
@@ -159,37 +142,38 @@ public class ArrayQueueModule {
     // Pred: n > 0
     // Post: n' = n - 1 && immutable(0, n') && R == a[n] && a'[n] == null
     //      remove()
-    public static Object remove() {
+    public Object remove() {
+        int right = (left + size - 1) % elements.length;
         final Object element = elements[right];
         elements[right] = null;
-        right = (right + elements.length - 1) % elements.length;
         size--;
+        if (left == elements.length) {
+            left = 0;
+        }
         return element;
     }
 
     // Pred: n > 0
     // Post: R == a[0] && immutable(0, n) && n' = n
     //      element()
-    public static Object element() {
+    public Object element() {
         return elements[left];
     }
 
     // Pred: n > 0
     // Post: R == a[n] && immutable(0, n) && n' == n
     //      peek()
-    public static Object peek() {
-        return elements[right];
+    public Object peek() {
+        return elements[(left + size + elements.length - 1) % elements.length];
     }
-
+    
     // Pred: true
     // Post: n' = 0 && for all i < n elements[i] = null 
     // clear()
-    public static void clear() {
-        for (int i = 0; i < elements.length; i++) {
-            elements[i] = null;
-        }
+    //:note: too slow
+    public void clear() {
+        elements = new Object[START_CAPACITY];
         left = 0;
-        right = 0;
         size = 0;
     }
 }

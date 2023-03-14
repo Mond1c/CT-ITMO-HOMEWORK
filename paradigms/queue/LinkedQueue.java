@@ -1,4 +1,4 @@
-package newQueue;
+package queue;
 
 public class LinkedQueue extends AbstractQueue {
 
@@ -57,36 +57,40 @@ public class LinkedQueue extends AbstractQueue {
         }
         return false;
     }
-
     @Override
     protected boolean removeFirstOccurrenceImpl(final Object element) {
-        Node ptr = head;
-        while (ptr != null) {
-            if (ptr.element.equals(element)) {
-                break;
-            }
-            ptr = ptr.next;
-        }
-        if (ptr == null) {
+        if (isEmpty()) {
             return false;
         }
-        size--;
-        if (ptr == head) {
+        if (head.element.equals(element)) {
+            size--;
             head = head.next;
             if (head == null) {
                 tail = null;
             }
             return true;
         }
-        Node slow = head;
-        while (slow.next != ptr) {
-            slow = slow.next;
+        Node ptr = head;
+        while (ptr.next != null) {
+            if (ptr.next.element.equals(element)) {
+                break;
+            }
+            ptr = ptr.next;
         }
-        if (ptr == tail) {
-            tail = slow;
+        if (ptr.next == null) {
+            return false;
         }
-        slow.next = ptr.next;
-        ptr.next = null;
+        size--;
+
+        //:note: 2 time
+//        Node slow = head;
+//        while (slow.next != ptr) {
+//            slow = slow.next;
+//        }
+        if (ptr.next == tail) {
+            tail = ptr;
+        }
+        ptr.next = ptr.next.next;
         return true;
     }
 }
