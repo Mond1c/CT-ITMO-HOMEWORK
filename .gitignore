@@ -1,3 +1,5 @@
 /.metadata/
 *Test.java
 *Test.jar
+*.vscode/
+*.tours/

@@ -45,7 +45,7 @@ PartOfExpression(
     function() {
         return this.varName;
     }
-)
+);
 
 function Operation(...parts) {
     this.parts = parts;
@@ -62,7 +62,7 @@ PartOfExpression(
     function() {
         return this.parts.map(part => part.toString()).join(" ") + " " + this.operationName;
     }
-)
+);
 
 function NewOperation(operation, operationName, calculate, diffOperation) {
     operation.prototype = Object.create(Operation.prototype);
@@ -78,12 +78,8 @@ function Add(...args) {
 NewOperation(
     Add,
     "+",
-    function(x, y) {
-        return x + y;
-    },
-    function(varName, left, right) {
-        return new Add(left.diff(varName), right.diff(varName));
-    },
+    (...args) => args.reduce((ans, x) => ans += x, 0),
+    (varName, ...args) => new Add(...args.map((arg) => arg.diff(varName)))
 );
 
 function Subtract(...args) {
@@ -93,12 +89,8 @@ function Subtract(...args) {
 NewOperation(
     Subtract,
     "-",
-    function(x, y) {
-        return x - y;
-    },
-    function(varName, left, right) {
-        return new Subtract(left.diff(varName), right.diff(varName));
-    }
+    (x, y) => x - y,
+    (varName, left, right) => new Subtract(left.diff(varName), right.diff(varName))
 );
 
 function Multiply(...args) {
@@ -108,16 +100,12 @@ function Multiply(...args) {
 NewOperation(
     Multiply,
     "*",
-    function(x, y) {
-        return x * y;
-    },
-    function(varName, left, right) {
-        return new Add(
+    (x, y) => x * y,
+    (varName, left, right) => new Add(
             new Multiply(left.diff(varName), right),
             new Multiply(left, right.diff(varName))
-        );
-    }
-)
+        )
+);
 
 function Divide(...args) {
     Operation.call(this, ...args);
@@ -126,19 +114,15 @@ function Divide(...args) {
 NewOperation(
     Divide,
     "/",
-    function(x, y) {
-        return x / y;
-    },
-    function(varName, left, right) {
-        return new Divide(
-            new Subtract(
-                new Multiply(left.diff(varName), right),
-                new Multiply(left, right.diff(varName))
-            ),
-            new Multiply(right, right)
-        );
-    }
-)
+    (x, y) => x / y,
+    (varName, left, right) => new Divide(
+        new Subtract(
+            new Multiply(left.diff(varName), right),
+            new Multiply(left, right.diff(varName))
+        ),
+        new Multiply(right, right)
+    )
+);
 
 
 function Negate(...args) {
@@ -148,20 +132,107 @@ function Negate(...args) {
 NewOperation(
     Negate,
     "negate",
-    function(x) {
-        return -x;
-    },
-    function(varName, left) {
-        return new Negate(left.diff(varName));
+    (x) => -x,
+    (varName, left) => new Negate(left.diff(varName))
+);
+
+function SumsqN(...args) {
+    Operation.call(this, ...args);
+}
+
+NewOperation(
+    SumsqN,
+    "sumsq",
+    (...args) => args.reduce((ans, x) => ans += x * x, 0),
+    (varName, ...args) => new Add(...args.map((arg) => new Multiply(arg, arg).diff(varName)))
+);
+
+function NewSumsqN(sumsq, operationName) {
+    sumsq.prototype = Object.create(SumsqN.prototype);
+    sumsq.prototype.operationName = operationName;
+}
+
+
+function Sumsq2(...args) {
+    SumsqN.call(this, ...args);
+}
+
+NewSumsqN(Sumsq2, "sumsq2");
+
+function Sumsq3(...args) {
+    SumsqN.call(this, ...args);
+}
+
+NewSumsqN(Sumsq3, "sumsq3");
+
+function Sumsq4(...args) {
+    SumsqN.call(this, ...args);
+}
+
+NewSumsqN(Sumsq4, "sumsq4");
+
+function Sumsq5(...args) {
+    SumsqN.call(this, ...args);
+}
+
+NewSumsqN(Sumsq5, "sumsq5");
+
+function DistanceN(...args) {
+    Operation.call(this, ...args);
+}
+
+NewOperation(
+    DistanceN,
+    "distance",
+    (...args) => Math.sqrt(args.reduce((ans, x) => ans += x * x, 0)),
+    function(varName, ...args) {
+        return new Divide(new SumsqN(...args).diff(varName), new Multiply(new Const(2), this));
     }
-)
+);
+
+function NewDistanceN(distance, operationName) {
+    distance.prototype = Object.create(DistanceN.prototype);
+    distance.prototype.operationName = operationName;
+}
+
+function Distance2(...args) {
+    DistanceN.call(this, ...args);
+}
+
+NewDistanceN(Distance2, "distance2");
+
+function Distance3(...args) {
+    DistanceN.call(this, ...args);
+}
+
+NewDistanceN(Distance3, "distance3");
+
+function Distance4(...args) {
+    DistanceN.call(this, ...args);
+}
+
+NewDistanceN(Distance4, "distance4");
+
+function Distance5(...args) {
+    DistanceN.call(this, ...args);
+}
+
+NewDistanceN(Distance5, "distance5");
 
 const strToOperation = new Map([
     ["+", [Add, 2]],
     ["-", [Subtract, 2]],
     ["*", [Multiply, 2]],
     ["/", [Divide, 2]],
-    ["negate", [Negate, 1]]
+    ["negate", [Negate, 1]],
+    ["sumsq2", [Sumsq2, 2]],
+    ["sumsq3", [Sumsq3, 3]],
+    ["sumsq4", [Sumsq4, 4]],
+    ["sumsq5", [Sumsq5, 5]],
+    ["distance2", [Distance2, 2]],
+    ["distance3", [Distance3, 3]],
+    ["distance4", [Distance4, 4]],
+    ["distance5", [Distance5, 5]]
 ]);
 
 const parseToken = (token, stack) => {
@@ -185,6 +256,3 @@ const parse = (expression) => {
     ).pop();
 }
 
-for (let i = 0; i <= 10; i++) {
-    console.log(parse("x x * 2 x * - 1 +").evaluate(i));
-}
