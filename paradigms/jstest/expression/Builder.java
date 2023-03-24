@@ -8,6 +8,7 @@ import jstest.ArithmeticTests;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.*;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static jstest.expression.AbstractTests.c;
@@ -147,13 +148,16 @@ public final class Builder {
             );
         } else {
             tests(
-                    null,
-                    f(name, arity, constGenerator),
-                    f(name, arity, variableGenerator)
+                    simplifications,
+                    Stream.concat(
+                                    Stream.of(
+                                            f(name, arity, constGenerator),
+                                            f(name, arity, variableGenerator)
+                                    ),
+                                    IntStream.range(0, 10).mapToObj(i -> f(name, arity, generator))
+                            )
+                            .toArray(AbstractTests.TestExpression[]::new)
             );
-            for (int i = 1; i < 10; i++) {
-                tests(null, f(name, arity, generator));
-            }
         }
     }
 

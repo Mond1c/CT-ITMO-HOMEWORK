@@ -100,6 +100,7 @@ public class Diff {
                 System.err.println(newSimplifications.stream()
                         .map(row -> Arrays.stream(row).mapToObj(Integer::toString).collect(Collectors.joining(", ", "{", "}")))
                         .collect(Collectors.joining(", ", "new int[][]{", "}")));
+                System.err.println(simplifications.size() + " " + newSimplifications.size());
                 throw new AssertionError("Uncovered");
             }
         });

@@ -219,12 +219,213 @@ function Distance5(...args) {
 
 NewDistanceN(Distance5, "distance5");
 
+function AddN(obj, n, ...args) {
+    obj.prototype.n = n;
+    Operation.call(obj, ...args);
+}
+
+NewOperation(
+    AddN,
+    function() {
+        return "add" + this.n;
+    },
+    (...args) => args.reduce((ans, a) => ans += a, 0),
+    function(varName, ...args) {
+        return new AddN(...args.map((a) => a.diff(varName)));
+    }
+)
+
+function SumsqN(obj, n, ...args) {
+    obj.prototype.n = n;
+    Operation.call(obj, ...args);
+}
+
+NewOperation(
+    SumsqN, 
+    function() {
+        return "sumsq" + this.n;
+    },
+    (...args) => args.reduce((a, ans) => ans += Math.pow(a, 2), 0),
+    function(varName, ...args) {
+        return new AddN(...args.map((a) => new Multiply(a, a).diff(varName)));
+    }
+);
+
+function Sumsq2(obj, ...args) {
+    SumsqN.call(obj, 2, ...args);
+}
+
+function Sumsq3(obj, ...args) {
+    SumsqN.call(obj, 3, ...args);
+}
+
+function Sumsq4(obj, ...args) {
+    SumsqN.call(obj, 4, ...args);
+}
+
+function Sumsq5(obj, ...args) {
+    SumsqN.call(obj, 5, ...args);
+}
+
+function DistanceN(obj, n, ...args) {
+    obj.prototype.n = n;
+    Operation.call(obj, ...args);
+}
+
+NewOperation(
+    DistanceN,
+    function() {
+        return "distance" + this.n;
+    },
+    (...args) => Math.sqrt(new SumsqN(...args)),
+    function (varName, ...args) {
+        return new Divide(new SumsqN(...args).diff(varName, ...args), 
+            new Multiply(new Const(2), this));
+    }
+)
+
+function Distance2(obj, ...args) {
+    DistanceN.call(obj, 2, ...args);
+}
+
+function Distance3(obj, ...args) {
+    DistanceN.call(obj, 3, ...args);
+}
+
+function Distance4(obj, ...args) {
+    DistanceN.call(obj, 4, ...args);
+}
+
+function Distance5(obj, ...args) {
+    DistanceN.call(obj, 5, ...args);
+}
+
+// function Distance2(...args) {
+//     Operation.call(this, ...args);
+// }
+
+
+
+// NewOperation(
+//     Distance2,
+//     "distance2",
+//     (x, y) => Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)),
+//     function (varName, left, right) {
+//         return new Divide(new Sumsq2(left, right).diff(varName, left, right), 
+//             new Multiply(new Const(2), this));
+//     }
+// );
+
+// function Distance3(...args) {
+//     Operation.call(this, ...args);
+// }
+
+// NewOperation(
+//     Distance3,
+//     "distance3",
+//     (x, y, z) => Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2)),
+//     function (varName, a, b, c) {
+//         return new Divide(new Sumsq3(a, b, c).diff(varName, a, b, c),
+//             new Multiply(new Const(2), this));
+//     }
+// );
+
+// function Distance4(...args) {
+//     Operation.call(this, ...args);
+// }
+
+// NewOperation(
+//     Distance4,
+//     "distance4",
+//     (a, b, c, d) => Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2) + Math.pow(d, 2)),
+//     function (varName, a, b, c, d) {
+//         return new Divide(new Sumsq4(a, b, c, d).diff(varName, a, b, c, d),
+//             new Multiply(new Const(2), this));
+//     } 
+// );
+
+// function Distance5(...args) {
+//     Operation.call(this, ...args);
+// }
+
+// NewOperation(
+//     Distance5,
+//     "distance5",
+//     (a, b, c, d, e) => Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2) + Math.pow(d, 2) + Math.pow(e, 2)),
+//     function(varName, a, b, c, d, e) { 
+//         return new Divide(new Sumsq5(a, b, c, d, e).diff(varName, a, b, c, d, e),
+//             new Multiply(new Const(2), this))
+//     }
+// );
+
+// function Sumsq2(...args) {
+//     Operation.call(this, ...args);
+// }
+
+
+// NewOperation(
+//     Sumsq2,
+//     "sumsq2",
+//     (x, y) => Math.pow(x, 2) + Math.pow(y, 2),
+//     (varName, left, right) => new Add(new Multiply(left, left).diff(varName), 
+//             new Multiply(right, right).diff(varName))
+    
+// );
+
+// function Sumsq3(...args) {
+//     Operation.call(this, ...args);
+// }
+
+
+// NewOperation(
+//     Sumsq3,
+//     "sumsq3",
+//     (a, b, c) => Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2),
+//     (varName, a, b, c) => new Add(new Add(new Multiply(a, a).diff(varName), new Multiply(b, b).diff(varName)),
+//             new Multiply(c, c).diff(varName))
+    
+// );
+
+// function Sumsq4(...args) {
+//     Operation.call(this, ...args);
+// }
+
+
+// NewOperation(
+//     Sumsq4,
+//     "sumsq4",
+//     (a, b, c, d) => Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2) + Math.pow(d, 2),
+//     (varName, a, b, c, d) => new Add(new Add(new Add(new Multiply(a, a).diff(varName),
+//             new Multiply(b, b).diff(varName)), new Multiply(c, c).diff(varName)),
+//             new Multiply(d, d).diff(varName))
+    
+// );
+
+// function Sumsq5(...args) {
+//     Operation.call(this, ...args);
+// }
+
+
+// NewOperation(
+//     Sumsq5,
+//     "sumsq5",
+//     (a, b, c, d, e) => Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2) + Math.pow(d, 2) + Math.pow(e, 2),
+//     (varName, a, b, c, d, e) => new Add(new Add(new Add(new Add(new Multiply(a, a).diff(varName),
+//             new Multiply(b, b).diff(varName)), new Multiply(c, c).diff(varName)),
+//             new Multiply(d, d).diff(varName)), new Multiply(e, e).diff(varName))
+    
+// );
+
+
+
+
 const strToOperation = new Map([
     ["+", [Add, 2]],
     ["-", [Subtract, 2]],
     ["*", [Multiply, 2]],
     ["/", [Divide, 2]],
     ["negate", [Negate, 1]],
+<<<<<<< Updated upstream
     ["sumsq2", [Sumsq2, 2]],
     ["sumsq3", [Sumsq3, 3]],
     ["sumsq4", [Sumsq4, 4]],
@@ -233,6 +434,16 @@ const strToOperation = new Map([
     ["distance3", [Distance3, 3]],
     ["distance4", [Distance4, 4]],
     ["distance5", [Distance5, 5]]
+=======
+    ["distance2", [Distance2, 2]],
+    ["distance3", [Distance3, 3]],
+    ["distance4", [Distance4, 4]],
+    ["distance5", [Distance5, 5]],
+    ["sumsq2", [Sumsq2, 2]],
+    ["sumsq3", [Sumsq3, 3]],
+    ["sumsq4", [Sumsq4, 4]],
+    ["sumsq5", [Sumsq5, 5]]
+>>>>>>> Stashed changes
 ]);
 
 const parseToken = (token, stack) => {
@@ -256,3 +467,10 @@ const parse = (expression) => {
     ).pop();
 }
 
+<<<<<<< Updated upstream
+=======
+console.log(new Distance2(new Const(2), new Const(3)));
+
+//console.log(new Distance2(new Const(2), new Const(3)).diff('x').toString())
+// 2 * 2 + y * y = 2y
+>>>>>>> Stashed changes

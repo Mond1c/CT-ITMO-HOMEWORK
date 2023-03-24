@@ -15,7 +15,7 @@ import java.nio.file.Path;
  * @author Georgiy Korneev (kgeorgiy@kgeorgiy.info)
  */
 public final class JSEngine {
-    public static final String OPTIONS = "--module-path=<js>/jstest.graal";
+    public static final String OPTIONS = "--module-path=<js>/graal";
     public static Path JS_ROOT = Path.of(".");
 
     private final ScriptEngine engine;

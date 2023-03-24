@@ -74,7 +74,7 @@ public abstract class AbstractTests {
         if (simplifications == null) {
             this.simplifications.addAll(Collections.nCopies(tests.length, null));
         } else {
-            assert simplifications.length == tests.length;
+            assert simplifications.length == tests.length : tests.length + " tests and " + simplifications.length + " simplifications";
             this.simplifications.addAll(Arrays.asList(simplifications));
         }
         tests(tests);
