@@ -289,7 +289,7 @@ NewParserError(InvalidArgumentError, "InvalidArgumentError");
 
 
 function StringSource(expr) {
-    this.separators = ['', '(', ')'];
+    this.separators = [' ', '(', ')'];
     this.pos = 0;
     this.expr = expr;
     this.get = () => this.expr[this.pos];
@@ -308,14 +308,14 @@ StringSource.prototype.take = function() {
 }
 
 StringSource.prototype.skipWhitespaces = function() {
-    while (this.hasNext() && this.expr[this.pos].trim() === "") {
+    while (this.hasNext() && this.expr[this.pos] === " ") {
         this.take();
     }
 }
 
 StringSource.prototype.getToken = function() {
     let token = '';
-    while (this.hasNext() && !(this.isSeparator(this.get().trim()))) {
+    while (this.hasNext() && !(this.isSeparator(this.get()))) {
         token += this.take();
     }
     return token;
