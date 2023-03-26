@@ -6,11 +6,10 @@ const variableToIndex = new Map([
     ["z", 2]
 ]);
 
-function PartOfExpression(obj, evaluate, diff, toString, prefix = toString) {
+function PartOfExpression(obj, evaluate, diff, toString) {
     obj.prototype.evaluate = evaluate;
     obj.prototype.diff = diff;
     obj.prototype.toString = toString;
-    obj.prototype.prefix = prefix;
 }
 
 function Const(x) {
@@ -62,9 +61,6 @@ PartOfExpression(
     },
     function() {
         return this.parts.map(part => part.toString()).join(" ") + " " + this.operationName;
-    },
-    function() {
-        return "(" + this.operationName + " " + this.parts.map(part => part.prefix()).join(" ") + ")";
     }
 );
 
@@ -260,148 +256,3 @@ const parse = (expression) => {
     ).pop();
 }
 
-
-function ParserError(message) {
-    this.message = message;
-}
-
-ParserError.prototype = Object.create(Error.prototype);
-ParserError.prototype.errorName = "ParserError";
-ParserError.prototype.constructor = ParserError;
-
-function NewParserError(error, errorName) {
-    error.prototype = Object.create(ParserError.prototype);
-    error.prototype.errorName = errorName;
-    error.prototype.constructor = ParserError;
-}
-
-function BracketNotFoundError(message) {
-    ParserError.call(this, message);
-}
-
-NewParserError(BracketNotFoundError, "BracketNotFoundError");
-
-function InvalidArgumentError(message) {
-    ParserError.call(this, message);
-}
-
-NewParserError(InvalidArgumentError, "InvalidArgumentError");
-
-
-function StringSource(expr) {
-    this.separators = ['', '(', ')'];
-    this.pos = 0;
-    this.expr = expr;
-    this.get = () => this.expr[this.pos];
-    this.isSeparator = (ch) => this.separators.includes(ch);
-    this.back = (n) => this.pos -= n;
-}
-
-
-
-StringSource.prototype.hasNext = function() {
-    return this.pos + 1 <= this.expr.length;
-}
-
-StringSource.prototype.take = function() {
-    return this.expr[this.pos++];
-}
-
-StringSource.prototype.skipWhitespaces = function() {
-    while (this.hasNext() && this.expr[this.pos].trim() === "") {
-        this.take();
-    }
-}
-
-StringSource.prototype.getToken = function() {
-    let token = '';
-    while (this.hasNext() && !(this.isSeparator(this.get().trim()))) {
-        token += this.take();
-    }
-    return token;
-}
-
-function Parser(expression) {
-    const source = new StringSource(expression);
-    let brackets = 0;
-    let operationStatus = false;
-
-    function parse() {
-        let answer = parseExpression();
-        source.skipWhitespaces();
-        if (source.hasNext()) {
-            throw new InvalidArgumentError("expected end of the expression " + get());
-        } else if (brackets !== 0) {
-            throw new BracketNotFoundError("Closing bracket not found");
-        }
-        return answer;
-    }
-
-    function parseExpression() {
-        source.skipWhitespaces();
-        if (source.get() === '(') {
-            operationStatus = true;
-            brackets++;
-            source.take();
-            let answer = parseExpression();
-            source.skipWhitespaces();
-            if (operationStatus) {
-                throw new InvalidArgumentError("expected operation " + get());
-            }
-            if (source.get() !== ')') {
-                throw new BracketNotFoundError("Closing bracket not found");
-            } else {
-                source.take();
-                brackets--;
-            }
-            return answer;
-        }
-        return parseOperation();
-    }
-
-    function parseOperation() {
-        source.skipWhitespaces();
-        let token = source.getToken();
-        if (strToOperation.has(token)) {
-            operationStatus = false;
-            let operation = strToOperation.get(token);
-            return new operation[0](...getTokens(operation[1]));
-        } else {
-            source.back(token.length);
-            return getTokens(1)[0];
-        }
-    }
-
-    function getTokens(count) {
-        let stack = [];
-        for (let i = 0; i < count; i++) {
-            source.skipWhitespaces();
-            if (source.get() === '(') {
-                brackets++;
-                source.take();
-                stack.push(parseExpression());
-                source.skipWhitespaces();
-                if (source.get() !== ')') {
-                    throw new BracketNotFoundError("Closing bracket not found");
-                } else {
-                    source.take();
-                    brackets--;
-                }
-            } else {
-                let token = source.getToken();
-                if (variableToIndex.has(token)) {
-                    stack.push(new Variable(token));
-                } else if (!isNaN(Number(token)) && token !== '') {
-                    stack.push(new Const(Number(token)));
-                } else {
-                    throw new InvalidArgumentError("unsupported token " + token);
-                }
-            }
-        }
-        return stack;
-    }
-
-    return parse();
-}
-
-const parsePrefix = Parser;
