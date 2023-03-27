@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 
 const variableToIndex = new Map([
     ["x", 0],
@@ -6,222 +6,242 @@ const variableToIndex = new Map([
     ["z", 2]
 ]);
 
-function PartOfExpression(obj, evaluate, diff, toString, prefix = toString) {
-    obj.prototype.evaluate = evaluate;
-    obj.prototype.diff = diff;
-    obj.prototype.toString = toString;
-    obj.prototype.prefix = prefix;
-}
+class PartOfExpression {
+    evaluate(...args) {
 
-function Const(x) {
-    this.x = x;
-}
-
-
-PartOfExpression(
-    Const,
-    function() {
-        return Number(this.x);
-    },
-    function() {
-        return new Const(0);
-    },
-    function() {
-        return this.x + '';
     }
-);
 
-function Variable(varName) {
-    this.varName = varName;
+    diff(varName) {
+
+    }
+
+    toString() {
+
+    }
 }
 
-PartOfExpression(
-    Variable,
-    function(...args) {
+class Const extends PartOfExpression {
+    constructor(x) {
+        super();
+        this.x = x;
+    }
+
+    evaluate(...args) {
+        return Number(this.x);
+    }
+
+    diff(varName) {
+        return new Const(0);
+    }
+
+    toString() {
+        return this.x.toString();
+    }
+}
+
+class Variable extends PartOfExpression {
+    constructor(varName) {
+        super();
+        this.varName = varName;
+    }
+
+    evaluate(...args) {
         return args[variableToIndex.get(this.varName)];
-    },
-    function(varName) {
+    }
+
+    diff(varName) {
         return this.varName === varName ? new Const(1) : new Const(0);
-    },
-    function() {
+    }
+
+    toString() {
         return this.varName;
     }
-);
-
-function Operation(...parts) {
-    this.parts = parts;
 }
 
-PartOfExpression(
-    Operation,
-    function(...args) {
+class Operation extends PartOfExpression {
+    constructor(operationName, ...parts) {
+        super();
+        this.operationName = operationName;
+        this.parts = parts;
+    }
+
+    calculate(...args) {
+
+    }
+
+    diffOperation(varName, ...args) {
+
+    }
+
+    evaluate(...args) {
         return this.calculate(...this.parts.map(part => part.evaluate(...args)));
-    },
-    function(varName) {
+    }
+
+    diff(varName) {
         return this.diffOperation(varName, ...this.parts);
-    },
-    function() {
-        return this.parts.map(part => part.toString()).join(" ") + " " + this.operationName;
-    },
-    function() {
-        return "(" + this.operationName + " " + this.parts.map(part => part.prefix()).join(" ") + ")";
     }
-);
 
-function NewOperation(operation, operationName, calculate, diffOperation) {
-    operation.prototype = Object.create(Operation.prototype);
-    operation.prototype.operationName = operationName;
-    operation.prototype.calculate = calculate;
-    operation.prototype.diffOperation = diffOperation;
+    toString() {
+        return this.parts.map(part => part.toString()).join(' ') + " " + this.operationName;
+    }
 }
 
-function Add(...args) {
-    Operation.call(this, ...args);
+class Add extends Operation {
+    constructor(...parts) {
+        super("+", ...parts);
+    }
+
+    calculate(...args) {
+        return args.reduce((ans, x) => ans += x, 0);
+    }
+
+    diffOperation(varName, ...args) {
+        return new Add(...args.map(part => part.diff(varName)));
+    }
 }
 
-NewOperation(
-    Add,
-    "+",
-    (...args) => args.reduce((ans, x) => ans += x, 0),
-    (varName, ...args) => new Add(...args.map((arg) => arg.diff(varName)))
-);
+class Subtract extends Operation {
+    constructor(...parts) {
+        super("-", ...parts);
+    }
 
-function Subtract(...args) {
-    Operation.call(this, ...args);
+    calculate(x, y) {
+        return x - y;
+    }
+
+    diffOperation(varName, left, right) {
+        return new Subtract(left.diff(varName), right.diff(varName));
+    }
 }
 
-NewOperation(
-    Subtract,
-    "-",
-    (x, y) => x - y,
-    (varName, left, right) => new Subtract(left.diff(varName), right.diff(varName))
-);
+class Multiply extends Operation {
+    constructor(...parts) {
+        super("*", ...parts);
+    }
 
-function Multiply(...args) {
-    Operation.call(this, ...args);
-}
+    calculate(x, y) {
+        return x * y;
+    }
 
-NewOperation(
-    Multiply,
-    "*",
-    (x, y) => x * y,
-    (varName, left, right) => new Add(
+    diffOperation(varName, left, right) {
+        return new Add(
             new Multiply(left.diff(varName), right),
             new Multiply(left, right.diff(varName))
-        )
-);
-
-function Divide(...args) {
-    Operation.call(this, ...args);
-}
-
-NewOperation(
-    Divide,
-    "/",
-    (x, y) => x / y,
-    (varName, left, right) => new Divide(
-        new Subtract(
-            new Multiply(left.diff(varName), right),
-            new Multiply(left, right.diff(varName))
-        ),
-        new Multiply(right, right)
-    )
-);
-
-
-function Negate(...args) {
-    Operation.call(this, ...args);
-}
-
-NewOperation(
-    Negate,
-    "negate",
-    (x) => -x,
-    (varName, left) => new Negate(left.diff(varName))
-);
-
-function SumsqN(...args) {
-    Operation.call(this, ...args);
-}
-
-NewOperation(
-    SumsqN,
-    "sumsq",
-    (...args) => args.reduce((ans, x) => ans += x * x, 0),
-    (varName, ...args) => new Add(...args.map((arg) => new Multiply(arg, arg).diff(varName)))
-);
-
-function NewSumsqN(sumsq, operationName) {
-    sumsq.prototype = Object.create(SumsqN.prototype);
-    sumsq.prototype.operationName = operationName;
-}
-
-
-function Sumsq2(...args) {
-    SumsqN.call(this, ...args);
-}
-
-NewSumsqN(Sumsq2, "sumsq2");
-
-function Sumsq3(...args) {
-    SumsqN.call(this, ...args);
-}
-
-NewSumsqN(Sumsq3, "sumsq3");
-
-function Sumsq4(...args) {
-    SumsqN.call(this, ...args);
-}
-
-NewSumsqN(Sumsq4, "sumsq4");
-
-function Sumsq5(...args) {
-    SumsqN.call(this, ...args);
-}
-
-NewSumsqN(Sumsq5, "sumsq5");
-
-function DistanceN(...args) {
-    Operation.call(this, ...args);
-}
-
-NewOperation(
-    DistanceN,
-    "distance",
-    (...args) => Math.sqrt(args.reduce((ans, x) => ans += x * x, 0)),
-    function(varName, ...args) {
-        return new Divide(new SumsqN(...args).diff(varName), new Multiply(new Const(2), this));
+        );
     }
-);
-
-function NewDistanceN(distance, operationName) {
-    distance.prototype = Object.create(DistanceN.prototype);
-    distance.prototype.operationName = operationName;
 }
 
-function Distance2(...args) {
-    DistanceN.call(this, ...args);
+
+class Divide extends Operation {
+    constructor(...parts) {
+        super("/", ...parts);
+    }
+
+    calculate(x, y) {
+        return x / y;
+    }
+
+    diffOperation(varName, left, right) {
+        return new Divide(
+            new Subtract(
+                new Multiply(left.diff(varName), right),
+                new Multiply(left, right.diff(varName))
+            ),
+            new Multiply(right, right)
+        );
+    }
 }
 
-NewDistanceN(Distance2, "distance2");
+class Negate extends Operation {
+    constructor(...parts) {
+        super("negate", ...parts);
+    }
 
-function Distance3(...args) {
-    DistanceN.call(this, ...args);
+    calculate(x) {
+        return -x;
+    }
+
+    diffOperation(varName, part) {
+        return new Negate(part.diff(varName));
+    }
 }
 
-NewDistanceN(Distance3, "distance3");
+class SumsqN extends Operation {
+    constructor(n, ...parts) {
+        super("sumsq" + n, ...parts);
+    }
 
-function Distance4(...args) {
-    DistanceN.call(this, ...args);
+    calculate(...args) {
+        return args.reduce((ans, x) => ans += x * x, 0);
+    }
+
+    diffOperation(varName, ...args) {
+        return new Add(...args.map(part => new Multiply(part, part).diff(varName)));
+    }
 }
 
-NewDistanceN(Distance4, "distance4");
-
-function Distance5(...args) {
-    DistanceN.call(this, ...args);
+class Sumsq2 extends SumsqN {
+    constructor(...parts) {
+        super(2, ...parts);
+    }
 }
 
-NewDistanceN(Distance5, "distance5");
+class Sumsq3 extends SumsqN {
+    constructor(...parts) {
+        super(3, ...parts);
+    }
+}
+
+class Sumsq4 extends SumsqN {
+    constructor(...parts) {
+        super(4, ...parts);
+    }
+}
+
+class Sumsq5 extends SumsqN {
+    constructor(...parts){
+        super(5, ...parts);
+    }
+}
+
+class DistanceN extends Operation {
+    constructor(n, ...parts) {
+        super("distance" + n, ...parts);
+        this.n = n;
+    }
+
+    calculate(...args) {
+        return Math.sqrt(args.reduce((ans, x) => ans += x * x, 0));
+    }
+
+    diffOperation(varName, ...args) {
+        return new Divide(new SumsqN(this.n, ...args).diff(varName), new Multiply(new Const(2), this));
+    }
+}
+
+class Distance2 extends DistanceN {
+    constructor(...parts) {
+        super(2, ...parts);
+    }
+}
+
+class Distance3 extends DistanceN {
+    constructor(...parts) {
+        super(3, ...parts);
+    }
+}
+
+class Distance4 extends DistanceN {
+    constructor(...parts)  {
+        super(4, ...parts);
+    }
+}
+
+class Distance5 extends DistanceN {
+    constructor(...parts) {
+        super(5, ...parts);
+    }
+}
 
 const strToOperation = new Map([
     ["+", [Add, 2]],
@@ -259,149 +279,3 @@ const parse = (expression) => {
         }, []
     ).pop();
 }
-
-
-function ParserError(message) {
-    this.message = message;
-}
-
-ParserError.prototype = Object.create(Error.prototype);
-ParserError.prototype.errorName = "ParserError";
-ParserError.prototype.constructor = ParserError;
-
-function NewParserError(error, errorName) {
-    error.prototype = Object.create(ParserError.prototype);
-    error.prototype.errorName = errorName;
-    error.prototype.constructor = ParserError;
-}
-
-function BracketNotFoundError(message) {
-    ParserError.call(this, message);
-}
-
-NewParserError(BracketNotFoundError, "BracketNotFoundError");
-
-function InvalidArgumentError(message) {
-    ParserError.call(this, message);
-}
-
-NewParserError(InvalidArgumentError, "InvalidArgumentError");
-
-
-function StringSource(expr) {
-    this.separators = [' ', '(', ')'];
-    this.pos = 0;
-    this.expr = expr;
-    this.get = () => this.expr[this.pos];
-    this.isSeparator = (ch) => this.separators.includes(ch);
-    this.back = (n) => this.pos -= n;
-}
-
-
-
-StringSource.prototype.hasNext = function() {
-    return this.pos + 1 <= this.expr.length;
-}
-
-StringSource.prototype.take = function() {
-    return this.expr[this.pos++];
-}
-
-StringSource.prototype.skipWhitespaces = function() {
-    while (this.hasNext() && this.expr[this.pos] === " ") {
-        this.take();
-    }
-}
-
-StringSource.prototype.getToken = function() {
-    let token = '';
-    while (this.hasNext() && !(this.isSeparator(this.get()))) {
-        token += this.take();
-    }
-    return token;
-}
-
-function Parser(expression) {
-    const source = new StringSource(expression);
-    let brackets = 0;
-    let operationStatus = false;
-
-    function parse() {
-        let answer = parseExpression();
-        source.skipWhitespaces();
-        if (source.hasNext()) {
-            throw new InvalidArgumentError("expected end of the expression " + get());
-        } else if (brackets !== 0) {
-            throw new BracketNotFoundError("Closing bracket not found");
-        }
-        return answer;
-    }
-
-    function parseExpression() {
-        source.skipWhitespaces();
-        if (source.get() === '(') {
-            operationStatus = true;
-            brackets++;
-            source.take();
-            let answer = parseExpression();
-            source.skipWhitespaces();
-            if (operationStatus) {
-                throw new InvalidArgumentError("expected operation " + get());
-            }
-            if (source.get() !== ')') {
-                throw new BracketNotFoundError("Closing bracket not found");
-            } else {
-                source.take();
-                brackets--;
-            }
-            return answer;
-        }
-        return parseOperation();
-    }
-
-    function parseOperation() {
-        source.skipWhitespaces();
-        let token = source.getToken();
-        if (strToOperation.has(token)) {
-            operationStatus = false;
-            let operation = strToOperation.get(token);
-            return new operation[0](...getTokens(operation[1]));
-        } else {
-            source.back(token.length);
-            return getTokens(1)[0];
-        }
-    }
-
-    function getTokens(count) {
-        let stack = [];
-        for (let i = 0; i < count; i++) {
-            source.skipWhitespaces();
-            if (source.get() === '(') {
-                brackets++;
-                source.take();
-                stack.push(parseExpression());
-                source.skipWhitespaces();
-                if (source.get() !== ')') {
-                    throw new BracketNotFoundError("Closing bracket not found");
-                } else {
-                    source.take();
-                    brackets--;
-                }
-            } else {
-                let token = source.getToken();
-                if (variableToIndex.has(token)) {
-                    stack.push(new Variable(token));
-                } else if (!isNaN(Number(token)) && token !== '') {
-                    stack.push(new Const(Number(token)));
-                } else {
-                    throw new InvalidArgumentError("unsupported token " + token);
-                }
-            }
-        }
-        return stack;
-    }
-
-    return parse();
-}
-
-const parsePrefix = Parser;
