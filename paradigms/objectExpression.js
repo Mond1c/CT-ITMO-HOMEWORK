@@ -18,16 +18,22 @@ class PartOfExpression {
     toString() {
 
     }
+
+    prefix() {
+
+    }
 }
 
 class Const extends PartOfExpression {
+    #x;
+
     constructor(x) {
         super();
-        this.x = x;
+        this.#x = x;
     }
 
     evaluate(...args) {
-        return Number(this.x);
+        return Number(this.#x);
     }
 
     diff(varName) {
@@ -35,34 +41,47 @@ class Const extends PartOfExpression {
     }
 
     toString() {
-        return this.x.toString();
+        return this.#x.toString();
+    }
+
+    prefix() {
+        return this.toString();
     }
 }
 
 class Variable extends PartOfExpression {
+    #varName;
+
     constructor(varName) {
         super();
-        this.varName = varName;
+        this.#varName = varName;
     }
 
     evaluate(...args) {
-        return args[variableToIndex.get(this.varName)];
+        return args[variableToIndex.get(this.#varName)];
     }
 
     diff(varName) {
-        return this.varName === varName ? new Const(1) : new Const(0);
+        return this.#varName === varName ? new Const(1) : new Const(0);
     }
 
     toString() {
-        return this.varName;
+        return this.#varName;
+    }
+
+    prefix() {
+        return this.toString();
     }
 }
 
 class Operation extends PartOfExpression {
+    #parts;
+    #operationName;
+
     constructor(operationName, ...parts) {
         super();
-        this.operationName = operationName;
-        this.parts = parts;
+        this.#operationName = operationName;
+        this.#parts = parts;
     }
 
     calculate(...args) {
@@ -74,15 +93,20 @@ class Operation extends PartOfExpression {
     }
 
     evaluate(...args) {
-        return this.calculate(...this.parts.map(part => part.evaluate(...args)));
+        return this.calculate(...this.#parts.map(part => part.evaluate(...args)));
     }
 
     diff(varName) {
-        return this.diffOperation(varName, ...this.parts);
+        return this.diffOperation(varName, ...this.#parts);
     }
 
     toString() {
-        return this.parts.map(part => part.toString()).join(' ') + " " + this.operationName;
+        return this.#parts.map(part => part.toString()).join(' ') + " " + this.#operationName;
+    }
+
+    prefix() {
+        return "(" + this.#operationName + " "
+            + this.#parts.map(part => part.prefix()).join(" ") + ")";
     }
 }
 
@@ -133,6 +157,7 @@ class Multiply extends Operation {
 
 
 class Divide extends Operation {
+
     constructor(...parts) {
         super("/", ...parts);
     }
@@ -205,9 +230,11 @@ class Sumsq5 extends SumsqN {
 }
 
 class DistanceN extends Operation {
+    #n;
+
     constructor(n, ...parts) {
         super("distance" + n, ...parts);
-        this.n = n;
+        this.#n = n;
     }
 
     calculate(...args) {
@@ -215,7 +242,7 @@ class DistanceN extends Operation {
     }
 
     diffOperation(varName, ...args) {
-        return new Divide(new SumsqN(this.n, ...args).diff(varName), new Multiply(new Const(2), this));
+        return new Divide(new SumsqN(this.#n, ...args).diff(varName), new Multiply(new Const(2), this));
     }
 }
 
@@ -278,4 +305,180 @@ const parse = (expression) => {
             return stack;
         }, []
     ).pop();
+}
+
+class StringSource {
+    #source;
+    #pos;
+
+    constructor(source) {
+        this.#source = source;
+        this.#pos = 0;
+    }
+
+    isSeparator(ch) {
+        return ch === " " || ch === '(' || ch === ')';
+    }
+
+    get() {
+        return this.#source[this.#pos];
+    }
+
+    next() {
+        this.#pos++;
+    }
+
+    hasNext() {
+        return this.#pos + 1 <= this.#source.length;
+    }
+
+    back(n) {
+        this.#pos -= n;
+    }
+}
+
+class BaseParser {
+    #source;
+
+    setSource(source) {
+        this.#source = new StringSource(source);
+    }
+
+    skipWhitespaces() {
+        while (this.#source.get() === " ") {
+            this.#source.next();
+        }
+    }
+
+    take(ch) {
+        if (this.#source.get() === ch) {
+            this.#source.next();
+            return true;
+        }
+        return false;
+    }
+
+    prev(n) {
+        this.#source.back(n);
+    }
+
+    getToken() {
+        let token = '';
+        while (this.#source.hasNext() && !(this.#source.isSeparator(this.#source.get()))) {
+            token += this.#source.get();
+            this.#source.next();
+        }
+        return token;
+    }
+
+    isEmpty() {
+        return !this.#source.hasNext();
+    }
+}
+
+class PrefixParser extends BaseParser {
+    #brackets;
+    #operationNeeded;
+
+    constructor() {
+        super();
+        this.#brackets = 0;
+        this.#operationNeeded = false;
+    }
+
+    parse(expression) {
+        super.setSource(expression);
+        let answer = this.#parseExpression();
+        this.skipWhitespaces();
+        if (!super.isEmpty()) {
+            throw new Error("expected end of the expression");
+        } else if (this.#brackets !== 0) {
+            throw new Error("Closing bracket not found");
+        }
+        return answer;
+    }
+
+    #parseExpression() {
+        super.skipWhitespaces();
+        if (super.take('(')) {
+            this.#operationNeeded = true;
+            this.#brackets++;
+            let part = this.#parseExpression();
+            this.skipWhitespaces();
+            if (this.#operationNeeded) {
+                throw new Error("missing operation");
+            }
+            if (!super.take(')')) {
+                throw new Error("missing close bracket");
+            }
+            this.#brackets--;
+            return part;   
+        }
+        return this.#parseOperation();
+    }
+
+    #parseOperation() {
+        this.skipWhitespaces();
+        let token = super.getToken();
+        if (strToOperation.has(token)) {
+            this.#operationNeeded = false;
+            let operation = strToOperation.get(token);
+            return new operation[0](...this.#getArgs(operation[1]));
+        }
+        super.prev(token.length);
+        return this.#getArgs(1)[0];
+    }
+
+    #getArgs(argsCount) {
+        let stack = [];
+        for (let i = 0; i < argsCount; i++) {
+            super.skipWhitespaces();
+            if (super.take('(')) {
+                this.#brackets++;
+                stack.push(this.#parseExpression());
+                super.skipWhitespaces();
+                if (!super.take(')')) {
+                    throw new Error("missing close bracket");
+                }
+                this.#brackets--;
+            } else {
+                let token = super.getToken();
+                if (variableToIndex.has(token)) {
+                    stack.push(new Variable(token));
+                } else if (!isNaN(Number(token)) && token !== "") {
+                    stack.push(new Const(Number(token)));
+                } else {
+                    throw new Error("unsupported token " + token);
+                }
+            }
+        }
+        return stack;
+    }
+}
+
+
+class PostfixParser extends BaseParser {
+    #brackets;
+    #operationNeeded;
+
+    constructor() {
+        super();
+        this.#brackets = 0;
+        this.#operationNeed = 0;
+    }
+
+    parse(expression) {
+        super.setSource(expression);
+        
+    }
+}
+
+
+const parsePrefix = (expression) => {
+    return new PrefixParser().parse(expression);
+}
+
+
+const parsePostfix = (expression) => {
+    return new PostfixParser.parse(expression);
 }
