@@ -457,28 +457,9 @@ class PrefixParser extends BaseParser {
 }
 
 
-class PostfixParser extends BaseParser {
-    #brackets;
-    #operationNeeded;
-
-    constructor() {
-        super();
-        this.#brackets = 0;
-        this.#operationNeed = 0;
-    }
-
-    parse(expression) {
-        super.setSource(expression);
-        
-    }
-}
-
-
 const parsePrefix = (expression) => {
     return new PrefixParser().parse(expression);
 }
 
 
-const parsePostfix = (expression) => {
-    return new PostfixParser.parse(expression);
-}
+
