@@ -160,13 +160,56 @@ const tokenToOperation = new Map([
     ["lse", LSE]
 ]);
 
+class UnsupportedOperation extends Error {
+    constructor(token) {
+        super();
+        this.message = "Unsupported operation: " + token;
+    }
+}
+
+class IllegalCountOfArgs extends Error {
+    constructor(token, count1, count2) {
+        super();
+        this.message = "Illegal count of arguments in " + token + ": " + count1 + " != " + count2;
+    }
+}
+
+class UnsupportedToken extends Error {
+    constructor(token) {
+        super();
+        this.message = "Unsupported token: " + token;
+    }
+}
+
+class MissingBracket extends Error {
+    constructor(openPos) {
+        super();
+        this.message = 'Missing closing bracket for ( at position ' + openPos;
+    }
+}
+
+class EmptyExpressionError extends Error {
+    constructor() {
+        super();
+        this.messagee = "Input expression is empty";
+    }
+
+}
+
+class UnexpectedEndToken extends Error {
+    constructor(token) {
+        super();
+        this.message = "Unexpected token: " + token + " at the end of the expression";
+    }
+}
+
 function parseOperation(operation, ...args) {
     if (!tokenToOperation.has(operation)) {
-        throw new Error("Unsupported operation");
+        throw new UnsupportedOperation(operation);
     }
     const op = tokenToOperation.get(operation);
     if (op.argsCount !== 0 && op.argsCount !== args.length) {
-        throw new Error("Illegal count of arguments: " + op.argsCount + " != " + args.length);
+        throw new IllegalCountOfArgs(operation, op.argsCount, args.length);
     }
     return new op(...args);
 }
@@ -176,7 +219,7 @@ function parseVariableAndConst(token) {
         return new Variable(token);
     }
     if (isNaN(Number(token))) {
-        throw new Error("unsupported variable or const " + token);
+        throw new UnsupportedToken(token);
     }
     return new Const(token);
 }
@@ -240,6 +283,10 @@ class StringSource {
     hasNext() {
         return this.#pos + 1 <= this.#source.length;
     }
+
+    getPos() {
+        return this.#pos;
+    }
 }
 
 class Parser {
@@ -270,7 +317,7 @@ class Parser {
             const operation = this.parseOperation();
             let nextToken = this.#source.getToken();
             if (nextToken !== ')') {
-                throw new Error("missing )");
+                throw new MissingBracket(this.#source.getPos() - nextToken.length);
             }
             return operation;
         } else {
@@ -281,12 +328,12 @@ class Parser {
     parse(expression) {
         expression = expression.trim();
         if (expression === '') {
-            throw new Error("empty");
+            throw new EmptyExpressionError();
         }
         this.#source = new StringSource(expression);
         const ans = this.parseToken(this.#source.getToken());
         if (this.#source.hasNext()) {
-            throw new Error("unexpected token");
+            throw new UnexpectedEndToken(this.#source.getToken());
         }
         return ans;
     }
