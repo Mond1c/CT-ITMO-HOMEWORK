@@ -252,7 +252,7 @@ class StringSource {
     }
 
 
-    isSeparator() {
+    #isSeparator() {
         return this.#source[this.#pos] === ' ' || this.#source[this.#pos] === '(' || this.#source[this.#pos] === ')';
     }
 
@@ -264,11 +264,11 @@ class StringSource {
 
     getToken() {
         this.#skipWhitespaces();
-        if (this.isSeparator()) {
+        if (this.#isSeparator()) {
             return this.#source[this.#pos++];
         }
         let ans = '';
-        while (this.#pos < this.#source.length && !this.isSeparator()) {
+        while (this.#pos < this.#source.length && !this.#isSeparator()) {
             ans += this.#source[this.#pos++];
         }
         return ans;
@@ -297,14 +297,14 @@ class Parser {
         this.#mode = mode;
     }
 
-    parseOperation() {
+    #parseOperation() {
         let token;
         if (this.#mode === 'prefix') {
             token = this.#source.getToken();
         }
         let args = [];
         while (this.#source.hasNext() && this.#source.getTestToken() !== ')' && !tokenToOperation.has(this.#source.getTestToken())) {
-            args.push(this.parseToken(this.#source.getToken()));
+            args.push(this.#parseToken(this.#source.getToken()));
         }
         if (this.#mode === "postfix") {
             token = this.#source.getToken();
@@ -312,9 +312,9 @@ class Parser {
         return parseOperation(token, ...args);
     }
 
-    parseToken(token) {
+    #parseToken(token) {
         if (token === '(') {
-            const operation = this.parseOperation();
+            const operation = this.#parseOperation();
             let nextToken = this.#source.getToken();
             if (nextToken !== ')') {
                 throw new MissingBracket(this.#source.getPos() - nextToken.length);
@@ -331,7 +331,7 @@ class Parser {
             throw new EmptyExpressionError();
         }
         this.#source = new StringSource(expression);
-        const ans = this.parseToken(this.#source.getToken());
+        const ans = this.#parseToken(this.#source.getToken());
         if (this.#source.hasNext()) {
             throw new UnexpectedEndToken(this.#source.getToken());
         }
