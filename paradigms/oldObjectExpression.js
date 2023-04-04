@@ -6,6 +6,7 @@ const variableToIndex = new Map([
     ["z", 2]
 ]);
 
+// :NOTE: "abstract" class
 function PartOfExpression(obj, evaluate, diff, toString) {
     obj.prototype.evaluate = evaluate;
     obj.prototype.diff = diff;

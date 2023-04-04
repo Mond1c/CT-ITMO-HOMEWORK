@@ -6,6 +6,7 @@ const variableToIndex = new Map([
     ["z", 2]
 ]);
 
+// :NOTE: "abstract" class
 function newPartOfExpression(part, evaluate, diff, toString, prefix = toString, postfix = toString) {
     part.prototype.evaluate = evaluate;
     part.prototype.diff = diff;
@@ -28,7 +29,7 @@ newPartOfExpression(
         return this.x;
     },
     function () {
-        return ZERO;
+        return ZERO; // :NOTE: new
     },
     function () {
         return this.x.toString();
@@ -91,6 +92,7 @@ function newOperation(operationName, calculate, diffOperation) {
     return newNOperation(calculate.length, operationName, calculate, diffOperation);
 }
 
+// const add = operation("+", (a, b) => a + b, (v, l, r) => new Add(l.diff(v), r.diff(v)), 2);
 
 const Add = newOperation('+', (x, y) => x + y,
     (varName, l, r) => new Add(l.diff(varName), r.diff(varName)));
