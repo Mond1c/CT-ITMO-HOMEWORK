@@ -1,1 +1,1 @@
-../../paradigms-2023/javascript/TestJS.sh jstest.prefix.ParserTest hard SumexpLSE
+../../paradigms-2023/javascript/TestJS.sh jstest.prefix.PostfixTest hard SumexpLSE

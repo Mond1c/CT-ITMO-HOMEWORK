@@ -118,10 +118,16 @@ const Divide = newOperation('/', (x, y) => x / y,
 const Negate = newOperation('negate', (x) => -x,
     (varName, part) => new Negate(part.diff(varName)));
 
-const SumsqN = (n) => newNOperation(n, 'sumsq' + n, (...args) => args.reduce((ans, x) => ans + x * x, 0),
+
+const calculateSumsqn = (...args) => args.reduce((ans, x) => ans + x * x, 0);
+
+// :NOTE: копипаста между SumsqN и DistanceN
+// args.reduce((ans, x) => ans + x * x, 0
+// parts.reduce((ans, part) => new Add(ans, new Multiply(part, part).diff(varName)), ZERO)
+const SumsqN = (n) => newNOperation(n, 'sumsq' + n, calculateSumsqn,
     (varName, ...parts) => parts.reduce((ans, part) => new Add(ans, new Multiply(part, part).diff(varName)), ZERO))
 
-const DistanceN = (n) => newNOperation(n, 'distance' + n, (...args) => Math.sqrt(args.reduce((ans, x) => ans + x * x, 0)),
+const DistanceN = (n) => newNOperation(n, 'distance' + n, (...args) => Math.sqrt(calculateSumsqn(...args)),
     function (varName, ...parts) {
         return new Divide(parts.reduce((ans, part) => new Add(ans, new Multiply(part, part).diff(varName)), ZERO), new Multiply(TWO, this));
     });
@@ -136,12 +142,19 @@ const Distance3 = DistanceN(3);
 const Distance4 = DistanceN(4);
 const Distance5 = DistanceN(5);
 
+const calculateSumexp = (...args) => args.reduce((ans, x) => ans + Math.exp(x), 0); 
 
-const Sumexp = newOperation("sumexp", (...args) => args.reduce((ans, x) => ans + Math.exp(x), 0),
+// :NOTE: копипаста между Sumexp и LSE
+// args.reduce((ans, x) => ans + Math.exp(x), 0)
+const Sumexp = newOperation("sumexp", calculateSumexp,
     (varName, ...parts) => parts.reduce((ans, part) => new Add(ans, new Multiply(new Sumexp(part), part.diff(varName))), ZERO));
 
-const LSE = newOperation("lse", (...args) => Math.log(args.reduce((ans, x) => ans + Math.exp(x), 0)),
-    (varName, ...parts) => new Divide(new Sumexp(...parts).diff(varName), new Sumexp(...parts)));
+const LSE = newOperation("lse", (...args) => Math.log(calculateSumexp(...args)),
+    // :NOTE: два раза создается один и тот же new Sumexp(...parts)
+    function (varName, ...parts) {
+        const sumexp = new Sumexp(...parts);
+        return new Divide(sumexp.diff(varName), sumexp);
+    });
 
 
 const tokenToOperation = new Map([
@@ -162,66 +175,48 @@ const tokenToOperation = new Map([
     ["lse", LSE]
 ]);
 
-class UnsupportedOperation extends Error {
-    constructor(token) {
-        super();
-        this.message = "Unsupported operation: " + token;
+function ParserError(message) {
+    this.message = message;
+}
+ParserError.prototype = Object.create(Error.prototype);
+ParserError.prototype.constructor = ParserError;
+ParserError.prototype.name = "ParserError";
+
+function newParserError(errorName, message) {
+    const parserError = function(...args) {
+        ParserError.call(this, message(...args));
     }
+    parserError.prototype = Object.create(ParserError.prototype);
+    parserError.errorName = errorName;
+    parserError.constructor = parserError;
+    return parserError;
 }
 
-class IllegalCountOfArgs extends Error {
-    constructor(token, count1, count2) {
-        super();
-        this.message = "Illegal count of arguments in " + token + ": " + count1 + " != " + count2;
-    }
-}
+const UnsupportedOperation = newParserError("UnsupportedOperation", (token, pos) => "Unsupported operation: " + token + " at position " + pos);
+const IllegalCountOfArgs = newParserError("IllegalCountOfArgs", (token, count1, count2, pos) => "Illegal count of arguments in " + token + ": " + count1 + " != " + count2 + " at position " + pos);
+const UnsupportedToken = newParserError("UnsupportedToken", (token, pos) => "Unsupported Token " + token + " at position " + pos);
+const MissingBracket = newParserError("MissingBracket", (pos) => 'Missing closing bracket for ( at position ' + pos);
+const EmptyExpressionError = newParserError("EmptyExpressionError", () => "Input expression is empty");
+const UnexpectedEndToken = newParserError("UnexpectedEndToken", (token, pos) => "Unexpected token: " + token + " at the end of the expression (at position " + pos + ")");
 
-class UnsupportedToken extends Error {
-    constructor(token) {
-        super();
-        this.message = "Unsupported token: " + token;
-    }
-}
 
-class MissingBracket extends Error {
-    constructor(openPos) {
-        super();
-        this.message = 'Missing closing bracket for ( at position ' + openPos;
-    }
-}
-
-class EmptyExpressionError extends Error {
-    constructor() {
-        super();
-        this.messagee = "Input expression is empty";
-    }
-
-}
-
-class UnexpectedEndToken extends Error {
-    constructor(token) {
-        super();
-        this.message = "Unexpected token: " + token + " at the end of the expression";
-    }
-}
-
-function parseOperation(operation, ...args) {
+function parseOperation(pos, operation, ...args) {
     if (!tokenToOperation.has(operation)) {
-        throw new UnsupportedOperation(operation);
+        throw new UnsupportedOperation(operation, pos - operation.length);
     }
     const op = tokenToOperation.get(operation);
     if (op.argsCount !== 0 && op.argsCount !== args.length) {
-        throw new IllegalCountOfArgs(operation, op.argsCount, args.length);
+        throw new IllegalCountOfArgs(operation, op.argsCount, args.length, pos);
     }
     return new op(...args);
 }
 
-function parseVariableAndConst(token) {
+function parseVariableAndConst(token, position = 0) {
     if (variableToIndex.has(token)) {
         return new Variable(token);
     }
     if (isNaN(Number(token))) {
-        throw new UnsupportedToken(token);
+        throw new UnsupportedToken(token, position - token.length);
     }
     return new Const(token);
 }
@@ -311,7 +306,7 @@ class Parser {
         if (this.#mode === "postfix") {
             token = this.#source.getToken();
         }
-        return parseOperation(token, ...args);
+        return parseOperation(this.#source.getPos(), token, ...args);
     }
 
     #parseToken(token) {
@@ -323,7 +318,7 @@ class Parser {
             }
             return operation;
         } else {
-            return parseVariableAndConst(token);
+            return parseVariableAndConst(token, this.#source.getPos());
         }
     }
 
@@ -335,7 +330,7 @@ class Parser {
         this.#source = new StringSource(expression);
         const ans = this.#parseToken(this.#source.getToken());
         if (this.#source.hasNext()) {
-            throw new UnexpectedEndToken(this.#source.getToken());
+            throw new UnexpectedEndToken(this.#source.getToken(), this.#source.getPos() - 1);
         }
         return ans;
     }
@@ -347,3 +342,28 @@ const PostfixParser = new Parser("postfix");
 const parsePrefix = (expression) => PrefixParser.parse(expression);
 
 const parsePostfix = (expression) => PostfixParser.parse(expression);
+
+// :NOTE: ошибки выбрасываются без сообщений -- см вывод тестов
+// Empty input              : org.graalvm.polyglot.PolyglotException: Error
+// Unknown variable         : org.graalvm.polyglot.PolyglotException: Error
+// Invalid number           : org.graalvm.polyglot.PolyglotException: Error
+// Missing )                : org.graalvm.polyglot.PolyglotException: Error
+// Missing (                : org.graalvm.polyglot.PolyglotException: Error
+// Unknown operation        : org.graalvm.polyglot.PolyglotException: Error
+// Excessive info           : org.graalvm.polyglot.PolyglotException: Error
+// Empty op                 : org.graalvm.polyglot.PolyglotException: Error
+// Invalid unary (0 args)   : org.graalvm.polyglot.PolyglotException: Error
+// Invalid unary (2 args)   : org.graalvm.polyglot.PolyglotException: Error
+// Invalid binary (0 args)  : org.graalvm.polyglot.PolyglotException: Error
+// Invalid binary (1 args)  : org.graalvm.polyglot.PolyglotException: Error
+// Invalid binary (3 args)  : org.graalvm.polyglot.PolyglotException: Error
+// Variable op (0 args)     : org.graalvm.polyglot.PolyglotException: Error
+// Variable op (1 args)     : org.graalvm.polyglot.PolyglotException: Error
+// Variable op (2 args)     : org.graalvm.polyglot.PolyglotException: Error
+// Const op (0 args)        : org.graalvm.polyglot.PolyglotException: Error
+// Const op (1 args)        : org.graalvm.polyglot.PolyglotException: Error
+// Const op (2 args)        : org.graalvm.polyglot.PolyglotException: Error
+
+
+// :NOTE: судя по коду, по ошибке нельзя понять в каком месте выражения произошла проблема
+// в случае с выражениями на 100+ символов с одинаковыми токенами пользователь будет страдать
