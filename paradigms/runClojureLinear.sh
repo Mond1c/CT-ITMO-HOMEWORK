@@ -1,1 +1,1 @@
-../../paradigms-2023/clojure/TestClojure.sh cljtest.linear.LinearTest easy Base
+../../paradigms-2023/clojure/TestClojure.sh cljtest.linear.LinearTest hard Tensor
