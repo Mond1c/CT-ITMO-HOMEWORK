@@ -78,11 +78,11 @@
    :post [(is-vector? %)]}
   (reduce
    (fn [v1 v2]
-     (let [[x y z] v1 m [[0 (- z) y] [z 0 (- x)] [(- y) x 0]]]
-       (m*v m v2)))
+     (let [[x1 y1 z1] v1 [x2 y2 z2] v2]
+       [(- (* y1 z2) (* z1 y2))
+        (- (* z1 x2) (* x1 z2))
+        (- (* x1 y2) (* y1 x2))]))
    v))
-
-
 
 (defn tensor-op [op]
   (letfn [(tensor' [& args]
