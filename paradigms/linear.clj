@@ -1,16 +1,22 @@
-(defn is-vector? [v] (and (vector? v) (or (every? number? v))))
-(defn is-matrix? [m] (and (not (empty? (filter vector? m))) (not (number? m))))
+(defn is-vector? [v] (and (vector? v) (every? number? v)))
+(defn is-matrix? [m] (every? is-vector? m))
 (defn is-valid-data? [args] (or (every? empty? args) (apply = (mapv (fn [x] (mapv number? x)) args))))
-(defn is-tensor? [t] (or (number? t) (is-vector? t) (is-matrix? t)))
+(defn is-tensor? [t] (or (number? t) (is-vector? t) (every? vector? t)))
+(defn v-size-eq? [args] (every? (fn [v] (== (count (first args)) (count v))) args))
+(defn m-size-eq? [args] (every? (fn [m] (and (== (count (first args)) (count m))
+                                             (== (count (first (first args))) (count (first m))))) args))
+(def t-size-eq? v-size-eq?)
 
 (defn new-v-m-op [op]
   (fn [& args]
     {:pre [(and
             (every? vector? args)
-            (is-valid-data? args))]
-     :post [(and
-             (every? vector? args)
-             (is-valid-data? args))]}
+            (is-valid-data? args)
+            (or (v-size-eq? args)
+                (m-size-eq? args)))]
+     :post [(or
+             (is-vector? %)
+             (is-matrix? %))]}
     (apply mapv op args)))
 
 (def v+ (new-v-m-op +))
@@ -21,7 +27,8 @@
 (defn scalar [& s] (apply + (apply v* s)))
 
 (defn v*s [v & s]
-  {:pre [(every? number? s)]}
+  {:pre [(every? number? s)]
+   :post [(or (number? %) (is-vector? %))]}
   (mapv (partial * (reduce * s)) v))
 
 (def m+ (new-v-m-op v+))
@@ -31,13 +38,15 @@
 
 
 (defn m*s [m & s]
-  {:pre [(and (is-matrix? m) (every? number? s))]}
+  {:pre [(and (is-matrix? m) (every? number? s))]
+   :post [(is-matrix? %)]}
   (mapv
    (fn [v]
      (v*s v (reduce * s))) m))
 
 (defn m*v [m v]
-  {:pre [(is-matrix? m)]}
+  {:pre [(and (is-matrix? m) (is-vector? v))]
+   :post [(or (is-matrix? %) (is-vector? %))]}
   (mapv
    (fn [s]
      (scalar s v)) m))
@@ -65,14 +74,15 @@
   [& v]
   {:pre [(and
           (every? vector? v)
-          (is-valid-data? v))]}
+          (is-valid-data? v))]
+   :post [(is-vector? %)]}
   (reduce
-   (fn [a b]
-     (let [[x y z] a matrix [[0 (- z) y] [z 0 (- x)] [(- y) x 0]]]
-       (m*v matrix b)))
+   (fn [v1 v2]
+     (let [[x y z] v1 m [[0 (- z) y] [z 0 (- x)] [(- y) x 0]]]
+       (m*v m v2)))
    v))
 
-(defn t-size-eq? [args] (every? (fn [x] (== (count (first args)) (count x))) args))
+
 
 (defn tensor-op [op]
   (letfn [(tensor' [& args]
