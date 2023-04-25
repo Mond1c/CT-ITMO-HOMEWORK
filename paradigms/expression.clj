@@ -1,15 +1,4 @@
 ; :NOTE: arity check
-;; (defn / [& args]
-;;   (if (== 1 (count args))
-;;     (/ 1 (double (first args)))
-;;     (reduce (fn [a b] (/ (double a) (double b))) args)))
-
-;; (defn div [] 1)
-
-;; (defn div [arg] (/ 1 (double arg)))
-
-;; (defn div [& args] (reduce (fn [a b] (/ (double a) (double b)))))
-
 (defn div
   ([] 1)
   ([arg] (/ 1 (double arg)))
