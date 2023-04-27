@@ -1,8 +1,9 @@
 ; :NOTE: arity check
 (defn div
-  ([] 1)
   ([arg] (/ 1 (double arg)))
-  ([arg & args] (reduce (fn [a b] (/ (double a) (double b))) (conj args arg))))
+  ; :NOTE: [a b]
+  ([a b] (/ (double a) (double b)))
+  ([a b & args] (reduce div (div a b) args)))
 
 (def constant constantly)
 
@@ -21,9 +22,8 @@
 (defn sumexp-calc [& args]
   (reduce + (mapv exp args)))
 
-; :NOTE: comp
-(defn lse-calc [& args]
-  (apply (comp log sumexp-calc) args))
+; :NOTE: simplify
+(def lse-calc (comp log sumexp-calc))
 
 (def add (operation +'))
 (def subtract (operation -'))
@@ -34,8 +34,7 @@
 (def lse (operation lse-calc))
 
 (def operations
-  {
-   '+ add,
+  {'+ add,
    '- subtract,
    '* multiply,
    '/ divide,
@@ -47,10 +46,8 @@
 (defn parse [expr]
   (cond
     (number? expr) (constant expr)
-    ; :NOTE: simplify
     (list? expr) (apply (operations (first expr)) (map parse (rest expr)))
-    (symbol? expr) (variable (str expr))))
+    (symbol? expr) (variable (name expr))))
 
-; :NOTE: comp
-(defn parseFunction [expr]
-  ((comp parse read-string) expr))
+; :NOTE: simplify
+(def parseFunction (comp parse read-string))
