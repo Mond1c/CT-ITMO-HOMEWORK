@@ -1,0 +1,1 @@
+../../paradigms-2023/clojure/TestClojure.sh cljtest.object.ObjectTest hard MeansqRMS
