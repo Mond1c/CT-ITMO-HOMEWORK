@@ -1,7 +1,7 @@
 # Homework from CT ITMO (Mikhail Kornilovich)
 #### Subjects:
 - [Algorithms and data structures](ADS/)
-- [Computer arhitecture](Arhitecture/)
+- [Computer architecture](Arhitecture/)
 - [Digital culture](DigitalCulture/)
 - [C++ course](cpp-course/)
 - [Discrete math](dm/)
