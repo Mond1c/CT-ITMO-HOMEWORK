@@ -8,8 +8,6 @@
 height(null, 0) :- !.
 height(node(_, _, _, _, H), H) :- !.
 
-max_value(A, B, R) :- (A > B -> R = A; R = B).
-
 balance(node(_, _, Left, Right, _), R) :-
 	height(Left, LeftHeight),
 	height(Right, RightHeight),
@@ -18,7 +16,7 @@ balance(node(_, _, Left, Right, _), R) :-
 correct_height(node(Key, Value, Left, Right, _), node(Key, Value, Left, Right, NewHeight)) :-
 	height(Left, LeftHeight),
 	height(Right, RightHeight),
-	max_value(LeftHeight, RightHeight, R),
+	(LeftHeight > RightHeight -> R = LeftHeight; R = RightHeight),
 	NewHeight is R + 1.
 
 rotate_left(node(Key, Value, Left, node(RightKey, RightValue, RightLeft, RightRight, _), _), R) :-
@@ -100,8 +98,8 @@ map_remove(node(Key, Value, Left, Right, H), K, R) :-
 	correct_height(node(Key, Value, Left, R1, H), R2),
 	big_rotate(R2, R).
 
-get_min(Node, Node) :- !.
-get_min(node(_, _, Left, _, _), R) :-
+get_left(Node, Node) :- !.
+get_left(node(_, _, Left, _, _), R) :-
 	\+ Left = null, !,
 	get_min(Left, R).
 
@@ -111,7 +109,7 @@ map_remove(node(Key, _, Left, null, _), K, Left) :- Key = K, !.
 map_remove(node(Key, _, null, Right, _), K, Right) :- Key = K, !.
 map_remove(node(Key, _, Left, Right, H), K, R) :-
 	Key = K, !,
-	get_min(Right, node(Key1, Value1, _, _, _)),
+	get_left(Right, node(Key1, Value1, _, _, _)),
 	map_remove(Right, Key1, R1),
 	correct_height(node(Key1, Value1, Left, R1, H), R2),
 	big_rotate(R2, R).
