@@ -44,16 +44,16 @@ pow2(A, B, R) :-
     R is R2 * R2.
 
 
-find_power(R, N, R, P) :- 
-    \+ 0 is mod(N, P).
-find_power(R, N, CUR, P) :-
-    !, 0 is mod(N, P),
-    N1 is N//P,
-    CUR1 is CUR + 1,
-    find_power(R, N1, CUR1, P).
+find_power(A, B, N, B) :- 
+    \+ 0 is mod(N, A).
+find_power(A, B, N, R) :-
+    !, 0 is mod(N, A),
+    N1 is N // A,
+    R1 is R + 1,
+    find_power(A, B, N1, R1).
 
 is_sorted_compact_primes([(A, B)]) :- B > 0, prime(A).
-is_sorted_compact_primes([(A1, B1), (A2, B2) | T]) :- A1 < A2, B1 > 0, prime(A1), is_sorted_compact_primes([(A2, B2) | T]).
+is_sorted_compact_primes([(A1, B1), (A2, B2) | T]) :- A1 =< A2, B1 > 0, prime(A1), is_sorted_compact_primes([(A2, B2) | T]).
 
 compact_product([], 1).
 compact_product([(A, B) | T], R) :- compact_product(T, R1), pow2(A, B, D), R is R1 * D.
@@ -61,7 +61,7 @@ compact_product([(A, B) | T], R) :- compact_product(T, R1), pow2(A, B, D), R is 
 compact_prime_divisors(1, []) :- !.
 compact_prime_divisors(N, [(A, B) | T]) :-
 	number(N), !, is_min_div(N, A),
-    	find_power(B, N, 0, A),
+    	find_power(A, B, N, 0),
 	pow2(A, B, C),
 	N1 is N // C,
 	compact_prime_divisors(N1, T).
