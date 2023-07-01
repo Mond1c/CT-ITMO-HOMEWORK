@@ -18,7 +18,7 @@ public abstract class UnaryOperation<T extends Comparable<T>> extends BaseOperat
     @Override
     public void toMiniString(StringBuilder sb) {
         sb.append(getOperationString());
-        if (expr instanceof UnaryOperation<T> operation) {
+        if (expr instanceof UnaryOperation<T>) {
             sb.append(' ');
             appendWithoutBrackets(sb, expr);
         }

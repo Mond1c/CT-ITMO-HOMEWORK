@@ -249,41 +249,6 @@ public class ExpressionParser<T extends Comparable<T>> implements TripleParser<T
             }
         }
 
-        // private Optional<AbstractTripleExpression<T>> parseSetClear() throws ParserException {
-        //     Optional<AbstractTripleExpression<T>> left = parseAddSubtract();
-        //     while (true) {
-        //         skipWhitespace();
-        //         int pos = getPos();
-        //         if (test("set")) {
-        //             take("set");
-        //             checkForNoLetter("set", pos);
-        //             if (left.isEmpty()) {
-        //                 throw new ParserException("Expected left argument for set", pos);
-        //             }
-        //             Optional<AbstractTripleExpression<T>> right = parseAddSubtract();
-        //             if (right.isEmpty()) {
-        //                 throw new ParserException("Expected right argument for set", pos);
-        //             } else {
-        //                 left = Optional.of(new SetBit(left.get(), right.get()));
-        //             }
-        //         } else if (test("clear")) {
-        //             take("clear");
-        //             checkForNoLetter("clear", pos);
-        //             if (left.isEmpty()) {
-        //                 throw new ParserException("Expected left argument for clear", pos);
-        //             }
-        //             Optional<AbstractTripleExpression<T>> right = parseAddSubtract();
-        //             if (right.isEmpty()) {
-        //                 throw new ParserException("Expected right argument for clear", pos);
-        //             } else {
-        //                 left = Optional.of(new ClearBit(left.get(), right.get()));
-        //             }
-        //         } else {
-        //             return left;
-        //         }
-        //     }
-        // }
-
         private void checkForNoLetter(String token, int pos) throws ParserException {
             if (!waitNotLetter()) {
                 throw new ParserException(token, token + take(), pos);

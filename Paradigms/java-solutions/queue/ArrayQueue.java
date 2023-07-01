@@ -4,32 +4,32 @@ import java.util.Objects;
 
 public class ArrayQueue extends AbstractQueue {
     private Object[] data = new Object[2];
-    private int head = 0, tail = 0;  // [head, tail)
+    private int head = 0, tail = 0; // [head, tail)
 
-    public void enqueueImpl(Object element) { 
+    public void enqueueImpl(Object element) {
         Objects.requireNonNull(element);
         ensureCapacityToAdd();
-        assert data[tail] == null: "Trying to replace not-null";
+        assert data[tail] == null : "Trying to replace not-null";
         data[tail] = element;
-        tail = (tail + 1) % data.length; 
+        tail = (tail + 1) % data.length;
     }
 
-    public void push(Object element) { 
+    public void push(Object element) {
         Objects.requireNonNull(element);
         ensureCapacityToAdd();
-        head = (head - 1 + data.length) % data.length; 
+        head = (head - 1 + data.length) % data.length;
         data[head] = element;
     }
 
-    public Object dequeueImpl() { 
+    public Object dequeueImpl() {
         Object result = data[head];
         data[head] = null;
         head = (head + 1) % data.length;
         return result;
     }
 
-    public Object remove() { 
-        assert !isEmpty(): "Deque has no elements";
+    public Object remove() {
+        assert !isEmpty() : "Deque has no elements";
         tail = (tail - 1 + data.length) % data.length;
         Object result = data[tail];
         data[tail] = null;
@@ -46,7 +46,7 @@ public class ArrayQueue extends AbstractQueue {
     }
 
     private Object[] copyToArray(int newSize) {
-        assert newSize >= size(): "Trying to copy to smaller size";
+        assert newSize >= size() : "Trying to copy to smaller size";
         Object[] result = new Object[newSize];
         if (newSize != 0) {
             if (head < tail) {
@@ -64,7 +64,7 @@ public class ArrayQueue extends AbstractQueue {
     }
 
     public Object peek() {
-        assert !isEmpty(): "Deque has no elements";
+        assert !isEmpty() : "Deque has no elements";
         return data[(tail - 1 + data.length) % data.length];
     }
 
@@ -82,14 +82,14 @@ public class ArrayQueue extends AbstractQueue {
 
     public void clear() {
         data = new Object[5];
-        head = 0; tail = 0;
+        head = 0;
+        tail = 0;
     }
 
     public Object[] toArray() {
         return copyToArray(size());
     }
 
-    @Override
     protected int findElement(Object element) {
         if (data[head].equals(element)) {
             return 0;
@@ -100,7 +100,7 @@ public class ArrayQueue extends AbstractQueue {
                     return i;
                 }
             }
-        } 
+        }
         return -1;
     }
 
@@ -113,26 +113,25 @@ public class ArrayQueue extends AbstractQueue {
 
         index = (index + head) % data.length;
 
-
         if (head < tail) {
             System.arraycopy(data, index + 1, data, index, tail - index);
             tail--;
             data[tail] = null;
+        } else if (head <= index) {
+            System.arraycopy(data, head, data, head + 1, index - head);
+            data[head] = null;
+            head = (head + 1) % data.length;
         } else {
-            if (head <= index) {
-                // :NOTE: arraycopy
-                for (int i = index; i > head; i--) {
-                    data[i] = data[i - 1];
-                }
-                data[head] = null;
-                head = (head + 1) % data.length;
-            } else {
-                System.arraycopy(data, index + 1, data, index, tail - index);
-                tail = (tail - 1 + data.length) % data.length;
-                data[tail] = null;
-            }
+            System.arraycopy(data, index + 1, data, index, tail - index);
+            tail = (tail - 1 + data.length) % data.length;
+            data[tail] = null;
         }
 
         return true;
+    }
+
+    @Override
+    protected boolean containsImpl(Object element) {
+        return findElement(element) != -1;
     }
 }

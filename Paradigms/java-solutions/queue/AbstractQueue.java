@@ -30,21 +30,14 @@ public abstract class AbstractQueue implements Queue {
 
     @Override
     public boolean contains(Object element) {
-        Objects.requireNonNull(element);
-        if (isEmpty()) {
-            return false;
-        } else {
-            int index = findElement(element);
-            return (index == -1 ? false : true);
-        }
+        return element != null && !isEmpty() && containsImpl(element);
     }
 
-    abstract protected int findElement(Object element);
+    abstract protected boolean containsImpl(Object element);
 
     @Override
     public boolean removeFirstOccurrence(Object element) {
-        Objects.requireNonNull(element);
-        return !isEmpty() && removeFirstOccurrenceImpl(element);
+        return element != null && !isEmpty() && removeFirstOccurrenceImpl(element);
     }
 
     abstract protected boolean removeFirstOccurrenceImpl(Object element);

@@ -1,6 +1,7 @@
 package expression.generic;
 
 
+import expression.exceptions.ParserException;
 import expression.generic.operations.TripleExpression;
 import expression.generic.parser.ExpressionParser;
 import expression.generic.types.BigIntegerNumberType;
@@ -13,7 +14,7 @@ import expression.generic.types.UShortNumberType;
 
 public class GenericTabulator implements Tabulator {
     @Override
-    public Object[][][] tabulate(String mode, String expression, int x1, int x2, int y1, int y2, int z1, int z2) throws Exception {
+    public Object[][][] tabulate(String mode, String expression, int x1, int x2, int y1, int y2, int z1, int z2) throws ParserException {
         return switch (mode) {
             case "i" -> tabulateImpl(new IntegerNumberType(), expression, x1, x2, y1, y2, z1, z2);
             case "d" -> tabulateImpl(new DoubleNumberType(), expression, x1, x2, y1, y2, z1, z2);
@@ -25,7 +26,7 @@ public class GenericTabulator implements Tabulator {
         };
     }
     
-    private <T extends Comparable<T>> Object[][][] tabulateImpl(NumberType<T> performer, String expression, int x1, int x2, int y1, int y2, int z1, int z2) throws Exception {
+    private <T extends Comparable<T>> Object[][][] tabulateImpl(NumberType<T> performer, String expression, int x1, int x2, int y1, int y2, int z1, int z2) throws ParserException {
         TripleExpression<T> expr = new ExpressionParser<T>().parse(expression, performer);
         Object[][][] result = new Object[x2 - x1 + 1][y2 - y1 + 1][z2 - z1 + 1];
         for (int x = 0; x <= x2 - x1; x++) {
@@ -36,7 +37,7 @@ public class GenericTabulator implements Tabulator {
                     T iz = performer.add(performer.valueOf(z), performer.valueOf(z1));
                     try {
                         result[x][y][z] = expr.evaluate(ix, iy, iz);
-                    } catch (Exception e) {
+                    } catch (RuntimeException e) {
                         result[x][y][z] = null;
                     }
                 }
@@ -52,8 +53,7 @@ public class GenericTabulator implements Tabulator {
             TripleExpression<Integer> expr = new ExpressionParser<Integer>().parse(exprStr, performer);
             System.out.format("%s = %s", expr.toString(), expr.evaluate(3, 0, 0).toString());
         } catch (Exception E) {
-            System.out.println(E);
+            System.out.println(E.getMessage());
         }
-
     }
 }

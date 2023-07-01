@@ -33,7 +33,7 @@ public class Variable<T extends Comparable<T>> extends AbstractTripleExpression<
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Variable<?> other) { // :TODO:
+        if (obj instanceof Variable<?> other) { 
             return other.variable.equals(this.variable);
         } else {
             return false;

@@ -1,12 +1,16 @@
 package queue;
 
 // Model: a[1]..a[size]
+// :NOTE: n
 // Invariant: (for i=1..n a[i] != null) && (size >= 0)
 public interface Queue {
     // immutable(n) <=> for i=1..n: a'[i] = a[i]
     // immutable(x, y) <=> for i=x..y: a'[i-x+1] = a[i]
+    // immutable(x, y, start) <=> for i=x..y: a'[i-x+start] = a[i]
 
-    // const_state <=> immutable(size) && size' = size 
+    // const_state <=> immutable(size) && size' = size
+
+    // T = min{set} <=> (for i in set: T <= i) && (T in set)
 
     // Pre: element != null
     // Post: size' = size + 1 && a[size'] = element && immutable(size)
@@ -25,25 +29,23 @@ public interface Queue {
     int size();
 
     // Pre: true
-    // Post: R == (size == 0 ? true : false) && const_state
+    // Post: R == (size == 0) && const_state
     boolean isEmpty();
 
     // Pre: true
     // Post: size' = 0
     void clear();
 
-    // :NOTE: informal
-    // :NOTE: element != null?
-    // Pre: element != null
-    // Post: R = (does index i exist, that a[i] = element) && const_state
+    // Pre: true
+    // :NOTE: simplify
+    // Post: R = {i: a[i] == element}.length > 0 && const_state
     boolean contains(Object element);
 
-    // Pre: element != null
-    // :NOTE: R = contains(element) &&
-    // Post: if (!contains(element)) then const_state; R = false
-    // :NOTE: immutable(index + 1, size)
-    //       else immutable(index - 1) && immutable(index + 1, size) && size' = size - 1,
-    // :NOTE: min
-    //                            where index = min{i: a[i] == element}, R = true
+    // :NOTE: ?:
+    // Pre: true
+    // Post: R = contains(element) &&
+    //         (R ?
+    //              immutable(index - 1) && immutable(index + 1, size, index) && size' = size - 1
+    //            : const_state)
     boolean removeFirstOccurrence(Object element);
 }

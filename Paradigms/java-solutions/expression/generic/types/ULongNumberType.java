@@ -43,6 +43,6 @@ public class ULongNumberType implements NumberType<Long> {
 
     @Override
     public Long getZero() {
-        return 0l;
+        return 0L;
     }
 }

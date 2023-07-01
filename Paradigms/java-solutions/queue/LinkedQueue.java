@@ -31,7 +31,8 @@ public class LinkedQueue extends AbstractQueue {
     public Object dequeueImpl() {
         Object result = head.element;
         if (size() == 1) {
-            head = null; tail = null; 
+            head = null;
+            tail = null;
         } else {
             head = head.prev;
         }
@@ -41,7 +42,7 @@ public class LinkedQueue extends AbstractQueue {
 
     @Override
     public Object elementImpl() {
-        assert !isEmpty(): "Queue has no element.";
+        assert !isEmpty() : "Queue has no element.";
         return head.element;
     }
 
@@ -57,23 +58,22 @@ public class LinkedQueue extends AbstractQueue {
 
     @Override
     public void clear() {
-        head = null; tail = null; size = 0;
+        head = null;
+        tail = null;
+        size = 0;
     }
 
-    // :NOTE: copy-paste
-    @Override
-    protected int findElement(Object element) {
+    // Returns a Node, that Node.prev.element == element (or null, if there's no such Node)
+    protected LinkedQueueNode findElementPrev(Object element) {
         LinkedQueueNode node = head;
-        int index = 0;
-        while (node != null) {
-            if (node.element.equals(element)) {
-                return index;
+        while (node.prev != null) {
+            if (node.prev.element.equals(element)) {
+                return node;
             } else {
                 node = node.prev;
-                index++;
             }
         }
-        return -1;
+        return null;
     }
 
     @Override
@@ -83,18 +83,21 @@ public class LinkedQueue extends AbstractQueue {
             return true;
         }
 
-        LinkedQueueNode node = head;
-        while (node.prev != null) {
-            if (node.prev.element.equals(element)) {
-                if (tail == node.prev) {
-                    tail = node;
-                }
-                node.prev = node.prev.prev;
-                size--;
-                return true;
-            }
-            node = node.prev;
+        LinkedQueueNode prevNode = findElementPrev(element);
+        if (prevNode == null) {
+            return false;
         }
-        return false;
+        if (tail == prevNode.prev) {
+            tail = prevNode;
+        }
+        prevNode.prev = prevNode.prev.prev;
+        size--;
+        return true;
+    }
+
+    // :NOTE: common code
+    @Override
+    protected boolean containsImpl(Object element) {
+        return head.element.equals(element) || findElementPrev(element) != null;
     }
 }
