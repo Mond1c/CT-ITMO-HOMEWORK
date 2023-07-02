@@ -2,9 +2,7 @@
 #### Subjects:
 - [Algorithms and data structures](ADS/)
 - [Computer architecture](Arhitecture/)
-- [Digital culture](DigitalCulture/)
 - [C++ course](cpp-course/)
 - [Discrete math](dm/)
-- [Calculus](math/)
 - [Programming paradigms](paradigms/)
 - [Programming intro](prog-intro/)
