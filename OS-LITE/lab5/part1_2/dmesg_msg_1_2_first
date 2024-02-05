@@ -1,0 +1,5 @@
+[ 1067.849775] Out of memory: Killed process 2131 (bash) total-vm:1340820kB, anon-rss:756320kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:2264kB oom_score_adj:0
+[ 1067.993576] oom_reaper: reaped process 2131 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+
+[ 1617.320255] Out of memory: Killed process 2132 (bash) total-vm:2458596kB, anon-rss:1538500kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:4452kB oom_score_adj:0
+[ 1617.740813] oom_reaper: reaped process 2132 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB

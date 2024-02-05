@@ -1,0 +1,849 @@
+7209 2732032 chrome || /opt/google/chrome/chrome
+7179 974848 chrome || /opt/google/chrome/chrome
+7237 475136 chrome || /opt/google/chrome/chrome
+472 131072 containerd || /usr/bin/containerd
+2151 131072 telegram-deskto || /usr/bin/telegram-desktop
+7251 114688 chrome || /opt/google/chrome/chrome
+2399 86016 Xwayland || /usr/bin/Xwayland
+7431 77824 chrome || /opt/google/chrome/chrome
+7238 20480 chrome || /opt/google/chrome/chrome
+7495 12288 chrome || /opt/google/chrome/chrome
+[zswap-shrink]
+[zswap-shrink]
+[vcn_enc1]
+[vcn_enc1]
+[vcn_enc0]
+[vcn_enc0]
+[vcn_dec]
+[vcn_dec]
+/usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+/usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+/usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+/usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+/usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+/usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+/usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+/usr/lib/xdg-permission-store
+/usr/lib/xdg-permission-store
+/usr/lib/xdg-document-portal
+/usr/lib/xdg-document-portal
+/usr/lib/xdg-document-portal
+/usr/lib/xdg-desktop-portal-gtk
+/usr/lib/xdg-desktop-portal-gtk
+/usr/lib/xdg-desktop-portal-gtk
+/usr/lib/xdg-desktop-portal-gnome
+/usr/lib/xdg-desktop-portal-gnome
+/usr/lib/xdg-desktop-portal-gnome
+/usr/lib/xdg-desktop-portal
+/usr/lib/xdg-desktop-portal
+/usr/lib/xdg-desktop-portal
+/usr/lib/upowerd
+/usr/lib/upowerd
+/usr/lib/udisks2/udisksd
+/usr/lib/udisks2/udisksd
+/usr/lib/tracker-miner-fs-3
+/usr/lib/tracker-miner-fs-3
+/usr/lib/systemd/systemd-udevd
+/usr/lib/systemd/systemd-udevd
+/usr/lib/systemd/systemd-resolved
+/usr/lib/systemd/systemd-resolved
+/usr/lib/systemd/systemd-logind
+/usr/lib/systemd/systemd-logind
+/usr/lib/systemd/systemd-journald
+/usr/lib/systemd/systemd-journald
+/usr/lib/systemd/systemd
+/usr/lib/systemd/systemd
+/usr/lib/pulse/gsettings-helper
+/usr/lib/pulse/gsettings-helper
+/usr/lib/pulse/gsettings-helper
+/usr/lib/polkit-1/polkitd
+/usr/lib/polkit-1/polkitd
+/usr/lib/mutter-x11-frames
+/usr/lib/mutter-x11-frames
+/usr/lib/iio-sensor-proxy
+/usr/lib/iio-sensor-proxy
+/usr/lib/gvfs-udisks2-volume-monitor
+/usr/lib/gvfs-udisks2-volume-monitor
+/usr/lib/gvfs-udisks2-volume-monitor
+/usr/lib/gvfs-mtp-volume-monitor
+/usr/lib/gvfs-mtp-volume-monitor
+/usr/lib/gvfs-mtp-volume-monitor
+/usr/lib/gvfs-gphoto2-volume-monitor
+/usr/lib/gvfs-gphoto2-volume-monitor
+/usr/lib/gvfs-gphoto2-volume-monitor
+/usr/lib/gvfs-goa-volume-monitor
+/usr/lib/gvfs-goa-volume-monitor
+/usr/lib/gvfs-goa-volume-monitor
+/usr/lib/gvfsd-trash
+/usr/lib/gvfsd-trash
+/usr/lib/gvfsd-recent
+/usr/lib/gvfsd-recent
+/usr/lib/gvfsd-recent
+/usr/lib/gvfsd-metadata
+/usr/lib/gvfsd-metadata
+/usr/lib/gvfsd-fuse
+/usr/lib/gvfsd-fuse
+/usr/lib/gvfsd
+/usr/lib/gvfsd
+/usr/lib/gvfs-afc-volume-monitor
+/usr/lib/gvfs-afc-volume-monitor
+/usr/lib/gvfs-afc-volume-monitor
+/usr/lib/gsd-xsettings
+/usr/lib/gsd-xsettings
+/usr/lib/gsd-xsettings
+/usr/lib/gsd-wacom
+/usr/lib/gsd-wacom
+/usr/lib/gsd-usb-protection
+/usr/lib/gsd-usb-protection
+/usr/lib/gsd-sound
+/usr/lib/gsd-sound
+/usr/lib/gsd-smartcard
+/usr/lib/gsd-smartcard
+/usr/lib/gsd-sharing
+/usr/lib/gsd-sharing
+/usr/lib/gsd-screensaver-proxy
+/usr/lib/gsd-screensaver-proxy
+/usr/lib/gsd-rfkill
+/usr/lib/gsd-rfkill
+/usr/lib/gsd-print-notifications
+/usr/lib/gsd-print-notifications
+/usr/lib/gsd-printer
+/usr/lib/gsd-printer
+/usr/lib/gsd-printer
+/usr/lib/gsd-power
+/usr/lib/gsd-power
+/usr/lib/gsd-power
+/usr/lib/gsd-media-keys
+/usr/lib/gsd-media-keys
+/usr/lib/gsd-media-keys
+/usr/lib/gsd-keyboard
+/usr/lib/gsd-keyboard
+/usr/lib/gsd-keyboard
+/usr/lib/gsd-housekeeping
+/usr/lib/gsd-housekeeping
+/usr/lib/gsd-housekeeping
+/usr/lib/gsd-disk-utility-notify
+/usr/lib/gsd-disk-utility-notify
+/usr/lib/gsd-disk-utility-notify
+/usr/lib/gsd-datetime
+/usr/lib/gsd-datetime
+/usr/lib/gsd-color
+/usr/lib/gsd-color
+/usr/lib/gsd-a11y-settings
+/usr/lib/gsd-a11y-settings
+/usr/lib/goa-identity-service
+/usr/lib/goa-identity-service
+/usr/lib/goa-daemon
+/usr/lib/goa-daemon
+/usr/lib/goa-daemon
+/usr/lib/gnome-shell-calendar-server
+/usr/lib/gnome-shell-calendar-server
+/usr/lib/gnome-session-ctl
+/usr/lib/gnome-session-binary
+/usr/lib/gnome-session-binary
+/usr/lib/gdm-wayland-session
+/usr/lib/evolution-source-registry
+/usr/lib/evolution-source-registry
+/usr/lib/evolution-data-server/evolution-alarm-notify
+/usr/lib/evolution-data-server/evolution-alarm-notify
+/usr/lib/evolution-calendar-factory
+/usr/lib/evolution-calendar-factory
+/usr/lib/evolution-addressbook-factory
+/usr/lib/evolution-addressbook-factory
+/usr/lib/evolution-addressbook-factory
+/usr/lib/dconf-service
+/usr/lib/dconf-service
+/usr/lib/colord
+/usr/lib/colord
+/usr/lib/boltd
+/usr/lib/boltd
+/usr/lib/bluetooth/obexd
+/usr/lib/bluetooth/obexd
+/usr/lib/bluetooth/bluetoothd
+/usr/lib/bluetooth/bluetoothd
+/usr/lib/at-spi-bus-launcher
+/usr/lib/at-spi-bus-launcher
+/usr/lib/at-spi2-registryd
+/usr/lib/at-spi2-registryd
+/usr/lib/accounts-daemon
+/usr/lib/accounts-daemon
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/zsh
+/usr/bin/Xwayland
+/usr/bin/Xwayland
+/usr/bin/wpa_supplicant
+/usr/bin/wpa_supplicant
+/usr/bin/vsftpd
+/usr/bin/vsftpd
+/usr/bin/telegram-desktop
+/usr/bin/telegram-desktop
+/usr/bin/python3
+/usr/bin/pulseaudio
+/usr/bin/pulseaudio
+/usr/bin/pulseaudio
+/usr/bin/pipewire
+/usr/bin/pipewire
+/usr/bin/pipewire
+/usr/bin/NetworkManager
+/usr/bin/NetworkManager
+/usr/bin/kitty
+/usr/bin/kitty
+/usr/bin/kitty
+/usr/bin/kitty
+/usr/bin/kitty
+/usr/bin/kitty
+/usr/bin/kitty
+/usr/bin/gnome-software
+/usr/bin/gnome-software
+/usr/bin/gnome-software
+/usr/bin/gnome-shell
+/usr/bin/gnome-keyring-daemon
+/usr/bin/gnome-keyring-daemon
+/usr/bin/gnome-calendar
+/usr/bin/gnome-calendar
+/usr/bin/gjs
+/usr/bin/gjs
+/usr/bin/gjs
+/usr/bin/gjs
+/usr/bin/gdm
+/usr/bin/gdm
+/usr/bin/dbus-daemon
+/usr/bin/dbus-daemon
+/usr/bin/dbus-daemon
+/usr/bin/dbus-daemon
+/usr/bin/dbus-daemon
+/usr/bin/dbus-daemon
+/usr/bin/cupsd
+/usr/bin/cupsd
+/usr/bin/containerd
+/usr/bin/containerd
+[ttm]
+[ttm]
+sudo
+sudo
+sort
+sort
+(sd-pam)
+(sd-pam)
+[sdma0]
+[sdma0]
+[scsi_tmf_0]
+[rcu_tasks_trace_kthread]
+[rcu_tasks_rude_kthread]
+[rcu_tasks_kthread]
+[rcu_preempt]
+[rcub/0]
+[psimon]
+[psimon]
+[psimon]
+[psimon]
+ps
+ps
+/opt/google/chrome/nacl_helper
+/opt/google/chrome/chrome_crashpad_handler
+/opt/google/chrome/chrome_crashpad_handler
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+/opt/google/chrome/chrome
+[oom_reaper]
+[nvme-wq]
+[nvme-wq]
+[nvme-reset-wq]
+[nvme-reset-wq]
+[nvme-delete-wq]
+[nvme-delete-wq]
+[nvme-auth-wq]
+[nvme-auth-wq]
+[mm_percpu_wq]
+[mld]
+[migration/7]
+[migration/6]
+[migration/5]
+[migration/4]
+[migration/3]
+[migration/2]
+[migration/1]
+[migration/0]
+[led_workqueue]
+[led_workqueue]
+[kworker/u33:1-rb_allocator]
+[kworker/u33:1-hci0]
+[kworker/u33:1-hci0]
+[kworker/u33:0-rb_allocator]
+[kworker/u33:0-rb_allocator]
+[kworker/u33:0-rb_allocator]
+[kworker/u32:9-events_unbound]
+[kworker/u32:9-events_unbound]
+[kworker/u32:9-events_unbound]
+[kworker/u32:9-events_unbound]
+[kworker/u32:8-events_unbound]
+[kworker/u32:8-events_unbound]
+[kworker/u32:8-events_unbound]
+[kworker/u32:7-events_unbound]
+[kworker/u32:7-events_unbound]
+[kworker/u32:7-events_unbound]
+[kworker/u32:6-events_unbound]
+[kworker/u32:6-events_unbound]
+[kworker/u32:6-events_unbound]
+[kworker/u32:6-events_unbound]
+[kworker/u32:5-events_unbound]
+[kworker/u32:5-events_unbound]
+[kworker/u32:5-events_unbound]
+[kworker/u32:4-ext4-rsv-conversion]
+[kworker/u32:4-ext4-rsv-conversion]
+[kworker/u32:4-events_unbound]
+[kworker/u32:3-events_unbound]
+[kworker/u32:3-events_unbound]
+[kworker/u32:3-events_unbound]
+[kworker/u32:2-events_unbound]
+[kworker/u32:2-events_unbound]
+[kworker/u32:2-events_unbound]
+[kworker/u32:1-events_unbound]
+[kworker/u32:1-events_unbound]
+[kworker/u32:1-events_unbound]
+[kworker/u32:1-events_unbound]
+[kworker/u32:14]
+[kworker/u32:14]
+[kworker/u32:14]
+[kworker/u32:13-events_unbound]
+[kworker/u32:13-events_unbound]
+[kworker/u32:13-events_unbound]
+[kworker/u32:12-events_unbound]
+[kworker/u32:12-events_unbound]
+[kworker/u32:12-events_unbound]
+[kworker/u32:11-events_unbound]
+[kworker/u32:11-events_unbound]
+[kworker/u32:11-events_unbound]
+[kworker/u32:10-events_unbound]
+[kworker/u32:10-events_unbound]
+[kworker/u32:10-events_unbound]
+[kworker/u32:0-events_unbound]
+[kworker/u32:0-events_unbound]
+[kworker/u32:0-events_unbound]
+[kworker/7:3H-ttm]
+[kworker/7:3H-ttm]
+[kworker/7:3-events]
+[kworker/7:3-events]
+[kworker/7:2H-kblockd]
+[kworker/7:2H-kblockd]
+[kworker/7:2H-kblockd]
+[kworker/6:2-events]
+[kworker/6:1H-kblockd]
+[kworker/6:1H-kblockd]
+[kworker/6:1]
+[kworker/6:1]
+[kworker/6:0H-ttm]
+[kworker/6:0H-ttm]
+[kworker/5:3H-ttm]
+[kworker/5:1H-kblockd]
+[kworker/5:1H-kblockd]
+[kworker/5:1H-kblockd]
+[kworker/5:1]
+[kworker/5:1]
+[kworker/5:1]
+[kworker/5:0-mm_percpu_wq]
+[kworker/5:0-events]
+[kworker/5:0-events]
+[kworker/5:0-events]
+[kworker/4:3H-ttm]
+[kworker/4:1H-kblockd]
+[kworker/4:1H-kblockd]
+[kworker/4:1H-kblockd]
+[kworker/4:1-events]
+[kworker/4:1-events]
+[kworker/4:1-events]
+[kworker/4:0-events]
+[kworker/3:3H-ttm]
+[kworker/3:1H-kblockd]
+[kworker/3:1H-kblockd]
+[kworker/3:0-events]
+[kworker/2:3-events]
+[kworker/2:1H-ttm]
+[kworker/2:1H-ttm]
+[kworker/2:0H-kblockd]
+[kworker/2:0H-kblockd]
+[kworker/2:0H-kblockd]
+[kworker/2:0-events]
+[kworker/2:0-events]
+[kworker/2:0-events]
+[kworker/1:3-mm_percpu_wq]
+[kworker/1:3-events]
+[kworker/1:1H-kblockd]
+[kworker/1:1H-kblockd]
+[kworker/1:0H-ttm]
+[kworker/1:0-events]
+[kworker/0:2H-kblockd]
+[kworker/0:2-events]
+[kworker/0:2-events]
+[kworker/0:1H-ttm]
+[kworker/0:1H-ttm]
+[kworker/0:1]
+[kworker/0:1]
+[kworker/0:1]
+[kstrp]
+[kstrp]
+[ksoftirqd/7]
+[ksoftirqd/6]
+[ksoftirqd/5]
+[ksoftirqd/4]
+[ksoftirqd/3]
+[ksoftirqd/2]
+[ksoftirqd/1]
+[ksoftirqd/0]
+[krfcommd]
+[krfcommd]
+[krfcommd]
+[khungtaskd]
+[kdevtmpfs]
+[kauditd]
+[jpeg_dec]
+[jpeg_dec]
+./jetbrains-toolbox
+./jetbrains-toolbox
+[jbd2/nvme0n1p7-8]
+[jbd2/nvme0n1p7-8]
+[irq/67-iwlwifi]
+[irq/67-iwlwifi]
+[irq/61-ELAN9008:00]
+[irq/60-ELAN1401:00]
+[ipv6_addrconf]
+[inet_frag_wq]
+[idle_inject/7]
+[idle_inject/6]
+[idle_inject/5]
+[idle_inject/4]
+[idle_inject/3]
+[idle_inject/2]
+[idle_inject/1]
+[idle_inject/0]
+[hwrng]
+/home/artyom/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+/home/artyom/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+/home/artyom/.local/share/JetBrains/Toolbox/apps/clion/jbr/bin/java
+/home/artyom/.local/share/JetBrains/Toolbox/apps/clion/bin/fsnotifier
+/home/artyom/.local/share/JetBrains/Toolbox/apps/clion/bin/clang/linux/x64/clangd
+grep
+grep
+[gfx_low]
+[gfx_low]
+[gfx_high]
+[gfx_high]
+gdm-session-worker
+fusermount3
+fusermount3
+fusermount3
+[ext4-rsv-conver]
+[ext4-rsv-conver]
+[dm_vblank_contr]
+[dm_vblank_contr]
+[cryptd]
+[cryptd]
+[cpuhp/7]
+[cpuhp/6]
+[cpuhp/5]
+[cpuhp/4]
+[cpuhp/3]
+[cpuhp/2]
+[cpuhp/1]
+[cpuhp/0]
+[comp_1.3.1]
+[comp_1.3.1]
+[comp_1.3.0]
+[comp_1.3.0]
+[comp_1.2.1]
+[comp_1.2.1]
+[comp_1.2.0]
+[comp_1.2.0]
+[comp_1.1.1]
+[comp_1.1.1]
+[comp_1.1.0]
+[comp_1.1.0]
+[comp_1.0.1]
+[comp_1.0.1]
+[comp_1.0.0]
+[comp_1.0.0]
+[charger_manager]
+[charger_manager]
+[cfg80211]
+[cfg80211]
+[ccp-1-q4]
+[ccp-1-q3]
+[ccp-1-q2]
+cat
+cat
+[card1-crtc3]
+[card1-crtc3]
+[card1-crtc2]
+[card1-crtc2]
+[card1-crtc1]
+[card1-crtc1]
+[card1-crtc0]
+[card1-crtc0]
+bash
+bash
+bash
+bash
+bash
+awk
+awk
+[amdgpu-reset-de]
+[amdgpu-reset-de]
+[amdgpu_dm_hpd_r]
+[amdgpu_dm_hpd_r]
+[amdgpu_dm_hpd_r]
+[amdgpu_dm_hpd_r]
+99 0 scsi_eh_0 || [scsi_eh_0]
+98 0 amd_iommu_v2 || [amd_iommu_v2]
+96 0 acpi_thermal_pm || [acpi_thermal_pm]
+954 0 dockerd || /usr/bin/dockerd
+9399 0 kworker/7:0-events || [kworker/7:0-events]
+9327 0 kworker/3:1 || [kworker/3:1]
+91 0 irq/29-aerdrv || [irq/29-aerdrv]
+90 0 irq/27-aerdrv || [irq/27-aerdrv]
+8989 0 kworker/6:2-events || [kworker/6:2-events]
+89 0 irq/26-aerdrv || [irq/26-aerdrv]
+8904 0 chrome || /opt/google/chrome/chrome
+8844 0 kworker/3:3H-ttm || [kworker/3:3H-ttm]
+88 0 kthrotld || [kthrotld]
+8745 0 kworker/0:2H-kblockd || [kworker/0:2H-kblockd]
+8735 0 chrome || /opt/google/chrome/chrome
+8720 0 chrome || /opt/google/chrome/chrome
+87 0 kswapd0 || [kswapd0]
+8672 0 kworker/6:0-events || [kworker/6:0-events]
+85 0 irq/25-AMD-Vi || [irq/25-AMD-Vi]
+845 0 rtkit-daemon || /usr/lib/rtkit-daemon
+82 0 watchdogd || [watchdogd]
+8130 0 ion.clangd.main || /home/artyom/.local/share/JetBrains/Toolbox/apps/clion/bin/clang/linux/x64/clangd
+8120 0 kworker/5:3H-ttm || [kworker/5:3H-ttm]
+8118 0 kworker/4:3H-ttm || [kworker/4:3H-ttm]
+81 0 devfreq_wq || [devfreq_wq]
+8085 0 fsnotifier || /home/artyom/.local/share/JetBrains/Toolbox/apps/clion/bin/fsnotifier
+80 0 edac-poller || [edac-poller]
+7940 0 java || /home/artyom/.local/share/JetBrains/Toolbox/apps/clion/jbr/bin/java
+79 0 ata_sff || [ata_sff]
+78 0 tpm_dev_wq || [tpm_dev_wq]
+77 0 blkcg_punt_bio || [blkcg_punt_bio]
+76 0 kblockd || [kblockd]
+7565 0 gnome-browser-c || /usr/bin/python3
+7548 0 chrome || /opt/google/chrome/chrome
+7513 0 chrome || /opt/google/chrome/chrome
+75 0 kintegrityd || [kintegrityd]
+7504 0 chrome || /opt/google/chrome/chrome
+7486 0 chrome || /opt/google/chrome/chrome
+7467 0 chrome || /opt/google/chrome/chrome
+7457 0 chrome || /opt/google/chrome/chrome
+7448 0 chrome || /opt/google/chrome/chrome
+74 0 khugepaged || [khugepaged]
+7377 0 chrome || /opt/google/chrome/chrome
+7364 0 chrome || /opt/google/chrome/chrome
+7354 0 chrome || /opt/google/chrome/chrome
+73 0 ksmd || [ksmd]
+72 0 kcompactd0 || [kcompactd0]
+7206 0 nacl_helper || /opt/google/chrome/nacl_helper
+7204 0 chrome || /opt/google/chrome/chrome
+7202 0 chrome || /opt/google/chrome/chrome
+7193 0 chrome_crashpad || /opt/google/chrome/chrome_crashpad_handler
+7191 0 chrome_crashpad || /opt/google/chrome/chrome_crashpad_handler
+7185 0 cat || cat
+7184 0 cat || cat
+71 0 writeback || [writeback]
+69 0 oom_reaper || [oom_reaper]
+68 0 khungtaskd || [khungtaskd]
+66 0 kauditd || [kauditd]
+65 0 inet_frag_wq || [inet_frag_wq]
+646 0 upowerd || /usr/lib/upowerd
+64 0 kdevtmpfs || [kdevtmpfs]
+61 0 ksoftirqd/7 || [ksoftirqd/7]
+6 0 netns || [netns]
+60 0 migration/7 || [migration/7]
+600 0 colord || /usr/lib/colord
+59 0 idle_inject/7 || [idle_inject/7]
+58 0 cpuhp/7 || [cpuhp/7]
+55 0 ksoftirqd/5 || [ksoftirqd/5]
+54 0 migration/5 || [migration/5]
+53 0 idle_inject/5 || [idle_inject/5]
+52 0 cpuhp/5 || [cpuhp/5]
+5 0 slub_flushwq || [slub_flushwq]
+50 0 kworker/3:0-events || [kworker/3:0-events]
+49 0 ksoftirqd/3 || [ksoftirqd/3]
+48 0 migration/3 || [migration/3]
+479 0 accounts-daemon || /usr/lib/accounts-daemon
+474 0 gdm || /usr/bin/gdm
+47 0 idle_inject/3 || [idle_inject/3]
+468 0 vsftpd || /usr/bin/vsftpd
+466 0 cupsd || /usr/bin/cupsd
+46 0 cpuhp/3 || [cpuhp/3]
+460 0 wpa_supplicant || /usr/bin/wpa_supplicant
+45 0 kworker/1:0H-ttm || [kworker/1:0H-ttm]
+44 0 kworker/1:0-events || [kworker/1:0-events]
+43 0 ksoftirqd/1 || [ksoftirqd/1]
+422 0 polkitd || /usr/lib/polkit-1/polkitd
+421 0 NetworkManager || /usr/bin/NetworkManager
+42 0 migration/1 || [migration/1]
+416 0 systemd-logind || /usr/lib/systemd/systemd-logind
+415 0 iio-sensor-prox || /usr/lib/iio-sensor-proxy
+414 0 dbus-daemon || /usr/bin/dbus-daemon
+413 0 bluetoothd || /usr/lib/bluetooth/bluetoothd
+41 0 idle_inject/1 || [idle_inject/1]
+4 0 rcu_par_gp || [rcu_par_gp]
+40 0 cpuhp/1 || [cpuhp/1]
+39825 0 bash || bash
+39824 0 sudo || sudo
+39823 0 sudo || sudo
+39808 0 chrome || /opt/google/chrome/chrome
+374 0 systemd-resolve || /usr/lib/systemd/systemd-resolved
+373 0 irq/67-iwlwifi || [irq/67-iwlwifi]
+37 0 ksoftirqd/6 || [ksoftirqd/6]
+370 0 cfg80211 || [cfg80211]
+369 0 led_workqueue || [led_workqueue]
+36 0 migration/6 || [migration/6]
+355 0 kworker/0:2-events || [kworker/0:2-events]
+3517 0 gvfsd-metadata || /usr/lib/gvfsd-metadata
+35 0 idle_inject/6 || [idle_inject/6]
+350 0 cryptd || [cryptd]
+34 0 cpuhp/6 || [cpuhp/6]
+338 0 irq/61-ELAN9008:00 || [irq/61-ELAN9008:00]
+337 0 hwrng || [hwrng]
+336 0 ccp-1-q4 || [ccp-1-q4]
+335 0 ccp-1-q3 || [ccp-1-q3]
+334 0 ccp-1-q2 || [ccp-1-q2]
+332 0 irq/60-ELAN1401:00 || [irq/60-ELAN1401:00]
+32751 0 kworker/6:1 || [kworker/6:1]
+32 0 kworker/4:0-events || [kworker/4:0-events]
+31 0 ksoftirqd/4 || [ksoftirqd/4]
+3 0 rcu_gp || [rcu_gp]
+30 0 migration/4 || [migration/4]
+29 0 idle_inject/4 || [idle_inject/4]
+285 0 psimon || [psimon]
+284 0 systemd-udevd || /usr/lib/systemd/systemd-udevd
+28 0 cpuhp/4 || [cpuhp/4]
+263 0 kworker/2:3-events || [kworker/2:3-events]
+2532 0 kworker/7:3H-ttm || [kworker/7:3H-ttm]
+25 0 ksoftirqd/2 || [ksoftirqd/2]
+2443 0 mutter-x11-fram || /usr/lib/mutter-x11-frames
+242 0 systemd-journal || /usr/lib/systemd/systemd-journald
+2420 0 gsd-xsettings || /usr/lib/gsd-xsettings
+24 0 migration/2 || [migration/2]
+23 0 idle_inject/2 || [idle_inject/2]
+230 0 psimon || [psimon]
+22 0 cpuhp/2 || [cpuhp/2]
+21 0 cpuhp/0 || [cpuhp/0]
+2 0 kthreadd || [kthreadd]
+2080 0 dconf-service || /usr/lib/dconf-service
+2072 0 tracker-miner-f || /usr/lib/tracker-miner-fs-3
+2050 0 obexd || /usr/lib/bluetooth/obexd
+204 0 ext4-rsv-conver || [ext4-rsv-conver]
+203 0 jbd2/nvme0n1p7-8 || [jbd2/nvme0n1p7-8]
+20 0 idle_inject/0 || [idle_inject/0]
+2003 0 gvfsd-trash || /usr/lib/gvfsd-trash
+1954 0 gnome-calendar || /usr/bin/gnome-calendar
+192 0 jpeg_dec || [jpeg_dec]
+191 0 vcn_enc1 || [vcn_enc1]
+19 0 migration/0 || [migration/0]
+190 0 vcn_enc0 || [vcn_enc0]
+189 0 vcn_dec || [vcn_dec]
+1882 0 kworker/7:2H-kblockd || [kworker/7:2H-kblockd]
+188 0 sdma0 || [sdma0]
+187 0 comp_1.3.1 || [comp_1.3.1]
+1866 0 xdg-desktop-por || /usr/lib/xdg-desktop-portal-gtk
+186 0 comp_1.2.1 || [comp_1.2.1]
+185 0 comp_1.1.1 || [comp_1.1.1]
+18497 0 kworker/u32:14 || [kworker/u32:14]
+18494 0 kworker/u32:13-events_unbound || [kworker/u32:13-events_unbound]
+18493 0 kworker/u32:12-events_unbound || [kworker/u32:12-events_unbound]
+18492 0 kworker/u32:11-events_unbound || [kworker/u32:11-events_unbound]
+18491 0 kworker/u32:10-events_unbound || [kworker/u32:10-events_unbound]
+18490 0 kworker/u32:8-events_unbound || [kworker/u32:8-events_unbound]
+18489 0 kworker/u32:7-events_unbound || [kworker/u32:7-events_unbound]
+18487 0 kworker/u32:5-events_unbound || [kworker/u32:5-events_unbound]
+18486 0 kworker/u32:4-events_unbound || [kworker/u32:4-events_unbound]
+18485 0 kworker/u32:3-events_unbound || [kworker/u32:3-events_unbound]
+18484 0 kworker/u32:2-events_unbound || [kworker/u32:2-events_unbound]
+184 0 comp_1.0.1 || [comp_1.0.1]
+18365 0 chrome || /opt/google/chrome/chrome
+18342 0 kworker/2:0-events || [kworker/2:0-events]
+18341 0 kworker/0:1 || [kworker/0:1]
+18334 0 kworker/5:1H-kblockd || [kworker/5:1H-kblockd]
+18333 0 kworker/4:1H-kblockd || [kworker/4:1H-kblockd]
+18320 0 kworker/2:0H-kblockd || [kworker/2:0H-kblockd]
+183 0 comp_1.3.0 || [comp_1.3.0]
+18293 0 gitstatusd || /usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+18292 0 zsh || /usr/bin/zsh
+18290 0 zsh || /usr/bin/zsh
+1828 0 xdg-desktop-por || /usr/lib/xdg-desktop-portal-gnome
+18258 0 zsh || /usr/bin/zsh
+18255 0 zsh || /usr/bin/zsh
+18246 0 kitty || /usr/bin/kitty
+18240 0 kworker/u33:1-rb_allocator || [kworker/u33:1-hci0]
+182 0 comp_1.2.0 || [comp_1.2.0]
+18198 0 gvfsd-recent || /usr/lib/gvfsd-recent
+18132 0 gitstatusd || /usr/share/zsh-theme-powerlevel10k/gitstatus/usrbin/gitstatusd
+1813 0 fusermount3 || fusermount3
+18130 0 zsh || /usr/bin/zsh
+18129 0 zsh || /usr/bin/zsh
+181 0 comp_1.1.0 || [comp_1.1.0]
+18 0 rcub/0 || [rcub/0]
+18097 0 zsh || /usr/bin/zsh
+18094 0 zsh || /usr/bin/zsh
+18079 0 kitty || /usr/bin/kitty
+1807 0 xdg-document-po || /usr/lib/xdg-document-portal
+18032 0 kworker/u32:1-events_unbound || [kworker/u32:1-events_unbound]
+1803 0 krfcommd || [krfcommd]
+180 0 comp_1.0.0 || [comp_1.0.0]
+17968 0 kworker/u33:0-rb_allocator || [kworker/u33:0-rb_allocator]
+17928 0 kworker/5:1 || [kworker/5:1]
+1791 0 gsettings-helpe || /usr/lib/pulse/gsettings-helper
+179 0 gfx_high || [gfx_high]
+1790 0 xdg-desktop-por || /usr/lib/xdg-desktop-portal
+17837 0 kworker/u32:0-events_unbound || [kworker/u32:0-events_unbound]
+178 0 gfx_low || [gfx_low]
+177 0 card1-crtc3 || [card1-crtc3]
+176 0 card1-crtc2 || [card1-crtc2]
+1755 0 pulseaudio || /usr/bin/pulseaudio
+1753 0 pipewire || /usr/bin/pipewire
+175 0 card1-crtc1 || [card1-crtc1]
+174 0 card1-crtc0 || [card1-crtc0]
+1731 0 gvfs-gphoto2-vo || /usr/lib/gvfs-gphoto2-volume-monitor
+173 0 dm_vblank_contr || [dm_vblank_contr]
+1725 0 gvfs-afc-volume || /usr/lib/gvfs-afc-volume-monitor
+172 0 amdgpu_dm_hpd_r || [amdgpu_dm_hpd_r]
+1720 0 gvfs-goa-volume || /usr/lib/gvfs-goa-volume-monitor
+1712 0 gvfs-mtp-volume || /usr/lib/gvfs-mtp-volume-monitor
+171 0 amdgpu_dm_hpd_r || [amdgpu_dm_hpd_r]
+17 0 rcu_preempt || [rcu_preempt]
+170 0 ttm || [ttm]
+169 0 amdgpu-reset-de || [amdgpu-reset-de]
+16846 0 kworker/5:0-events || [kworker/5:0-events]
+1684 0 gvfs-udisks2-vo || /usr/lib/gvfs-udisks2-volume-monitor
+1683 0 evolution-addre || /usr/lib/evolution-addressbook-factory
+168 0 kworker/7:3-events || [kworker/7:3-mm_percpu_wq]
+16794 0 kworker/2:1H-ttm || [kworker/2:1H-ttm]
+16790 0 kworker/6:1H-kblockd || [kworker/6:1H-kblockd]
+16789 0 kworker/6:0H-ttm || [kworker/6:0H-ttm]
+16777 0 kworker/3:1H-kblockd || [kworker/3:1H-kblockd]
+16762 0 boltd || /usr/lib/boltd
+1662 0 goa-identity-se || /usr/lib/goa-identity-service
+165 0 kworker/1:3-events || [kworker/1:3-events]
+1641 0 evolution-calen || /usr/lib/evolution-calendar-factory
+162 0 nvme-auth-wq || [nvme-auth-wq]
+16174 0 kworker/4:1-events || [kworker/4:1-events]
+161 0 nvme-delete-wq || [nvme-delete-wq]
+16 0 ksoftirqd/0 || [ksoftirqd/0]
+1605 0 gsd-printer || /usr/lib/gsd-printer
+160 0 nvme-reset-wq || [nvme-reset-wq]
+15947 0 kworker/u32:9-events_unbound || [kworker/u32:9-events_unbound]
+15944 0 kworker/u32:6-events_unbound || [kworker/u32:6-events_unbound]
+1594 0 goa-daemon || /usr/lib/goa-daemon
+159 0 nvme-wq || [nvme-wq]
+1589 0 gjs || /usr/bin/gjs
+1581 0 udisksd || /usr/lib/udisks2/udisksd
+1520 0 jetbrains-toolb || /home/artyom/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+15 0 rcu_tasks_trace_kthread || [rcu_tasks_trace_kthread]
+1497 0 evolution-alarm || /usr/lib/evolution-data-server/evolution-alarm-notify
+1494 0 gsd-wacom || /usr/lib/gsd-wacom
+1493 0 jetbrains-toolb || ./jetbrains-toolbox
+1492 0 gsd-usb-protect || /usr/lib/gsd-usb-protection
+1491 0 gsd-sound || /usr/lib/gsd-sound
+1490 0 gsd-smartcard || /usr/lib/gsd-smartcard
+1489 0 gsd-sharing || /usr/lib/gsd-sharing
+1487 0 gsd-screensaver || /usr/lib/gsd-screensaver-proxy
+1485 0 gsd-rfkill || /usr/lib/gsd-rfkill
+1482 0 gsd-print-notif || /usr/lib/gsd-print-notifications
+1479 0 gsd-power || /usr/lib/gsd-power
+1478 0 gnome-software || /usr/bin/gnome-software
+1476 0 gsd-media-keys || /usr/lib/gsd-media-keys
+1474 0 gsd-keyboard || /usr/lib/gsd-keyboard
+1471 0 gsd-housekeepin || /usr/lib/gsd-housekeeping
+147 0 kworker/1:1H-kblockd || [kworker/1:1H-kblockd]
+1470 0 gsd-disk-utilit || /usr/lib/gsd-disk-utility-notify
+1468 0 gsd-datetime || /usr/lib/gsd-datetime
+1456 0 gsd-color || /usr/lib/gsd-color
+1455 0 gsd-a11y-settin || /usr/lib/gsd-a11y-settings
+1438 0 gjs || /usr/bin/gjs
+1424 0 evolution-sourc || /usr/lib/evolution-source-registry
+14 0 rcu_tasks_rude_kthread || [rcu_tasks_rude_kthread]
+1406 0 gnome-shell-cal || /usr/lib/gnome-shell-calendar-server
+1405 0 xdg-permission- || /usr/lib/xdg-permission-store
+1393 0 at-spi2-registr || /usr/lib/at-spi2-registryd
+1390 0 dbus-daemon || /usr/bin/dbus-daemon
+1383 0 at-spi-bus-laun || /usr/lib/at-spi-bus-launcher
+132 0 kworker/0:1H-ttm || [kworker/0:1H-ttm]
+13 0 rcu_tasks_kthread || [rcu_tasks_kthread]
+1309 0 gvfsd-fuse || /usr/lib/gvfsd-fuse
+1303 0 gvfsd || /usr/lib/gvfsd
+1296 0 gnome-shell || /usr/bin/gnome-shell
+1267 0 gnome-session-b || /usr/lib/gnome-session-binary
+1263 0 gnome-session-c || /usr/lib/gnome-session-ctl
+1216 0 gnome-session-b || /usr/lib/gnome-session-binary
+1210 0 gdm-wayland-ses || /usr/lib/gdm-wayland-session
+1193 0 dbus-daemon || /usr/bin/dbus-daemon
+1184 0 gnome-keyring-d || /usr/bin/gnome-keyring-daemon
+1171 0 (sd-pam) || (sd-pam)
+1169 0 systemd || /usr/lib/systemd/systemd
+115 0 charger_manager || [charger_manager]
+112 0 zswap-shrink || [zswap-shrink]
+111 0 kstrp || [kstrp]
+11 0 mm_percpu_wq || [mm_percpu_wq]
+1 0 systemd || /sbin/init
+1090 0 gdm-session-wor || gdm-session-worker
+102 0 ipv6_addrconf || [ipv6_addrconf]
+101 0 mld || [mld]
+100 0 scsi_tmf_0 || [scsi_tmf_0]

@@ -1,0 +1,3 @@
+[  820.797564] Out of memory: Killed process 1744 (bash) total-vm:2596008kB, anon-rss:1571628kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:4712kB oom_score_adj:0
+[  821.040817] oom_reaper: reaped process 1744 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+[root@localhost lab5]# top

@@ -1,0 +1,17 @@
+[ 2774.253881] Out of memory: Killed process 4091 (bash) total-vm:320196kB, anon-rss:51736kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:268kB oom_score_adj:0
+[ 2774.286505] oom_reaper: reaped process 4091 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+
+[ 2789.279147] Out of memory: Killed process 4098 (bash) total-vm:314784kB, anon-rss:52736kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:252kB oom_score_adj:0
+[ 2789.289189] oom_reaper: reaped process 4098 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+
+[ 2822.288752] Out of memory: Killed process 4100 (bash) total-vm:316764kB, anon-rss:55136kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:252kB oom_score_adj:0
+[ 2822.303010] oom_reaper: reaped process 4100 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+
+[ 2838.231637] Out of memory: Killed process 4102 (bash) total-vm:317952kB, anon-rss:57260kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:260kB oom_score_adj:0
+[ 2838.243871] oom_reaper: reaped process 4102 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+
+[ 3141.748165] Out of memory: Killed process 4127 (bash) total-vm:403620kB, anon-rss:121540kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:428kB oom_score_adj:0
+[ 3141.783565] oom_reaper: reaped process 4127 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+
+[ 3220.605060] Out of memory: Killed process 4133 (bash) total-vm:442560kB, anon-rss:150964kB, file-rss:0kB, shmem-rss:0kB, UID:0 pgtables:504kB oom_score_adj:0
+[ 3220.643486] oom_reaper: reaped process 4133 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
